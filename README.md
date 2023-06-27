@@ -1,8 +1,9 @@
 <h1 align="center">Enigma Engineers</h1>
-<hr>
+
 <div align="center">
 <img src="https://brenofotos.s3.sa-east-1.amazonaws.com/Recurso+3.png" alt="Enigma logo" style="border: 1px solid #ccc; width: 200px; ">
 </div>
+<hr>
 <p>¡Bienvenidos al repositorio de Enigma Engineers! Somos un grupo de estudiantes de informatica apasionados por la tecnología. En este repositorio, hemos reunido todas nuestras materias de la UTU, creando un espacio colaborativo donde podemos compartir recursos, conocimientos y experiencias. </p>
 
 <h2>Acerca de nosotros </h2>
