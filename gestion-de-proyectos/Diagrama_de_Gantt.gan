@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2023-07-01" view-index="0" gantt-divider-location="516" resource-divider-location="466" version="3.2.3247" locale="es_ES">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2023-05-08" view-index="0" gantt-divider-location="752" resource-divider-location="466" version="3.2.3247" locale="es_ES">
     <description/>
-    <view zooming-state="default:9" id="gantt-chart">
-        <field id="tpd3" name="Nombre" width="285" order="0"/>
-        <field id="tpd4" name="Fecha de inicio" width="107" order="1"/>
-        <field id="tpd5" name="Fecha de fin" width="108" order="2"/>
+    <view zooming-state="default:6" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="418" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="158" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="160" order="2"/>
         <option id="filter.completedTasks" value="false"/>
         <option id="color.recent">
             <![CDATA[#00cc99 #ff0099 #3333ff #ff0033 #ff66ff]]>
@@ -199,6 +199,45 @@
         <task id="98" name="Requerimientos no funcionales" color="#8cb6ce" meeting="false" start="2023-07-21" duration="1" complete="0" thirdDate="2023-05-29" thirdDate-constraint="0" expand="true"/>
         <task id="99" name="Limitaciones (ESRE)" color="#8cb6ce" meeting="false" start="2023-07-21" duration="1" complete="0" thirdDate="2023-05-29" thirdDate-constraint="0" expand="true"/>
         <task id="100" name="Realización del formato del documento para entregas" color="#8cb6ce" meeting="false" start="2023-07-24" duration="1" complete="0" thirdDate="2023-05-29" thirdDate-constraint="0" expand="true"/>
+        <task id="101" name="Diagrama de casos de uso" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="102" name="Formato de planilla de casos de uso" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="103" name="Diagramacion de planilla de casos de uso" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="104" name="Formato de planilla de diagrama de clases" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="105" name="Diagrama de clases" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="106" name="Formato de planilla de diagrama de estados" color="#8cb6ce" meeting="false" start="2023-07-03" duration="1" complete="0" thirdDate="2023-07-03" thirdDate-constraint="0" expand="true"/>
+        <task id="107" name="Diagrama de estados" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="108" name="Estudio de factibilidad" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="109" name="DR actualizado" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="110" name="Modelo físico" color="#8cb6ce" meeting="false" start="2023-07-03" duration="1" complete="0" thirdDate="2023-07-03" thirdDate-constraint="0" expand="true"/>
+        <task id="111" name="Creacion de sentencias DDL" color="#8cb6ce" meeting="false" start="2023-07-03" duration="1" complete="0" thirdDate="2023-07-03" thirdDate-constraint="0" expand="true"/>
+        <task id="112" name="Creacion de sentencias DML" color="#8cb6ce" meeting="false" start="2023-07-03" duration="1" complete="0" thirdDate="2023-07-03" thirdDate-constraint="0" expand="true"/>
+        <task id="113" name="Implementacion BD en la maquina virtual" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="114" name="Creacion de datos de prueba en la BD" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="115" name="Creacion de documento de forma juridica" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="116" name="Creacion de plan de inversiones" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="117" name="Creacion de plan de financiacion" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="118" name="Matriz FODA" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="119" name="Prototipo navegable del sitio web del producto" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="120" name="Prototipo navegable del sitio web de la empresa" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="121" name="Implementacion de formularios funcionales" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="122" name="Implementacion de los scripts del sitio web" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="123" name="Implementacion responsive del sitio web del producto" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="124" name="Implementacion responsive del sitio web de la empresa" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="125" name="Creacion de plan de contingencias" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="126" name="Control de avance" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="127" name="Creacion de plan de actividades" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="128" name="Creacion de diagrama Pert" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="129" name="Plan  de marketing" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="131" name="Conexion a la base de datos de la maquina virtual" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="132" name="Login funcional validando contra la BD segun perfil de acceso" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="133" name="Seguridad con manejo de variables de sesion" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="134" name="Alta de turistas" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="135" name="Alta de restaurantes" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="136" name="Listado con paginado de todas las entidades" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="138" name="Configuracion de los servidores y terminales" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="139" name="Configuracion de las terminales de red" meeting="false" start="2023-07-03" duration="1" complete="0" expand="true"/>
+        <task id="142" name="Instalacion de MariaDB en Maquina Virtual" meeting="false" start="2023-05-08" duration="1" complete="0" expand="true"/>
+        <task id="143" name="Instalacion de Grafana en Maquina Virtual" meeting="false" start="2023-05-08" duration="1" complete="0" expand="true"/>
     </tasks>
     <resources>
         <resource id="0" name="Maximiliano Domínguez" function="SoftwareDevelopment:3" contacts="" phone="">
