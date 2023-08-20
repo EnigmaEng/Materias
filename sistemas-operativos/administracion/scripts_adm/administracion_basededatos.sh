@@ -4,6 +4,7 @@ logger -p local1.info "Iniciando administracion de base de datos"
 user=wweat
 pass=Wweat123**
 database=wweat
+BACKUP_FILE=backupbd
 
 OPCION=1
 while [ $OPCION != 0 ]
@@ -19,6 +20,7 @@ do
 	echo "5) Actualizar cambios"
 	echo "6) Ver registro actividad BD"
 	echo "7) Ver registro de errores BD"
+	echo "8) Realizar un respaldo de BD"
 	echo "0) Salir"
 	echo "***************************************"
 	echo "***************************************"
@@ -149,7 +151,7 @@ Agregar privilegios
 			"		
 read -p "Ingrese una opcion: " AGPRIV
 	case $AGPRIV in
-		1)
+1)
 logger -p local1.info "Agregando permiso INSERT"
 read -p "Ingrese tabla donde modificar los privilegios: " table
 mysql -u "$user" -p"$pass" $database -e "GRANT INSERT ON `$database`.$table TO '$userPriv'@'%' "
@@ -388,6 +390,27 @@ sudo mysql -u "$user" -p"$pass" $database -e "SHOW VARIABLES LIKE 'log_error';"
 sleep 3
 echo "Precione enter para volver..."
 read exit
+;;
+8)
+logger -p local1.info "Se ingrea a realizar respaldo de la BD"
+read -p "Ingrese nombre para archivo de respaldo: " BACK
+if [ -z "$BACK" ]
+then echo "El nombre de archivo esta vacio, presione enter para continuar..."
+	read exit
+else
+mysqldump -u "$user" -p"$pass" "$database" > "$BACK"
+
+if [ $? -eq 0 ]; then
+	logger -p local1.info "Respaldo de la BD creado correctamente"
+      	echo "
+Respaldo completado correctamente con nombre: $BACK
+Para volver presione enter
+	"
+read exit
+else
+  echo "Error al realizar el respaldo"
+fi
+fi
 ;;
 0)
 logger -p local1.info "saliendo de adminBD"

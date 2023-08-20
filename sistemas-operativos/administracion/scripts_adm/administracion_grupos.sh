@@ -1,18 +1,18 @@
 #!/bin/bash
 logger -p local1.info "Ingresando a menu de administracion de usuarios y grupos"
 OPCION=1
-clear
 while [ "$OPCION" != 0 ]
 do
-	 
+	clear
 	echo "-----------------------------------"
 	echo "--------------GRUPOS---------------"
 	echo "-----------------------------------"
-	echo "1- Agregar un nuevo grupo"
-	echo "2- Eliminar un grupo"
-	echo "3- Modificar un grupo"
-	echo "4- Listar grupos"
-	echo "0- Salir"
+	echo " 1- Agregar un nuevo grupo"
+	echo " 2- Eliminar un grupo"
+	echo " 3- Modificar un grupo"
+	echo " 4- Listar grupos"
+	echo " 5- Buscar grupo"
+	echo " 0- Salir"
 	echo "-----------------------------------"
 	echo "-----------------------------------"
 	echo "-----------------------------------"
@@ -160,6 +160,32 @@ do
 		fi
 		sleep 3
 		;;
+5) logger -p local1.info "Ingresa a buscar grupo..."
+	read -p "Ingrese el nombre del grupo que desee buscar: " grupo
+	if grep -q "^$grupo:" /etc/group
+	then
+		gid=$(grep "^$grupo:" /etc/group | cut -d':' -f3)
+		miembros=$(grep "^$grupo:" /etc/group | cut -d':' -f4)
+echo "
+***************************************
+ Datos del grupo $grupo:
+
+ GID del grupo: $gid
+ Usuarios en el grupo: $miembros
+
+*+*************************************
+Presione enter para volver...
+"
+		read exit
+	else
+		echo "El grupo $grupo, no existe..."
+		echo "Presione enter para volver..."
+		read exit
+	fi
+
+
+	;;
+
 		0)
 		logger -p local1.info "Salio del menu de aministracion de grupos"
 		clear

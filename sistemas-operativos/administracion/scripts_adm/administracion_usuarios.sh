@@ -80,6 +80,7 @@ logger -p local1.info "Ingreso modificar contrasenia"
     read -p "Ingrese usuario a modif " usuario
     usuario=$(validar_entrada $usuario)
     sudo passwd $usuario
+logger -p local1.info "Se modifica contrasenia"
     clear
 }
 
@@ -91,12 +92,46 @@ sleep 5
 clear
 }
 
+buscar_usuario(){
+logger -p local1.info "Ingreso a buscar usuario"
+clear
+    read -p "Ingrese nombre de usuario: " usuario
+    usuario=$(validar_entrada $usuario)
+ 	if id "$usuario" &>/dev/null
+	then
+logger -p local1.info "Se lista indormacion de el usuario $usuario"
+
+echo "
+******************************************************************
+******************************************************************
+ Datos de $usuario:
+
+ Nombre completo: $(grep $usuario /etc/passwd | cut -d':' -f5)
+ UID: $(id -u $username)
+ GID: $(id -g $username)
+ Shell por defecto: $(grep $usuario /etc/passwd | cut -d':' -f7)
+ Directorio de inicio: $(grep $usuario /etc/passwd | cut -d':' -f6)
+
+******************************************************************
+******************************************************************
+"
+echo "Presione enter para volver... "
+read exit
+
+	else
+		echo "El usuario ingresado: $usuario, no existe en el sistema..."
+	fi
+
+}
+
 
 # Función para mostrar el menú interactivo
 mostrar_menu() {
 OPC=1
     while [ "$OPC" != 0 ] 
+    
     do
+    clear
     echo "----------------------------------------------"
     echo "----- Menú de Administración de Usuarios -----"
     echo "----------------------------------------------"
@@ -106,10 +141,12 @@ OPC=1
     echo "4. Eliminar un usuario"
     echo "5. Modificar contrasenia usuario"
     echo "6. Listar todos los usuarios"
+    echo "7. Buscar usuario"
     echo "0. Salir"
     echo "------------------------------------------------"
     echo "------------------------------------------------"
     echo "------------------------------------------------"   
+    echo ""
     read -p "Ingrese la opción deseada: " OPC
          case $OPC in
             1) agregar_usuario ;;
@@ -118,6 +155,7 @@ OPC=1
             4) eliminar_usuario ;;
 	    5) modif_contrasenia ;;
 	    6) listar_usuarios ;;
+	    7) buscar_usuario ;;
 	    0) echo "Saliendo...."
 		sleep 3 ;;
             *) clear
