@@ -35,25 +35,25 @@ CREATE TABLE `administrador` (
   FOREIGN KEY (id_usuario) REFERENCES `usuarios`(id_usuario)
 );
 
+
+CREATE TABLE `restaurante` (
+  id_usuario INT(10) UNSIGNED PRIMARY KEY,
+  nombre VARCHAR(50) NOT NULL,
+  id_loc_restaurante INT(10) UNSIGNED,
+  FOREIGN KEY (id_usuario) REFERENCES `usuarios`(id_usuario),
+  FOREIGN KEY (id_loc_restaurante) REFERENCES `localizacion`(id_localizacion)
+);
+
 CREATE TABLE `plato_restaurantes` (
   id_Plato INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   nombre_plato VARCHAR(80) NOT NULL,
   costo FLOAT(5,2),
   descripcion VARCHAR(300),
   url_img_menu VARCHAR(150),
-  estado_plato ENUM ('S','N') DEFAULT 'S'
+  estado_plato ENUM ('S','N') DEFAULT 'S',
+  id_usuario_rest INT (10) UNSIGNED,
+  FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante`(id_usuario)
 );
-
-CREATE TABLE `restaurante` (
-  id_usuario INT(10) UNSIGNED PRIMARY KEY,
-  nombre VARCHAR(50) NOT NULL,
-  id_loc_restaurante INT(10) UNSIGNED,
-  id_plato INT (10) UNSIGNED,
-  FOREIGN KEY (id_plato) REFERENCES `plato_restaurantes`(id_Plato),
-  FOREIGN KEY (id_usuario) REFERENCES `usuarios`(id_usuario),
-  FOREIGN KEY (id_loc_restaurante) REFERENCES `localizacion`(id_localizacion)
-);
-
 
 CREATE TABLE `sesiones`(
 	id_sesion INT (10) UNSIGNED AUTO_INCREMENT,
