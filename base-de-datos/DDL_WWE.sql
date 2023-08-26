@@ -26,12 +26,16 @@ CREATE TABLE `turista` (
   id_usuario INT(10) UNSIGNED PRIMARY KEY,
   nacionalidad VARCHAR(50) NOT NULL,
   motivo_alojamiento VARCHAR (60) NOT NULL,
+  nombres VARCHAR(50),
+  apellidos VARCHAR(50),
   FOREIGN KEY (id_usuario) REFERENCES `usuarios`(id_usuario)
 );
 
 CREATE TABLE `administrador` (
   id_usuario INT(10) UNSIGNED PRIMARY KEY,
   nro_empleado SMALLINT(5) UNIQUE,
+  nombres VARCHAR(50),
+  apellidos VARCHAR(50),
   FOREIGN KEY (id_usuario) REFERENCES `usuarios`(id_usuario)
 );
 
