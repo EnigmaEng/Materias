@@ -61,9 +61,13 @@ do
 			logger -p local1.info " grupo '$groupName' eliminado"
 			sudo groupdel $groupName
 			echo "El grupo $groupName fue eliminado satisfactoriamente"
+			echo "Presione enter para volver..."
+			read exit
 		else
 			logger -p local1.info "...el grupo a eliminar no exite en el sistema"
 			echo "Grupo $groupName no existe"
+			echo "Presione enter para volver..."
+			read exit
 		fi
 		;;
 		3)
@@ -158,7 +162,8 @@ do
 		else
 			logger -p local1.info "...no se listaron los grupos"
 		fi
-		sleep 3
+		echo "Presione enter para continuar..."
+		read exit
 		;;
 5) logger -p local1.info "Ingresa a buscar grupo..."
 	read -p "Ingrese el nombre del grupo que desee buscar: " grupo

@@ -22,7 +22,9 @@ agregar_usuario() {
 	logger -p local1.info "Se creo correctamente el usuario $nombre_usuario"
     	clear
 	echo "Usuario $nombre_usuario creado exitosamente."
-    	echo ""
+	echo "Presione enter para volver..."
+	read exit	
+	    	
 }
 
 # Func xa agregar un administrador
@@ -44,21 +46,44 @@ agregar_usuario_admin() {
 	echo "$nombre_usuario:$contrasena" | chpasswd
 
     	echo "Usuario administrador $nombre_usuario creado exitosamente."
-      	echo ""
+      	echo "Presione enter para volver..."
+	read exit	
+	
 }
 
 # Función para modificar un usuario que ya existe:
 modificar_usuario() {
 	logger -p local1.info "Ingreso modificacion usuario"
-    read -p "Ingrese el nombre de usuario a modificar: " nombre_usuario
-    nombre_usuario=$(validar_entrada $nombre_usuario)
-    read -p "Ingrese el nuevo nombre de usuario: " nuevo_nombre_usuario
-    nuevo_nombre_usuario=$(validar_entrada $nuevo_nombre_usuario)
-    # Modificacion real aca:
-    sudo usermod -l $nuevo_nombre_usuario $nombre_usuario
-    clear
-    echo "Nombre de usuario modificado exitosamente de $nombre_usuario a $nuevo_nombre_usuario."
-    echo
+while [ "$aux" != "exit" ]
+do
+read -p "Ingrese nombre de usuario a modificar o 0 para salir: " usuario
+usuario=$(validar_entrada $usuario)
+if [ "$usuario" == 0 ] 
+then
+exit
+fi
+id "$usuario" &> /dev/null
+if [ $? -ne 0 ]
+then
+    echo "El usuario $usuario no existe."
+else
+aux="exit"
+fi
+done
+echo "El usuario seleccionado es: $usuario:"
+echo "-------------------------------------------------"
+
+read -p "Nuevo nombre completo del usuario: " nuevo_nombre
+nuevo_nombre=$(validar_entrada $nuevo_nombre)
+read -p "Nuevo directorio de inicio (vacío para mantener el actual): " nuevo_home
+read -p "Nuevo shell (vacío para mantener el actual): " nuevo_shell
+
+sudo usermod -c "$nuevo_nombre" -d "$nuevo_home" -s "$nuevo_shell" "$usuario"
+
+echo "El usuario $usuario, fue modificado correctamente"
+echo "Presione enter para volver..."
+read exit	
+
 }
 
 # Función para eliminar un usuario
@@ -71,7 +96,8 @@ logger -p local1.info ""
     sudo userdel -r $nombre_usuario
 	clear
      	echo "Usuario $nombre_usuario eliminado exitosamente."
-   	echo
+   	echo "Presione enter para volver..."
+	read exit	
 }
 
 # Funcion para modif contrasenia
@@ -81,14 +107,16 @@ logger -p local1.info "Ingreso modificar contrasenia"
     usuario=$(validar_entrada $usuario)
     sudo passwd $usuario
 logger -p local1.info "Se modifica contrasenia"
-    clear
+  	echo "Presione enter para volver..."
+			read exit 
 }
 
 listar_usuarios(){
 logger -p local1.info "Se listan usuarios"
 echo "Usuarios: "
 cut -d: -f1 /etc/passwd
-sleep 5
+echo "Presione enter para volver..."
+read exit
 clear
 }
 
@@ -120,6 +148,8 @@ read exit
 
 	else
 		echo "El usuario ingresado: $usuario, no existe en el sistema..."
+		echo "Presione enter para volver..."
+		read exit
 	fi
 
 }

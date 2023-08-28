@@ -3,8 +3,7 @@ logger -p local1.info "Iniciando administracion de base de datos"
 
 user=wweat
 pass=Wweat123**
-database=wweat
-BACKUP_FILE=backupbd
+database=wwe
 
 OPCION=1
 while [ $OPCION != 0 ]
@@ -21,6 +20,7 @@ do
 	echo "6) Ver registro actividad BD"
 	echo "7) Ver registro de errores BD"
 	echo "8) Realizar un respaldo de BD"
+	echo "9) Restaurar BD"
 	echo "0) Salir"
 	echo "***************************************"
 	echo "***************************************"
@@ -408,10 +408,14 @@ Para volver presione enter
 	"
 read exit
 else
-  echo "Error al realizar el respaldo"
+  	logger -p local1.info "Respaldo de bd fallido..."
+	echo "Error al realizar el respaldo"
 fi
 fi
 ;;
+
+9)#Hacer restauracion bd
+	;;
 0)
 logger -p local1.info "saliendo de adminBD"
 echo "Gracias por utilizar el script de administracion!!!"
