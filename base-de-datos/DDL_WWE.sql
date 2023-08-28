@@ -26,14 +26,19 @@ CREATE TABLE `turista` (
   id_usuario INT(10) UNSIGNED PRIMARY KEY,
   nacionalidad VARCHAR(50) NOT NULL,
   motivo_alojamiento VARCHAR (60) NOT NULL,
+  nombres VARCHAR(50),
+  apellidos VARCHAR(50),
   FOREIGN KEY (id_usuario) REFERENCES `usuarios`(id_usuario)
 );
 
 CREATE TABLE `administrador` (
   id_usuario INT(10) UNSIGNED PRIMARY KEY,
   nro_empleado SMALLINT(5) UNIQUE,
+  nombres VARCHAR(50),
+  apellidos VARCHAR(50),
   FOREIGN KEY (id_usuario) REFERENCES `usuarios`(id_usuario)
 );
+
 
 CREATE TABLE `restaurante` (
   id_usuario INT(10) UNSIGNED PRIMARY KEY,
@@ -41,6 +46,17 @@ CREATE TABLE `restaurante` (
   id_loc_restaurante INT(10) UNSIGNED,
   FOREIGN KEY (id_usuario) REFERENCES `usuarios`(id_usuario),
   FOREIGN KEY (id_loc_restaurante) REFERENCES `localizacion`(id_localizacion)
+);
+
+CREATE TABLE `plato_restaurantes` (
+  id_Plato INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  nombre_plato VARCHAR(80) NOT NULL,
+  costo FLOAT(5,2),
+  descripcion VARCHAR(300),
+  url_img_menu VARCHAR(150),
+  estado_plato ENUM ('S','N') DEFAULT 'S',
+  id_usuario_rest INT (10) UNSIGNED,
+  FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante`(id_usuario)
 );
 
 CREATE TABLE `sesiones`(
@@ -83,23 +99,13 @@ CREATE TABLE `alojamiento` (
   FOREIGN KEY (id_alojamiento) REFERENCES `localizacion`(id_localizacion)
   );
 
-CREATE TABLE `menu_restaurantes` (
-  id_menu_res INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  nombre_menu VARCHAR(50) NOT NULL,
-  costo FLOAT(5,2),
-  descripcion VARCHAR(300),
-  url_img_menu VARCHAR(150),
-  id_usuario_rest INT (10) UNSIGNED,
-  FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante`(id_usuario)
-);
+
 
 CREATE TABLE `tipo_subscripcion` (
   id_tipo_subs INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(50) NOT NULL,
   precio_subscripcion ENUM ('9.99','99.99','149.99') NOT NULL
 );
-
-
 
 CREATE TABLE `descuento` (
   id_descuento INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -123,6 +129,7 @@ CREATE TABLE `admin_aprueba_rest` (
 CREATE TABLE `restaurante_tiene_tipo_subscripcion` (
   id_usuario_rest INT(10) UNSIGNED PRIMARY KEY,
   id_tipo_subscripcion INT(10) UNSIGNED,
+  fecha_pago DATE,
   FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante` (id_usuario),
   FOREIGN KEY (id_tipo_subscripcion) REFERENCES `tipo_subscripcion` (id_tipo_subs)
 );
