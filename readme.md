@@ -17,3 +17,4 @@ Creemos firmemente en el poder del conocimiento compartido y en la importancia d
 <p>-desarrollo branch-</p>
 <p>-hotfix branch-</p>
 <p>-implementaciones branch-</p>
+<p>-testing branch-</p>
