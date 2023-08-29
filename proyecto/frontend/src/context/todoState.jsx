@@ -24,10 +24,44 @@ const TodoState = ({ children }) => {
 
 
     //Registrar nuevos usuarios
-    const registrarUsuario = async datos => {
+    const registrarTurista = async datos => {
     
         try {
-            const respuesta = await fetch("http://localhost/apiWhereWeEat/controllers/turistaController.php", { 
+            const respuesta = await fetch("http://127.0.0.1:8080/controllers/turistaController.php", { 
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json' 
+            },
+            
+            body:JSON.stringify(datos) 
+        });
+        const contenidoRespuesta = await respuesta.text();
+console.log("Contenido de la respuesta:", contenidoRespuesta);
+            const datosJSON = JSON.parse(contenidoRespuesta)
+            
+            dispatch({
+                type: REGISTRO_EXITOSO, 
+                payload: datosJSON.msg
+            });
+            
+        } catch (error) {
+        console.log("Full Error:", error);
+            }
+            
+        setTimeout(() => {
+            dispatch({
+                type: LIMPIAR_ALERTA
+
+            })
+        }, 3000);
+     
+    }
+
+    //Registrar restaurante
+    const registrarRestaurante = async datos => {
+    
+        try {
+            const respuesta = await fetch("http://127.0.0.1:8080/controllers/restauranteController.php", { 
             method:'POST',
             headers: {
                 'Content-Type': 'application/json' 
@@ -60,19 +94,27 @@ console.log("Contenido de la respuesta:", contenidoRespuesta);
     //Autenticar Usuarios 
     const iniciarSesion = async datos => {
         try {
-            const respuesta = await clienteAxios.post('', datos);
+            const respuesta = await fetch("http://127.0.0.1:8080/controllers/loginController.php", { 
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json' 
+            },
+            
+            body:JSON.stringify(datos) 
+        });
+        const contenidoRespuesta = await respuesta.text();
+console.log("Contenido de la respuesta:", contenidoRespuesta);
+            const datosJSON = JSON.parse(contenidoRespuesta)
+            
             dispatch({
-                type: LOGIN_EXITOSO,
-                payload: respuesta.data.token
-            })
-        
+                type: LOGIN_EXITOSO, 
+                payload: datosJSON.msg
+            });
+            
         } catch (error) {
-            dispatch({
-                type: LOGIN_ERROR,
-                payload: error.response.data.msg
-            })
-        }
-        //Limpiar alerta a los 3 segundos 
+        console.log("Full Error:", error);
+            }
+            
         setTimeout(() => {
             dispatch({
                 type: LIMPIAR_ALERTA
@@ -124,7 +166,8 @@ console.log("Contenido de la respuesta:", contenidoRespuesta);
                 autenticado: state.autenticado,
                 usuario: state.usuario,
                 mensaje: state.mensaje,
-                registrarUsuario,
+                registrarTurista,
+                registrarRestaurante,
                 iniciarSesion,
                 usuarioAutenticado,
                 cerrarSesion,

@@ -7,8 +7,8 @@ const Mensaje = () => {
     const {mensaje} = TodoContext;
 
   return (
-    <div className='text-black text-2xl font-bold'>{mensaje}
-    </div>
+    <p className='text-black text-2xl font-bold'>{mensaje}
+    </p>
   )
 }
 
