@@ -8,7 +8,7 @@ CREATE TABLE `usuarios` (
   id_usuario INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   alias VARCHAR(50) UNIQUE,
   email VARCHAR(50) NOT NULL,
-  contrasena VARCHAR(64) NOT NULL,
+  contrasena VARCHAR(100) NOT NULL,
   activo ENUM ('S','N') DEFAULT 'S',
   bloqueado ENUM ('S','N') DEFAULT 'N',
   url_img_usuario VARCHAR(150) DEFAULT NULL,
@@ -66,9 +66,9 @@ CREATE TABLE `sesiones`(
     fecha_ultima_sesion DATE NOT NULL, #Se crea cuando el usuario INICIA sesion.
     ip VARCHAR (16),
     max_intentos INT (1),
-    id_usuario_rest INT (10) UNSIGNED,
+    id_usuario INT (10) UNSIGNED,
     PRIMARY KEY (id_sesion,fecha_ultima_sesion),
-    FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante`(id_usuario)
+    FOREIGN KEY (id_usuario) REFERENCES `usuarios`(id_usuario)
 );
 
 CREATE TABLE `tipo_restaurantes`(
@@ -105,8 +105,8 @@ CREATE TABLE `alojamiento` (
 
 CREATE TABLE `tipo_subscripcion` (
   id_tipo_subs INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  nombre VARCHAR(50) NOT NULL,
-  precio_subscripcion ENUM ('9.99','99.99','149.99') NOT NULL
+  nombre ENUM('STANDAR','PREMIUM','VIP') DEFAULT 'PREMIUM',
+  precio_subscripcion ENUM ('9.99','99.99','149.99') DEFAULT '99.99'
 );
 
 CREATE TABLE `descuento` (
