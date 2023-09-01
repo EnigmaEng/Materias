@@ -1,9 +1,6 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-header("Allow: GET, POST, OPTIONS, PUT, DELETE");
-header("content-type: application/json; charset=utf-8");
 require_once '../models/restaurante.php';
+require_once './cors.php';
 
 function insertarController($alias = '', $url_img_usuario = '', $email = '', $contrasena = '', $rol = '',$nombre='')
 {

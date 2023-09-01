@@ -3,12 +3,12 @@ import todoContext from '../../context/todoContext'
 
 const Mensaje = () => {
     
-    const TodoContext = useContext(todoContext)
+    const TodoContext = useContext(todoContext);
     const {mensaje} = TodoContext;
 
   return (
-    <p className='text-black text-2xl font-bold'>{mensaje}
-    </p>
+    <div className='text-black border p-2 text-center text-3xl font-bold'>{mensaje}
+    </div>
   )
 }
 

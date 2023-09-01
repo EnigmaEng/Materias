@@ -1,8 +1,8 @@
 import {GoogleMap, useLoadScript, MarkerF} from '@react-google-maps/api'
 import { useMemo } from 'react'
 
- 
-const apiKey = import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY;
+const apiKey = import.meta.env.VITE_GOOGLE_MAP
+
  export default function Map()  {
 
      const {isLoaded} = useLoadScript({ 
@@ -24,7 +24,7 @@ function MapComponents() {
 return (
   <>
 
-     <GoogleMap zoom={10} center={center} mapContainerClassName='hover:scale-125 transition-all duration-300 delay-150 absolute h-80 w-9/12 m-auto rounded-lg shadow-xl'>
+     <GoogleMap zoom={10} center={center} mapContainerClassName='hover:scale-125 mt-14 transition-all duration-300 delay-150 absolute h-80 w-9/12 m-auto rounded-lg shadow-xl'>
 <MarkerF position={center} />
   </GoogleMap>
 

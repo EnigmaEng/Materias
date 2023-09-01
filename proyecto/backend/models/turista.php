@@ -144,10 +144,10 @@ class Turista extends Usuario implements Crud
     public function delete($tabla, $datos)
     {
         try {
-            $query = "SELECT * FROM $tabla WHERE alias = :alias AND contrasenia = :contrasenia";
+            $query = "SELECT * FROM $tabla WHERE alias = :alias AND contrasena = :contrasena";
             $stmt = $this->getConn()->prepare($query);
             $stmt->bindValue(':alias', $datos['alias']);
-            $stmt->bindValue(':contrasenia', $datos['contrasenia']);
+            $stmt->bindValue(':contrasena', $datos['contrasena']);
 
             $stmt->execute();
 

@@ -19,4 +19,4 @@ const HomeAuth = () => {
   )
 }
 
-export default HomeAuth
+export default HomeAuth;

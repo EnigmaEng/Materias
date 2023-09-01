@@ -5,7 +5,6 @@ import todoReducer from "./todoReducer";
 import { REGISTRO_EXITOSO, REGISTRO_ERROR, LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION,} from "../types/types";
 import clienteAxios from "../config/axios";
 
-//falta token
 
 
 //Usamos el useReducer para actualizar los estados de la aplicacion en funcion a las acciones que se envian en este caso, datos generados por el usuario 
@@ -13,47 +12,46 @@ import clienteAxios from "../config/axios";
 const TodoState = ({ children }) => {
 
     const initialState = {
-        token: typeof window !== 'undefined' ? localStorage.getItem('token') : '',
+      
         autenticado: null,
         usuario: null,
         mensaje: null,
     }
+
     //Reducer
     const [state, dispatch] = useReducer(todoReducer, initialState);
 
 
-
-    //Registrar nuevos usuarios
+    //Registrar turista
     const registrarTurista = async datos => {
     
         try {
-            const respuesta = await fetch("http://127.0.0.1:8080/controllers/turistaController.php", { 
-            method:'POST',
+            const respuesta = await clienteAxios.post("/turistaController.php", datos,{ 
+            
             headers: {
                 'Content-Type': 'application/json' 
             },
             
-            body:JSON.stringify(datos) 
         });
-        const contenidoRespuesta = await respuesta.text();
-console.log("Contenido de la respuesta:", contenidoRespuesta);
-            const datosJSON = JSON.parse(contenidoRespuesta)
-            
             dispatch({
                 type: REGISTRO_EXITOSO, 
-                payload: datosJSON.msg
+                payload: respuesta.data.msg
             });
             
         } catch (error) {
-        console.log("Full Error:", error);
-            }
-            
-        setTimeout(() => {
             dispatch({
-                type: LIMPIAR_ALERTA
-
+                type: REGISTRO_ERROR,
+                payload: error.response.data.msg
             })
-        }, 3000);
+            }
+
+            setTimeout(() => {
+                dispatch({
+                    type: LIMPIAR_ALERTA
+    
+                })
+            }, 3000);
+       
      
     }
 
@@ -61,81 +59,71 @@ console.log("Contenido de la respuesta:", contenidoRespuesta);
     const registrarRestaurante = async datos => {
     
         try {
-            const respuesta = await fetch("http://127.0.0.1:8080/controllers/restauranteController.php", { 
-            method:'POST',
+            const respuesta = await clienteAxios.post("/restauranteController.php", datos, { 
+        
             headers: {
                 'Content-Type': 'application/json' 
             },
-            
-            body:JSON.stringify(datos) 
+
         });
-        const contenidoRespuesta = await respuesta.text();
-console.log("Contenido de la respuesta:", contenidoRespuesta);
-            const datosJSON = JSON.parse(contenidoRespuesta)
+
             
             dispatch({
                 type: REGISTRO_EXITOSO, 
-                payload: datosJSON.msg
+                payload: respuesta.data.msg
             });
-            
-        } catch (error) {
-        console.log("Full Error:", error);
-            }
-            
-        setTimeout(() => {
-            dispatch({
-                type: LIMPIAR_ALERTA
 
-            })
-        }, 3000);
-     
+        } catch (error) {
+             dispatch({
+                type:REGISTRO_ERROR,
+                payload: error.response.data.msg
+             })
+            }
+            setTimeout(() => {
+                dispatch({
+                    type: LIMPIAR_ALERTA
+    
+                })
+            }, 3000);
+    
     }
 
-    //Autenticar Usuarios 
-    const iniciarSesion = async datos => {
+    //Login
+    const iniciarSesion = async (datos) => {
         try {
-            const respuesta = await fetch("http://127.0.0.1:8080/controllers/loginController.php", { 
-            method:'POST',
-            headers: {
-                'Content-Type': 'application/json' 
-            },
-            
-            body:JSON.stringify(datos) 
-        });
-        const contenidoRespuesta = await respuesta.text();
-console.log("Contenido de la respuesta:", contenidoRespuesta);
-            const datosJSON = JSON.parse(contenidoRespuesta)
-            
-            dispatch({
+          const respuesta = await clienteAxios.post('/loginController.php', datos);
+      const {data} =respuesta
+          if(data.mensaje === 'Logueado correctamente'){
+            dispatch({ 
                 type: LOGIN_EXITOSO, 
-                payload: datosJSON.msg
+                payload: data.usuario
             });
-            
-        } catch (error) {
-        console.log("Full Error:", error);
-            }
-            
-        setTimeout(() => {
+          }else{
             dispatch({
-                type: LIMPIAR_ALERTA
-
+                type: LOGIN_ERROR,
+                payload: 'Credenciales incorrectas'
             })
-        }, 3000);
-    }
-
-
-    //user autenticado
-    const usuarioAutenticado = async () => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            tokenAuth(token)
+          }
+            
+         
+        } catch (error) {
+          
+            dispatch({ 
+                type: LOGIN_ERROR, 
+                payload: error.response.data.msg
+             });
         }
+      };
+
+    const usuarioAutenticado = async () => {
+        const session = sessionStorage.getItem('session');
+       if(session === 'autenticado'){
         try {
-            const respuesta = await clienteAxios.get('');
+            const respuesta = await clienteAxios.post('/loginController.php');
             
             dispatch({
                 type: USUARIO_AUTENTICADO,
-                payload: respuesta.data.usuario
+                payload: respuesta.data.usuario,
             })
         } catch (error) {
             dispatch({
@@ -144,33 +132,29 @@ console.log("Contenido de la respuesta:", contenidoRespuesta);
             })
         }
     }
-
-
-    const cerrarSesion = () => {
-    
-
-        dispatch({
-            type: CERRAR_SESION
-
-        })
-      
     }
 
+        const cerrarSesion = () => {
+            dispatch({
+                  type: CERRAR_SESION
 
+         })
+         window.location.reload();
+        }
+   
  
     
     return (
         <todoContext.Provider
             value={{
-                token: state.token,
+               
                 autenticado: state.autenticado,
                 usuario: state.usuario,
                 mensaje: state.mensaje,
                 registrarTurista,
                 registrarRestaurante,
                 iniciarSesion,
-                usuarioAutenticado,
-                cerrarSesion,
+              
             }}>
 
             {children}

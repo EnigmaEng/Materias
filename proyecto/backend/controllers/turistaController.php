@@ -1,9 +1,6 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-header("Allow: GET, POST, OPTIONS, PUT, DELETE");
-header("content-type: application/json; charset=utf-8");
 require_once '../models/turista.php';
+require_once './cors.php';
 
 function insertarController($alias = '', $url_img_usuario = '', $email = '', $contrasena = '', $rol = '',$nacionalidad='',$motivoAlojamiento='',$nombres='',$apellidos='')
 {
@@ -98,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['accion']) && $_GET['acci
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['accion']) && $_GET['accion'] == 'filtrarTurista') {
     $datos = array(
         "alias" => $_GET['alias'],
-        "contrasenia" => $_GET['contrasenia']
+        "contrasena" => $_GET['contrasena']
     );
     $turista = filtrarController("usuarios", $datos);
     echo json_encode($turista);
@@ -108,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['accion']) && $_GET['acci
 if($_SERVER['REQUEST_METHOD'] == 'DELETE' && isset($_GET['accion']) && $_GET['accion'] == 'eliminarTurista'){
     $datos = array(
         "alias" => $_GET['alias'],
-        "contrasenia" => $_GET['contrasenia']
+        "contrasena" => $_GET['contrasena']
     );
     
     borrarController("usuarios",$datos);
