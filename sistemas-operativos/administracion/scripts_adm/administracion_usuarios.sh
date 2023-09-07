@@ -114,7 +114,7 @@ logger -p local1.info "Se modifica contrasenia"
 listar_usuarios(){
 logger -p local1.info "Se listan usuarios"
 echo "Usuarios: "
-cut -d: -f1 /etc/passwd
+cut -d: -f1 /etc/passwd | more
 echo "Presione enter para volver..."
 read exit
 clear

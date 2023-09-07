@@ -155,7 +155,7 @@ do
 		4)
 		logger -p local1.info "ingreso a listar grupos"
 		clear
-		sudo cat /etc/group | cut -f1 -d':'
+		sudo cat /etc/group | cut -f1 -d':' | more
 		if [ $? == 0 ]
 		then
 			logger -p local1.info "...grupos listados"

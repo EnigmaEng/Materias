@@ -20,7 +20,6 @@ do
 	echo "6) Ver registro actividad BD"
 	echo "7) Ver registro de errores BD"
 	echo "8) Realizar un respaldo de BD"
-	echo "9) Restaurar BD"
 	echo "0) Salir"
 	echo "***************************************"
 	echo "***************************************"
@@ -378,14 +377,52 @@ fi
 ;;
 
 6)logger -p local1.info "Se consulta registro actividad BD"
-sudo mysql -u "$user" -p"$pass" $database -e "SHOW GLOBAL STATUS LIKE 'Uptime'; SHOW GLOBAL STATUS LIKE 'Slow_queries'; SHOW GLOBAL STATUS LIKE 'Com_select';"
-sleep 3
-echo "Precione enter para volver..."
-read exit	
+while [ $OPCION != 0 ]
+do
+clear
+	read -p "
+**********************************
+Ingrese la opcion que desee:
+1) Ver Uptime
+2) Ver Canidad Queries realizadas
+3) Ver Threads conectados
+4) Ver InnoDB Status
+
+0) Salir
+**********************************
+
+" OPCION
+case $OPCION in 
+
+	1)logger -p local1.info "Se consulta Uptime"
+		sudo mysql -u "$user" -p"$pass" $database -e "SHOW GLOBAL STATUS LIKE 'Uptime';"
+	echo "Precione enter para volver..."
+	read exit ;;
+
+	2)logger -p local1.info "Se consulta Queries"
+		sudo mysql -u "$user" -p"$pass" $database -e "SHOW GLOBAL STATUS LIKE 'Queries';"
+	echo "Precione enter para volver..."
+	read exit		
+		;;
+	3)logger -p local1.info "Se consulta threads"
+	sudo mysql -u "$user" -p"$pass" $database -e "SHOW GLOBAL STATUS LIKE 'threads_connected';"
+	echo "Precione enter para volver..."
+	read exit ;;	
+	4)logger -p local1.info "Se consulta innodb"
+	sudo mysql -u "$user" -p"$pass" $database -e "SHOW ENGINE INNODB STATUS;" | less
+	echo "Precione enter para volver..."
+	read exit	
+		;;
+	
+	0)clear;;
+	*)echo "Opcion no valida "
+	
+esac		
+done
 ;;
 
 7)
-logger -p local1.info "Se consulta registro errores BD"
+logger -p local1.info "Se consultquieroa registro errores BD"
 sudo mysql -u "$user" -p"$pass" $database -e "SHOW VARIABLES LIKE 'log_error';"
 sleep 3
 echo "Precione enter para volver..."
@@ -414,8 +451,6 @@ fi
 fi
 ;;
 
-9)#Hacer restauracion bd
-	;;
 0)
 logger -p local1.info "saliendo de adminBD"
 echo "Gracias por utilizar el script de administracion!!!"

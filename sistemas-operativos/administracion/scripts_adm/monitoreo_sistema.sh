@@ -2,7 +2,7 @@
 
 logger -p local1.info "entrando en el menu de monitoreo de sistema"
 OPCION=1
-while [ $OPCION != 0 ]
+while [ "$OPCION" != 0 ]
 do
 	clear
 	echo "Menu de monitoreo"
@@ -34,13 +34,13 @@ do
 	;;
 	4)
 	logger -p local1.info "muestro todos los servicios"
-	systemctl list-units --type=service | cat
+	systemctl list-units --type=service | cat | more
 	echo "Presione enter para continuar"
 	read exit
 	;;
 	5)
 	logger -p local1.info "muestro todos los servicios activos"
-	systemctl list-units --type=service --state=running | cat
+	systemctl list-units --type=service --state=running | cat | more
 	echo "Presione enter para continuar"
 	read exit
 	;;
