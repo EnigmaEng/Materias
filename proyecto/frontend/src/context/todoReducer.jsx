@@ -12,26 +12,28 @@ export default (state, action) => {
                 mensaje: action.payload
             }
         case LOGIN_EXITOSO:
-          
+            
             return {
                 ...state,
-               
                 autenticado: true,
-mensje:null
+                mensaje: null,
+
             }
         case LIMPIAR_ALERTA:
             return {
                 ...state,
-                mensaje: null //el mensaje vuelve a ser null en el case LIMPIAR_ALERTA
+                mensaje: null 
 
             }
         case USUARIO_AUTENTICADO:
+
             return {
                 ...state,
-                usuario: action.payload
+                usuario: action.payload,
+            
             }
         case CERRAR_SESION:
-         
+   
             return {
                 ...state,
                 usuario: null,

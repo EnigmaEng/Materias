@@ -70,10 +70,10 @@ class Restaurante extends Usuario implements Crud
             } else {
 
                 //Generar un hash seguro usando el algoritmo bcrypt
-                $hashedPass = password_hash($datos['contrasena'], PASSWORD_BCRYPT);
+                $hashedPass = password_hash($datos['contrasenia'], PASSWORD_BCRYPT);
 
                 //Almaceno nuevamente la contraseña
-                $datos['contrasena'] = $hashedPass;
+                $datos['contrasenia'] = $hashedPass;
 
                 $columnNames = implode(', ', array_keys($datos));
                 $placeholders = implode(', ', array_map(function ($key) {
@@ -137,10 +137,10 @@ class Restaurante extends Usuario implements Crud
     public function delete($tabla, $datos)
     {
         try {
-            $query = "SELECT * FROM $tabla WHERE alias = :alias AND contrasena = :contrasena";
+            $query = "SELECT * FROM $tabla WHERE alias = :alias AND contrasenia = :contrasenia";
             $stmt = $this->getConn()->prepare($query);
             $stmt->bindValue(':alias', $datos['alias']);
-            $stmt->bindValue(':contrasena', $datos['contrasena']);
+            $stmt->bindValue(':contrasenia', $datos['contrasenia']);
 
             $stmt->execute();
 

@@ -12,7 +12,7 @@ import clienteAxios from "../config/axios";
 const TodoState = ({ children }) => {
 
     const initialState = {
-      
+       
         autenticado: null,
         usuario: null,
         mensaje: null,
@@ -27,7 +27,6 @@ const TodoState = ({ children }) => {
     
         try {
             const respuesta = await clienteAxios.post("/turistaController.php", datos,{ 
-            
             headers: {
                 'Content-Type': 'application/json' 
             },
@@ -35,7 +34,7 @@ const TodoState = ({ children }) => {
         });
             dispatch({
                 type: REGISTRO_EXITOSO, 
-                payload: respuesta.data.msg
+                payload: 'Registro exitoso'
             });
             
         } catch (error) {
@@ -57,20 +56,16 @@ const TodoState = ({ children }) => {
 
     //Registrar restaurante
     const registrarRestaurante = async datos => {
-    
+
         try {
             const respuesta = await clienteAxios.post("/restauranteController.php", datos, { 
-        
             headers: {
                 'Content-Type': 'application/json' 
             },
-
-        });
-
-            
+        });     
             dispatch({
                 type: REGISTRO_EXITOSO, 
-                payload: respuesta.data.msg
+                payload: 'Registro exitoso'
             });
 
         } catch (error) {
@@ -85,55 +80,53 @@ const TodoState = ({ children }) => {
     
                 })
             }, 3000);
-    
     }
 
     //Login
     const iniciarSesion = async (datos) => {
         try {
           const respuesta = await clienteAxios.post('/loginController.php', datos);
-      const {data} =respuesta
-          if(data.mensaje === 'Logueado correctamente'){
-            dispatch({ 
-                type: LOGIN_EXITOSO, 
-                payload: data.usuario
-            });
-          }else{
-            dispatch({
-                type: LOGIN_ERROR,
-                payload: 'Credenciales incorrectas'
-            })
-          }
+          const {data} = respuesta;
+          if(data.mensaje === "Logueado correctamente"){
+console.log(data)
+              dispatch({ 
+              type: LOGIN_EXITOSO, 
             
-         
-        } catch (error) {
-          
+            }); 
+          }else{
             dispatch({ 
                 type: LOGIN_ERROR, 
-                payload: error.response.data.msg
-             });
+                payload: 'Credenciales incorrectas'
+              });
+          }
+        } catch (error) {
+            dispatch({ 
+                type: LOGIN_ERROR, 
+                payload: response.error.data.msg
+              });
         }
+        setTimeout(() => {
+          dispatch({
+            type: LIMPIAR_ALERTA
+          })
+        }, 3000);
       };
 
-    const usuarioAutenticado = async () => {
-        const session = sessionStorage.getItem('session');
-       if(session === 'autenticado'){
+      const usuarioAutenticado = async () => {
         try {
-            const respuesta = await clienteAxios.post('/loginController.php');
-            
+         const respuesta = await clienteAxios.get('/sessionController.php'); 
             dispatch({
-                type: USUARIO_AUTENTICADO,
-                payload: respuesta.data.usuario,
-            })
+              type: USUARIO_AUTENTICADO,
+              payload: respuesta.data.usuario
+            });
         } catch (error) {
-            dispatch({
-                type: LOGIN_ERROR,
-                payload: error.response.data.msg
-            })
+          dispatch({
+            type: LOGIN_ERROR,
+            payload: error.response.data.msg
+          });
         }
-    }
-    }
-
+      };
+      
         const cerrarSesion = () => {
             dispatch({
                   type: CERRAR_SESION
@@ -154,7 +147,7 @@ const TodoState = ({ children }) => {
                 registrarTurista,
                 registrarRestaurante,
                 iniciarSesion,
-              
+               cerrarSesion
             }}>
 
             {children}

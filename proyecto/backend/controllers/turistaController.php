@@ -1,4 +1,5 @@
 <?php
+
 require_once '../models/turista.php';
 require_once './cors.php';
 
@@ -95,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['accion']) && $_GET['acci
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['accion']) && $_GET['accion'] == 'filtrarTurista') {
     $datos = array(
         "alias" => $_GET['alias'],
-        "contrasena" => $_GET['contrasena']
+        "contrasenia" => $_GET['contrasenia']
     );
     $turista = filtrarController("usuarios", $datos);
     echo json_encode($turista);
@@ -105,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['accion']) && $_GET['acci
 if($_SERVER['REQUEST_METHOD'] == 'DELETE' && isset($_GET['accion']) && $_GET['accion'] == 'eliminarTurista'){
     $datos = array(
         "alias" => $_GET['alias'],
-        "contrasena" => $_GET['contrasena']
+        "contrasenia" => $_GET['contrasenia']
     );
     
     borrarController("usuarios",$datos);

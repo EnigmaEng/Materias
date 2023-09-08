@@ -4,5 +4,4 @@ header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Conte
 header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 header("content-type: application/json; charset=utf-8");
 
-
 ?>

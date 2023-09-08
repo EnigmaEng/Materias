@@ -6,19 +6,18 @@ const HomeMb = () => {
   return (
 <>
 
- <div className="">
-      <video autoPlay muted loop playsInline preload='none' >
-        <source src="https://vod-progressive.akamaized.net/exp=1691995830~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F242%2F15%2F376213843%2F1569722379.mp4~hmac=d892f51645aac9211e081deae83786bd4b657091b2c7963a7067bca235bf2388/vimeo-prod-skyfire-std-us/01/242/15/376213843/1569722379.mp4" type='video/mp4' />
-      </video>
+ <div className="h-screen bg-mb py-40 ">
+    <aside className="w-full backdrop-blur shadow-xl p-6">
+
+    
       
-      <div className="absolute  top-5 left-1/2 transform -translate-x-1/2 z-10 text-center">
-        <h1 className="font-bold text-white text-3xl mb-2">WHERE WE EAT</h1>
+        <h1 className="text-center  font-bold text-red-800 text-3xl mb-2">WHERE WE EAT</h1>
         <Link to='/'>
           <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="logo" className='w-28 m-auto rounded-full' />
         </Link>
-      </div>
+    
       
-      <div className="absolute top-56 left-1/2 transform -translate-x-1/2 z-10 w-full text-center ">
+      <div className="text-center ">
        
         
         <div className="flex items-center justify-center mt-3 gap-5">
@@ -32,7 +31,7 @@ const HomeMb = () => {
         </div>
       </div>
       
-  
+      </aside>
     </div>
 
  
