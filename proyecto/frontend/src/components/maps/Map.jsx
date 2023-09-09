@@ -30,7 +30,7 @@ const apiKey = import.meta.env.VITE_GOOGLE_MAP
 
   return (
     <>
-    <div className='py-2 '>
+    <div className='py-11 '>
       <MapComponents ubicacion={ubicacion}/> 
     </div>
     
@@ -46,7 +46,7 @@ function MapComponents() {
 return (
   <>
 
-     <GoogleMap zoom={10} center={center} mapContainerClassName='rounded-lg md:w-8/12 h-64 w-11/12  m-auto '>
+     <GoogleMap zoom={10} center={center} mapContainerClassName='rounded-lg  md:w-8/12 md:h-[505px] h-64  w-11/12  m-auto '>
 <MarkerF position={center} />
   </GoogleMap>
 

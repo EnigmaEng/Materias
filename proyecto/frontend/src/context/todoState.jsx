@@ -88,10 +88,9 @@ const TodoState = ({ children }) => {
           const respuesta = await clienteAxios.post('/loginController.php', datos);
           const {data} = respuesta;
           if(data.mensaje === "Logueado correctamente"){
-console.log(data)
               dispatch({ 
-              type: LOGIN_EXITOSO, 
-            
+              type: LOGIN_EXITOSO,
+              
             }); 
           }else{
             dispatch({ 
@@ -147,7 +146,7 @@ console.log(data)
                 registrarTurista,
                 registrarRestaurante,
                 iniciarSesion,
-               cerrarSesion
+                cerrarSesion
             }}>
 
             {children}

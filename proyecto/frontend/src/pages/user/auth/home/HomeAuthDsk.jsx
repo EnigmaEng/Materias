@@ -9,10 +9,10 @@ const HomeAuthDsk = () => {
   return (
 
    <>
-<div className='flex flex-col'>
+<div className='flex flex-col h-screen'>
     <NavBar/>
     <Map/>  
-   <ListRestaurantes/>
+   {/* <ListRestaurantes/> */}
 </div>
   
  

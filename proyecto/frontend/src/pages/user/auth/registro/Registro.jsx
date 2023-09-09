@@ -32,12 +32,14 @@ const validationSchema = Yup.object({
 
 const RegistroUsuario = () => {
   const [selectedRole, setSelectedRole] = useState('');
+ 
   
   const {mensaje, registrarTurista, registrarRestaurante} = useContext(todoContext)
 
   const handleRoleChange = (e) => {
     setSelectedRole(e.target.value);
   };
+
 
 
   const formik = useFormik({
@@ -133,7 +135,8 @@ const RegistroUsuario = () => {
         
     <div className='flex flex-col mb-4'>
         <label htmlFor="url_img_usuario" className='font-bold px-4'>Foto de perfil</label>
-        <input type="text" placeholder='foto' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic' id='url_img_usuario' value={formik.values.url_img_usuario} onChange={formik.handleChange} onBlur={formik.handleBlur}  />
+        <input type="text" placeholder='foto' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic' id='url_img_usuario' value={formik.values.url_img_usuario} 
+        onChange={formik.handleChange} onBlur={formik.handleBlur}  />
          {formik.touched.url_img_usuario && formik.errors.url_img_usuario ? (
           <div> <p className='text-sm px-5 text-black'> {formik.errors.url_img_usuario}</p></div> ): (
             null

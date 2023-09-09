@@ -9,7 +9,7 @@ const HomeAuthMb = () => {
     <div className='flex flex-col '>
       
   <Map/>
-  <ListRestauranteMb/>
+  {/* <ListRestauranteMb/> */}
 
    <NavBar/>
 
