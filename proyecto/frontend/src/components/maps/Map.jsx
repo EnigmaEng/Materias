@@ -40,9 +40,7 @@ const apiKey = import.meta.env.VITE_GOOGLE_MAP
 
 function MapComponents() {
 
-  const center = 
-  
-  useMemo(() => ({ lat: -34.862021,  lng: -56.169345}), []);
+  const center = useMemo(() => ({ lat: -34.862021,  lng: -56.169345}), []);
 return (
   <>
 

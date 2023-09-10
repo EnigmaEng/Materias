@@ -1,7 +1,7 @@
 <?php
 require_once '../models/session.php';
 require_once '../models/usuario.php';
-require_once './cors.php';
+require_once 'cors.php';
 
 session_start();
 
@@ -9,4 +9,6 @@ if(!isset($_SESSION['email']) && !isset($_SESSION['contrasena']) || !isset($_SES
     $usuario=new Usuario();
     $session=new Session($usuario);
     $session->logout();
+}else{
+    echo "Estas conectado con la sesion de ".$_SESSION['email'];
 }

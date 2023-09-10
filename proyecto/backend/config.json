@@ -2,6 +2,6 @@
     "db_host": "192.168.56.103:3306",  
     "db_user": "wweat",
     "db_password": "Wweat123**",
-    "db_driver": "mariadb",
+    "db_driver":"mysql",
     "database": "wwe"
 }
