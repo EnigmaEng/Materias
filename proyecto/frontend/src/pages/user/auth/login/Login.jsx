@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import todoContext from "../../../../context/todoContext";
@@ -8,9 +9,15 @@ import HomeAuth from "../home/HomeAuth";
 const Login = () => {
 
 const Todocontext = useContext(todoContext)
-const { iniciarSesion, mensaje , autenticado, usuario} = Todocontext;
+const { iniciarSesion, mensaje , autenticado} = Todocontext;
 
+const navigate = useNavigate();
 
+useEffect(() => {
+if(autenticado){
+  navigate("/homeAuth");
+}
+},[autenticado])
     
 const formik = useFormik({
   initialValues: {
@@ -36,9 +43,7 @@ iniciarSesion(userData)
 
   return (
     <>
-    {
-      autenticado ? (<> <HomeAuth/> </>) : (
-
+  
   
   
       <div className=" flex   justify-center h-screen">
@@ -77,8 +82,7 @@ iniciarSesion(userData)
     </form>
     </div>
    
-    )
-}
+ 
       </>
  
    

@@ -97,7 +97,7 @@ const RegistroUsuario = () => {
 <div className='pb-8  flex justify-center md:block md:w-3/12 md:m-auto md:py-40 '>
  
     <form onSubmit={formik.handleSubmit}  className='text-black p-4 shadow-xl rounded-lg backdrop-blur' method='POST'>
-      <p className='text-red-800 font-bold text-center text-2xl mb-2'>Crear una cuenta</p>
+      <p className='md:text-red-800 font-bold text-center text-2xl  mb-2'>Crear una cuenta</p>
  <div> {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }</div>
         <div className='flex flex-col mb-4'>
         <label htmlFor="alias" className='font-bold px-4'>Alias</label>

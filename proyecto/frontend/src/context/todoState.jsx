@@ -111,20 +111,6 @@ const TodoState = ({ children }) => {
         }, 3000);
       };
 
-      const usuarioAutenticado = async () => {
-        try {
-         const respuesta = await clienteAxios.get('/sessionController.php'); 
-            dispatch({
-              type: USUARIO_AUTENTICADO,
-              payload: respuesta.data.usuario
-            });
-        } catch (error) {
-          dispatch({
-            type: LOGIN_ERROR,
-            payload: error.response.data.msg
-          });
-        }
-      };
       
         const cerrarSesion = () => {
             dispatch({
