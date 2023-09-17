@@ -11,7 +11,7 @@ const TodoContext = useContext(todoContext)
   return (
 <>
 
-  <div className='bg-white navbar absolute bottom-0 border shadow-xl'>
+  <div className='bg-white navbar  border shadow-xl'>
     <div>
     <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="logo"
               className='w-14 ml-2'  />
