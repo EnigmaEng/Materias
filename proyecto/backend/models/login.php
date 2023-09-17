@@ -20,24 +20,17 @@ class Login
             $stmt = $conn->prepare($query);
             $stmt->bindValue(":email", $this->userModel->getEmail());
             $stmt->execute();
-
             $userData = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (!$userData) {
-                return false; // Usuario no encontrado
+                return false;
             }
-
-            var_dump($this->userModel->getEmail());
-            var_dump($this->userModel->getContrasenia());
-            var_dump($userData['contrasena']);
-
-
+            
             // Verificar la contraseña utilizando password_verify
-            if (!password_verify($this->userModel->getContrasenia(), $userData['contrasena'])) {
-                echo "Incorrecto";
-                return false; // Autenticación exitosa
-            }
+            if (password_verify($this->userModel->getContrasenia(), $userData['contrasena'])) {
                 return true;
+            }
+                return false;
         } catch (PDOException $ex) {
             echo "Error en la conexión: " . $ex->getMessage();
         }

@@ -1,6 +1,9 @@
 <?php
 require_once '../models/turista.php';
+require_once '../models/restaurante.php';
 require_once '../models/login.php';
+require_once '../models/session.php';
+require_once 'cors.php';
 
 function loginTuristaController($tabla, $datos)
 {
@@ -8,8 +11,29 @@ function loginTuristaController($tabla, $datos)
     $login = new Login($turista);
     $turista->setEmail($datos['email']);
     $turista->setContrasenia($datos['contrasena']);
-    return $login->authenticate($tabla);
+    if($login->authenticate($tabla)){
+        $session = new Session($turista);
+        $session->setSession("email");
+        return true;
+    }
+    return false;
 }
+
+function loginRestauranteController($tabla, $datos)
+{
+    $restaurante = new Restaurante();
+    $login = new Login($restaurante);
+    $restaurante->setEmail($datos['email']);
+    $restaurante->setContrasenia($datos['contrasena']);
+    if($login->authenticate($tabla)){
+        $session = new Session($restaurante);
+        $session->setSession("email");
+        return true;
+    }
+    return false;
+}
+
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
@@ -22,11 +46,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $data = json_decode($json, true);
                 // Validar los datos recibidos
                 if (isset($data['email']) && isset($data['contrasena'])) {
-                    // Intentar autenticar al usuario
-                    if (loginTuristaController("usuarios", $data)) {
-                        echo json_encode(array("mensaje" => "Logueado correctamente"));
-                    } else {
+                    if (!loginTuristaController("usuarios", $data)) {
                         echo json_encode(array("mensaje" => "Credenciales incorrectas"));
+                    }else{
+                        echo json_encode(array("mensaje" => "Logueado correctamente"));
+                    }
+                } else {
+                    echo json_encode(array("mensaje" => "Datos incompletos"));
+                }
+                break;
+            case 'loginRestaurante':
+                $json = file_get_contents('php://input');
+                $data = json_decode($json, true);
+                if (isset($data['email']) && isset($data['contrasena'])) {
+                    if (!loginTuristaController("usuarios", $data)) {
+                        echo json_encode(array("mensaje" => "Credenciales incorrectas"));
+                    }else{
+                        echo json_encode(array("mensaje" => "Logueado correctamente"));
                     }
                 } else {
                     echo json_encode(array("mensaje" => "Datos incompletos"));

@@ -1,4 +1,35 @@
+body{
+  background-image: url('./assets/bg-minimal.png');
+ background-repeat: no-repeat;
+ background-size: cover;
+  margin: 0;
+  padding: 0;
+  
+}
 
+.bg-home{
+  background-image: url('./assets/bg-4.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+}
+
+.bg-mb{
+  background-image: url('./assets/bg-plato.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+}
+
+.bg-login{
+  background-image: url('./assets/bg-2.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
 
 .text-layout {
   font-family: 'San Francisco', sans-serif;
@@ -21,10 +52,4 @@
 
 .layout-color {
   background-color: rgb(160, 14, 14);
-}
-
-.icons-calificacion{
-  background-image: url("../src/assets/calificacion.png");
-  background-repeat: no-repeat;
-  height: 5rem;
 }

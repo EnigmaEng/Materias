@@ -1,0 +1,29 @@
+version: '3'
+services:
+  php-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9090:80"
+    depends_on:
+      - mariadb-db
+    networks:
+      - api-php
+
+  mariadb-db:
+    image: mariadb:10.3
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3307:3306"
+    networks:
+      - api-php
+
+networks:
+  api-php:
+    driver: bridge
+          

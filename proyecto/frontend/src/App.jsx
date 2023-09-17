@@ -26,7 +26,7 @@ function App() {
     <Routes>
  {/* Home  */}
 <Route path='/' element={<Home/>} />
-<Route path='/authDesk' element={<HomeAuth/>}/>
+<Route path='/homeAuth' element={<HomeAuth/>}/>
 {/* Registro */}
 
 <Route path='/registro' element={<RegistroUsuario/>}/>

@@ -1,18 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import ButtonMb from '../Buttons/ButtonMb'
-const NavBarMb = () => {
-  return (
+import todoContext from '../../context/todoContext'
 
-    <div className='p-4 absolute  bottom-0 backdrop-blur-xl shadow-xl shadow-white w-full  flex items-center justify-center gap-10'>
-      
-      <Link to='/rolLogin'> 
-        <ButtonMb >Ingresar</ButtonMb>
-      </Link>
-    <Link to='/rolRegistro'> 
-        <ButtonMb >Registrarse</ButtonMb>
-      </Link>
+
+const NavBarMb = () => {
+
+const TodoContext = useContext(todoContext)
+ const { cerrarSesion  } = TodoContext
+
+  return (
+<>
+
+  <div className='bg-white navbar absolute bottom-0 border shadow-xl'>
+    <div>
+    <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="logo"
+              className='w-14 ml-2'  />
     </div>
+   <button onClick={cerrarSesion}  className='absolute right-5 border px-4 py-1 rounded-lg shadow-xl text-black font-bold'>Salir </button> 
+  </div>
+
+  </>
+
+
+
+    
   )
 }
 
