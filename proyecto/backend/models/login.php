@@ -23,6 +23,8 @@ class Login
 
             $userData = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            echo $this->userModel->getContrasenia();
+
             if (!$userData) {
                 return false;
             }

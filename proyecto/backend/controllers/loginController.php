@@ -14,7 +14,9 @@ function loginTuristaController($tabla, $datos)
     if($login->authenticate($tabla)){
         $session = new Session($turista);
         $session->setSession("email");
+        return true;
     }
+    return false;
 }
 
 function loginRestauranteController($tabla, $datos)
