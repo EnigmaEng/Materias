@@ -86,8 +86,8 @@ const TodoState = ({ children }) => {
     const iniciarSesion = async (datos) => {
   try {
     const respuesta = await clienteAxios.post('/loginController.php', datos);
-    const responseData = parseResponseData(respuesta.data);
-    if (responseData && responseData.mensaje === "Logueado correctamente") {
+    console.log(respuesta.data)
+    if (respuesta.data) {
       dispatch({
         type: LOGIN_EXITOSO,
         
@@ -102,7 +102,7 @@ const TodoState = ({ children }) => {
     console.error("Error en la solicitud:", error);
     dispatch({
       type: LOGIN_ERROR,
-      payload: 'Credenciales incorrectas'
+      payload: response.data.error
     });
   }
   setTimeout(() => {
@@ -112,25 +112,6 @@ const TodoState = ({ children }) => {
   }, 3000);
 };
 
-function parseResponseData(responseData) {
-  const startIndex = responseData.indexOf('{');
-  if (startIndex !== -1) {
-    const jsonString = responseData.substring(startIndex);
-    try {
-      return JSON.parse(jsonString);
-    } catch (error) {
-      console.error("Error al analizar JSON:", error);
-      return null;
-    }
-  }
-  return null;
-}
-
-
-
-
-
-
 
 
         const usuarioAutenticado = async () => {
@@ -139,7 +120,7 @@ function parseResponseData(responseData) {
             tokenAuth(token)
         }
         try {
-            const respuesta = await clienteAxios.get('/auth.php', {
+            const respuesta = await clienteAxios.get('/loginController.php', {
                    headers: {
                 'Content-Type': 'application/json' 
             },
@@ -160,12 +141,14 @@ function parseResponseData(responseData) {
 
 
       
-        const cerrarSesion = () => {
-            dispatch({
-                  type: CERRAR_SESION
+        const cerrarSesion = async () => {
 
-         })
-         window.location.reload();
+          const respuesta = await clienteAxios.get('/logoutController.php')
+            dispatch({
+                  type: CERRAR_SESION,
+                  payload: respuesta.action
+            });
+        window.location.reload();
         }
    
  

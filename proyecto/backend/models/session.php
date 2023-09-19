@@ -24,9 +24,9 @@ class Session{
             if(!isset($_SESSION['email']) && !isset($_SESSION['contrasena'])){
                 $_SESSION['email']=$this->userModel->getEmail();
                 $_SESSION['contrasena']=$this->userModel->getContrasenia();
-                echo "La sesion del usuario es: ".$_SESSION['usuario'];
+                echo "La sesion del usuario es: ".$_SESSION['email'];
                 //Redirigo a la pagina del usuario
-                header("location:http://localhost/Repositorio/apiWhereWeEat/views/turista.php");
+                // header("location:http://localhost/Repositorio/apiWhereWeEat/views/turista.php");
             }
         }
     }
@@ -34,7 +34,7 @@ class Session{
     function logout(){
         session_start();
         session_destroy();
-        header("location:http://localhost/Repositorio/apiWhereWeEat/views/login.php");
+        // header("location:http://localhost/Repositorio/apiWhereWeEat/views/login.php");
     }
     
 }
