@@ -3,7 +3,7 @@ services:
   php-backend:
     build:
       context: .
-      dockerfile: backend/Dockerfile
+      dockerfile: Dockerfile
     ports:
       - "8080:80"
     depends_on:
@@ -24,13 +24,6 @@ services:
       - api-php
     volumes:
       - mariadb-data:/var/lib/mysql
-
-  frontend:
-    image: wwe-front  
-    ports:
-      - "5000:80"
-    networks:
-      - api-php
 
 networks:
   api-php:
