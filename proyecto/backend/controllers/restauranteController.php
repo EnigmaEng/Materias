@@ -48,3 +48,28 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     }
     echo $resultado;
 }
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $json = file_get_contents('php://input');
+    $data = json_decode($json, true);
+
+    
+        //se crea la instancia del modelo restaurante
+        $restaurante = new Restaurante();
+
+        //llama a la funcion creada dentro del modelo restaurante para obtener los datos del restaurante
+        $datos = $restaurante->obtenerRestaurantes();
+
+        //convierte los datos en formato json y los envia como respuesta
+        $respuesta = json_encode($datos);
+
+        echo $respuesta;
+
+    
+}else {
+ //error en la respuesta
+        echo json_encode(false);
+}
+
+

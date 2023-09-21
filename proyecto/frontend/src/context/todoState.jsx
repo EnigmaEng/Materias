@@ -2,7 +2,7 @@ import React, { useReducer} from "react";
 
 import todoContext from "./todoContext";
 import todoReducer from "./todoReducer";
-import { REGISTRO_EXITOSO, REGISTRO_ERROR, LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION,} from "../types/types";
+import { REGISTRO_EXITOSO, REGISTRO_ERROR, LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, OBTENER_RESTAURANTE} from "../types/types";
 import clienteAxios from "../config/axios";
 import tokenAuth from "../config/token";
 
@@ -16,6 +16,7 @@ const TodoState = ({ children }) => {
         autenticado: null,
         usuario: null,
         mensaje: null,
+       
     }
 
     //Reducer
@@ -150,7 +151,10 @@ const TodoState = ({ children }) => {
             });
         window.location.reload();
         }
-   
+
+        
+       
+
  
     
     return (
@@ -164,7 +168,9 @@ const TodoState = ({ children }) => {
                 registrarRestaurante,
                 iniciarSesion,
                 usuarioAutenticado,
-                cerrarSesion
+                cerrarSesion,
+                
+                
             }}>
 
             {children}
