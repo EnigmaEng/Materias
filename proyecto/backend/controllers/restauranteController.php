@@ -63,10 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         //convierte los datos en formato json y los envia como respuesta
         $respuesta = json_encode($datos);
-
+        
         echo $respuesta;
-
-    
+        
+        
 }else {
  //error en la respuesta
         echo json_encode(false);
