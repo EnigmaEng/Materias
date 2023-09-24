@@ -226,4 +226,27 @@ class Restaurante extends Usuario implements Crud
         return $result;
     }
 
+
+
+
+public function obtenerRestaurantes(){
+    $query = "SELECT r.nombre AS nombre_restaurante, u.url_img_usuario AS foto_usuario
+            FROM restaurante r
+            JOIN usuarios u ON r.id_usuario = u.id_usuario";
+    
+    $stmt = $this->getConn()->prepare($query);
+    
+    if($stmt === false){
+        die("Error en la preparacion de la consulta");
+    }
+
+
+    if(!$stmt->execute()){
+        die("Error en la ejecucion de la consulta");
+    }
+
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $data;
+}
+    
 }

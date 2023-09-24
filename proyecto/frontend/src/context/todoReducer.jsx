@@ -6,11 +6,12 @@ export default (state, action) => {
         case REGISTRO_EXITOSO:
         case REGISTRO_ERROR:
         case LOGIN_ERROR:
-      
+        
             return {
                 ...state,
                 mensaje: action.payload
             }
+        
         case LOGIN_EXITOSO:
             
             return {

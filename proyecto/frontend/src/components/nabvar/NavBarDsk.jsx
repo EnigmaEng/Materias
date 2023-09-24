@@ -39,7 +39,8 @@ const NavBarDsk = () => {
           </Link>
         </li>
         <li className=' hover:bg-gray-200 rounded-lg p-2'><Link className='text-black flex gap-4'> Menu</Link></li>
-        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link className='text-black flex gap-4'><SlLogout/> </Link></li>
+        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/' className='text-black flex gap-4  w-24'> <div className='mt-1'>
+          <SlLogout/> </div> Salir </Link></li>
       </ul>
     </div>
   </div>
