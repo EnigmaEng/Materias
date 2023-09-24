@@ -6,10 +6,18 @@ import todoContext from "../../../../context/todoContext";
 import { useContext, useEffect } from "react";
 import Mensaje from '../../../../components/alertas/Mensaje'
 import HomeAuth from "../home/HomeAuth";
+<<<<<<< HEAD
 const Login = () => {
 
 const Todocontext = useContext(todoContext)
 const { iniciarSesion, mensaje , autenticado} = Todocontext;
+=======
+
+const Login = () => {
+
+const Todocontext = useContext(todoContext)
+const { iniciarSesion, mensaje , autenticado, usuario} = Todocontext;
+>>>>>>> main
 
 const navigate = useNavigate();
 
@@ -25,6 +33,7 @@ const formik = useFormik({
     contrasena: ''
   },
   validationSchema: Yup.object({
+<<<<<<< HEAD
     email: Yup.string().email("El campo debe ser un email.").required("Campo obligatorio."),
     contrasena: Yup.string().required("Campo obligatorio.")
   }),
@@ -37,15 +46,38 @@ const userData = {
 }
 iniciarSesion(userData)
 
+=======
+    email: Yup.string().required("Campo obligatorio."),
+    contrasena: Yup.string().required("Campo obligatorio.")
+  }),
+
+
+
+  onSubmit: async (valores) => {
+const userData = {
+  "accion": "loginRestaurante",
+  email: valores.email,
+  contrasena: valores.contrasena
+}
+
+iniciarSesion(userData)
+
+>>>>>>> main
   }
 })
 
 
   return (
     <>
+<<<<<<< HEAD
   
   
   
+=======
+  {
+    usuario ? (<HomeAuth/>) : (
+
+>>>>>>> main
       <div className=" flex   justify-center h-screen">
 <Link to='/'>
 <button className="bg-white absolute md:left-96 left-5 md:top-24 top-10 w-20 py-1 border rounded-lg text-black shadow-xl"> Volver
@@ -57,8 +89,13 @@ iniciarSesion(userData)
 <h2 className="text-center font-bold text-red-800 text-2xl mb-4">Iniciar sesion</h2>
       <div className="flex flex-col mb-4  ">
 <div className="" > {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }</div>
+<<<<<<< HEAD
       <label htmlFor="email" className="text-red-800   px-2 font-bold">Email</label>
       <input type="text" name="" id="email" placeholder="Email.." className="focus:outline-none focus:ring-2 focus:ring-red-800 text-black rounded-full border border-red-800 bg-white md:w-80 py-2 px-4 placeholder:italic" 
+=======
+      <label htmlFor="email" className="text-red-800   px-2 font-bold">Alias o Correo</label>
+      <input type="text" name="" id="email" placeholder=" Correo" className="focus:outline-none focus:ring-2 focus:ring-red-800 text-black rounded-full border border-red-800 bg-white md:w-80 py-2 px-4 placeholder:italic" 
+>>>>>>> main
       value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur}
       />
       {
@@ -81,12 +118,20 @@ iniciarSesion(userData)
     <button type="submit" className="px-4 ml-4 bg-white  py-1 border w-40 rounded-lg text-black font-bold shadow-xl">Ingresar</button>
     </form>
     </div>
+<<<<<<< HEAD
    
  
       </>
  
    
     
+=======
+
+    )
+  }
+  
+      </>
+>>>>>>> main
   )
 }
 

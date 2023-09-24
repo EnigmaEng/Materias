@@ -1,0 +1,38 @@
+mlabora
+Mathias123**
+------------------
+lschiavoni
+Lucio123**
+---------------------
+lhernandez
+Leandro123**
+------------------------
+mdominguez
+Maximiliano123**
+--------------------------
+Administrador
+Administrador123**
+--------------------------
+basededatos
+basededatos123**
+-------------------------
+Ruta del script: /home/nombUsuario/administracion/administracion_usuarios.sh
+
+-------------------------
+mysql_secure_installation
+Password: Mariadb123**
+-------------------------
+Grafana http://ip:3000
+Usuario: admin
+Pass: Admin123**
+------------------------
+Usuario bd
+wweat
+Pass: Wweat123**
+------------------------
+Prometheus
+prometheus
+Grafana123**
+------------------------
+passphrase for key 'C:\Users\mathi/.ssh/id_rsa':
+-> mlabora

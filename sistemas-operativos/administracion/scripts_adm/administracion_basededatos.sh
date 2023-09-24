@@ -3,8 +3,7 @@ logger -p local1.info "Iniciando administracion de base de datos"
 
 user=wweat
 pass=Wweat123**
-database=wweat
-BACKUP_FILE=backupbd
+database=wwe
 
 OPCION=1
 while [ $OPCION != 0 ]
@@ -378,14 +377,52 @@ fi
 ;;
 
 6)logger -p local1.info "Se consulta registro actividad BD"
-sudo mysql -u "$user" -p"$pass" $database -e "SHOW GLOBAL STATUS LIKE 'Uptime'; SHOW GLOBAL STATUS LIKE 'Slow_queries'; SHOW GLOBAL STATUS LIKE 'Com_select';"
-sleep 3
-echo "Precione enter para volver..."
-read exit	
+while [ $OPCION != 0 ]
+do
+clear
+	read -p "
+**********************************
+Ingrese la opcion que desee:
+1) Ver Uptime
+2) Ver Canidad Queries realizadas
+3) Ver Threads conectados
+4) Ver InnoDB Status
+
+0) Salir
+**********************************
+
+" OPCION
+case $OPCION in 
+
+	1)logger -p local1.info "Se consulta Uptime"
+		sudo mysql -u "$user" -p"$pass" $database -e "SHOW GLOBAL STATUS LIKE 'Uptime';"
+	echo "Precione enter para volver..."
+	read exit ;;
+
+	2)logger -p local1.info "Se consulta Queries"
+		sudo mysql -u "$user" -p"$pass" $database -e "SHOW GLOBAL STATUS LIKE 'Queries';"
+	echo "Precione enter para volver..."
+	read exit		
+		;;
+	3)logger -p local1.info "Se consulta threads"
+	sudo mysql -u "$user" -p"$pass" $database -e "SHOW GLOBAL STATUS LIKE 'threads_connected';"
+	echo "Precione enter para volver..."
+	read exit ;;	
+	4)logger -p local1.info "Se consulta innodb"
+	sudo mysql -u "$user" -p"$pass" $database -e "SHOW ENGINE INNODB STATUS;" | less
+	echo "Precione enter para volver..."
+	read exit	
+		;;
+	
+	0)clear;;
+	*)echo "Opcion no valida "
+	
+esac		
+done
 ;;
 
 7)
-logger -p local1.info "Se consulta registro errores BD"
+logger -p local1.info "Se consultquieroa registro errores BD"
 sudo mysql -u "$user" -p"$pass" $database -e "SHOW VARIABLES LIKE 'log_error';"
 sleep 3
 echo "Precione enter para volver..."
@@ -408,10 +445,12 @@ Para volver presione enter
 	"
 read exit
 else
-  echo "Error al realizar el respaldo"
+  	logger -p local1.info "Respaldo de bd fallido..."
+	echo "Error al realizar el respaldo"
 fi
 fi
 ;;
+
 0)
 logger -p local1.info "saliendo de adminBD"
 echo "Gracias por utilizar el script de administracion!!!"

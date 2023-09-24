@@ -1,7 +1,13 @@
 {
+<<<<<<< HEAD
     "db_host": "192.168.56.103:3306",  
     "db_user": "wweat",
     "db_password": "Wweat123**",
+=======
+    "db_host":"mariadb-db",
+    "db_user":"root",
+    "db_password":"123",
+>>>>>>> main
     "db_driver":"mysql",
     "database": "wwe"
 }

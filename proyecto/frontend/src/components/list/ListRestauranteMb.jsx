@@ -5,7 +5,11 @@ const ListRestauranteMb = () => {
 
   
   return (
+<<<<<<< HEAD
     <div className=' p-2 bg-white w-11/12 m-auto shadow-xl mb-2'>
+=======
+    <div className=' p-2 bg-white w-11/12 m-auto shadow-xl mb-2 border'>
+>>>>>>> main
         
         <div className='flex flex-col text-center text-red-800 mb-2 py-4 gap-2'>
      

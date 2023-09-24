@@ -4,7 +4,11 @@ import todoContext from "./todoContext";
 import todoReducer from "./todoReducer";
 import { REGISTRO_EXITOSO, REGISTRO_ERROR, LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION,} from "../types/types";
 import clienteAxios from "../config/axios";
+<<<<<<< HEAD
 
+=======
+import tokenAuth from "../config/token";
+>>>>>>> main
 
 
 //Usamos el useReducer para actualizar los estados de la aplicacion en funcion a las acciones que se envian en este caso, datos generados por el usuario 
@@ -12,7 +16,11 @@ import clienteAxios from "../config/axios";
 const TodoState = ({ children }) => {
 
     const initialState = {
+<<<<<<< HEAD
        
+=======
+        token: typeof window !== 'undefined' ? localStorage.getItem('token'): '',
+>>>>>>> main
         autenticado: null,
         usuario: null,
         mensaje: null,
@@ -84,6 +92,7 @@ const TodoState = ({ children }) => {
 
     //Login
     const iniciarSesion = async (datos) => {
+<<<<<<< HEAD
         try {
           const respuesta = await clienteAxios.post('/loginController.php', datos);
           const {data} = respuesta;
@@ -116,6 +125,88 @@ const TodoState = ({ children }) => {
             dispatch({
                   type: CERRAR_SESION
 
+=======
+  try {
+    const respuesta = await clienteAxios.post('/loginController.php', datos);
+    const responseData = parseResponseData(respuesta.data);
+    if (responseData && responseData.mensaje === "Logueado correctamente") {
+      dispatch({
+        type: LOGIN_EXITOSO,
+        
+      });
+    } else {
+      dispatch({
+        type: LOGIN_ERROR,
+        payload: 'Credenciales incorrectas'
+      });
+    }
+  } catch (error) {
+    console.error("Error en la solicitud:", error);
+    dispatch({
+      type: LOGIN_ERROR,
+      payload: 'Credenciales incorrectas'
+    });
+  }
+  setTimeout(() => {
+    dispatch({
+      type: LIMPIAR_ALERTA
+    });
+  }, 3000);
+};
+
+function parseResponseData(responseData) {
+  const startIndex = responseData.indexOf('{');
+  if (startIndex !== -1) {
+    const jsonString = responseData.substring(startIndex);
+    try {
+      return JSON.parse(jsonString);
+    } catch (error) {
+      console.error("Error al analizar JSON:", error);
+      return null;
+    }
+  }
+  return null;
+}
+
+
+
+
+
+
+
+
+        const usuarioAutenticado = async () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            tokenAuth(token)
+        }
+        try {
+            const respuesta = await clienteAxios.get('/auth.php', {
+                   headers: {
+                'Content-Type': 'application/json' 
+            },
+            });
+            
+            dispatch({
+                type: USUARIO_AUTENTICADO,
+                payload: respuesta.data.usuario
+            })
+        } catch (error) {
+            dispatch({
+                type: LOGIN_ERROR,
+                payload: error.response.data.msg
+            })
+        }
+    }
+
+
+
+      
+        const cerrarSesion = () => {
+            dispatch({
+                  type: CERRAR_SESION
+
+>>>>>>> main
          })
          window.location.reload();
         }
@@ -132,6 +223,10 @@ const TodoState = ({ children }) => {
                 registrarTurista,
                 registrarRestaurante,
                 iniciarSesion,
+<<<<<<< HEAD
+=======
+                usuarioAutenticado,
+>>>>>>> main
                 cerrarSesion
             }}>
 

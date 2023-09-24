@@ -17,13 +17,20 @@ export default (state, action) => {
                 ...state,
                 autenticado: true,
                 mensaje: null,
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> main
             }
         case LIMPIAR_ALERTA:
             return {
                 ...state,
                 mensaje: null 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
             }
         case USUARIO_AUTENTICADO:
 
@@ -39,7 +46,6 @@ export default (state, action) => {
                 usuario: null,
                 autenticado: false
             }
-
         default:
             return state;
     }

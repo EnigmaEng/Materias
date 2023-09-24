@@ -5,11 +5,19 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
+<<<<<<< HEAD
       - "8080:80"
+=======
+      - "9090:80"
+>>>>>>> main
     depends_on:
       - mariadb-db
     networks:
       - api-php
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
   mariadb-db:
     image: mariadb:10.3
     environment:

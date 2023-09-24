@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Validar los datos recibidos
                 if (isset($data['email']) && isset($data['contrasena'])) {
                     if (!loginTuristaController("usuarios", $data)) {
+<<<<<<< HEAD
                         echo json_encode(array("mensaje" => "Credenciales incorrectas"));
                     }
                 } else {
@@ -58,7 +59,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $data = json_decode($json, true);
                 if (isset($data['email']) && isset($data['contrasena'])) {
                     if (!loginTuristaController("usuarios", $data)) {
+=======
+>>>>>>> main
                         echo json_encode(array("mensaje" => "Credenciales incorrectas"));
+                    }else{
+                        echo json_encode(array("mensaje" => "Logueado correctamente"));
+                    }
+                } else {
+                    echo json_encode(array("mensaje" => "Datos incompletos"));
+                }
+                break;
+            case 'loginRestaurante':
+                $json = file_get_contents('php://input');
+                $data = json_decode($json, true);
+                if (isset($data['email']) && isset($data['contrasena'])) {
+                    if (!loginTuristaController("usuarios", $data)) {
+                        echo json_encode(array("mensaje" => "Credenciales incorrectas"));
+                    }else{
+                        echo json_encode(array("mensaje" => "Logueado correctamente"));
                     }
                 } else {
                     echo json_encode(array("mensaje" => "Datos incompletos"));

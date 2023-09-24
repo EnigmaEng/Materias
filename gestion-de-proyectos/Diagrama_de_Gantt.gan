@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2023-08-28" view-index="0" gantt-divider-location="542" resource-divider-location="507" version="3.2.3247" locale="es_ES">
     <description/>
     <view zooming-state="default:6" id="gantt-chart">
@@ -5,14 +6,28 @@
         <field id="tpd4" name="Fecha de inicio" width="65" order="1"/>
         <field id="tpd5" name="Fecha de fin" width="69" order="2"/>
         <field id="tpd6" name="Duración" width="46" order="3"/>
+=======
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2023-06-01" view-index="0" gantt-divider-location="568" resource-divider-location="438" version="3.2.3247" locale="es_ES">
+    <description/>
+    <view zooming-state="default:8" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="363" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="68" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="72" order="2"/>
+        <field id="tpd6" name="Duración" width="49" order="3"/>
+>>>>>>> main
         <option id="filter.completedTasks" value="false"/>
         <option id="color.recent">
             <![CDATA[#00cc99 #ff0099 #3333ff #ff0033 #ff66ff]]>
         </option>
     </view>
     <view id="resource-table">
+<<<<<<< HEAD
         <field id="0" name="Nombre" width="311" order="0"/>
         <field id="1" name="Función" width="192" order="1"/>
+=======
+        <field id="0" name="Nombre" width="277" order="0"/>
+        <field id="1" name="Función" width="157" order="1"/>
+>>>>>>> main
     </view>
     <!-- -->
     <calendars>
@@ -41,7 +56,10 @@
         <task id="2" name="Primera entrega" color="#ff0033" shape="0,0,0,0,0,0,0,1,0,0,1,1,0,1,1,1" meeting="true" start="2023-06-01" duration="0" complete="0" thirdDate="2023-06-15" thirdDate-constraint="0" priority="4" expand="true">
             <depend id="21" type="2" difference="0" hardness="Strong"/>
         </task>
+<<<<<<< HEAD
         <task id="213" name="Entrega Final" color="#8cb6ce" meeting="true" start="2023-11-06" duration="0" complete="0" thirdDate="2023-08-01" thirdDate-constraint="0" priority="4" expand="true"/>
+=======
+>>>>>>> main
         <task id="164" name="Segunda entrega" color="#ff0033" shape="0,0,0,0,0,0,0,1,0,0,1,1,0,1,1,1" meeting="true" start="2023-09-11" duration="0" complete="0" thirdDate="2023-06-01" thirdDate-constraint="0" priority="4" expand="true" cost-manual-value="0.0" cost-calculated="true"/>
         <task id="15" name="Creación del repositorio" color="#ff0099" meeting="false" start="2023-06-01" duration="2" complete="0" thirdDate="2023-06-09" thirdDate-constraint="0" expand="true">
             <notes>
@@ -309,6 +327,7 @@
         <task id="139" name="Configuracion de las terminales de red" color="#8cb6ce" meeting="false" start="2023-08-23" duration="2" complete="0" thirdDate="2023-07-03" thirdDate-constraint="0" expand="true">
             <depend id="150" type="2" difference="0" hardness="Strong"/>
         </task>
+<<<<<<< HEAD
         <task id="165" name="Acta de reunion y plan de actividad 15" color="#8cb6ce" meeting="false" start="2023-09-10" duration="1" complete="0" thirdDate="2023-06-01" thirdDate-constraint="0" expand="true">
             <depend id="173" type="2" difference="0" hardness="Strong"/>
             <depend id="174" type="2" difference="0" hardness="Strong"/>
@@ -451,6 +470,56 @@
         <task id="212" name="Menú de gestión de todos los Shell scripts del servidor" color="#8cb6ce" meeting="false" start="2023-10-27" duration="4" complete="0" thirdDate="2023-06-01" thirdDate-constraint="0" expand="true">
             <depend id="177" type="2" difference="0" hardness="Strong"/>
         </task>
+=======
+        <task id="165" name="Acta de reunion y plan de actividad 15" color="#8cb6ce" meeting="true" start="2023-09-16" duration="0" complete="0" thirdDate="2023-06-01" thirdDate-constraint="0" expand="true"/>
+        <task id="166" name="Acta de reunion y plan de actividad 16" color="#8cb6ce" meeting="true" start="2023-06-01" duration="0" complete="0" thirdDate="2023-06-01" thirdDate-constraint="0" expand="true"/>
+        <task id="167" name="Acta de reunion y plan de actividad 17" color="#8cb6ce" meeting="true" start="2023-06-01" duration="0" complete="0" thirdDate="2023-06-01" thirdDate-constraint="0" expand="true"/>
+        <task id="168" name="Acta de reunion y plan de actividad 18" color="#8cb6ce" meeting="true" start="2023-06-01" duration="0" complete="0" thirdDate="2023-06-01" thirdDate-constraint="0" expand="true"/>
+        <task id="169" name="Acta de reunion y plan de actividad 19" color="#8cb6ce" meeting="true" start="2023-06-01" duration="0" complete="0" thirdDate="2023-06-01" thirdDate-constraint="0" expand="true"/>
+        <task id="170" name="Acta de reunion y plan de actividad 20" color="#8cb6ce" meeting="true" start="2023-06-01" duration="0" complete="0" thirdDate="2023-06-01" thirdDate-constraint="0" expand="true"/>
+        <task id="171" name="Acta de reunion y plan de actividad 21" color="#8cb6ce" meeting="true" start="2023-06-01" duration="0" complete="0" thirdDate="2023-06-01" thirdDate-constraint="0" expand="true"/>
+        <task id="172" name="Acta de reunion y plan de actividad 22" color="#8cb6ce" meeting="true" start="2023-06-01" duration="0" complete="0" thirdDate="2023-06-01" thirdDate-constraint="0" expand="true"/>
+        <task id="173" name="Agregar envio email pagina de la Empresa" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="174" name="Documentación de Gestión y control de Avances del Proyecto." meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="175" name="Diagrama de Gantt (cronograma de la gestión del proyecto completo)." meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="176" name="Contenedor virtual con la implementación del servidor web de la empresa (web)" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="177" name="Entrega de máquina virtual con la implementación de todo lo realizado" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="178" name="Documento de políticas de seguridad del servidor (soporte)" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="179" name="Menú testeos de red, conectividad" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="180" name="Menú Monitoreo de acceso al servidor y funcionamiento de servicios" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="181" name="Shell Script para Administración del servidor" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="182" name="Instalación y puesta a punto del servidor para el administrador de sistemas." meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="183" name="Conectividad &quot;sitio web/aplicación – almacén de datos&quot;" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="184" name="Manual de usuario." meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="185" name="Sitio terminado e implementado en la máquina virtual (frontend y backend)." meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="186" name="Realización de pruebas OWASP." meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="187" name="Implementación de consultas." meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="188" name="CRUD completos de todas las entidades. Considerar bajas lógicas para mantener el historial de reseñas" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="189" name="Auditoría de accesibilidad en base a estándares de W3C" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="190" name="Sitio web del producto completo." meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="191" name="Implementación de seguridad en el sitio web basado en OWASP" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="192" name="Conexión del sitio con la base de datos" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="193" name="Sitio web de la empresa finalizado." meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="194" name="Trámites al inicio de la empresa (presentar formularios completos de DGI, apertura, RUT, constancia de impresión, BPS, otros organismos públicos)" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="195" name="Viabilidad de la empresa" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="196" name="Plan de Recursos Humanos" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="197" name="Respaldo de Datos Políticas de respaldo del Servidor de Base de datos y logs" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="198" name="Consultas S.Q.L." meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="199" name="Seguridad Estudio de permisos e implementación para cada perfil de usuario del sistema" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="200" name="RNE" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="201" name="DR final." meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="202" name="DER final" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="203" name="Manual de administrador" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="204" name="Manual de usuario operacionales" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="205" name="Métricas de software" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="206" name="Plan de seguridad web basado en OWASP (web)" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="207" name="Plan de testing con planillas de testing funcional" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="208" name="Documento de calidad de software de aplicaciones (soporte)" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="209" name="Documento de calidad de software en entornos web (web)" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="210" name="Asignación de tareas 3ra entrega" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="211" name="Instalación de servidor web Apache (web)" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+        <task id="212" name="Menú de gestión de todos los Shell scripts del servidor" meeting="false" start="2023-06-01" duration="1" complete="0" expand="true"/>
+>>>>>>> main
     </tasks>
     <resources>
         <resource id="0" name="Maximiliano Domínguez" function="SoftwareDevelopment:3" contacts="" phone="">
@@ -538,7 +607,10 @@
         <allocation task-id="162" resource-id="0" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="161" resource-id="0" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="160" resource-id="0" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
+<<<<<<< HEAD
         <allocation task-id="206" resource-id="0" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
+=======
+>>>>>>> main
         <allocation task-id="154" resource-id="9" function="1" responsible="true" load="100.0"/>
         <allocation task-id="207" resource-id="9" function="1" responsible="true" load="100.0"/>
         <allocation task-id="148" resource-id="13" function="6" responsible="true" load="100.0"/>
@@ -574,12 +646,15 @@
         <allocation task-id="104" resource-id="2" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="152" resource-id="2" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="164" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+<<<<<<< HEAD
         <allocation task-id="174" resource-id="2" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="175" resource-id="2" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="178" resource-id="2" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="194" resource-id="2" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="196" resource-id="2" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="195" resource-id="2" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
+=======
+>>>>>>> main
         <allocation task-id="37" resource-id="11" function="2" responsible="true" load="100.0"/>
         <allocation task-id="27" resource-id="11" function="2" responsible="true" load="100.0"/>
         <allocation task-id="212" resource-id="11" function="2" responsible="true" load="100.0"/>
@@ -624,9 +699,12 @@
         <allocation task-id="146" resource-id="1" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="108" resource-id="1" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="164" resource-id="1" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+<<<<<<< HEAD
         <allocation task-id="185" resource-id="1" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
         <allocation task-id="189" resource-id="1" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="209" resource-id="1" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
+=======
+>>>>>>> main
         <allocation task-id="41" resource-id="10" function="2" responsible="true" load="100.0"/>
         <allocation task-id="33" resource-id="10" function="2" responsible="true" load="100.0"/>
         <allocation task-id="119" resource-id="10" function="2" responsible="true" load="100.0"/>
@@ -670,11 +748,14 @@
         <allocation task-id="125" resource-id="3" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="129" resource-id="3" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="164" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+<<<<<<< HEAD
         <allocation task-id="184" resource-id="3" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="185" resource-id="3" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
         <allocation task-id="203" resource-id="3" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="204" resource-id="3" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
         <allocation task-id="197" resource-id="3" function="SoftwareDevelopment:3" responsible="true" load="100.0"/>
+=======
+>>>>>>> main
         <allocation task-id="131" resource-id="12" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="135" resource-id="12" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="134" resource-id="12" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>

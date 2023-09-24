@@ -1,0 +1,55 @@
+body{
+  background-image: url('./assets/bg-minimal.png');
+ background-repeat: no-repeat;
+ background-size: cover;
+  margin: 0;
+  padding: 0;
+  
+}
+
+.bg-home{
+  background-image: url('./assets/bg-4.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+}
+
+.bg-mb{
+  background-image: url('./assets/bg-plato.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+}
+
+.bg-login{
+  background-image: url('./assets/bg-2.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
+.text-layout {
+  font-family: 'San Francisco', sans-serif;
+}
+
+
+.input-layout {
+  width: 16rem;
+  border: 1px solid rgb(190, 32, 32);
+  padding: 4px;
+  padding-left: 10px;
+  padding-top: 4px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.layout-rol {
+  height: 50%;
+}
+
+.layout-color {
+  background-color: rgb(160, 14, 14);
+}

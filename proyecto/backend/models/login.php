@@ -20,7 +20,6 @@ class Login
             $stmt = $conn->prepare($query);
             $stmt->bindValue(":email", $this->userModel->getEmail());
             $stmt->execute();
-
             $userData = $stmt->fetch(PDO::FETCH_ASSOC);
 
             echo $this->userModel->getContrasenia();
