@@ -6,19 +6,22 @@ import todoContext from "../../../../context/todoContext";
 import { useContext, useEffect } from "react";
 import Mensaje from '../../../../components/alertas/Mensaje'
 import HomeAuth from "../home/HomeAuth";
+import {BiArrowBack} from 'react-icons/bi';
 
 const Login = () => {
 
 const Todocontext = useContext(todoContext)
-const { iniciarSesion, mensaje , autenticado, usuario} = Todocontext;
+const { iniciarSesion,usuarioAutentiocado, mensaje , autenticado, usuario} = Todocontext;
 
 const navigate = useNavigate();
 
-useEffect(() => {
-if(autenticado){
-  navigate("/homeAuth");
-}
+useEffect(()=>{
+  if(autenticado){
+      navigate('/homeAuth')
+    }
 },[autenticado])
+    
+
     
 const formik = useFormik({
   initialValues: {
@@ -32,36 +35,33 @@ const formik = useFormik({
 
 
 
-  onSubmit: async (valores) => {
+  onSubmit:  (valores) => {
 const userData = {
   "accion": "loginRestaurante",
   email: valores.email,
   contrasena: valores.contrasena
 }
-
 iniciarSesion(userData)
-
   }
 })
 
 
   return (
     <>
-  {
-    usuario ? (<HomeAuth/>) : (
+ 
 
-      <div className=" flex   justify-center h-screen">
+      <div className=" flex   justify-center min-h-screen bg-home">
 <Link to='/'>
-<button className="bg-white absolute md:left-96 left-5 md:top-24 top-10 w-20 py-1 border rounded-lg text-black shadow-xl"> Volver
+<button className="bg-white absolute md:left-96 left-5 md:top-24 top-10 px-6 py-2 border rounded-lg text-red-800 shadow-xl"> <BiArrowBack/>
       </button>
 </Link>
 
-        <form onSubmit={formik.handleSubmit} className="backdrop-blur   p-4 mt-40 mb-4 h-80 rounded-lg shadow-xl ">
+        <form onSubmit={formik.handleSubmit} className="bg-white   p-4 mt-52 mb-4 h-80 rounded-lg shadow-xl ">
 
 <h2 className="text-center font-bold text-red-800 text-2xl mb-4">Iniciar sesion</h2>
       <div className="flex flex-col mb-4  ">
 <div className="" > {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }</div>
-      <label htmlFor="email" className="text-red-800   px-2 font-bold">Alias o Correo</label>
+      <label htmlFor="email" className="text-red-800   px-2 font-bold"> Correo</label>
       <input type="text" name="" id="email" placeholder=" Correo" className="focus:outline-none focus:ring-2 focus:ring-red-800 text-black rounded-full border border-red-800 bg-white md:w-80 py-2 px-4 placeholder:italic" 
       value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur}
       />
@@ -83,11 +83,13 @@ iniciarSesion(userData)
     </div>
 
     <button type="submit" className="px-4 ml-4 bg-white  py-1 border w-40 rounded-lg text-black font-bold shadow-xl">Ingresar</button>
+    <div className="ml-40 py-6">
+      <Link to='/' className="text-red-800  underline-offset-1 underline" >Olvide mi contraseña</Link>
+    </div>
     </form>
     </div>
 
-    )
-  }
+   
   
       </>
   )

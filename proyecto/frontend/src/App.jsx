@@ -9,7 +9,7 @@ import HomeAuth from './pages/user/auth/home/HomeAuth'
 import RegistroUsuario from './pages/user/auth/registro/Registro'
 import Login from './pages/user/auth/login/Login'
 import TodoState from './context/todoState'
-
+import PerfilAdmin from './pages/user/perfil/admin/PerfilAdmin'
 
 
 
@@ -26,6 +26,7 @@ function App() {
     <Routes>
  {/* Home  */}
 <Route path='/' element={<Home/>} />
+
 <Route path='/homeAuth' element={<HomeAuth/>}/>
 {/* Registro */}
 
@@ -34,12 +35,16 @@ function App() {
 {/* Login */}
 <Route path='/login' element={<Login/>} />
 {/* Perfiles */}
+<Route path='/admin' element={<PerfilAdmin/>} />
 <Route path='/perfilTurista' element={<PerfilTurista/>}/>
 <Route path='/perfilRestaurante' element={<PerfilRestaurante/>} />
 {/* Resenias */}
 <Route path='/crearResenia' element={<CrearResenia/>} />
 <Route path='/misResenias' element={<MisResenias/>}/>
+
+
     </Routes>
+    
     </BrowserRouter>
   
      </TodoState>

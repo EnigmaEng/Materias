@@ -1,10 +1,11 @@
 
+import axios from "axios";
 import clienteAxios from "../config/axios"
 import { useState } from "react"
 
 const restauranteData = () => {
     
-    const URL = clienteAxios.get('/restauranteController.php');
+    const URL = axios.get('http://127.0.0.1:8080/controllers/restauranteController.php'); //clienteAxios.get('/restauranteController.php');
     const [pagina, setPagina] = useState(1);
     const [busqueda, setBusqueda] = useState('');
     const [buscando, setBuscando] = useState(false);
@@ -23,9 +24,9 @@ const restauranteData = () => {
         item.nombre_restaurante.toLowerCase().includes(busqueda.toLowerCase())
     ); //filtra los datos de la api basabdose en la busqueda del usuario
         
-        const slicedData = datosFiltrados.slice(startIndex, endIndex);  // crea un nuevo array tomando datosFiltrados que corresponde a la pagina actual
+        const slicedData = datosFiltrados.slice(startIndex, endIndex);  // crea un nuevo array tomando datosFiltrados que va desde startIndex hasta endIndex
 
-        setProduct(slicedData);    // actualiza el estado product con los datos filtrados y paginados
+        setProduct(slicedData);    // actualiza el valor product con los datos filtrados y paginados
     } catch (error) {
         console.log(error);
     }
@@ -36,7 +37,7 @@ const restauranteData = () => {
     //pagina es el valor del estado que esta en ese momento 
  
     const handlePaginaSiguiente = () => {
-    setPagina(pagina + 1);  //actualiza la funcion setPagina con el valor pagina + 1
+    setPagina(pagina + 1);  //actualiza el valor pagina con el valor pagina + 1
     };    
 
     const handlePaginaAnterior = () => {

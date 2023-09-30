@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Francois+One&display=swap');
+
+.font-aref{
+font-family: 'Francois One', sans-serif;
+}
+
 body{
   background-image: url('./assets/bg-minimal.png');
  background-repeat: no-repeat;
@@ -8,7 +14,7 @@ body{
 }
 
 .bg-home{
-  background-image: url('./assets/bg-4.png');
+  background-image: url('./assets/bg-gradient.png');
   background-size: cover;
   background-repeat: no-repeat;
   margin: 0;

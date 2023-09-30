@@ -11,16 +11,16 @@ const TodoContext = useContext(todoContext)
   return (
 <>
 
-  <div className='bg-white navbar  border shadow-xl'>
+  <div className='bg-red-800 navbar   shadow-xl'>
     <div>
       <Link to='/homeAuth'> 
       
-        <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="logo"
-              className='w-14 ml-2'  />
+        {/* <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="logo"
+              className='w-14 ml-2'  /> */}
       </Link>
  
     </div>
-   <button onClick={cerrarSesion}  className='absolute right-5 border px-4 py-1 rounded-lg shadow-xl text-black font-bold'>Salir </button> 
+   <button onClick={cerrarSesion}  className='absolute right-5  px-4 py-1 rounded-lg shadow-xl text-black bg-white font-bold'>Salir </button> 
   </div>
 
   </>

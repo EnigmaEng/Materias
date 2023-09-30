@@ -1,7 +1,7 @@
 import React from 'react'
 import NavBar from '../../../../components/nabvar/NavBar'
 import {AiOutlineEdit} from 'react-icons/ai';
-import imagen from '../../../../assets/lucio.png';
+
 
 const PerfilDsk = () => {
   return (

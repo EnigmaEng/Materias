@@ -32,7 +32,7 @@ const ListRestaurantes = () => {
   return (
     <>
 
-    <div className='w-8/12 m-auto px-10 border shadow-xl p-4 rounded-lg  mb-10 bg-white'>
+    <div className='w-8/12 m-auto px-10 border shadow-xl p-4 rounded-lg   bg-white'>
 
     <div className='flex flex-col text-center justify-center items-center mb-2 mt-2'>
     
@@ -51,11 +51,11 @@ const ListRestaurantes = () => {
    <div className=' grid grid-cols-4 ml-20  py-16 place-content-center gap-5 ' >
     {
         product.map((item, index) => (
-            <div className='border h-72 w-52 rounded-lg shadow-xl bg-white p-4 text-center text-black' key={index} >
-<img src="" alt="logo-restaurante" className='w-full m-auto h-32 mb-4 border ' />
-<h2 className='font-bold mb-10 '> {item.nombre_restaurante}</h2>
+            <div className='border h-7/12 w-52 rounded-lg shadow-xl bg-white  text-center text-black' key={index} >
+<img src={item.url_img_usuario} alt="logo-restaurante" className='w-full m-auto h-52  border ' />
+<h2 className='font-bold p-2 '> {item.nombre_restaurante}</h2>
 
-<div className='gap-5 flex mt-4'>
+<div className='gap-5 flex p-4 '>
     <button className=' rounded-lg border px-4  shadow-xl border  w-24 flex justify-center py-3 h-10'> <BsSearch/></button>
     <button className='rounded-lg border px-4  bg-white shadow-xl  w-24 flex justify-center py-3 h-10'><GoCodeReview/></button>
 </div>

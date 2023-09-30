@@ -3,30 +3,24 @@ import { Link } from "react-router-dom";
 const HomeDsk = () => {
   return (
   <>
-<div className="h-screen bg-home">
-
-<div className="flex">
-  <div className=" h-full fixed   w-6/12">
-  <h1 className="text-center text-5xl font-bold text-red-800 mb-8 mt-40">Where We Eat</h1>
- <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="logo" className='w-28 rounded-full m-auto mb-8' />
-
-  <div className="flex justify-center gap-5">
-   <Link to='/login'>
-  <button className=" bg-white w-60 border border-red-800 px-4  py-2 shadow-xl text-black font-bold rounded-full ">Iniciar sesion</button>
-  </Link>
-  <Link to='/registro'> 
-   <button className="w-60 bg-white border border-red-800 px-4 py-2 shadow-xl text-black font-bold rounded-full ">Registrarse</button>
-  </Link>
-</div>
+<div className="flex w-full ">
+  <div className="flex flex-col w-6/12  flex-grow  bg-gradient-to-b from-red-900 to-red-700 place-items-center gap-5 py-52">
+    <h1 className="text-6xl text-white font-aref mb-24 italic">Where we eat</h1>
+  <h2 className="text-3xl text-white font-aref">Bienvenido!</h2>
+    {/* <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="" className="w-28" /> */}
+    <div className="flex gap-5">
+      <Link to='/login'>
+      <button className=" bg-white font-bold text-black text-2xl px-4 py-1 shadow-xl border rounded-box w-52  ">Iniciar sesion</button>
+      </Link>
+      <Link to='/registro'>
+        <button className="font-bold text-black bg-white border shadow-xl text-2xl px-4 py-1 rounded-box w-52">Registrarse</button>
+        </Link>
+    </div>
   </div>
-  <div className="   w-6/12 h-full absolute right-0">
+  <div className="grid min-h-screen flex-grow w-6/12 bg-mb place-items-center ">
   
   </div>
-
 </div>
-
-</div>
-    
  
   </>
     

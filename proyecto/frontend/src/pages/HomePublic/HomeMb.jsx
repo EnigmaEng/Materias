@@ -5,15 +5,15 @@ import ButtonMb from "../../components/Buttons/ButtonMb";
 const HomeMb = () => {
   return (
 <>
-
- <div className="h-screen bg-mb py-40 ">
-    <aside className="w-full backdrop-blur shadow-xl p-6">
+{/* la clase bg-mb trae una foto del css */}
+ <div className="min-h-screen bg-home py-52 ">
+    <aside className="w-full p-6 ">
 
     
       
-        <h1 className="text-center  font-bold text-red-800 text-3xl mb-2">WHERE WE EAT</h1>
+        <h1 className="text-center  font-bold text-white text-4xl mb-10 font-aref italic ">WHERE WE EAT</h1>
         <Link to='/'>
-          <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="logo" className='w-28 m-auto rounded-full' />
+          {/* <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="logo" className='w-28 m-auto rounded-full' /> */}
         </Link>
     
       

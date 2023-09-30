@@ -12,16 +12,16 @@ import tokenAuth from "../config/token";
 const TodoState = ({ children }) => {
 
     const initialState = {
-        token: typeof window !== 'undefined' ? localStorage.getItem('token'): '',
+        token: typeof window !== 'undefined' ? localStorage.getItem('token') : '',
         autenticado: null,
         usuario: null,
         mensaje: null,
        
+        
     }
 
     //Reducer
     const [state, dispatch] = useReducer(todoReducer, initialState);
-
 
     //Registrar turista
     const registrarTurista = async datos => {
@@ -35,7 +35,7 @@ const TodoState = ({ children }) => {
         });
             dispatch({
                 type: REGISTRO_EXITOSO, 
-                payload: 'Registro exitoso'
+                payload: respuesta.data
             });
             
         } catch (error) {
@@ -44,88 +44,73 @@ const TodoState = ({ children }) => {
                 payload: error.response.data.msg
             })
             }
-
             setTimeout(() => {
                 dispatch({
                     type: LIMPIAR_ALERTA
-    
                 })
             }, 3000);
-       
-     
     }
 
     //Registrar restaurante
     const registrarRestaurante = async datos => {
-
+        
         try {
-            const respuesta = await clienteAxios.post("/restauranteController.php", datos, { 
-            headers: {
-                'Content-Type': 'application/json' 
-            },
-        });     
+            const respuesta = await clienteAxios.post("/restauranteController.php", datos);     
             dispatch({
                 type: REGISTRO_EXITOSO, 
-                payload: 'Registro exitoso'
+                payload: respuesta.data    
             });
 
         } catch (error) {
-             dispatch({
+            dispatch({
                 type:REGISTRO_ERROR,
                 payload: error.response.data.msg
-             })
+            })
             }
             setTimeout(() => {
                 dispatch({
                     type: LIMPIAR_ALERTA
-    
                 })
             }, 3000);
     }
 
     //Login
     const iniciarSesion = async (datos) => {
-  try {
+    try {
     const respuesta = await clienteAxios.post('/loginController.php', datos);
     console.log(respuesta.data)
     if (respuesta.data) {
-      dispatch({
+    dispatch({
         type: LOGIN_EXITOSO,
         
-      });
+    });
     } else {
-      dispatch({
+    dispatch({
         type: LOGIN_ERROR,
         payload: 'Credenciales incorrectas'
-      });
+    });
     }
-  } catch (error) {
+} catch (error) {
     console.error("Error en la solicitud:", error);
     dispatch({
-      type: LOGIN_ERROR,
-      payload: response.data.error
+    type: LOGIN_ERROR,
+    payload: response.data.error
     });
-  }
-  setTimeout(() => {
+}
+setTimeout(() => {
     dispatch({
-      type: LIMPIAR_ALERTA
+    type: LIMPIAR_ALERTA
     });
   }, 3000);
 };
 
-
-
-        const usuarioAutenticado = async () => {
+const usuarioAutenticado = async () => {
         const token = localStorage.getItem('token');
         if (token) {
             tokenAuth(token)
         }
         try {
-            const respuesta = await clienteAxios.get('/loginController.php', {
-                   headers: {
-                'Content-Type': 'application/json' 
-            },
-            });
+            const respuesta = await clienteAxios.get('/login');
             
             dispatch({
                 type: USUARIO_AUTENTICADO,
@@ -139,17 +124,12 @@ const TodoState = ({ children }) => {
         }
     }
 
-
-
-      
         const cerrarSesion = async () => {
-
-          const respuesta = await clienteAxios.get('/logoutController.php')
             dispatch({
-                  type: CERRAR_SESION,
-                  payload: respuesta.action
+                type: CERRAR_SESION,
+                
             });
-        window.location.reload();
+        
         }
 
         
@@ -169,7 +149,8 @@ const TodoState = ({ children }) => {
                 iniciarSesion,
                 usuarioAutenticado,
                 cerrarSesion,
-                
+             
+
                 
             }}>
 

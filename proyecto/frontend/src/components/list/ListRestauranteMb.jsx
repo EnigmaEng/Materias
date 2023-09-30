@@ -47,10 +47,10 @@ const ListRestauranteMb = () => {
     <p className='w-80 m-auto px-12 py-10 text-black text-lg'>Restaurante no encontrado..</p>
   ) : (
     product.map((item, index) => (
-      <div key={index} className='border shadow-xl rounded-box '>
-        <img src="" alt="foto-restaurantes" className='w-full border rounded-box h-24' />
-        <h1 className='text-center text-black font-bold px-6 py-8'>{item.nombre_restaurante}</h1>
-        <div className='gap-5 flex mt-4 px-2 py-2'>
+      <div key={index} className='border shadow-xl h-64  '>
+        <img src={item.url_img_usuario} alt="foto-restaurantes" className='w-full border  h-40' />
+        <h1 className='text-center text-black font-bold px-6 py-4'>{item.nombre_restaurante}</h1>
+        <div className='gap-5 flex  px-2 '>
     <button className=' rounded-lg border px-2  shadow-xl border  w-20 flex justify-center py-2 h-8'> <BsSearch/></button>
     <button className='rounded-lg border px-2  bg-white shadow-xl  w-20 flex justify-center py-2 h-8'><GoCodeReview/></button>
 </div>
