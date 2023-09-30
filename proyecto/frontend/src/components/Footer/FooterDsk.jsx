@@ -5,7 +5,7 @@ const FooterDsk = () => {
     <footer className="footer p-10 bg-gray-800 text-white">
   <aside>
 <img src={Image} alt="perfil" className='w-8 '/>
-    <p className='italic'>Enigma Engineers</p> <p className=''>Copyright © 2023 - All right reserved</p>
+    <p className='italic'>Enigma Engineers</p> <p className=''>Copyright © 2023 - All right reserved.</p>
   </aside> 
   <nav>
     <header className="footer-title">Social</header> 
