@@ -12,12 +12,11 @@ export default (state, action) => {
                 mensaje: action.payload
             }
         case LOGIN_EXITOSO:
-            localStorage.setItem('token', action.payload);
+        
             return {
                 ...state,
-                token: action.payload,
-                autenticado: true
-
+                autenticado: true,
+                usuario: action.payload
             }
         case LIMPIAR_ALERTA:
             return {

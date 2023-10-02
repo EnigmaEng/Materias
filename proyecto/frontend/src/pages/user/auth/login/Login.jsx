@@ -7,6 +7,7 @@ import { useContext, useEffect } from "react";
 import Mensaje from '../../../../components/alertas/Mensaje'
 import HomeAuth from "../home/HomeAuth";
 import {BiArrowBack} from 'react-icons/bi';
+import DarkMode from "../../../../components/Buttons/DarkMode";
 
 const Login = () => {
 
@@ -48,15 +49,17 @@ iniciarSesion(userData)
 
   return (
     <>
- 
-
-      <div className=" flex   justify-center min-h-screen bg-home">
+ {
+  autenticado ? (<HomeAuth/>) : (<div className=" flex   justify-center min-h-screen bg-zinc-100 dark:bg-zinc-800">
+     <div className='absolute top-16 right-28'>
+      <DarkMode/>
+      </div>
 <Link to='/'>
-<button className="bg-white absolute md:left-96 left-5 md:top-24 top-10 px-6 py-2 border rounded-lg text-red-800 shadow-xl"> <BiArrowBack/>
+<button className="bg-white  absolute md:left-96 left-5 md:top-24 top-10 px-6 py-2 border rounded-lg text-red-800 shadow-xl"> <BiArrowBack/>
       </button>
 </Link>
 
-        <form onSubmit={formik.handleSubmit} className="bg-white   p-4 mt-52 mb-4 h-80 rounded-lg shadow-xl ">
+        <form onSubmit={formik.handleSubmit} className="bg-white   p-4 mt-52 mb-4 h-96 rounded-lg shadow-xl  ">
 
 <h2 className="text-center font-bold text-red-800 text-2xl mb-4">Iniciar sesion</h2>
       <div className="flex flex-col mb-4  ">
@@ -81,13 +84,18 @@ iniciarSesion(userData)
         )
       }
     </div>
-
-    <button type="submit" className="px-4 ml-4 bg-white  py-1 border w-40 rounded-lg text-black font-bold shadow-xl">Ingresar</button>
-    <div className="ml-40 py-6">
+<div className="flex flex-col justify-center items-center mt-10  ">
+    <button type="submit" className="px-4  bg-white  py-1 border w-52 rounded-lg text-black font-bold shadow-xl">Ingresar</button>
+    <div className="py-6  mt-10">
       <Link to='/' className="text-red-800  underline-offset-1 underline" >Olvide mi contraseña</Link>
     </div>
+</div>
+  
     </form>
-    </div>
+    </div>)
+ }
+
+      
 
    
   

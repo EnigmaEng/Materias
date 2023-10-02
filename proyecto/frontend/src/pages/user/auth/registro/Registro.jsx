@@ -1,10 +1,16 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as Yup from 'yup';
 import todoContext from '../../../../context/todoContext'
 import Mensaje from '../../../../components/alertas/Mensaje'
 import {BiArrowBack} from 'react-icons/bi'
+import {FiAlertCircle} from 'react-icons/fi'
+import axios from 'axios';
+import DarkMode from '../../../../components/Buttons/DarkMode';
+
+//api publica para traer todos los datos de los paises
+const API_COUNTRY = 'https://restcountries.com/v3.1/all'
 
 const initialValues = {
   alias: '',
@@ -30,8 +36,23 @@ const validationSchema = Yup.object({
 
 const RegistroUsuario = () => {
   const [selectedRole, setSelectedRole] = useState('');
- 
+  const [nacionalidad, setNacionalidad] = useState('');
   
+  const getFlags = async () => {
+    try {
+      const res = await axios.get(API_COUNTRY)
+     setNacionalidad(res.data);
+
+    } catch (error) {
+      console.log(error)
+    }
+   
+  }
+
+  useEffect(() => {
+    getFlags()
+  },[])
+
   const {mensaje, registrarTurista, registrarRestaurante} = useContext(todoContext)
 
   const handleRoleChange = (e) => {
@@ -87,28 +108,33 @@ const RegistroUsuario = () => {
   });
 
   return (
-  <div className='bg-gray-100'>
-  <Link to='/' >
-    <button className='bg-white rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-16 md:absolute md:left-80 md:p-10 md:py-3 md:shadow-xl md:border-gray-400 text-red-800'><BiArrowBack/></button>
+  <div className='bg-gray-100 dark:bg-zinc-800'>
+    <div className='absolute top-16 right-28'>
+      <DarkMode/>
+      </div>
+        <Link to='/' >
+    <button className='bg-white rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-16 md:absolute md:left-80 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700 md:border-gray-400 text-red-800'><BiArrowBack/></button>
     </Link>
+    
+
 <div className='pb-8  flex justify-center md:block md:w-3/12 md:m-auto md:py-40 '>
-    <form onSubmit={formik.handleSubmit}  className='text-black p-4 shadow-xl rounded-lg bg-[#AA000B] glass' method='POST' encType="multipart/form-data">
+    <form onSubmit={formik.handleSubmit}  className='text-black p-4 shadow-xl rounded-lg bg-[#AA000B] ' method='POST' encType="multipart/form-data">
       <p className='md:text-white py-4 font-bold text-center text-2xl mb-2'>Crear una cuenta</p>
  <div> {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }</div>
         <div className='flex flex-col mb-4'>
         <label htmlFor="alias" className='font-bold px-4 text-white'>Alias</label>
         <input type="text" placeholder='Alias' className='border  rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic' id='alias' value={formik.values.alias} onChange={formik.handleChange}  onBlur={formik.handleBlur}  />
         {formik.touched.alias && formik.errors.alias ? (
-          <div> <p className='text-lg px-5 text-white'> {formik.errors.alias}</p></div> ): (
+          <div> <p className='text-lg px-5 text-white flex'> {formik.errors.alias}  <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ): (
             null
           )
         }
         </div>
         <div className='flex flex-col mb-4'>
         <label htmlFor="email" className='font-bold px-4 text-white'>Email</label>
-        <input type="text" placeholder='Email' className='border rounded-full bg-white  border-gray-800  px-6 py-2 py-1 focus:outline-none placeholder:italic' id='email' value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+        <input type="text" placeholder='Email' className='border rounded-full bg-white  border-red-700  px-6 py-2 py-1 focus:outline-none placeholder:italic' id='email' value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
         {formik.touched.email && formik.errors.email ? (
-          <div> <p className='text-lg px-5 text-white'> {formik.errors.email}</p></div> ): (
+          <div> <p className='text-lg px-5 text-white flex'> {formik.errors.email}  <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ): (
             null
           )
         }
@@ -117,25 +143,25 @@ const RegistroUsuario = () => {
         <label htmlFor="contrasena" className='font-bold px-4 text-white'>Contraseña</label>
         <input type="password" placeholder='Contraseña' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic' id='contrasena' value={formik.values.contrasena} onChange={formik.handleChange} onBlur={formik.handleBlur} />
         {formik.touched.contrasena && formik.errors.contrasena ? (
-          <div> <p className='text-lg px-5 text-white'>{formik.errors.contrasena}</p></div> ) : (null)
+          <div> <p className='text-lg px-5 text-white flex'>{formik.errors.contrasena} <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ) : (null)
         }
         </div>
         <div className='flex flex-col mb-4'>
         <label htmlFor="confirmContrasena" className='font-bold px-4 text-white'>Repetir contraseña</label>
         <input type="password" placeholder='Contraseña' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic' id='confirmContrasena' onChange={formik.handleChange} value={formik.values.confirmContrasena} onBlur={formik.handleBlur} />
         {formik.touched.confirmContrasena && formik.errors.confirmContrasena ? (
-          <div> <p className='text-lg px-5 text-white'>{formik.errors.confirmContrasena}</p></div> ) : (null)
+          <div> <p className='text-lg px-5 text-white flex'>{formik.errors.confirmContrasena} <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ) : (null)
         }
         </div>
     <div className='flex flex-col mb-4 px-2'>
         <label htmlFor="url_img_usuario" className='font-bold px-4 text-white'>Foto de perfil</label>
-        <input type="text" placeholder='foto' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic' id='url_img_usuario' 
+        <input type="text" placeholder='foto' className='border rounded-full bg-white  border-red-700  px-6 py-2 py-1 focus:outline-none placeholder:italic' id='url_img_usuario' 
         
         onChange={formik.handleChange}
         value={formik.values.url_img_usuario}
         onBlur={formik.handleBlur} />
          {formik.touched.url_img_usuario && formik.errors.url_img_usuario ? (
-          <div> <p className='text-lg px-5 text-white'> {formik.errors.url_img_usuario}</p></div> ): (
+          <div> <p className='text-lg px-5 text-white '> {formik.errors.url_img_usuario}</p></div> ): (
             null
           )
         }
@@ -173,7 +199,7 @@ const RegistroUsuario = () => {
           />
           {formik.touched.nombres && formik.errors.nombres && (
             <div>
-              <p className='text-sm px-5 text-white'>{formik.errors.nombres}</p>
+              <p className='text-sm px-5 text-white '>{formik.errors.nombres} </p>
             </div>
           )}
            <label htmlFor='apellidos' className='font-bold px-4 text-white mt-2'>
@@ -213,14 +239,21 @@ const RegistroUsuario = () => {
           <label htmlFor='nacionalidad' className='font-bold px-4 text-white mt-2'>
             Nacionalidad
           </label>
-          <input
-            type='text'
-            id='nacionalidad' placeholder='Nacionalidad..'
-            className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic'
-            value={formik.values.nacionalidad}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
+         <select
+          id='nacionalidad'
+          name='nacionalidad'
+          className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic'
+          value={formik.values.nacionalidad}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+            required>
+          <option value='' disabled>Seleccionar Nacionalidad</option>
+          {nacionalidad.map((item, index) => (
+            <option key={index} value={item.translations.spa.common}>
+            {item.translations.spa.common}
+          </option>
+            ))}
+          </select>
           {formik.touched.nacionalidad && formik.errors.nacionalidad && (
             <div>
               <p className='text-sm px-5 text-black'>{formik.errors.nacionalidad}</p>

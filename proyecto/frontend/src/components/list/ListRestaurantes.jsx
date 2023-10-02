@@ -32,7 +32,7 @@ const ListRestaurantes = () => {
   return (
     <>
 
-    <div className='w-8/12 m-auto px-10 border shadow-xl p-4 rounded-lg   bg-white'>
+    <div className='w-8/12 m-auto px-10  shadow-xl p-4 rounded-lg  dark:bg-zinc-800 bg-white'>
 
     <div className='flex flex-col text-center justify-center items-center mb-2 mt-2'>
     
@@ -56,7 +56,7 @@ const ListRestaurantes = () => {
 <h2 className='font-bold p-2 '> {item.nombre_restaurante}</h2>
 
 <div className='gap-5 flex p-4 '>
-    <button className=' rounded-lg border px-4  shadow-xl border  w-24 flex justify-center py-3 h-10'> <BsSearch/></button>
+    <button className=' rounded-lg border px-4   shadow-xl border  w-24 flex justify-center py-3 h-10'> <BsSearch/></button>
     <button className='rounded-lg border px-4  bg-white shadow-xl  w-24 flex justify-center py-3 h-10'><GoCodeReview/></button>
 </div>
 
@@ -73,14 +73,15 @@ const ListRestaurantes = () => {
    
     <div className='flex justify-between'>
   <button
-    className='border px-4 py-1 mt-2 bg-white text-black rounded-lg shadow-xl'
+    className=' px-4 py-1 mt-2 bg-white dark:bg-red-800 dark:text-white text-black rounded-lg shadow-xl'
     onClick={handlePaginaAnterior}
     disabled={pagina === 1 || buscando}
   >
+    
     Anterior
   </button>
   <button
-    className='border px-4 py-1 mt-2 bg-white text-black rounded-lg shadow-xl'
+    className=' px-4 py-1 mt-2 bg-white text-black dark:bg-red-800 dark:text-white rounded-lg shadow-xl'
     onClick={handlePaginaSiguiente}
     disabled={pagina === 2 || buscando}
   >

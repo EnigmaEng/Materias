@@ -4,6 +4,7 @@ import Map from '../../../../components/maps/Map'
 import ListRestaurantes from '../../../../components/list/ListRestaurantes';
 import Categorias from '../../../../components/categorias/Categorias';
 import FooterDsk from '../../../../components/Footer/FooterDsk';
+import DarkMode from '../../../../components/Buttons/DarkMode';
 
 
 const HomeAuthDsk = () => {
@@ -12,8 +13,10 @@ const HomeAuthDsk = () => {
   return (
 
    <>
-<div className='min-h-screen bg-gray-100'>
+<div className='min-h-screen bg-gray-100 dark:bg-zinc-800'>
   <NavBar/>
+
+
     <Map/>  
     <Categorias/>
    <ListRestaurantes/>

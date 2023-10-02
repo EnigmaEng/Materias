@@ -5,7 +5,7 @@ import { useState } from "react"
 
 const restauranteData = () => {
     
-    const URL = axios.get('http://127.0.0.1:8080/controllers/restauranteController.php'); //clienteAxios.get('/restauranteController.php');
+    const URL = clienteAxios.get('/restauranteController.php'); //clienteAxios.get('/restauranteController.php');
     const [pagina, setPagina] = useState(1);
     const [busqueda, setBusqueda] = useState('');
     const [buscando, setBuscando] = useState(false);

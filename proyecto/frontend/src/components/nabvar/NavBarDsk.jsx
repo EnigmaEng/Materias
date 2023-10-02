@@ -4,15 +4,16 @@ import todoContext from '../../context/todoContext'
 import {AiOutlineUser} from 'react-icons/ai'
 import {MdRestaurantMenu} from 'react-icons/md'
 import {SlLogout} from 'react-icons/sl'
+import DarkMode from '../Buttons/DarkMode'
 
 const NavBarDsk = () => {
 
   const TodoContext = useContext(todoContext)
-  const { cerrarSesion, usuarioAutenticado, usuario} = TodoContext;
+  const { cerrarSesion, iniciarSesion, usuario} = TodoContext;
 
 useEffect(() =>{
-
-    usuarioAutenticado();
+console.log(usuario)
+    iniciarSesion();
   
 },[])
 
@@ -21,7 +22,7 @@ useEffect(() =>{
     <>
 {
 
-  usuario ? ( <div className="navbar bg-red-800 border shadow-xl">
+  usuario ? ( <div className="navbar bg-red-800  shadow-xl">
   <div className="flex-1">
     <Link to='/homeAuth'>  
       <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="logo"
@@ -50,6 +51,10 @@ useEffect(() =>{
   </div>
 </div>
   ) : (<div className='navbar bg-red-800 m-auto shadow-xl '>
+    <div className='px-6'>
+          <DarkMode/>
+    </div>
+
       <div>
             {/* <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="logo"
               className='w-14 ml-10'  /> */}

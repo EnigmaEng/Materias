@@ -4,8 +4,13 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  "darkMode": "class",
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        'wwe': '#AA000B'
+      }
+    },
   },
   plugins: [require("daisyui")],
 }

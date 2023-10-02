@@ -35,7 +35,7 @@ const TodoState = ({ children }) => {
         });
             dispatch({
                 type: REGISTRO_EXITOSO, 
-                payload: respuesta.data
+                payload: 'Registro exitoso'
             });
             
         } catch (error) {
@@ -58,7 +58,7 @@ const TodoState = ({ children }) => {
             const respuesta = await clienteAxios.post("/restauranteController.php", datos);     
             dispatch({
                 type: REGISTRO_EXITOSO, 
-                payload: respuesta.data    
+                payload: 'Registro exitoso'    
             });
 
         } catch (error) {
@@ -82,13 +82,14 @@ const TodoState = ({ children }) => {
     if (respuesta.data) {
     dispatch({
         type: LOGIN_EXITOSO,
-        
+        payload: respuesta.data
     });
     } else {
     dispatch({
         type: LOGIN_ERROR,
         payload: 'Credenciales incorrectas'
     });
+    
     }
 } catch (error) {
     console.error("Error en la solicitud:", error);
