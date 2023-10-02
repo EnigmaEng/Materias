@@ -1,4 +1,4 @@
--- Where We Eat (DDL)drop
+-- Where We Eat (DDL)
 
 DROP DATABASE IF EXISTS `wwe`;
 CREATE DATABASE `wwe` CHARSET utf8mb4;
