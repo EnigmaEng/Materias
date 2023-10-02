@@ -108,7 +108,7 @@ const RegistroUsuario = () => {
   });
 
   return (
-  <div className='bg-gray-100 dark:bg-zinc-800'>
+  <div className='bg-wwe bg-opacity-75 dark:bg-opacity-75 dark:bg-zinc-800'>
     <div className='absolute top-16 right-28'>
       <DarkMode/>
       </div>
