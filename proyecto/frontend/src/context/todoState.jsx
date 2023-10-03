@@ -78,13 +78,13 @@ const TodoState = ({ children }) => {
     const iniciarSesion = async (datos) => {
     try {
     const respuesta = await clienteAxios.post('/loginController.php', datos);
-    console.log(respuesta.data)
-    if (respuesta.data) {
+    console.log(respuesta.data.email)
+    if (respuesta.status === 200) {
     dispatch({
         type: LOGIN_EXITOSO,
         payload: respuesta.data
     });
-    } else {
+    } else if(respuesta.status === 401) {
     dispatch({
         type: LOGIN_ERROR,
         payload: 'Credenciales incorrectas'
@@ -105,13 +105,13 @@ setTimeout(() => {
   }, 3000);
 };
 
-const usuarioAutenticado = async () => {
+    const usuarioAutenticado = async () => {
         const token = localStorage.getItem('token');
         if (token) {
             tokenAuth(token)
         }
         try {
-            const respuesta = await clienteAxios.get('/login');
+            const respuesta = await clienteAxios.post('/loginController.php');
             
             dispatch({
                 type: USUARIO_AUTENTICADO,
@@ -150,7 +150,7 @@ const usuarioAutenticado = async () => {
                 iniciarSesion,
                 usuarioAutenticado,
                 cerrarSesion,
-             
+            
 
                 
             }}>

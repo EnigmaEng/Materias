@@ -3,7 +3,7 @@ require_once '../models/session.php';
 require_once '../models/usuario.php';
 require_once './cors.php';
 
-session_start();
+
 
 if(!isset($_SESSION['email']) && !isset($_SESSION['contrasena']) || !isset($_SESSION['alias']) && !isset($_SESSION['contrasena'])){
     $usuario=new Usuario();

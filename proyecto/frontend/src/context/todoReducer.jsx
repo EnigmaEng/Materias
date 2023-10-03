@@ -12,7 +12,7 @@ export default (state, action) => {
                 mensaje: action.payload
             }
         case LOGIN_EXITOSO:
-        
+         
             return {
                 ...state,
                 autenticado: true,
