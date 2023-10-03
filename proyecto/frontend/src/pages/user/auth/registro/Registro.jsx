@@ -109,7 +109,7 @@ const RegistroUsuario = () => {
 
   return (
   <div className='bg-wwe bg-opacity-75 dark:bg-opacity-75 dark:bg-zinc-800'>
-    <div className='absolute top-16 right-28'>
+    <div className='absolute md:top-16 md:right-28 top-2 right-5'>
       <DarkMode/>
       </div>
         <Link to='/' >
@@ -118,8 +118,8 @@ const RegistroUsuario = () => {
     
 
 <div className='pb-8  flex justify-center md:block md:w-3/12 md:m-auto md:py-40 '>
-    <form onSubmit={formik.handleSubmit}  className='text-black p-4 shadow-xl rounded-lg bg-[#AA000B] ' method='POST' encType="multipart/form-data">
-      <p className='md:text-white py-4 font-bold text-center text-2xl mb-2'>Crear una cuenta</p>
+    <form onSubmit={formik.handleSubmit}  className='text-black p-4 shadow-xl rounded-lg bg-wwe ' method='POST' encType="multipart/form-data">
+      <p className='text-white py-4 font-bold text-center text-2xl mb-2'>Crear una cuenta</p>
  <div> {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }</div>
         <div className='flex flex-col mb-4'>
         <label htmlFor="alias" className='font-bold px-4 text-white'>Alias</label>

@@ -7,14 +7,14 @@ const HomeDsk = () => {
   return (
   <>
 <div className="flex w-full ">
-  <div className="flex flex-col w-6/12 flex-grow dark:bg-zinc-800 bg-wwe bg-opacity-75 dark:text-white   place-items-center gap-5 py-52 min-h-screen ">
+  <div className="flex flex-col w-6/12 flex-grow dark:bg-zinc-800 bg-wwe bg-opacity-75 dark:text-white dark:bg-opacity-95  place-items-center gap-5 py-52 min-h-screen ">
     <div className="absolute top-10 left-10">
        <DarkMode/>
     </div>
    
-    <h1 className="text-6xl text-white font-aref mb-4 italic">Where we eat</h1>
-        <img src={Image} alt="" className="w-28 mb-20"/>
-  <h2 className="text-3xl text-white font-aref">Bienvenido!</h2>
+    <h1 className="text-6xl text-white font-aref mb-4 ">WHERE WE EAT</h1>
+        <img src={Image} alt="" className="w-40 mb-20"/>
+  <h2 className="text-3xl text-white font-aref">BIENVENIDO!</h2>
     {/* <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="" className="w-28" /> */}
 
     <div className="flex gap-5">

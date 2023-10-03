@@ -13,13 +13,13 @@ const HomeAuthDsk = () => {
   return (
 
    <>
-<div className='min-h-screen bg-gray-100 dark:bg-zinc-800'>
+<div className='min-h-screen space-y-5 bg-white bg-opacity-90 dark:bg-zinc-800 dark:bg-opacity-95'>
   <NavBar/>
 
-
-    <Map/>  
+ <ListRestaurantes/>
+   
     <Categorias/>
-   <ListRestaurantes/>
+   <Map/>  
    <div className='mt-24'>
        <FooterDsk/>
    </div>

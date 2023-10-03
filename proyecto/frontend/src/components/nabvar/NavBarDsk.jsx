@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import todoContext from '../../context/todoContext'
-import {AiOutlineUser} from 'react-icons/ai'
-import {MdRestaurantMenu} from 'react-icons/md'
+
 import {SlLogout} from 'react-icons/sl'
 import DarkMode from '../Buttons/DarkMode'
+import Image from "../../assets/logo-white.png";
 
 const NavBarDsk = () => {
 
@@ -22,11 +22,14 @@ console.log(usuario)
     <>
 {
 
-  usuario ? ( <div className="navbar bg-red-800  shadow-xl">
+  usuario ? ( <div className="navbar bg-wwe  shadow-xl">
   <div className="flex-1">
-    <Link to='/homeAuth'>  
-      <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="logo"
-              className='w-14 ml-10'  />
+    <div className='absolute left-5'>
+       <DarkMode/>
+    </div>
+   
+    <Link to='/homeAuth' className='m-auto w-14'>  
+    <img src={Image} alt="logo"/>
     </Link>
  
   </div>

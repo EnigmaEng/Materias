@@ -29,7 +29,7 @@ const handleTheme = async () => {
 }
 
 return (
-<button onClick={handleTheme} className='bg-blue-900 text-white dark:text-yellow-500 dark:bg-blue-600   px-6 py-1 rounded-box'>
+<button onClick={handleTheme} className='bg-blue-900 text-white dark:text-yellow-500 dark:bg-blue-600  px-6 py-1 rounded-box'>
     <span className='hidden dark:block text-2xl'><BsSun/></span>
     <span className='dark:hidden  text-2xl'><MdOutlineDarkMode/></span>
 </button>

@@ -7,7 +7,7 @@ import Categorias from '../../../../components/categorias/Categorias'
 
 const HomeAuthMb = () => {
   return (
-    <div className='flex flex-col min-h-screen bg-gray-100 '>
+    <div className='flex flex-col min-h-screen dark:bg-zinc-800 bg-white bg-opacity-75 dark:bg-opacity-95 '>
       
   <Map/>
   <Categorias/>

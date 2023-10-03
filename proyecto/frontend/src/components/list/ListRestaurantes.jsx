@@ -32,7 +32,7 @@ const ListRestaurantes = () => {
   return (
     <>
 
-    <div className='w-8/12 m-auto px-10  shadow-xl p-4 rounded-lg  dark:bg-zinc-800 bg-white'>
+    <div className='w-8/12 m-auto px-10 h-8/12  shadow-xl p-4 rounded-lg  dark:bg-zinc-800 bg-white'>
 
     <div className='flex flex-col text-center justify-center items-center mb-2 mt-2'>
     
@@ -46,7 +46,7 @@ const ListRestaurantes = () => {
       {
         product.length === 0 ? ( 
         
-        <p className='text-center text-2xl py-24 '>Restaurante no encontrado</p>) : (
+        <p className='text-center text-2xl py-24  '>Restaurante no encontrado</p>) : (
 
    <div className=' grid grid-cols-4 ml-20  py-16 place-content-center gap-5 ' >
     {

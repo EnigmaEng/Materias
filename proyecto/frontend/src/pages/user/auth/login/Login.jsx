@@ -50,8 +50,8 @@ iniciarSesion(userData)
   return (
     <>
  {
-  autenticado ? (<HomeAuth/>) : (<div className=" flex   justify-center min-h-screen bg-zinc-100 dark:bg-zinc-800">
-     <div className='absolute top-16 right-28'>
+  autenticado ? (<HomeAuth/>) : (<div className=" flex   justify-center min-h-screen bg-wwe bg-opacity-75 dark:bg-opacity-95 dark:bg-zinc-800  ">
+     <div className='absolute md:top-16 md:right-28 top-2 right-5'>
       <DarkMode/>
       </div>
 <Link to='/'>
@@ -59,7 +59,7 @@ iniciarSesion(userData)
       </button>
 </Link>
 
-        <form onSubmit={formik.handleSubmit} className="bg-white   p-4 mt-52 mb-4 h-96 rounded-lg shadow-xl  ">
+        <form onSubmit={formik.handleSubmit} className="bg-white    p-4 mt-52 mb-4 h-96 rounded-lg shadow-xl  ">
 
 <h2 className="text-center font-bold text-red-800 text-2xl mb-4">Iniciar sesion</h2>
       <div className="flex flex-col mb-4  ">

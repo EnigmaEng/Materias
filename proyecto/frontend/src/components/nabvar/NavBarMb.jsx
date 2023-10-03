@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import todoContext from '../../context/todoContext'
-
+import Image from "../../assets/logo-white.png";
+import DarkMode from '../Buttons/DarkMode';
 
 const NavBarMb = () => {
 
@@ -11,15 +12,17 @@ const TodoContext = useContext(todoContext)
   return (
 <>
 
-  <div className='bg-red-800 navbar   shadow-xl'>
-    <div>
-      <Link to='/homeAuth'> 
+  <div className='bg-wwe navbar   shadow-xl'>
+   
       
-        {/* <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="logo"
-              className='w-14 ml-2'  /> */}
+        <DarkMode/>
+     
+      
+      <Link to='/homeAuth' className='w-12 ml-20 m-auto'> 
+      
+        <img src={Image} alt=""  />
       </Link>
- 
-    </div>
+
    <button onClick={cerrarSesion}  className='absolute right-5  px-4 py-1 rounded-lg shadow-xl text-black bg-white font-bold'>Salir </button> 
   </div>
 
