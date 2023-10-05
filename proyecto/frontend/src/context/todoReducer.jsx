@@ -12,11 +12,12 @@ export default (state, action) => {
                 mensaje: action.payload
             }
         case LOGIN_EXITOSO:
-         
+
             return {
                 ...state,
                 autenticado: true,
-                usuario: action.payload
+                usuario: action.usuario
+                
             }
         case LIMPIAR_ALERTA:
             return {
@@ -27,15 +28,17 @@ export default (state, action) => {
         case USUARIO_AUTENTICADO:
             return {
                 ...state,
-                usuario: action.payload
+                usuario: action.payload,
+                autenticado:true
             }
         case CERRAR_SESION:
             localStorage.removeItem('token');
+             localStorage.removeItem('usuarioData');
             return {
                 ...state,
                 usuario: null,
                 token: null,
-                autenticado: null
+                autenticado: false
             }
 
         default:

@@ -4,12 +4,12 @@ import todoContext from '../../../../context/todoContext'
 
 const PerfilDsk = () => {
   const TodoContext = useContext(todoContext);
-  const { usuario, autenticado, iniciarSesion } = TodoContext;
+  const { usuario, autenticado, usuarioAutenticado } = TodoContext;
 
  useEffect(() => {
  
-iniciarSesion()
-console.log(usuario)
+usuarioAutenticado()
+
   }, [autenticado]);
 
 
@@ -19,7 +19,7 @@ console.log(usuario)
         <div className='min-h-screen'>Cargando...</div>
       ) : usuario ? (
         <div className='min-h-screen'>
-          <p className='text-3xl font-bold text-black'>Hola! {usuario.email}</p>
+          <p className='text-3xl font-bold text-black'>Hola! {usuario.rol.nombre}</p>
           <img
             src={usuario.url_img_usuario}
             alt="perfil"

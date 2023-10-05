@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 import Home from './pages/HomePublic/Home'
 import PerfilTurista from './pages/user/perfil/turista/PerfilTurista'
@@ -10,10 +10,16 @@ import RegistroUsuario from './pages/user/auth/registro/Registro'
 import Login from './pages/user/auth/login/Login'
 import TodoState from './context/todoState'
 import PerfilAdmin from './pages/user/perfil/admin/PerfilAdmin'
+import PerfilTest from './pages/user/perfil/restaurante/PerfilTest'
+import todoContext from './context/todoContext'
+import { useContext, useEffect } from 'react'
 
 
 
 function App() {
+
+
+
 
 
   return (
@@ -22,9 +28,6 @@ function App() {
 
     
     <TodoState>
-    
-
-     
     <BrowserRouter> 
     <Routes>
  {/* Home  */}
@@ -39,8 +42,8 @@ function App() {
 <Route path='/login' element={<Login/>} />
 {/* Perfiles */}
 <Route path='/admin' element={<PerfilAdmin/>} />
-<Route path='/perfilTurista' element={<PerfilTurista/>}/>
-<Route path='/perfilRestaurante' element={<PerfilRestaurante/>} />
+<Route path='/perfil' element={<PerfilTest/>}/>
+
 {/* Resenias */}
 <Route path='/crearResenia' element={<CrearResenia/>} />
 <Route path='/misResenias' element={<MisResenias/>}/>
@@ -49,7 +52,7 @@ function App() {
     </Routes>
     
     </BrowserRouter>
-  
+
      </TodoState>
     </>
   )

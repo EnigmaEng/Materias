@@ -12,7 +12,7 @@ import DarkMode from "../../../../components/Buttons/DarkMode";
 const Login = () => {
 
 const Todocontext = useContext(todoContext)
-const { iniciarSesion,usuarioAutentiocado, mensaje , autenticado, usuario} = Todocontext;
+const { iniciarSesion, mensaje , autenticado} = Todocontext;
 
 const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ const formik = useFormik({
 
   onSubmit:  (valores) => {
 const userData = {
-  "accion": "loginRestaurante",
+  "accion": "login",
   email: valores.email,
   contrasena: valores.contrasena
 }

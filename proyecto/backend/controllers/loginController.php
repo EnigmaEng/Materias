@@ -4,9 +4,11 @@ require_once '../models/turista.php';
 require_once '../models/restaurante.php';
 require_once '../models/login.php';
 require_once '../models/session.php';
+require_once '../vendor/autoload.php';
+use Firebase\JWT\JWT;
 
 
-function loginRestauranteController($tabla, $datos)
+function loginUsuario($tabla, $datos)
 {
     $restaurante = new Restaurante();
     $login = new Login($restaurante);
@@ -16,46 +18,24 @@ function loginRestauranteController($tabla, $datos)
     // Llama a la funcion authenticate y verifica si las credenciales son correctas
     $usuarioData = $login->authenticate($tabla);
 
-    if ($usuarioData) {
-        // Llama a generateToken con los datos del usuario
-        $token = Login::generateToken($usuarioData);
+       if ($usuarioData) {
+        
+        $tokenData = [
+            'id_usuario' => $usuarioData['id_usuario'],
+            'email' => $usuarioData['email'],
+           
+        ];
 
-        if ($token) {
-            // Devuelve un array con el token y un succes
-            return array("success" => true, "token" => $token);
-        }
+        $secret_key = "clave_secreta"; 
+        $token = JWT::encode($tokenData, $secret_key, 'HS256');
+
+        
+        return array("success" => true, "usuarioData" => $usuarioData, "token" => $token);
+    } else {
+       
+        return array("success" => false, "mensaje" => "Autenticación fallida");
     }
-
-    // En caso de falla, devuelve un succes en falso
-    return array("success" => false);
 }
-
-function loginTuristaController($tabla, $datos)
-{
-    $turista = new Turista();
-    $login = new Login($turista);
-    $turista->setEmail($datos['email']);
-    $turista->setContrasenia($datos['contrasena']);
-
-    // Llama a la funcion authenticate y verifica si las credenciales son correctas
-    $usuarioData = $login->authenticate($tabla);
-
-    if ($usuarioData) {
-        // Llama a generateToken con los datos del usuario
-        $token = Login::generateToken($usuarioData);
-
-        if ($token) {
-            // Devuelve un array con el token y un succes
-            return array("success" => true, "token" => $token);
-        }
-    }
-
-    // En caso de falla, devuelve un succes en falso
-    return array("success" => false);
-}
-
-
-
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -64,32 +44,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (isset($data['accion'])) {
         switch ($data['accion']) {
-            case 'loginTurista':
+            case 'login':
                 // Validar los datos recibidos
                 if (isset($data['email']) && isset($data['contrasena'])) {
-                    $result = loginTuristaController("usuarios", $data);
+                    $result = loginUsuario("usuarios", $data);
                     if ($result['success']) {
-                        http_response_code(200); // Código de estado 200 (OK)
-                        echo json_encode(array("token" => $result['token']));
+                        http_response_code(200); 
+                        echo json_encode($result);
                     } else {
-                        http_response_code(401); // Código de estado 401 (No autorizado)
-                        echo json_encode(array("mensaje" => "Autenticacion fallida"));
-                    }
-                } else {
-                    http_response_code(400); // Código de estado 400 (Solicitud incorrecta)
-                    echo json_encode(array("mensaje" => "Datos incompletos"));
-                }
-                break;
-            case 'loginRestaurante':
-                // Validar los datos recibidos
-                if (isset($data['email']) && isset($data['contrasena'])) {
-                    $result = loginRestauranteController("usuarios", $data);
-                    if ($result['success']) {
-                        http_response_code(200); //Devuelve un status 200
-                        echo json_encode(array("token" => $result['token']));  //devuele el token en json
-                    } else {
-                        http_response_code(401); //Devuelve un status 400
-                        echo json_encode(array("mensaje" => "Autenticacion fallida"));
+                        http_response_code(401); 
+                        echo json_encode(array("mensaje" => "Autenticación fallida"));
                     }
                 } else {
                     http_response_code(400); 
@@ -102,6 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     } else {
         http_response_code(400); 
-        echo json_encode(array("mensaje" => "No se proporciono la accion"));
+        echo json_encode(array("mensaje" => "No se proporcionó la acción"));
     }
 }
