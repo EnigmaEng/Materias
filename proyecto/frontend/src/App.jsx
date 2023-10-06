@@ -14,8 +14,11 @@ import PerfilTest from './pages/user/perfil/restaurante/PerfilTest'
 import todoContext from './context/todoContext'
 import { useContext, useEffect } from 'react'
 import EditarPerfi from './pages/user/perfil/restaurante/EditarPerfi'
-import Menu from './pages/user/perfil/restaurante/Menu'
+import Menu from './pages/user/perfil/restaurante/Menu/Menu'
+import CrearMenu from './pages/user/perfil/restaurante/Menu/CrearMenu'
 import Configuracion from './pages/user/perfil/turista/Configuracion'
+import Subscripcion from './pages/user/perfil/restaurante/Subscripcion/Subscripcion'
+import ConfiguracionRest from './pages/user/perfil/restaurante/Configuracion/ConfiguracionRest'
 
 
 
@@ -35,27 +38,34 @@ function App() {
     <Routes>
  {/* Home  */}
 <Route path='/' element={<Home/>} />
-
 <Route path='/homeAuth' element={<HomeAuth/>}/>
+
 {/* Registro */}
-
 <Route path='/registro' element={<RegistroUsuario/>}/>
-
 {/* Login */}
 <Route path='/login' element={<Login/>} />
+
 {/* Perfiles */}
-<Route path='/admin' element={<PerfilAdmin/>} />
-<Route path='/perfil' element={<PerfilTest/>}/>
-<Route path='/perfilTurista' element={<PerfilTurista/>}/>
-<Route path='/perfilRestaurante' element={<PerfilRestaurante/>}/>
-<Route path='/editarPerfilRestaurante' element={<EditarPerfi/>}/>
-<Route path='/menu' element={<Menu/>}/>
+
+{/* Turista */}
 <Route path='/configuracion' element={<Configuracion/>}/>
+<Route path='/perfilTurista' element={<PerfilTurista/>}/>
 {/* Resenias */}
 <Route path='/crearResenia' element={<CrearResenia/>} />
 <Route path='/misResenias' element={<MisResenias/>}/>
 
+{/* Admin */}
+<Route path='/admin' element={<PerfilAdmin/>} />
 
+{/* Restaurante */}
+
+<Route path='/perfil' element={<PerfilTest/>}/>
+<Route path='/perfilRestaurante' element={<PerfilRestaurante/>}/>
+<Route path='/editarPerfilRestaurante' element={<EditarPerfi/>}/>
+<Route path='/crearMenu' element={<CrearMenu/>}/>
+<Route path='/menu' element={<Menu/>}/>
+<Route path='/subscripcion' element={<Subscripcion/>}/>
+<Route path='/configuracionRest' element={<ConfiguracionRest/>}/>
     </Routes>
     
     </BrowserRouter>

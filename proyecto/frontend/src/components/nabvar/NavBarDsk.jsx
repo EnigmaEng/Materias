@@ -21,14 +21,14 @@ usuarioAutenticado();
 
   usuario && usuario.rol.nombre ? 
    // Restaurante Navbar
-  ( <div className="navbar bg-wwe  shadow-xl">
+  ( <div className="navbar  bg-wwe  shadow-xl">
   <div className="flex-1">
     <div className='absolute left-5'>
        <DarkMode/>
     </div>
    
-    <Link to='/homeAuth' className='m-auto w-14'>  
-    <img src={Image} alt="logo"/>
+    <Link to='/homeAuth' className='m-auto w-14 '>  
+    <img src={Image} alt="logo" className='ml-8'/>
     </Link>
  
   </div>
@@ -45,7 +45,7 @@ usuarioAutenticado();
          Perfil 
           </Link>
         </li>
-        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/menu' className='text-black flex gap-4'> Menu</Link></li>
+        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/configuracionRest' className='text-black flex gap-4'> Configuracion</Link></li>
         <li className=' hover:bg-gray-200 rounded-lg p-2'><button onClick={() => cerrarSesion()}  className='text-black flex gap-4  w-24'> <div className='mt-1'>
           <SlLogout/> </div> Salir </button></li>
       </ul>

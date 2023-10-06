@@ -23,7 +23,7 @@ usuarioAutenticado();
   usuario && usuario.rol.nombre ? 
    // Restaurante Navbar
   ( <div className="navbar  bg-wwe flex justify-center items-center gap-20 shadow-xl">
-  <Link className='gap-5 text-5xl text-white  '>
+  <Link to='/menu' className='gap-5 text-5xl text-white  '>
   
     <MdMenuBook/>
   </Link>
@@ -35,7 +35,7 @@ usuarioAutenticado();
  
    </Link>
   </div>
-  <button className='text-white text-4xl' onChange={()=> cerrarSesion()}>
+  <button className='text-white text-4xl' onClick={() => cerrarSesion()}>
     <SlLogout/>
   </button>
 </div>

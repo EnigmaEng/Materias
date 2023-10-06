@@ -22,6 +22,7 @@ body{
 }
 
 
+
 .bg-mb{
   background-image: url('./assets/bg-plato.png');
   background-size: cover;
@@ -42,6 +43,14 @@ body{
   font-family: 'San Francisco', sans-serif;
 }
 
+/* Ocultar flechas en los input tipo number */
+.custom-number-input::-webkit-inner-spin-button,
+.custom-number-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+ 
+}
 
 .input-layout {
   width: 16rem;

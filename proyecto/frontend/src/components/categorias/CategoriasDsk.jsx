@@ -6,50 +6,27 @@ import Image3 from '../../assets/top-10.png';
 import {GrNext} from 'react-icons/gr';
 import {MdOutlineArrowBackIos} from 'react-icons/md';
 
-const images = [
-  { src: Image1, link: '/' },
-  { src: Image2, link: '/' },
-  { src: Image3, link: '/' },
-];
+
 
 const CategoriasDsk = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-  };
-
-  const currentImage = images[currentIndex];
-
-  return (
-    <div className="p-2 rounded-lg w-full mb-5">
-      <div className="flex justify-center items-center gap-6">
-        <button
-          className="bg-white h-8  text-2xl  text-black rounded hover:bg-zinc-300 transition-colors duration-300"
-          onClick={prevSlide}
-        >
-          <MdOutlineArrowBackIos/>
-        </button>
-        <div className="relative w-5/12 h-64 gap-4">
-          <Link to={currentImage.link}>
-            <img
-              src={currentImage.src}
-              alt={`Imagen ${currentIndex + 1}`}
-              className="w-full h-full rounded-lg transform transition-all duration-300 hover:scale-105"
-            />
-          </Link>
+ return (
+         <div className='grid grid-cols-3 p-2  mb-5 gap-2'>
+        <div className=''>
+          <p className='text-center text-[#AA000B] font-bold '>Restaurantes visitados </p>
+            <div className='border text-2xl h-28   shadow-xl rounded-box  bg-[url(https://media-public.canva.com/wfCjA/MAED24wfCjA/1/tl.jpg)] bg-cover '> </div>
         </div>
-        <button
-          className="bg-white h-8 p2 text-2xl   text-black rounded hover:bg-zinc-300 transition-colors duration-300"
-          onClick={nextSlide}
-        >
-          <GrNext/>
-        </button>
-      </div>
+      
+        <div className='mt-6'>
+          <p className='  font-bold text-[#AA000B]  text-center'>Top 10</p>
+               <div className='border h-28   shadow-xl rounded-box bg-[url(https://media-public.canva.com/MADAyEdkg_c/1/thumbnail_large-1.jpg)] bg-cover '>
+          
+        </div>
+        </div>
+   
+        <div className='mt-6'>
+          <p className='text-center text-[#AA000B] font-bold '>Mis Reseñas</p>
+           <div className='border h-28  shadow-xl rounded-box font-bold bg-[url(https://media-public.canva.com/MADOrCJgfqU/1/thumbnail_large-1.jpg)] bg-cover'></div>
+        </div>
     </div>
   );
 };
