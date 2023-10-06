@@ -13,6 +13,9 @@ import PerfilAdmin from './pages/user/perfil/admin/PerfilAdmin'
 import PerfilTest from './pages/user/perfil/restaurante/PerfilTest'
 import todoContext from './context/todoContext'
 import { useContext, useEffect } from 'react'
+import EditarPerfi from './pages/user/perfil/restaurante/EditarPerfi'
+import Menu from './pages/user/perfil/restaurante/Menu'
+import Configuracion from './pages/user/perfil/turista/Configuracion'
 
 
 
@@ -45,7 +48,9 @@ function App() {
 <Route path='/perfil' element={<PerfilTest/>}/>
 <Route path='/perfilTurista' element={<PerfilTurista/>}/>
 <Route path='/perfilRestaurante' element={<PerfilRestaurante/>}/>
-
+<Route path='/editarPerfilRestaurante' element={<EditarPerfi/>}/>
+<Route path='/menu' element={<Menu/>}/>
+<Route path='/configuracion' element={<Configuracion/>}/>
 {/* Resenias */}
 <Route path='/crearResenia' element={<CrearResenia/>} />
 <Route path='/misResenias' element={<MisResenias/>}/>
