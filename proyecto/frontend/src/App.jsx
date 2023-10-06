@@ -62,6 +62,7 @@ function App() {
 
 <Route path='/perfil' element={<PerfilTest/>}/>
 <Route path='/perfilRestaurante' element={<PerfilRestaurante/>}/>
+<Route path='/perfilRestaurante/:id' element={<PerfilRestaurante/>}/>
 <Route path='/editarPerfilRestaurante' element={<EditarPerfi/>}/>
 <Route path='/crearMenu' element={<CrearMenu/>}/>
 <Route path='/menu' element={<Menu/>}/>

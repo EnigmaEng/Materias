@@ -2,7 +2,7 @@ import React, { useReducer} from "react";
 
 import todoContext from "./todoContext";
 import todoReducer from "./todoReducer";
-import { REGISTRO_EXITOSO, REGISTRO_ERROR, LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, OBTENER_RESTAURANTE} from "../types/types";
+import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, OBTENER_RESTAURANTE} from "../types/types";
 import clienteAxios from "../config/axios";
 
 const TodoState = ({ children }) => {
@@ -54,7 +54,7 @@ const TodoState = ({ children }) => {
             
             dispatch({
                 type: REGISTRO_EXITOSO, 
-                 payload: 'Registro exitoso!'
+                payload: 'Registro exitoso!'
             });
             
         } catch (error) {
@@ -139,6 +139,19 @@ const usuarioAutenticado = () => {
   }
 };
 
+    const crearPlato = async (datos) => {
+      try {
+        const respuesta = await clienteAxios.post('/restauranteController.php', datos)
+        
+        dispatch({
+        type: PLATO_CREADO,
+        payload: 'Plato Guardado!'
+      })
+      } catch (error) {
+        console.log(error)
+      }
+     
+    }
 
 
         const cerrarSesion = async () => {
@@ -146,8 +159,9 @@ const usuarioAutenticado = () => {
                 type: CERRAR_SESION,
                 
             });
+            // Eliminamos el token y los datos de usuario del localstorage una vez cerrado sesion
               localStorage.removeItem('token');
-    localStorage.removeItem('usuarioData');
+              localStorage.removeItem('usuarioData');
   
         }
     
@@ -161,8 +175,8 @@ const usuarioAutenticado = () => {
                 registrarRestaurante,
                 iniciarSesion,
                 cerrarSesion,
-            usuarioAutenticado,
-
+                usuarioAutenticado,
+                crearPlato,
                 
             }}>
 

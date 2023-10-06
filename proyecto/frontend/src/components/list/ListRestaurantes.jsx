@@ -2,6 +2,7 @@ import restauranteData from '../../context/restauranteData';
 import { useEffect } from 'react';
 import {BsSearch} from 'react-icons/bs'
 import {GoCodeReview} from 'react-icons/go'
+import { Link } from 'react-router-dom';
 
 const ListRestaurantes = () => {
     
@@ -56,7 +57,7 @@ const ListRestaurantes = () => {
 <h2 className='font-bold p-2 '> {item.nombre_restaurante}</h2>
 
 <div className='gap-5 flex p-4 '>
-    <button className=' rounded-lg border px-4   shadow-xl border  w-24 flex justify-center py-3 h-10'> <BsSearch/></button>
+    <Link to='/perfilRestaurante/:id' className=' rounded-lg border px-4   shadow-xl border  w-24 flex justify-center py-3 h-10'> <BsSearch/></Link>
     <button className='rounded-lg border px-4  bg-white shadow-xl  w-24 flex justify-center py-3 h-10'><GoCodeReview/></button>
 </div>
 

@@ -1,4 +1,4 @@
-import { REGISTRO_EXITOSO, REGISTRO_ERROR, LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION } from "../types/types.jsx";
+import { REGISTRO_EXITOSO, PLATO_CREADO,  REGISTRO_ERROR, LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION } from "../types/types.jsx";
 
 
 export default (state, action) => {
@@ -6,7 +6,7 @@ export default (state, action) => {
         case REGISTRO_EXITOSO:
         case REGISTRO_ERROR:
         case LOGIN_ERROR:
-      
+        case PLATO_CREADO:
             return {
                 ...state,
                 mensaje: action.payload
