@@ -6,8 +6,12 @@ import Categorias from '../../../../components/categorias/Categorias';
 import FooterDsk from '../../../../components/Footer/FooterDsk';
 import DarkMode from '../../../../components/Buttons/DarkMode';
 import todoContext from '../../../../context/todoContext';
-
-
+import PerfilDsk from '../../perfil/turista/PerfilDsk';
+import CategoriasTurista from '../../../../components/categorias/CategoriasTurista';
+import AdminHome from './adminHome/adminHome';
+import Home from '../../../HomePublic/Home';
+import RestauranteHome from './restauranteHome/restauranteHome';
+import TuristaHome from './turistaHome/turistaHome';
 const HomeAuthDsk = () => {
 
   const TodoContext = useContext(todoContext)
@@ -22,24 +26,22 @@ const HomeAuthDsk = () => {
 
    <>
 
-   {
-    // Restaurante
-     
-  
-<div className='min-h-screen space-y-5 bg-white bg-opacity-90 dark:bg-zinc-800 dark:bg-opacity-95'>
-  <NavBar/>
-
- <ListRestaurantes/>
    
-    <Categorias/>
-   <Map/>  
-   <div className='mt-24'>
-       <FooterDsk/>
-   </div>
+{ 
 
-</div>
+    usuario && usuario.rol.nombre ?  
+  
+<RestauranteHome/>
+  : usuario && usuario.rol.nacionalidad ? 
 
-  }
+   <TuristaHome/>
+
+   : usuario &&
+   usuario.rol.nro_empleados ? 
+   
+<AdminHome/>
+ :   <Home/>
+ } 
     </>
     
     

@@ -5,11 +5,6 @@ import todoReducer from "./todoReducer";
 import { REGISTRO_EXITOSO, REGISTRO_ERROR, LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, OBTENER_RESTAURANTE} from "../types/types";
 import clienteAxios from "../config/axios";
 
-
-
-
-//Usamos el useReducer para actualizar los estados de la aplicacion en funcion a las acciones que se envian en este caso, datos generados por el usuario 
-
 const TodoState = ({ children }) => {
 
     const initialState = {
@@ -36,9 +31,8 @@ const TodoState = ({ children }) => {
         });
             dispatch({
                 type: REGISTRO_EXITOSO, 
-                payload: 'Registro exitoso'
+                payload: 'Registro exitoso!'
             });
-            
         } catch (error) {
             dispatch({
                 type: REGISTRO_ERROR,
@@ -56,12 +50,13 @@ const TodoState = ({ children }) => {
     const registrarRestaurante = async datos => {
         
         try {
-            const respuesta = await clienteAxios.post("/restauranteController.php", datos);     
+            const respuesta = await clienteAxios.post("/restauranteController.php", datos); 
+            
             dispatch({
                 type: REGISTRO_EXITOSO, 
-                payload: 'Registro exitoso'    
+                 payload: 'Registro exitoso!'
             });
-
+            
         } catch (error) {
             dispatch({
                 type:REGISTRO_ERROR,
@@ -80,17 +75,23 @@ const iniciarSesion = async (datos) => {
   try {
     const respuesta = await clienteAxios.post('/loginController.php', datos);
 
+
     if (respuesta.status === 200) {
       if (respuesta.data.success) {
+     
+        //usuarioData trae todos los datos del usuario desde el backend
         const usuarioData = respuesta.data.usuarioData;
-console.log(respuesta.data.token)
-        // Almacenar el token en el localStorage
+        console.log(respuesta.data.token)
+        
+        // const token = respuesta.data.token
+        // clienteAxios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+         //se guardan el token de la sesion en el localstorage
         localStorage.setItem('token', respuesta.data.token);
-        // Almacenar los datos del usuario en el localStorage
+        
+        //se guardan los datos del usuario en el localstorage
         localStorage.setItem('usuarioData', JSON.stringify(usuarioData));
-console.log(usuarioData)
-        // Agregar el token a las solicitudes futuras
-
+        console.log(usuarioData)
+        
         dispatch({
           type: LOGIN_EXITOSO,
           usuario: usuarioData
@@ -121,13 +122,14 @@ console.log(usuarioData)
 
 const usuarioAutenticado = () => {
 
+  //usamos el token guardado en el localstorage
   const token = localStorage.getItem('token');
 
   if (token) {
-   
+    //usamos el encabezado authorization y utilizamos el esquema de autorizacion Bearer
     clienteAxios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    
-   
+  
+    // parseamos en formato json los datos guardados del usuario en el localstorage 
     const usuarioData = JSON.parse(localStorage.getItem('usuarioData'));
 
     dispatch({
@@ -144,13 +146,10 @@ const usuarioAutenticado = () => {
                 type: CERRAR_SESION,
                 
             });
-        
+              localStorage.removeItem('token');
+    localStorage.removeItem('usuarioData');
+  
         }
-
-        
-       
-
- 
     
     return (
         <todoContext.Provider

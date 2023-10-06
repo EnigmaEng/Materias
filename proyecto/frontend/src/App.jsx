@@ -43,6 +43,8 @@ function App() {
 {/* Perfiles */}
 <Route path='/admin' element={<PerfilAdmin/>} />
 <Route path='/perfil' element={<PerfilTest/>}/>
+<Route path='/perfilTurista' element={<PerfilTurista/>}/>
+<Route path='/perfilRestaurante' element={<PerfilRestaurante/>}/>
 
 {/* Resenias */}
 <Route path='/crearResenia' element={<CrearResenia/>} />

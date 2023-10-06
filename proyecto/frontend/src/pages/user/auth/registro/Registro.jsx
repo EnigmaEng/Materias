@@ -108,7 +108,7 @@ const RegistroUsuario = () => {
   });
 
   return (
-  <div className='bg-wwe bg-opacity-75 dark:bg-opacity-75 dark:bg-zinc-800'>
+  <div className='bg-white bg-opacity-75 dark:bg-opacity-75 dark:bg-zinc-800'>
     <div className='absolute md:top-16 md:right-28 top-2 right-5'>
       <DarkMode/>
       </div>
@@ -222,15 +222,14 @@ const RegistroUsuario = () => {
            <label htmlFor='motivo_alojamiento' className='font-bold px-4 text-white mt-2'>
             Motivo de alojamiento
           </label>
-          <input
-            type='text'
-            id='motivo_alojamiento'
-            placeholder='Trabajo, Vacaciones, etc..'
-            className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic'
+          <select name="motivo_alojamiento" id="motivo_alojamiento"  
            value={formik.values.motivo_alojamiento}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur }
-          />
+            onBlur={formik.handleBlur } className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic'  >
+                  <option value="Vacaciones" >Vacaciones</option>
+            <option value="Trabajo">Trabajo</option>
+            <option value="Otro">Otro</option>
+          </select>
           {formik.touched.motivo_alojamiento && formik.errors.motivo_alojamiento && (
             <div>
               <p className='text-sm px-5 text-black'>{formik.errors.motivo_alojamiento}</p>

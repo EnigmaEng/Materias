@@ -9,7 +9,7 @@ import Image from "../../assets/logo-white.png";
 const NavBarDsk = () => {
 
   const TodoContext = useContext(todoContext)
-  const {autenticado, usuarioAutenticado, usuario} = TodoContext;
+  const {autenticado, usuarioAutenticado, usuario, cerrarSesion} = TodoContext;
 
 useEffect(()=>{
 usuarioAutenticado();
@@ -19,7 +19,9 @@ usuarioAutenticado();
     <>
 {
 
-  usuario && usuario.rol.nombre ? ( <div className="navbar bg-wwe  shadow-xl">
+  usuario && usuario.rol.nombre ? 
+   // Restaurante Navbar
+  ( <div className="navbar bg-wwe  shadow-xl">
   <div className="flex-1">
     <div className='absolute left-5'>
        <DarkMode/>
@@ -39,18 +41,19 @@ usuarioAutenticado();
       </label>
       <ul tabIndex={0} className="px-4 py-4 dropdown-content mt-3 border bg-white rounded-box w-40">
         <li className=' hover:bg-gray-200 rounded-lg p-2'>
-          <Link to='/perfil' className="gap-2 text-center w-40 text-black flex">
+          <Link to='/perfilRestaurante' className="gap-2 text-center w-40 text-black flex">
          Perfil 
           </Link>
         </li>
         <li className=' hover:bg-gray-200 rounded-lg p-2'><Link className='text-black flex gap-4'> Menu {usuario.nombre}</Link></li>
-        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/login'  className='text-black flex gap-4  w-24'> <div className='mt-1'>
-          <SlLogout/> </div> Salir </Link></li>
+        <li className=' hover:bg-gray-200 rounded-lg p-2'><button onClick={() => cerrarSesion()}  className='text-black flex gap-4  w-24'> <div className='mt-1'>
+          <SlLogout/> </div> Salir </button></li>
       </ul>
     </div>
   </div>
 </div>
   ) : usuario && usuario.rol.nacionalidad ?
+   // Turista Navbar
    (
   <div className="navbar bg-wwe  shadow-xl">
   <div className="flex-1">
@@ -72,21 +75,52 @@ usuarioAutenticado();
       </label>
       <ul tabIndex={0} className="px-4 py-4 dropdown-content mt-3 border bg-white rounded-box w-40">
         <li className=' hover:bg-gray-200 rounded-lg p-2'>
-          <Link to='/perfil' className="gap-2 text-center w-40 text-black flex">
+          <Link to='/perfilTurista' className="gap-2 text-center w-40 text-black flex">
          Perfil 
           </Link>
         </li>
-        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link className='text-black flex gap-4'> Configuracion {usuario.alias}</Link></li>
-        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/' className='text-black flex gap-4  w-24'> <div className='mt-1'>
-          <SlLogout/> </div> Salir </Link></li>
+        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link className='text-black flex gap-4'> Configuracion </Link></li>
+        <li className=' hover:bg-gray-200 rounded-lg p-2'><button onClick={() => cerrarSesion()} className='text-black flex gap-4  w-24'> <div className='mt-1'>
+          <SlLogout/> </div> Salir </button></li>
       </ul>
     </div>
   </div>
 </div>
-    ) : 
+    ) : usuario && usuario.rol.nro_empleado ? 
   (
-<p>Hola admin</p>
-  )
+    // Admin Navbar
+ <div className="navbar bg-wwe  shadow-xl">
+  <div className="flex-1 gap-5">
+    <div className='absolute left-5'>
+       <DarkMode/>
+    </div>
+   
+    <Link to='/homeAuth' className='m-auto w-14'>  
+    <img src={Image} alt="logo"/>
+    </Link>
+     
+     <div className='text-white text-lg'>
+      <p className='space-x-5'>{usuario.nombres} {usuario.apellidos}</p>
+      
+     </div>
+  </div>
+ 
+</div>
+
+  ) :  <div className="navbar bg-wwe  shadow-xl">
+  <div className="flex-1 gap-5">
+    <div className='absolute left-5'>
+       <DarkMode/>
+    </div>
+   
+    <Link to='/homeAuth' className='m-auto w-14'>  
+    <img src={Image} alt="logo"/>
+    </Link>
+ <Link to='/login' className='bg-white px-6 py-1 rounded-lg text-wwe text-lg'>Iniciar sesion</Link>
+  <Link to='/registro' className='bg-white px-6 py-1 rounded-lg text-wwe text-lg'>Registrarse</Link>
+  </div>
+ 
+</div>
 }
 
  

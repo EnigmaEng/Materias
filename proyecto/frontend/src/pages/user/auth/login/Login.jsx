@@ -12,7 +12,7 @@ import DarkMode from "../../../../components/Buttons/DarkMode";
 const Login = () => {
 
 const Todocontext = useContext(todoContext)
-const { iniciarSesion, mensaje , autenticado} = Todocontext;
+const { usuario, iniciarSesion, mensaje , autenticado} = Todocontext;
 
 const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ iniciarSesion(userData)
   return (
     <>
  {
-  autenticado ? (<HomeAuth/>) : (<div className=" flex   justify-center min-h-screen bg-wwe bg-opacity-75 dark:bg-opacity-95 dark:bg-zinc-800  ">
+  usuario ? (<HomeAuth/>) : (<div className=" flex   justify-center min-h-screen bg-wwe bg-opacity-75 dark:bg-opacity-95 dark:bg-zinc-800  ">
      <div className='absolute md:top-16 md:right-28 top-2 right-5'>
       <DarkMode/>
       </div>

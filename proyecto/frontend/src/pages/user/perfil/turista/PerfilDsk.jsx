@@ -1,35 +1,51 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import NavBar from '../../../../components/nabvar/NavBar'
 import {AiOutlineEdit} from 'react-icons/ai';
+import todoContext from '../../../../context/todoContext';
+import Home from '../../../HomePublic/Home';
 
 
 const PerfilDsk = () => {
-  return (
-    <div className='space-y-24 h-screen'>
-<NavBar/> 
-      <div className='p-4  m-auto shadow-xl rounded-box  border w-8/12 bg-white  '>
-   
-      <div className=' space-y-5 border h-64 w-full rounded-box p-8 flex'>
-             <div className=''>
-          <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' alt="perfil" className='w-40 h-40 rounded-box border   border-white shadow-xl' />
-         <p className='text-center text-lg text-gray-400 mt-2'>@JhonDoe01</p>
-        </div>
-        <div className='w-full m-auto'>
-              <p className='font-bold text-gray-700 text-3xl mb-4 px-6'>Jhon Doe</p> <hr />
 
-              <div className='flex gap-10 text-lg text-gray-700 p-4'>
-                <p className='p-2  rounded-lg'>Nacionalidad: Sri Lanka</p>
-                <p className=' p-2 rounded-lg'>Motivo de alojamiento: Vacaciones </p>
+const TodoContext = useContext(todoContext)
+const {usuario, usuarioAutenticado, autenticado} = TodoContext
+
+useEffect(() => 
+{
+usuarioAutenticado()
+},[autenticado])
+
+  return (
+<>
+    {
+      usuario && usuario.rol.nacionalidad ? 
+ <div className='space-y-24 min-h-screen bg-white text-black font-aref dark:text-white bg-opacity-75 dark:bg-zinc-800 dark:bg-opacity-95'>
+<NavBar/> 
+      <div className='p-4   m-auto shadow-xl rounded-box   w-8/12 bg-white dark:bg-zinc-800    '>
+   
+      <div className=' space-y-5 border dark:border-zinc-700 h-64 w-full rounded-box p-8 flex'>
+             <div className=''>
+          <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' alt="perfil" className='w-48 h-40 rounded-box  shadow-xl' />
+         <p className='text-center text-lg text-gray-400 mt-2'>@{usuario.alias}</p>
+        </div>
+        <div className='w-full m-auto text-center'>
+              <p className='font-bold text-5xl mb-4 px-6 '>{usuario.rol.nombres} {usuario.rol.apellidos}</p> <hr />
+
+        
+                <p className='p-2 text-2xl  rounded-lg'>Nacionalidad: {usuario.rol.nacionalidad}</p>
+              
               </div>   
          
+       
+      <button className='h-10 w-50  flex gap-5 px-6 py-2.5   rounded-lg shadow-lg  bg-red-800 text-white '>Editar  <AiOutlineEdit/></button>
         </div>
-      <button className='h-10 w-50  flex gap-5 px-6 py-1.5  border rounded-lg shadow-lg text-black bg-red-800 text-white '>Editar  <AiOutlineEdit/></button>
-        </div>
-      <div className='border h-80 p-4 mt-5 rounded-box shadow-xl'>
-        <p className='text-center text-gray-700 font-bold text-3xl mt-3'>Reviews:</p>
+      <div className='dark:border dark:border-none h-80 p-4 mt-5 rounded-box shadow-xl'>
+        <p className='text-center  font-bold text-3xl mt-3'>Reviews:</p>
 
-        <div className='grid grid-cols-3 p-8'>
-        <div className='border rounded-lg h-40 w-64 text-center px-6 py-4 text-black shadow-xl'>
+        <div className='grid grid-cols-3 p-8 '>
+        <div className='border border-wwe space-y-3 rounded-lg h-40 w-64  px-6 py-4  shadow-xl'>
+          <p>Restaurante:</p>
+          <hr />
           <p>Calificaciones:</p>
         </div>
   
@@ -38,6 +54,9 @@ const PerfilDsk = () => {
       </div>
     
     </div>
+      : <Home/>
+    }
+   </>
   )
 }
 

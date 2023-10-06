@@ -32,13 +32,12 @@ export default (state, action) => {
                 autenticado:true
             }
         case CERRAR_SESION:
-            localStorage.removeItem('token');
-             localStorage.removeItem('usuarioData');
+        
             return {
                 ...state,
                 usuario: null,
                 token: null,
-                autenticado: false
+                autenticado: null
             }
 
         default:
