@@ -19,6 +19,7 @@ import CrearMenu from './pages/user/perfil/restaurante/Menu/CrearMenu'
 import Configuracion from './pages/user/perfil/turista/Configuracion'
 import Subscripcion from './pages/user/perfil/restaurante/Subscripcion/Subscripcion'
 import ConfiguracionRest from './pages/user/perfil/restaurante/Configuracion/ConfiguracionRest'
+import CrearDescuentos from './pages/user/perfil/restaurante/Descuentos/CrearDescuentos'
 
 
 
@@ -66,6 +67,7 @@ function App() {
 <Route path='/menu' element={<Menu/>}/>
 <Route path='/subscripcion' element={<Subscripcion/>}/>
 <Route path='/configuracionRest' element={<ConfiguracionRest/>}/>
+<Route path='/crearDescuentos' element={<CrearDescuentos/>}/>
     </Routes>
     
     </BrowserRouter>

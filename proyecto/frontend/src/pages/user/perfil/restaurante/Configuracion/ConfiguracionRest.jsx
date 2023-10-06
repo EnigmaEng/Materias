@@ -18,6 +18,11 @@ const ConfiguracionRest = () => {
         <hr />
         <Link to='/subscripcion' className=' px-2 py-0.5 rounded-lg bg-wwe text-white'>Pagar subscripcion</Link>
         </div>
+          <div className='border  p-4 mb-10 rounded-box  shadow-xl'>
+        <h2 className='mb-5 font-aref'>Descuentos</h2>
+        <hr />
+        <Link to='/crearDescuentos' className=' px-2 py-0.5 rounded-lg bg-wwe text-white'>Crear descuento</Link>
+        </div>
 </div>
     </div>
   )
