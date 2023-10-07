@@ -9,7 +9,8 @@ clear
 echo ""
 echo "1. Pullear desde main"
 echo "2. Pushear al main"
-echo "3. Volver al Menú"
+echo "3. Volver un Commit"
+echo "0. Volver al Menú"
 
 read -p "Ingrese una opcion: " opc
 case $opc in
@@ -20,10 +21,32 @@ sh GitPull.sh
 2) clear
 sh GitPush.sh
 ;;
-3)clear
+0)clear
 echo "Volviendo al menú..."
 sleep 1.5
 A=0
+;;
+3)
+clear
+function Revert() {
+    read -p "Desea ver el historial de commits? (s/n) " res
+    if [ $res == "S" || $res == "s" ];
+    then
+    cd ../../
+    git log -n 10 --pretty=format:"%h - %ad - %s" --date=short
+    sleep 1
+    read -p "Ingrese el ID del commit al que desea volver: " ID
+    git revert "$ID"
+    elif [ $res == "N" ||$res == "n" ];
+    then
+    read -p "Ingrese el ID del commit al que desea volver: " ID
+    git revert "$ID"
+    else
+    echo "Opcion incorrecta, intente nuevamente."
+    sleep 1
+    fi
+}
+Revert
 ;;
 *) 
 clear
