@@ -1,5 +1,6 @@
 <?php
-
+require_once '../vendor/autoload.php';
+use Firebase\JWT\JWT;
 
 class Login
 {
@@ -11,6 +12,25 @@ class Login
         $this->userModel = $userModel;
     }
 
+//   public static function generateToken($data)
+// {
+//     // Clave secreta para firmar el token (debe estar en tu .env)
+//     $secret_key = "tu_clave_secreta";
+
+//     // Tiempo de expiración del token (puedes personalizarlo)
+//     $expiration_time = 3600; // 1 hora (en segundos)
+
+//     // Crear el payload del token con los datos del usuario
+//     $payload = array(
+//         "data" => $data,
+//         "exp" => time() + $expiration_time
+//     );
+
+//     // Generar el token JWT
+//     $token = JWT::encode($payload, $secret_key, 'HS256');
+
+//     return $token;
+// }
 
     public function authenticate($tabla)
     {
@@ -40,13 +60,13 @@ class Login
                 'alias' => $userData['alias'],
                 'email' => $userData['email'],
                 'url_img_usuario' => $userData['url_img_usuario'],
-                'rol' => $userData['rol'],
+                'rol' => $rol,
                 'activo' => $userData['activo'],
                 'bloqueado' => $userData['bloqueado']
             );
             
             $rolData = array();
-            if ($userData['rol'] === 'R') {
+            if ($rol === 'R') {
                 
                 $query = "SELECT * FROM restaurante WHERE id_usuario = :id_usuario";
                 $stmt = $conn->prepare($query);
@@ -72,7 +92,8 @@ class Login
             $usuarioData['rol'] = $rolData;
             
             
-            
+            // creamos la varaible para generar el token con los datos del usuario
+            // $token = Login::generateToken($usuarioData);
             return $usuarioData;
             
             }
