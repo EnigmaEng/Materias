@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 sudo chmod u+x GitPush.sh
-cd ../../Materias
+cd ../../
 git add .
 git status
 sleep 2

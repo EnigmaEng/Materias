@@ -7,9 +7,7 @@ require_once '../models/session.php';
 require_once '../vendor/autoload.php';
 use Firebase\JWT\JWT;
 
-
-function loginUsuario($tabla, $datos)
-{
+function loginUsuario($tabla, $datos) {
     $restaurante = new Restaurante();
     $login = new Login($restaurante);
     $restaurante->setEmail($datos['email']);
@@ -23,7 +21,6 @@ function loginUsuario($tabla, $datos)
         $tokenData = [
             'id_usuario' => $usuarioData['id_usuario'],
             'email' => $usuarioData['email'],
-           
         ];
 
         $secret_key = "clave_secreta"; 
@@ -32,7 +29,6 @@ function loginUsuario($tabla, $datos)
         
         return array("success" => true, "usuarioData" => $usuarioData, "token" => $token);
     } else {
-       
         return array("success" => false, "mensaje" => "Autenticación fallida");
     }
 }
@@ -53,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         echo json_encode($result);
                     } else {
                         http_response_code(401); 
-                        echo json_encode(array("mensaje" => "Autenticación fallida"));
+                        echo json_encode(array("mensaje" => "Contraseña incorrecta"));
                     }
                 } else {
                     http_response_code(400); 

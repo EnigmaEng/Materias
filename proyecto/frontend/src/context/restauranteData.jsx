@@ -19,7 +19,7 @@ const restauranteData = () => {
 
     const getProduct = async () => {
     try {
-        const res = await URL;  //realiza la solicitud a la api y guarda la respuesta en res
+        const res = await 'URL';  //realiza la solicitud a la api y guarda la respuesta en res
         const datosFiltrados = res.data.filter(item =>
         item.nombre_restaurante.toLowerCase().includes(busqueda.toLowerCase())
     ); //filtra los datos de la api basabdose en la busqueda del usuario

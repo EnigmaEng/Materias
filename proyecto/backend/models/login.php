@@ -64,7 +64,7 @@ class Login
                 // Consulta para obtener datos de admin según el usuario con rol 'A'
                 $query = "SELECT * FROM administrativo WHERE id_usuario = :id_usuario";
                 $stmt = $conn->prepare($query);
-                $stmt->bindValue(":id_usuario", $userData['id']);
+                $stmt->bindValue(":id_usuario", $userData['id_usuario']);
                 $stmt->execute();
                 $rolData = $stmt->fetch(PDO::FETCH_ASSOC);
             }
