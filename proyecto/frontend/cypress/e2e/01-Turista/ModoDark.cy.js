@@ -1,4 +1,4 @@
-describe ('LoginTurista', () => {
+describe ('Iniciando Modo Oscuro', () => {
     beforeEach (() => { 
         cy.visit('http://127.0.0.1:5173/')
     })
