@@ -4,7 +4,7 @@ describe ('LoginTurista', () => {
     })
 
     it('Entrando al Login',() =>{
-        cy.contains('Where we eat')
+        cy.contains('WHERE WE EAT')
         cy.get('.flex-col > .flex > [href="/login"] > .bg-white').click()
     })
 
