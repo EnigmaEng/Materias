@@ -3,8 +3,8 @@ describe ('Registro_Rest', () => {
         cy.visit('http://127.0.0.1:5173/')
     })
     it('Entrando al Registro',() =>{
-        cy.contains('Where We Eat')
-        cy.get('[href="/registro"] > .w-60').click()
+        cy.contains('WHERE WE EAT')
+        cy.get('.flex-col > .flex > [href="/registro"] > .font-bold').click()
         cy.get('#alias').type('Test_UserR')
         cy.get('#email').type('RestauranteEmail@gmail.com')
         cy.get('#contrasena').type('SoyRestaurante123')

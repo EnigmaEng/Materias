@@ -4,7 +4,7 @@ describe ('LoginTurista', () => {
     })
 
     it('Entrando al Login',() =>{
-        cy.contains('Where we eat')
-        cy.get('.bg-blue-900').click()
+        cy.contains('WHERE WE EAT')
+        cy.get('.flex-col > .absolute > .bg-blue-900').click()
     })
 })

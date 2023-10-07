@@ -4,16 +4,16 @@ describe ('LoginTurista', () => {
     })
 
     it('Entrando al Login',() =>{
-        cy.contains('Where We Eat')
+        cy.contains('WHERE WE EAT')
         cy.get('.fixed > .flex > [href="/login"] > .bg-white').click()
     })
 
     it('Loguenado user Turista',() =>{
-        cy.get('.fixed > .flex > [href="/login"] > .bg-white').click()
+        cy.get('.flex-col > .flex > [href="/login"] > .bg-white').click()
         cy.contains('Iniciar sesion')
         cy.get('#email').type('RestauranteEmail@gmail.com')
         cy.get('#contrasena').type('SoyRestaurante123')
-        cy.get('.ml-4').click()
+        cy.get('.justify-center > .px-4').click()
         cy.contains('Mis resenias')
     })
 })
