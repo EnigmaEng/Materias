@@ -60,14 +60,14 @@ const TodoState = ({ children }) => {
         } catch (error) {
             dispatch({
                 type:REGISTRO_ERROR,
-                payload: error.response.data.msg
+                payload: respuesta.data.mensaje
             })
             }
-            setTimeout(() => {
-                dispatch({
-                    type: LIMPIAR_ALERTA
-                })
-            }, 3000);
+            // setTimeout(() => {
+            //     dispatch({
+            //         type: LIMPIAR_ALERTA
+            //     })
+            // }, 3000);
     }
 
     //Login
@@ -88,7 +88,7 @@ const iniciarSesion = async (datos) => {
          //se guardan el token de la sesion en el localstorage
         localStorage.setItem('token', respuesta.data.token);
         
-        //se guardan los datos del usuario en el localstorage
+        //se guardan los datos del usuario en formato json en el localstorage
         localStorage.setItem('usuarioData', JSON.stringify(usuarioData));
         console.log(usuarioData)
         
@@ -101,7 +101,7 @@ const iniciarSesion = async (datos) => {
       } else {
         dispatch({
           type: LOGIN_ERROR,
-          payload: 'Credenciales incorrectas'
+          payload: respuesta.data.mensaje  //traigo el mensaje de error desde el back
         });
       }
     } 
@@ -109,7 +109,7 @@ const iniciarSesion = async (datos) => {
     console.error("Error en la solicitud:", error);
     dispatch({
       type: LOGIN_ERROR,
-      payload: error.response.data.error
+      payload: error.response.data.mensaje
     });
   }
   setTimeout(() => {
