@@ -1,10 +1,10 @@
 #!/bin/bash
 clear
-echo "🌐🔥 BIENVENIDO A GITHUB - WWE 🔥🌐"
 sudo chmod u+x back.sh 2>/dev/null
 A=1
 while [ $A -ne 0 ]
 do
+echo "🌐🔥 BIENVENIDO A GITHUB - WWE 🔥🌐"
 echo ""
 echo "Qué desea hacer❓"
 echo ""
