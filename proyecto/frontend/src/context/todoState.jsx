@@ -75,7 +75,6 @@ const iniciarSesion = async (datos) => {
   try {
     const respuesta = await clienteAxios.post('/loginController.php', datos);
 
-
     if (respuesta.status === 200) {
       if (respuesta.data.success) {
      
