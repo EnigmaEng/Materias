@@ -19,13 +19,19 @@ const restauranteData = () => {
     const getProduct = async () => {
     try {
         const res = await URL;  //realiza la solicitud a la api y guarda la respuesta en res
+        if(res.data){
+
+       
         const datosFiltrados = res.data.filter(item =>
         item.nombre_restaurante.toLowerCase().includes(busqueda.toLowerCase())
     ); //filtra los datos de la api basabdose en la busqueda del usuario
 
         const slicedData = datosFiltrados.slice(startIndex, endIndex);  // crea un nuevo array tomando datosFiltrados que va desde startIndex hasta endIndex
 
-        setProduct(slicedData);    // actualiza el valor product con los datos filtrados y paginados
+        setProduct(slicedData);    // actualiza el valor product con los datos filtrados y paginados 
+    }else{
+        console.log("Error para leer los datos de restaurante")
+    }
     } catch (error) {
         console.log(error);
     }
