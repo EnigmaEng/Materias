@@ -13,7 +13,8 @@ echo ""
 echo "1. Restaurar Back y BD"
 echo "2. Restaurar Back"
 echo "3. Detener Back y BD"
-echo "0. Volver al Menu principal..."
+echo ""
+echo "(0) Volver al Menú 🔙"
 echo ""
 read -p "Ingrese una opcion: " opc
 
