@@ -49,7 +49,7 @@ const restauranteData = () => {
     if (pagina > 1) {    //el valor pagina debe ser mas grande que uno, osea debe haber pasado ya a la siguiente pagina para utilizar esta funcion
 
         setPagina(pagina - 1); //actualiza la funcion setPagina con el valor pagina - 1
-    }
+    };
     };
 
 return {
