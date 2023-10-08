@@ -30,13 +30,19 @@ A=0
 clear
 function Revert() {
     read -p "Desea ver el historial de commits? (s/n) " res
-    if [ $res == "S" || $res == "s" ];
+    if [[ $res == "S" || $res == "s" ]];
     then
-    cd ../../
-    git log -n 10 --pretty=format:"%h - %ad - %s" --date=short
+    git log -n 10 --pretty=format:"%h - %ad - %an - %s" --date=short
     sleep 1
     read -p "Ingrese el ID del commit al que desea volver: " ID
+    read -p "ESTAS SEGURO DE LO QUE ESTAS HACIENDO? (s/n) " val
+    if [ $val == "S" || $val == "s" ];
+    then
     git revert "$ID"
+    else
+    break
+    fi
+
     elif [ $res == "N" ||$res == "n" ];
     then
     read -p "Ingrese el ID del commit al que desea volver: " ID
