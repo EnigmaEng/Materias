@@ -7,7 +7,7 @@ USE `wwe`;
 CREATE TABLE `usuarios` (
   id_usuario INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   alias VARCHAR(50) UNIQUE,
-  email VARCHAR(50) NOT NULL,
+  email VARCHAR(50) UNIQUE,
   contrasena VARCHAR(200) NOT NULL,
   activo ENUM ('S','N') DEFAULT 'S',
   bloqueado ENUM ('S','N') DEFAULT 'N',
@@ -33,7 +33,7 @@ CREATE TABLE `turista` (
   FOREIGN KEY (id_usuario) REFERENCES `usuarios`(id_usuario)
 );
 
-CREATE TABLE `administrador` (
+CREATE TABLE `administrativo` (
   id_usuario INT(10) UNSIGNED PRIMARY KEY,
   nro_empleado SMALLINT(5) UNIQUE,
   nombres VARCHAR(50),
@@ -125,18 +125,18 @@ CREATE TABLE `admin_aprueba_rest` (
   PRIMARY KEY (id_usuario_rest, fecha_ini_sub, fecha_fin_sub),
   CHECK (fecha_ini_sub < fecha_fin_sub),
   FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante` (id_usuario),
-  FOREIGN KEY (id_usuario_admin) REFERENCES `administrador` (id_usuario)
+  FOREIGN KEY (id_usuario_admin) REFERENCES `administrativo` (id_usuario)
 );
 
 CREATE TABLE `restaurante_paga_subscripcion` (
   id_usuario_rest INT(10) UNSIGNED PRIMARY KEY,
   id_tipo_subscripcion INT(10) UNSIGNED,
   fecha_pago DATE,
-  FOREIGN KEY (id_usuario_rest) REFERENCES `admin_aprueba_rest` (id_usuario_rest),
+  FOREIGN KEY (id_usuario_rest) REFERENCES `admin_aprueba_rest`(id_usuario_rest),
   FOREIGN KEY (id_tipo_subscripcion) REFERENCES `tipo_subscripcion` (id_tipo_subs)
 );
 
-CREATE TABLE `turista_seAloja_Alojamiento` (
+CREATE TABLE `turista_sealoja_alojamiento` (
   id_usuario_turista INT(10) UNSIGNED,
   id_alojamiento INT(10) UNSIGNED,
   fecha_ini_alojamiento DATE,
@@ -157,8 +157,9 @@ CREATE TABLE `turista_resena_rest` (
   calificacion_general ENUM('Muy bueno', 'Bueno', 'Medio', 'Malo', 'Muy malo') NOT NULL,
   PRIMARY KEY (id_usuario_turista, id_usuario_rest),
   /* CHECK (fecha >= fecha_ini_alojamiento AND fecha >= fecha_fin_alojamiento + 90), REVISAR ESTO !!! */
-  FOREIGN KEY (id_usuario_turista) REFERENCES `turista` (id_usuario),
+  FOREIGN KEY (id_usuario_turista) REFERENCES `turista_sealoja_alojamiento` (id_usuario_turista),
   FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante` (id_usuario));
+
   
 CREATE TABLE `restaurante_tiene_descuento` (
   id_descuento INT(10) UNSIGNED,
@@ -174,35 +175,17 @@ CREATE TABLE `restaurante_tiene_descuento` (
 
 /*DCL Creación de Usuarios*/
 
-drop user if exists wwe_rol_r;
-drop user if exists wwe_rol_a;
-drop user if exists wwe_rol_t;
+drop user if exists 'wwe_rol_r'@'192.168.56.103';
+drop user if exists 'wwe_rol_a'@'192.168.56.103';
+drop user if exists 'wwe_rol_t'@'192.168.56.103';
+drop user if exists 'wweat’@'192.168.56.103;
 
-/*Creacion y Privilegios de Turistas con el host de Where We Eat*/
-/*
-CREATE USER 'wwe_rol_t'@'wwe-server' IDENTIFIED BY 'ContraTurista';
-GRANT USAGE ON wwe.* TO 'wwe_rol_t'@'wwe-server';
-GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.usuarios TO 'wwe_rol_t'@'wwe-server';
-GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.turista TO 'wwe_rol_t'@'wwe-server';
-GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.turista TO 'wwe_rol_t'@'wwe-server';
-GRANT SELECT ON wwe.tipo_restaurantes TO 'wwe_rol_t'@'wwe-server';
-GRANT SELECT ON wwe.descuento TO 'wwe_rol_t'@'wwe-server';
-GRANT INSERT, SELECT, DELETE ON wwe.turista_resena_rest TO 'wwe_rol_t'@'wwe-server';
-GRANT SELECT ON wwe.premios TO 'wwe_rol_t'@'wwe-server';
-GRANT SELECT ON wwe.plato_restaurantes TO 'wwe_rol_t'@'wwe-server';
-GRANT INSERT, SELECT ON wwe.localizacion TO 'wwe_rol_t'@'wwe-server';
-GRANT INSERT, SELECT, UPDATE ON wwe.alojamiento TO 'wwe_rol_t'@'wwe-server';
-GRANT INSERT, SELECT ON wwe.turista_seAloja_Alojamiento TO 'wwe_rol_t'@'wwe-server';
-GRANT SELECT ON wwe.restaurante_tiene_descuento TO 'wwe_rol_t'@'wwe-server';
-GRANT SELECT ON wwe.rest_obtiene_premios TO 'wwe_rol_t'@'wwe-server';
-FLUSH PRIVILEGES;
-*/
+CREATE USER 'wweat'@'192.168.56.103' IDENTIFIED BY 'Wweat123**';
+GRANT ALL PRIVILEGES ON wwe.* TO 'wweat'@'192.168.56.103' WITH GRANT OPTION;
 
-/*Creacion y Privilegios de Turistas CON CUALQUIER HOST*/
+/*Creacion y Privilegios de Turistas
 CREATE USER 'wwe_rol_t'@'%' IDENTIFIED BY 'ContraTurista';
-GRANT USAGE ON wwe.* TO 'wwe_rol_t'@'%';
 GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.usuarios TO 'wwe_rol_t'@'%';
-GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.turista TO 'wwe_rol_t'@'%';
 GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.turista TO 'wwe_rol_t'@'%';
 GRANT SELECT ON wwe.tipo_restaurantes TO 'wwe_rol_t'@'%';
 GRANT SELECT ON wwe.descuento TO 'wwe_rol_t'@'%';
@@ -211,32 +194,30 @@ GRANT SELECT ON wwe.premios TO 'wwe_rol_t'@'%';
 GRANT SELECT ON wwe.plato_restaurantes TO 'wwe_rol_t'@'%';
 GRANT INSERT, SELECT ON wwe.localizacion TO 'wwe_rol_t'@'%';
 GRANT INSERT, SELECT, UPDATE ON wwe.alojamiento TO 'wwe_rol_t'@'%';
-GRANT INSERT, SELECT ON wwe.turista_seAloja_Alojamiento TO 'wwe_rol_t'@'%';
+GRANT INSERT, SELECT ON wwe.turista_sealoja_alojamiento TO 'wwe_rol_t'@'%';
 GRANT SELECT ON wwe.restaurante_tiene_descuento TO 'wwe_rol_t'@'%';
 GRANT SELECT ON wwe.rest_obtiene_premios TO 'wwe_rol_t'@'%';
 FLUSH PRIVILEGES;
 
-
-/*Creacion y Privilegios de Restaurantes con el host de Where We Eat*/
-/*
-CREATE USER 'wwe_rol_r'@'wwe-server' IDENTIFIED BY 'ContraRestaurante';
-GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.usuarios TO 'wwe_rol_r'@'wwe-server';
-GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.Restaurante TO 'wwe_rol_r'@'wwe-server';
-GRANT INSERT ON wwe.sesiones TO 'wwe_rol_r'@'wwe-server';
-GRANT INSERT, SELECT, UPDATE ON wwe.tipo_restaurantes TO 'wwe_rol_r'@'wwe-server';
-GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.descuento TO 'wwe_rol_r'@'wwe-server';
-GRANT SELECT ON wwe.admin_aprueba_rest TO 'wwe_rol_r'@'wwe-server';
-GRANT SELECT ON wwe.restaurante_paga_subscripcion TO 'wwe_rol_r'@'wwe-server';
-GRANT SELECT ON wwe.turista_resena_rest TO 'wwe_rol_r'@'wwe-server';
-GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.premios TO 'wwe_rol_r'@'wwe-server';
-GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.plato_restaurantes TO 'wwe_rol_r'@'wwe-server';
-GRANT INSERT, SELECT ON wwe.localizacion TO 'wwe_rol_r'@'wwe-server';
-GRANT SELECT, UPDATE ON wwe.tipo_subscripcion TO 'wwe_rol_r'@'wwe-server';
-GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.restaurante_tiene_descuento TO 'wwe_rol_r'@'wwe-server';
-GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.rest_obtiene_premios TO 'wwe_rol_r'@'wwe-server';
-FLUSH PRIVILEGES;
 */
-/*Creacion y Privilegios de Restaurantes CON CUALQUIER HOST*/
+
+/*Creacion y Privilegios de Turistas*/
+CREATE USER 'wwe_rol_t'@'192.168.56.103' IDENTIFIED BY 'ContraTurista';
+GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.usuarios TO 'wwe_rol_t'@'192.168.56.103';
+GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.turista TO 'wwe_rol_t'@'192.168.56.103';
+GRANT SELECT ON wwe.tipo_restaurantes TO 'wwe_rol_t'@'192.168.56.103';
+GRANT SELECT ON wwe.descuento TO 'wwe_rol_t'@'192.168.56.103';
+GRANT INSERT, SELECT, DELETE ON wwe.turista_resena_rest TO 'wwe_rol_t'@'192.168.56.103';
+GRANT SELECT ON wwe.premios TO 'wwe_rol_t'@'192.168.56.103';
+GRANT SELECT ON wwe.plato_restaurantes TO 'wwe_rol_t'@'192.168.56.103';
+GRANT INSERT, SELECT ON wwe.localizacion TO 'wwe_rol_t'@'192.168.56.103';
+GRANT INSERT, SELECT, UPDATE ON wwe.alojamiento TO 'wwe_rol_t'@'192.168.56.103';
+GRANT INSERT, SELECT ON wwe.turista_sealoja_alojamiento TO 'wwe_rol_t'@'192.168.56.103';
+GRANT SELECT ON wwe.restaurante_tiene_descuento TO 'wwe_rol_t'@'192.168.56.103';
+GRANT SELECT ON wwe.rest_obtiene_premios TO 'wwe_rol_t'@'192.168.56.103';
+FLUSH PRIVILEGES;
+
+/*Creacion y Privilegios de Restaurantes
 CREATE USER 'wwe_rol_r'@'%' IDENTIFIED BY 'ContraRestaurante';
 GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.usuarios TO 'wwe_rol_r'@'%';
 GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.restaurante TO 'wwe_rol_r'@'%';
@@ -253,26 +234,30 @@ GRANT SELECT, UPDATE ON wwe.tipo_subscripcion TO 'wwe_rol_r'@'%';
 GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.restaurante_tiene_descuento TO 'wwe_rol_r'@'%';
 GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.rest_obtiene_premios TO 'wwe_rol_r'@'%';
 FLUSH PRIVILEGES;
+*/
 
+/*Creacion y Privilegios de Restaurantes*/
+CREATE USER 'wwe_rol_r'@'192.168.56.103' IDENTIFIED BY 'ContraRestaurante';
+GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.usuarios TO 'wwe_rol_r'@'192.168.56.103';
+GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.restaurante TO 'wwe_rol_r'@'192.168.56.103';
+GRANT INSERT ON wwe.sesiones TO 'wwe_rol_r'@'192.168.56.103';
+GRANT INSERT, SELECT, UPDATE ON wwe.tipo_restaurantes TO 'wwe_rol_r'@'192.168.56.103';
+GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.descuento TO 'wwe_rol_r'@'192.168.56.103';
+GRANT SELECT ON wwe.admin_aprueba_rest TO 'wwe_rol_r'@'192.168.56.103';
+GRANT SELECT ON wwe.restaurante_paga_subscripcion TO 'wwe_rol_r'@'192.168.56.103';
+GRANT SELECT ON wwe.turista_resena_rest TO 'wwe_rol_r'@'192.168.56.103';
+GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.premios TO 'wwe_rol_r'@'192.168.56.103';
+GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.plato_restaurantes TO 'wwe_rol_r'@'192.168.56.103';
+GRANT INSERT, SELECT ON wwe.localizacion TO 'wwe_rol_r'@'192.168.56.103';
+GRANT SELECT, UPDATE ON wwe.tipo_subscripcion TO 'wwe_rol_r'@'192.168.56.103';
+GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.restaurante_tiene_descuento TO 'wwe_rol_r'@'192.168.56.103';
+GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.rest_obtiene_premios TO 'wwe_rol_r'@'192.168.56.103';
+FLUSH PRIVILEGES;
 
 /*Creacion y Privilegios de Admin
-CREATE USER 'wwe_rol_a'@'wwe-server' IDENTIFIED BY 'ContraAdmin';
-GRANT SELECT, UPDATE ON wwe.usuarios TO 'wwe_rol_a'@'wwe-server';
-GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.administrador TO 'wwe_rol_a'@'wwe-server';
-GRANT INSERT ON wwe.sesiones TO 'wwe_rol_a'@'wwe-server';
-GRANT SELECT ON wwe.tipo_restaurantes TO 'wwe_rol_a'@'wwe-server';
-GRANT INSERT, SELECT ON wwe.admin_aprueba_rest TO 'wwe_rol_a'@'wwe-server';
-GRANT INSERT, SELECT ON wwe.restaurante_paga_subscripcion TO 'wwe_rol_a'@'wwe-server';
-GRANT SELECT ON wwe.turista_resena_rest TO 'wwe_rol_a'@'wwe-server';
-GRANT SELECT ON wwe.premios TO 'wwe_rol_a'@'wwe-server';
-GRANT INSERT, SELECT, UPDATE ON wwe.tipo_subscripcion TO 'wwe_rol_a'@'wwe-server';
-GRANT SELECT ON wwe.rest_obtiene_premios TO 'wwe_rol_a'@'wwe-server';
-FLUSH PRIVILEGES;
-*/
-/*Creacion y Privilegios de Admin CON CUALQUIER HOST*/
 CREATE USER 'wwe_rol_a'@'%' IDENTIFIED BY 'ContraAdmin';
 GRANT SELECT, UPDATE ON wwe.usuarios TO 'wwe_rol_a'@'%';
-GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.administrador TO 'wwe_rol_a'@'%';
+GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.administrativo TO 'wwe_rol_a'@'%';
 GRANT INSERT ON wwe.sesiones TO 'wwe_rol_a'@'%';
 GRANT SELECT ON wwe.tipo_restaurantes TO 'wwe_rol_a'@'%';
 GRANT INSERT, SELECT ON wwe.admin_aprueba_rest TO 'wwe_rol_a'@'%';
@@ -282,96 +267,23 @@ GRANT SELECT ON wwe.premios TO 'wwe_rol_a'@'%';
 GRANT INSERT, SELECT, UPDATE ON wwe.tipo_subscripcion TO 'wwe_rol_a'@'%';
 GRANT SELECT ON wwe.rest_obtiene_premios TO 'wwe_rol_a'@'%';
 FLUSH PRIVILEGES;
+*/
 
-
+/*Creacion y Privilegios de Admin con HOST*/
+CREATE USER 'wwe_rol_a'@'192.168.56.103' IDENTIFIED BY 'ContraAdmin';
+GRANT SELECT, UPDATE ON wwe.usuarios TO 'wwe_rol_a'@'192.168.56.103';
+GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.administrativo TO 'wwe_rol_a'@'192.168.56.103';
+GRANT INSERT ON wwe.sesiones TO 'wwe_rol_a'@'192.168.56.103';
+GRANT SELECT ON wwe.tipo_restaurantes TO 'wwe_rol_a'@'192.168.56.103';
+GRANT INSERT, SELECT ON wwe.admin_aprueba_rest TO 'wwe_rol_a'@'192.168.56.103';
+GRANT INSERT, SELECT ON wwe.restaurante_paga_subscripcion TO 'wwe_rol_a'@'192.168.56.103';
+GRANT SELECT ON wwe.turista_resena_rest TO 'wwe_rol_a'@'192.168.56.103';
+GRANT SELECT ON wwe.premios TO 'wwe_rol_a'@'192.168.56.103';
+GRANT INSERT, SELECT, UPDATE ON wwe.tipo_subscripcion TO 'wwe_rol_a'@'192.168.56.103';
+GRANT SELECT ON wwe.rest_obtiene_premios TO 'wwe_rol_a'@'192.168.56.103';
+FLUSH PRIVILEGES;
 
 /*Datos de Prueba*/
-USE wwe;
-
-/*Insertando datos de turistas…*/
-
--- Insertar turista 1
-INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('jsmith', 'turista1@example.com', 'contrasena123', 'S', 'N', 'T');
-
-INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
-VALUES (LAST_INSERT_ID(), 'USA', 'Vacaciones', 'John', 'Smith');
-
--- Insertar turista 2
-INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('smartin', 'turista2@example.com', 'pass456', 'S', 'N', 'T');
-
-INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
-VALUES (LAST_INSERT_ID(), 'France', 'Vacaciones', 'Sophie', 'Martin');
-
--- Insertar turista 3
-INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('agarcia', 'turista3@example.com', 'mysecret', 'S', 'N', 'T');
-
-INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
-VALUES (LAST_INSERT_ID(), 'Spain', 'Vacaciones', 'Antonio', 'García');
-
--- Insertar turista 4
-INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('lschmidt', 'turista4@example.com', 'mypassword', 'S', 'N', 'T');
-
-INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
-VALUES (LAST_INSERT_ID(), 'Germany', 'Vacaciones', 'Lukas', 'Schmidt');
-
--- Insertar turista 5
-INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('ssilva', 'turista5@example.com', 'securepass', 'S', 'N', 'T');
-
-INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
-VALUES (LAST_INSERT_ID(), 'Brazil', 'Vacaciones', 'Isabella', 'Silva');
--- Insertar turista 6
-INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('wchen', 'turista6@example.com', 'topsecret', 'S', 'N', 'T');
-
-INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
-VALUES (LAST_INSERT_ID(), 'China', 'Vacaciones', 'Wei', 'Chen');
-
--- Insertar turista 7
-INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('ojohnson', 'turista7@example.com', 'hiddenpass', 'S', 'N', 'T');
-
-INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
-VALUES (LAST_INSERT_ID(), 'Australia', 'Vacaciones', 'Olivia', 'Johnson');
-
--- Insertar turista 8
-INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('divanov', 'turista8@example.com', 'confidential', 'S', 'N', 'T');
-
-INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
-VALUES (LAST_INSERT_ID(), 'Russia', 'Vacaciones', 'Dmitri', 'Ivanov');
-
--- Insertar turista 9
-INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('ebrown', 'turista9@example.com', 'myp@ss123', 'S', 'N', 'T');
-
-INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
-VALUES (LAST_INSERT_ID(), 'Canada', 'Vacaciones', 'Emma', 'Brown');
-
--- Insertar turista 10
-INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('mjkim', 'turista10@example.com', 'hiddenpass123', 'S', 'N', 'T');
-
-INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
-VALUES (LAST_INSERT_ID(), 'South Korea', 'Vacaciones', 'Min-Ji', 'Kim');
-
--- Insertar turista 11
-INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('asharma', 'turista11@example.com', 'secretpass123', 'S', 'N', 'T');
-
-INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
-VALUES (LAST_INSERT_ID(), 'India', 'Vacaciones', 'Aarav', 'Sharma');
-
--- Insertar turista 12
-INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('sricci', 'turista12@example.com', 'turista123', 'S', 'N', 'T');
-
-INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
-VALUES (LAST_INSERT_ID(), 'Italy', 'Vacaciones', 'Sophia', 'Ricci');
 
 /*Insertando restaurantes de Montevideo…*/
 
@@ -475,6 +387,92 @@ VALUES ('Bulevar Artigas', 'Plaza Cuba', '2223');
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
 VALUES (LAST_INSERT_ID(), 'Exquisitez del Mar', LAST_INSERT_ID());
 
+
+/*Insertando datos de turistas…*/
+
+-- Insertar turista 1
+INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
+VALUES ('jsmith', 'turista1@example.com', 'contrasena123', 'S', 'N', 'T');
+
+INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
+VALUES (LAST_INSERT_ID(), 'USA', 'Vacaciones', 'John', 'Smith');
+
+-- Insertar turista 2
+INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
+VALUES ('smartin', 'turista2@example.com', 'pass456', 'S', 'N', 'T');
+
+INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
+VALUES (LAST_INSERT_ID(), 'France', 'Vacaciones', 'Sophie', 'Martin');
+
+-- Insertar turista 3
+INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
+VALUES ('agarcia', 'turista3@example.com', 'mysecret', 'S', 'N', 'T');
+
+INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
+VALUES (LAST_INSERT_ID(), 'Spain', 'Vacaciones', 'Antonio', 'García');
+
+-- Insertar turista 4
+INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
+VALUES ('lschmidt', 'turista4@example.com', 'mypassword', 'S', 'N', 'T');
+
+INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
+VALUES (LAST_INSERT_ID(), 'Germany', 'Vacaciones', 'Lukas', 'Schmidt');
+
+-- Insertar turista 5
+INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
+VALUES ('ssilva', 'turista5@example.com', 'securepass', 'S', 'N', 'T');
+
+INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
+VALUES (LAST_INSERT_ID(), 'Brazil', 'Vacaciones', 'Isabella', 'Silva');
+-- Insertar turista 6
+INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
+VALUES ('wchen', 'turista6@example.com', 'topsecret', 'S', 'N', 'T');
+
+INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
+VALUES (LAST_INSERT_ID(), 'China', 'Vacaciones', 'Wei', 'Chen');
+
+-- Insertar turista 7
+INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
+VALUES ('ojohnson', 'turista7@example.com', 'hiddenpass', 'S', 'N', 'T');
+
+INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
+VALUES (LAST_INSERT_ID(), 'Australia', 'Vacaciones', 'Olivia', 'Johnson');
+
+-- Insertar turista 8
+INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
+VALUES ('divanov', 'turista8@example.com', 'confidential', 'S', 'N', 'T');
+
+INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
+VALUES (LAST_INSERT_ID(), 'Russia', 'Vacaciones', 'Dmitri', 'Ivanov');
+
+-- Insertar turista 9
+INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
+VALUES ('ebrown', 'turista9@example.com', 'myp@ss123', 'S', 'N', 'T');
+
+INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
+VALUES (LAST_INSERT_ID(), 'Canada', 'Vacaciones', 'Emma', 'Brown');
+
+-- Insertar turista 10
+INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
+VALUES ('mjkim', 'turista10@example.com', 'hiddenpass123', 'S', 'N', 'T');
+
+INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
+VALUES (LAST_INSERT_ID(), 'South Korea', 'Vacaciones', 'Min-Ji', 'Kim');
+
+-- Insertar turista 11
+INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
+VALUES ('asharma', 'turista11@example.com', 'secretpass123', 'S', 'N', 'T');
+
+INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
+VALUES (LAST_INSERT_ID(), 'India', 'Vacaciones', 'Aarav', 'Sharma');
+
+-- Insertar turista 12
+INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
+VALUES ('sricci', 'turista12@example.com', 'turista123', 'S', 'N', 'T');
+
+INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
+VALUES (LAST_INSERT_ID(), 'Italy', 'Vacaciones', 'Sophia', 'Ricci');
+
 /*Insertando premios…*/
 -- Premio 1
 
@@ -503,19 +501,21 @@ INSERT INTO rest_obtiene_premios (id_premio, fecha_recibido,id_usuario_rest)
 VALUES (3, SYSDATE(),3);
 
 
-/*Insertando Administradores*/
+/*Insertando administradores*/
 
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
 VALUES ('admin22', 'admin22@wwe.com', 'adminpass22', 'S', 'N', 'A');
 
-INSERT INTO administrador (id_usuario, nro_empleado, nombres, apellidos)
+INSERT INTO administrativo (id_usuario, nro_empleado, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 22, 'Juan', 'Pérez');
 
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
 VALUES ('admin17', 'admin17@wwe.com', 'adminpass17', 'S', 'N', 'A');
 
-INSERT INTO administrador (id_usuario, nro_empleado, nombres, apellidos)
+INSERT INTO administrativo (id_usuario, nro_empleado, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 17, 'María', 'González');
+
+/*Insertando Alojamientos*/
 
 -- Insertar alojamiento 1
 INSERT INTO localizacion (calle, esquina, nro_puerta)
@@ -559,13 +559,13 @@ VALUES ('VIP', '149.99');
 /*Insertando aprobaciones de Admin a las subs de restaurantes...*/
 
 INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
-VALUES (1, 23, SYSDATE(), '27/08/24');
+VALUES (1, 23, SYSDATE(), '27-08-24');
 
 INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
-VALUES (2,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 YEAR));
+VALUES (2,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 MONTH));
 
 INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
-VALUES (3,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 YEAR));
+VALUES (3,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 2 YEAR));
 
 INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
 VALUES (4,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 YEAR));
@@ -574,16 +574,16 @@ INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub
 VALUES (5,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 YEAR));
 
 INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
-VALUES (6,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 YEAR));
+VALUES (6,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 2 YEAR));
 
 INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
 VALUES (7,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 YEAR));
 
 INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
-VALUES (8,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 YEAR));
+VALUES (8,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 MONTH));
 
 INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
-VALUES (9,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 YEAR));
+VALUES (9,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 MONTH));
 
 /*Insertando suscripciones...*/
 
@@ -695,7 +695,6 @@ VALUES ('Paella Valenciana', ROUND(RAND() * 260 + 300, 2), 'Paella tradicional c
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
 VALUES ('Crema Catalana', ROUND(RAND() * 70 + 100, 2), 'Postre cremoso con capa de azúcar quemado.', 7);
 
-
 -- Restaurante 8
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
 VALUES ('Tacos de Carnitas', ROUND(RAND() * 140 + 180, 2), 'Tacos de cerdo asado con condimentos mexicanos.', 8);
@@ -726,30 +725,64 @@ VALUES ('Empanadas Criollas', ROUND(RAND() * 160 + 200, 2), 'Empanadas rellenas 
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
 VALUES ('Flan Casero', ROUND(RAND() * 50 + 80, 2), 'Flan casero con caramelo y crema.', 10);
 
+/*Insertando Turistas Alojados*/
+
+INSERT INTO turista_sealoja_alojamiento (id_usuario_turista, id_alojamiento, fecha_ini_alojamiento, fecha_fin_alojamiento)
+VALUES ('11','1','2023-09-01','2023-09-07');
+
+INSERT INTO turista_sealoja_alojamiento (id_usuario_turista, id_alojamiento, fecha_ini_alojamiento, fecha_fin_alojamiento)
+VALUES ('12','2','2023-09-01','2023-09-07');
+
+INSERT INTO turista_sealoja_alojamiento (id_usuario_turista, id_alojamiento, fecha_ini_alojamiento, fecha_fin_alojamiento)
+VALUES ('13','3','2023-09-01','2023-09-07');
+
+INSERT INTO turista_sealoja_alojamiento (id_usuario_turista, id_alojamiento, fecha_ini_alojamiento, fecha_fin_alojamiento)
+VALUES ('14','4','2023-09-01','2023-09-07');
+
+INSERT INTO turista_sealoja_alojamiento (id_usuario_turista, id_alojamiento, fecha_ini_alojamiento, fecha_fin_alojamiento)
+VALUES ('15','2','2023-09-01','2023-09-07');
+
+INSERT INTO turista_sealoja_alojamiento (id_usuario_turista, id_alojamiento, fecha_ini_alojamiento, fecha_fin_alojamiento)
+VALUES ('16','2','2023-09-01','2023-09-07');
+
+INSERT INTO turista_sealoja_alojamiento (id_usuario_turista, id_alojamiento, fecha_ini_alojamiento, fecha_fin_alojamiento)
+VALUES ('17','3','2023-09-01','2023-09-07');
+
+INSERT INTO turista_sealoja_alojamiento (id_usuario_turista, id_alojamiento, fecha_ini_alojamiento, fecha_fin_alojamiento)
+VALUES ('18','1','2023-09-01','2023-09-07');
+
+INSERT INTO turista_sealoja_alojamiento (id_usuario_turista, id_alojamiento, fecha_ini_alojamiento, fecha_fin_alojamiento)
+VALUES ('19','4','2023-09-01','2023-09-07');
+
+INSERT INTO turista_sealoja_alojamiento (id_usuario_turista, id_alojamiento, fecha_ini_alojamiento, fecha_fin_alojamiento)
+VALUES ('20','4','2023-09-01','2023-09-07');
+
+INSERT INTO turista_sealoja_alojamiento (id_usuario_turista, id_alojamiento, fecha_ini_alojamiento, fecha_fin_alojamiento)
+VALUES ('21','1','2023-09-01','2023-09-07');
+
+INSERT INTO turista_sealoja_alojamiento (id_usuario_turista, id_alojamiento, fecha_ini_alojamiento, fecha_fin_alojamiento)
+VALUES ('22','3','2023-09-01','2023-09-07');
+
 /*Insertando resenias de turistas a restaurantes*/
 
 -- Inserción de una reseña por un turista para un restaurante
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
-VALUES (1, 1, '2023-08-25', 'Excelente', '9', '8', 'Muy bueno');
+VALUES (20, 1, '2023-08-25', 'Excelente', '9', '8', 'Muy bueno');
 
 -- Otra reseña de turista para otro restaurante
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
-VALUES (2, 2, '2023-08-26', 'Medio', '5', '6', 'Bueno');
+VALUES (15, 2, '2023-08-26', 'Medio', '5', '6', 'Bueno');
 
 -- Una reseña más para un restaurante diferente
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
-VALUES (3, 3, '2023-08-27', 'Insuficiente', '3', '4', 'Medio');
+VALUES (16, 3, '2023-08-27', 'Insuficiente', '3', '4', 'Medio');
 
 -- Otra reseña de turista para otro restaurante
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
-VALUES (4, 5, '2023-08-26', 'Medio', '7', '9', 'Bueno');
+VALUES (14, 5, '2023-08-26', 'Medio', '7', '9', 'Bueno');
 
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
-VALUES (4, 9, '2023-08-26', 'Medio', '7', '9', 'Bueno');
+VALUES (13, 9, '2023-08-26', 'Medio', '7', '9', 'Bueno');
 
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
-VALUES (4, 8, '2023-08-26', 'Medio', '7', '9', 'Bueno');
-
-
-
-
+VALUES (17, 8, '2023-08-26', 'Medio', '7', '9', 'Bueno');

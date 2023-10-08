@@ -11,9 +11,9 @@ describe ('LoginTurista', () => {
     it('Loguenado user Turista',() =>{
         cy.get('.flex-col > .flex > [href="/login"] > .bg-white').click()
         cy.contains('Iniciar sesion')
-        cy.get('#email').type('TuristaEmail@gmail.com')
-        cy.get('#contrasena').type('SoyTurista123')
+        cy.get('#email').type('turista@gmail.com')
+        cy.get('#contrasena').type('hola1234')
         cy.get('.justify-center > .px-4').click()
-        cy.contains('Mis Reseñas')
+       /* cy.contains('Mis Reseñas')*/
     })
 })

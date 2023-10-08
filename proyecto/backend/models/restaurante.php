@@ -231,8 +231,8 @@ class Restaurante extends Usuario implements Crud
 
 public function obtenerRestaurantes(){
     $query = "SELECT r.nombre AS nombre_restaurante, u.url_img_usuario AS foto_usuario
-            FROM restaurante r
-            JOIN usuarios u ON r.id_usuario = u.id_usuario";
+            FROM wwe.restaurante r
+            JOIN wwe.usuarios u ON r.id_usuario = u.id_usuario";
     
     $stmt = $this->getConn()->prepare($query);
     

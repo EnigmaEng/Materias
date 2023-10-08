@@ -15,6 +15,7 @@ do
 	echo "## 4) Servicio SSH                     ##"
 	echo "## 5) Antivirus                        ##"
 	echo "## 6) Grafana Server                   ##"
+	echo "## 7) Ver todos los servicios          ##"
 	echo "##                                     ##"
 	echo "## 0) Salir                            ##"
 	echo "#########################################"
@@ -348,6 +349,12 @@ do
 			;;
 		esac
 		done
+		;;
+		7)
+			logger -p local1.info "Consultando estado de todos los servicios..."
+			sudo systemctl status --all
+			echo "Presione enter para salir"
+			read exit
 		;;
 		0)
 		logger -p local1.info "Saliendo del script de administracion de servicios"

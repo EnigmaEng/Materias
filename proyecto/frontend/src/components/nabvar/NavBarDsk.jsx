@@ -21,7 +21,7 @@ usuarioAutenticado();
 
   usuario && usuario.rol.nombre ? 
    // Restaurante Navbar
-  ( <div className="navbar  bg-wwe  shadow-xl">
+  ( <div className="navbar bg-local  bg-wwe  shadow-xl">
   <div className="flex-1">
     <div className='absolute left-5'>
        <DarkMode/>
@@ -39,7 +39,7 @@ usuarioAutenticado();
           <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className='w-14 rounded-full' />
         </div>
       </label>
-      <ul tabIndex={0} className="px-4 py-4 dropdown-content mt-3 border bg-white rounded-box w-40">
+      <ul tabIndex={0} className="z-10 px-4 py-4 z dropdown-content mt-3 border bg-white rounded-box w-40">
         <li className=' hover:bg-gray-200 rounded-lg p-2'>
           <Link to='/perfilRestaurante' className="gap-2 text-center w-40 text-black flex">
          Perfil 
@@ -73,7 +73,7 @@ usuarioAutenticado();
           <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className='w-14 rounded-full' />
         </div>
       </label>
-      <ul tabIndex={0} className="px-4 py-4 dropdown-content mt-3 border bg-white rounded-box w-40">
+      <ul tabIndex={0} className=" z-10 px-4 py-4 dropdown-content mt-3 border bg-white rounded-box w-40">
         <li className=' hover:bg-gray-200 rounded-lg p-2'>
           <Link to='/perfilTurista' className="gap-2 text-center w-40 text-black flex">
          Perfil 
