@@ -24,8 +24,10 @@ sh GitPull.sh
 sh GitPush.sh
 ;;
 3) clear
-git log -n 3 --pretty=format:"%h - %ad - %an - %s" --date=short
-sleep 3
+git log -n 5 --pretty=format:"%h - %ad - %an - %s" --date=short
+echo ""
+read -p "Presione Enter para volver..."
+clear
 ;;
 4) clear
 function Revert() {
