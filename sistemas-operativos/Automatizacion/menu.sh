@@ -133,25 +133,25 @@ while [ $A -ne 0 ]; do
             }
 
            echo "Seleccione una opción:"
-echo "(1) Abrir solo el 💻 FRONTEND 💻 (npm run dev)"
-echo "(2) Abrir el 🔌 BACKEND 🔌 y el 💻 FRONTEND 💻 (Docker y npm run dev)"
-echo ""
-read -p "Ingrese el número de la opción que desea ejecutar (1 o 2): " var
-
-if [ "$var" == "1" ]; then
-    clear
-    WWE
-elif [ "$var" == "2" ]; then
-    clear
-    WWE+Back
-else
-    sleep 0.1
-    clear
-    echo "Opción incorrecta, por favor seleccione 1 o 2."
-    sleep 2
-fi
-
-            ;;
+        echo "(1) Abrir solo el 💻 FRONTEND 💻 (npm run dev)"
+        echo "(2) Abrir el 🔌 BACKEND 🔌 y el 💻 FRONTEND 💻 (Docker y npm run dev)"
+        echo ""
+        read -p "Ingrese el número de la opción que desea ejecutar (1 o 2): " var
+        if [ "$var" == "1" ]; then
+            clear
+            WWE
+        cd "$directorio_principal"
+            elif [ "$var" == "2" ]; then
+            clear
+            WWE+Back
+        cd "$directorio_principal"
+        else
+            sleep 0.1
+            clear
+            echo "Opción incorrecta, por favor seleccione 1 o 2."
+            sleep 2
+        fi
+        ;;
         5)
             clear
             read -p "Deseas ver qué carpetas existen? (s/[n]) " res
