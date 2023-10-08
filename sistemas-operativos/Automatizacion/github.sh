@@ -12,7 +12,8 @@ echo "1. Pullear desde main"
 echo "2. Pushear al main"
 echo "3. Chequear ultimos Commits"
 echo "4. Volver un Commit"
-echo "0. Volver al Menú 🔙"
+echo ""
+echo "(0) Volver al Menú 🔙"
 echo ""
 read -p "Ingrese una opcion: " opc
 case $opc in
