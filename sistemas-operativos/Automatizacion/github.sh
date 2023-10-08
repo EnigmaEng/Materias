@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#PROBANDO AUTOMATIZACION
+
 clear
 sudo chmod u+x back.sh
 A=1
@@ -9,7 +11,8 @@ clear
 echo ""
 echo "1. Pullear desde main"
 echo "2. Pushear al main"
-echo "3. Volver un Commit"
+echo "3. Chequear ultimo Commit"
+echo "4. Volver un Commit"
 echo "0. Volver al Menú"
 
 read -p "Ingrese una opcion: " opc
@@ -21,13 +24,11 @@ sh GitPull.sh
 2) clear
 sh GitPush.sh
 ;;
-0)clear
-echo "Volviendo al menú..."
-sleep 1.5
-A=0
+3) clear
+git log -n 1 --pretty=format:"%h - %ad - %an - %s" --date=short
+sleep 3
 ;;
-3)
-clear
+4) clear
 function Revert() {
     read -p "Desea ver el historial de commits? (s/n) " res
     if [[ $res == "S" || $res == "s" ]];
@@ -35,15 +36,21 @@ function Revert() {
     git log -n 10 --pretty=format:"%h - %ad - %an - %s" --date=short
     sleep 1
     read -p "Ingrese el ID del commit al que desea volver: " ID
-    read -p "ESTAS SEGURO DE LO QUE ESTAS HACIENDO? (s/n) " val
-    if [ $val == "S" || $val == "s" ];
+    echo ""
+    read -p "ESTAS SEGURO DE LO QUE ESTAS HACIENDO? (s/[n]) " val
+    val=${val:-n} #ELIGE UN VALOR POR DEFECTO PARA LA VARIABLE
+    if [[ $val == "S" || $val == "s" ]];
     then
     git revert "$ID"
+    elif [[ $val == "N" || $val == "n" ]]; 
+    then
+    echo "Volviendo atras..."
+    sleep 1
     else
-    break
+    echo "Opcion incorrecta."
+    sleep 1
     fi
-
-    elif [ $res == "N" ||$res == "n" ];
+    elif [[ $res == "N" || $res == "n" ]];
     then
     read -p "Ingrese el ID del commit al que desea volver: " ID
     git revert "$ID"
@@ -53,6 +60,11 @@ function Revert() {
     fi
 }
 Revert
+;;
+0)clear
+echo "Volviendo al menú..."
+sleep 1.5
+A=0
 ;;
 *) 
 clear
