@@ -8,3 +8,4 @@ sleep 2
 read -p "¿Nombre del Commit? " commit
 git commit -m "$commit"
 git push -u origin main
+clear
