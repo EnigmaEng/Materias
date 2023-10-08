@@ -1,17 +1,20 @@
 #!/bin/bash
-
-sudo chmod u+x back.sh
+clear
+sudo chmod u+x back.sh 2>/dev/null
 A=1
-
 while [ $A -ne 0 ]
 do
 clear
+echo "╔══════════════════════════════════════════════╗"
+echo "║     BIENVENIDO AL MENÚ DE AUTOMATIZACIÓN     ║"
+echo "╚══════════════════════════════════════════════╝"
+echo ""
 echo "1. GitHub"
 echo "2. Docker"
 echo "3. Cypress"
 echo "4. WHERE WE EAT"
 echo "0. Salir"
-
+echo ""
 read -p "Ingrese una opcion: " opc
 
 case $opc in

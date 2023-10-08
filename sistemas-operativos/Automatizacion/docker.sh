@@ -1,14 +1,15 @@
 #!/bin/bash
-sudo chmod u+x docker.sh
-A=1
+sudo chmod u+x docker.sh 2>/dev/null
 
+A=1
+clear
 while [ $A -ne 0 ]
 do
 clear
 echo "1. Restaurar Back y BD"
 echo "2. Restaurar Back"
-echo "0. Salir"
-
+echo "0. Volver al Menu principal..."
+echo ""
 read -p "Ingrese una opcion: " opc
 
 case $opc in

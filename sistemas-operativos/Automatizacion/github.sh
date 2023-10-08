@@ -3,18 +3,18 @@
 #PROBANDO AUTOMATIZACION
 
 clear
-sudo chmod u+x back.sh
+sudo chmod u+x back.sh 2>/dev/null
 A=1
 while [ $A -ne 0 ]
 do
-clear
+
 echo ""
 echo "1. Pullear desde main"
 echo "2. Pushear al main"
-echo "3. Chequear ultimo Commit"
+echo "3. Chequear ultimos Commits"
 echo "4. Volver un Commit"
 echo "0. Volver al Menú"
-
+echo ""
 read -p "Ingrese una opcion: " opc
 case $opc in
 
@@ -25,7 +25,7 @@ sh GitPull.sh
 sh GitPush.sh
 ;;
 3) clear
-git log -n 1 --pretty=format:"%h - %ad - %an - %s" --date=short
+git log -n 3 --pretty=format:"%h - %ad - %an - %s" --date=short
 sleep 3
 ;;
 4) clear
@@ -33,7 +33,6 @@ function Revert() {
     read -p "Desea ver el historial de commits? (s/n) " res
     if [[ $res == "S" || $res == "s" ]];
     then
-    cd ../../
     git log -n 10 --pretty=format:"%h - %ad - %s" --date=short
     sleep 1
     read -p "Ingrese el ID del commit al que desea volver: " ID
@@ -51,9 +50,10 @@ function Revert() {
     echo "Opcion incorrecta."
     sleep 1
     fi
-    elif [[ $res == "N" || $res == "n" ]];
+    elif [[ $val == "N" || $val == "n" ]];
+    then
     git revert "$ID"
-    elif [[ $res == "N" ||$res == "n" ]];
+    elif [[ $res == "N" || $res == "n" ]];
     then
     read -p "Ingrese el ID del commit al que desea volver: " ID
     git revert "$ID"
@@ -64,11 +64,13 @@ function Revert() {
 }
 Revert
 ;;
+
 0)clear
 echo "Volviendo al menú..."
 sleep 1.5
 A=0
 ;;
+
 *) 
 clear
 echo "Opción incorrecta, intente nuevamente."
