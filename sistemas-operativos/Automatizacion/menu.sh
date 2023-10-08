@@ -15,6 +15,7 @@ function show_menu {
     echo "3. Test Cypress"
     echo "4. WHERE WE EAT"
     echo "5. Moverme..."
+    echo "6. Recomendaciones de uso (LEER)"
     echo "0. Salir"
     echo ""
     read -p "Ingrese una opcion: " opc
@@ -69,7 +70,7 @@ function menu_de_directorios {
         ;;
         0)
             clear
-            echo "Volviendo al menú principal..."
+            echo "Volviendo al menú principal... 🔙"
             sleep 1
             # Regresa al directorio original antes de salir del menú secundario
             cd "$directorio_principal"
@@ -109,7 +110,7 @@ while [ $A -ne 0 ]; do
             clear
             Cypress
             ;;
-        4)
+        4) 
             clear
             function WWE {
                 cd ../../proyecto/frontend
@@ -131,19 +132,25 @@ while [ $A -ne 0 ]; do
                 npm run dev
             }
 
-            read -p "1) FRONTEND ❓: o 2) BACK Y FRONT ❓:   " var
-            if [ $var == "1" ]; then
-                clear
-                WWE
-            elif [ $var == "2" ]; then
-                clear
-                WWE+Back
-            else
-                sleep 0.1
-                clear
-                echo "Valor incorrecto, intente nuevamente."
-                sleep 2
-            fi
+           echo "Seleccione una opción:"
+echo "(1) Abrir solo el 💻 FRONTEND 💻 (npm run dev)"
+echo "(2) Abrir el 🔌 BACKEND 🔌 y el 💻 FRONTEND 💻 (Docker y npm run dev)"
+echo ""
+read -p "Ingrese el número de la opción que desea ejecutar (1 o 2): " var
+
+if [ "$var" == "1" ]; then
+    clear
+    WWE
+elif [ "$var" == "2" ]; then
+    clear
+    WWE+Back
+else
+    sleep 0.1
+    clear
+    echo "Opción incorrecta, por favor seleccione 1 o 2."
+    sleep 2
+fi
+
             ;;
         5)
             clear
@@ -161,6 +168,63 @@ while [ $A -ne 0 ]; do
                 fi
             fi
             ;;
+
+6) 
+    while true; do
+        clear
+        echo " 📃 RECOMENDACIONES DE USO PARA NUESTRA APP - WHERE WE EAT 📃 "
+        echo "---------------------------------------------------------------"
+        echo ""
+        echo "Seleccione una opción:"
+        echo "1. INFO - GitHub"
+        echo "2. INFO - Docker"
+        echo "3. INFO - Cypress"
+        echo "4. INFO - WHERE WE EAT"
+        echo "0. Volver al menú principal"
+        echo ""
+        read -p "¿Qué necesita saber? " resp
+        case $resp in
+            1)
+                clear
+                echo "Recomendaciones sobre GitHub:"
+                echo "Hay opciones dentro de GitHub que pueden causar inconvenientes en la rama main, es importante estar consciente de lo que estamos haciendo al elegir determinadas opciones."
+                echo ""
+                read -p "Presione Enter para volver..."
+                ;;
+            2)
+                clear
+                echo "Recomendaciones sobre Docker:"
+                echo "Para desplegar la aplicación correctamente con Docker, debe tener instalado Docker Desktop y abrirlo. Luego, diríjase a la opción '4. WHERE WE EAT' en el menú principal y seleccione lo que desea desplegar."
+                echo ""
+                read -p "Presione Enter para volver..."
+                ;;
+            3)
+                clear
+                echo "Cypress es una herramienta de prueba de extremo a extremo (E2E) que se utiliza para realizar pruebas automatizadas en aplicaciones web. Permite simular interacciones de usuario y verificar que la aplicación funcione correctamente."
+                echo ""
+                read -p "Presione Enter para volver..."
+                ;;
+            4)
+                clear
+                echo "Recomendaciones sobre WHERE WE EAT:"
+                echo "Para desplegar la aplicación WHERE WE EAT, siga las instrucciones proporcionadas en la opción '4. WHERE WE EAT' en el menú principal."
+                echo ""
+                read -p "Presione Enter para volver..."
+                ;;
+            0)
+                clear
+                echo "Volviendo al menú principal..."
+                sleep 1
+                break  # Salir del bucle de recomendaciones
+                ;;
+            *)
+                clear
+                echo "Opción incorrecta, intente nuevamente."
+                sleep 2
+                ;;
+        esac
+    done
+    ;;
         0)
             clear
             echo " 🔚 Saliendo del menú... 🔚"
