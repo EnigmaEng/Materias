@@ -3,9 +3,12 @@ sudo chmod u+x docker.sh 2>/dev/null
 
 A=1
 clear
+echo "🌐🔥 BIENVENIDO A DOCKER - WWE 🔥🌐"
 while [ $A -ne 0 ]
 do
-clear
+echo ""
+echo "Qué desea hacer❓"
+echo ""
 echo "1. Restaurar Back y BD"
 echo "2. Restaurar Back"
 echo "0. Volver al Menu principal..."
@@ -24,7 +27,7 @@ function Restaurar {
 
     docker rmi backend-php-backend
     cd ../../proyecto/backend
-    echo "Back y BD restaurado correctamente :D"
+    echo " ✅ Back y BD restaurado correctamente ✅ "
     sleep 2
 }
 Restaurar
@@ -39,14 +42,14 @@ function RestaurarBack {
     cd ../../proyecto/backend
     docker-compose up -d 
     clear
-    echo "Back restaurado correctamente :D"
+    echo " ✅ Back restaurado correctamente ✅"
     sleep 2
 } 
 RestaurarBack
 ;;
 
 0) clear
-echo "Volviendo al menú..."
+echo "Volviendo al menú... 🔙"
 sleep 1.5
 A=0
 ;;

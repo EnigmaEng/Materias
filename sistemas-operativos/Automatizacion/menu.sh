@@ -5,13 +5,15 @@ A=1
 while [ $A -ne 0 ]
 do
 clear
-echo "╔══════════════════════════════════════════════╗"
-echo "║     BIENVENIDO AL MENÚ DE AUTOMATIZACIÓN     ║"
-echo "╚══════════════════════════════════════════════╝"
+echo "╔══════════════════════════════════════════════════╗"
+echo "║   😎  BIENVENIDO AL MENÚ DE AUTOMATIZACIÓN 😎    ║"
+echo "╚══════════════════════════════════════════════════╝"
+echo ""
+echo " 🍕🍔🍟   Descubra el mundo de Where We Eat   🍕🍔🍟"
 echo ""
 echo "1. GitHub"
 echo "2. Docker"
-echo "3. Cypress"
+echo "3. Test Cypress"
 echo "4. WHERE WE EAT"
 echo "0. Salir"
 echo ""
@@ -26,7 +28,7 @@ case $opc in
 ./docker.sh
 ;;
 3) clear
-echo "Abriendo Cypres..."
+echo "  🤓 Abriendo Cypres 🤓"
 sleep 1
 function Cypress {
     npm i
@@ -40,8 +42,8 @@ Cypress
 function WWE {
     cd ../../proyecto/frontend
     sleep 1
-    echo "Front iniciado :D"
-    sleep 1
+    echo " 😀 Front iniciado 😀"
+    sleep 1.5
     npm run dev
 }
 
@@ -49,21 +51,22 @@ function WWE+Back {
     cd ../../proyecto/backend
     docker-compose up -d
     sleep 1
-    echo "Back iniciado..."
-    sleep 1
+    echo " 🔌 Back iniciado 🔌"
+    sleep 1.5
     cd ../../proyecto/frontend
-    clear
-    echo "Front iniciado :D"
-    sleep 1
+    echo " 😀 Front iniciado 😀"
+    sleep 1.5
     npm run dev
 }
 
-read -p "1) FrontEnd: o 2) Back y Front: " var
+read -p "1) FRONTEND ❓: o 2) BACK Y FRONT ❓:   " var
 if [ $var == "1" ];
 then
+clear
 WWE
 elif [ $var == "2" ];
 then
+clear
 WWE+Back
 else
 sleep 0.1
@@ -72,8 +75,8 @@ echo "Valor incorrecto, intente nuevamente."
 sleep 2
 fi
 ;;
-0)clear
-echo "Saliendo del menú..."
+0) clear
+echo " 🔚 Saliendo del menú... 🔚"
 sleep 1.5
 A=0
 ;;
