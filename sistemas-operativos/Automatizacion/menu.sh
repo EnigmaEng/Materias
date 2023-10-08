@@ -16,19 +16,25 @@ function show_menu {
     echo "4. WHERE WE EAT"
     echo "5. Moverme..."
     echo "6. Recomendaciones de uso (LEER)"
-    echo "0. Salir"
+    echo ""
+    echo "(0) Salir"
     echo ""
     read -p "Ingrese una opcion: " opc
 }
 
 function menu_de_directorios {
     clear
+    echo ""
     echo "Estás en el directorio actual: $(pwd)"
+    echo ""
     echo "Seleccione una opción:"
+    echo ""
     echo "1. Listar contenido del directorio"
     echo "2. Abrir una carpeta y listar su contenido"
     echo "3. Abrir un archivo"
-    echo "0. Volver al menú principal"
+    echo "4. Volver un directorio atras"
+    echo ""
+    echo "(0) Volver al menu principal..."
     echo ""
     read -p "Ingrese una opción: " dir_opc
 
@@ -41,7 +47,7 @@ function menu_de_directorios {
             menu_de_directorios
             ;;
         2)
-            clear
+            
             echo "Carpetas disponibles:"
             ls -d */
             read -p "Ingrese el nombre de la carpeta que desea abrir: " carpeta
@@ -55,22 +61,27 @@ function menu_de_directorios {
             fi
             ;;
         3)
-        clear
-        echo "Archivos disponibles:"
-        ls
-        read -p "Ingrese el nombre del archivo que desea abrir con Visual Studio Code: " carpeta
-        if [ -f "$carpeta" ]; then
-            code "$carpeta"
-            menu_de_directorios
-        else
-            echo "El archivo '$carpeta' no existe."
-            read -p "Presione Enter para continuar..."
-            menu_de_directorios
-        fi
-        ;;
+            clear
+            echo "Archivos disponibles:"
+            ls
+            read -p "Ingrese el nombre del archivo que desea abrir con Visual Studio Code: " archivo
+            if [ -f "$archivo" ]; then
+                code "$archivo"
+                menu_de_directorios
+            else
+                echo "El archivo '$archivo' no existe."
+                read -p "Presione Enter para continuar..."
+                menu_de_directorios
+            fi
+            ;;
+        4) clear
+        cd ..
+        echo "Ahora se encuentra en: " | pwd
+        sleep 2
+        ;;    
         0)
             clear
-            echo "Volviendo al menú principal... 🔙"
+            echo "Volviendo al menu principal... 🔙"
             sleep 1
             # Regresa al directorio original antes de salir del menú secundario
             cd "$directorio_principal"
@@ -136,6 +147,8 @@ while [ $A -ne 0 ]; do
         echo "(1) Abrir solo el 💻 FRONTEND 💻 (npm run dev)"
         echo "(2) Abrir el 🔌 BACKEND 🔌 y el 💻 FRONTEND 💻 (Docker y npm run dev)"
         echo ""
+        echo "(0) Volver al menu principal..."
+        echo ""
         read -p "Ingrese el número de la opción que desea ejecutar (1 o 2): " var
         if [ "$var" == "1" ]; then
             clear
@@ -145,6 +158,9 @@ while [ $A -ne 0 ]; do
             clear
             WWE+Back
         cd "$directorio_principal"
+        elif [ "$var" == "0" ]; then
+            clear
+        cd "/MAIN/Materias/sistemas-operativos/Automatizacion"   
         else
             sleep 0.1
             clear
@@ -152,22 +168,38 @@ while [ $A -ne 0 ]; do
             sleep 2
         fi
         ;;
+
         5)
-            clear
-            read -p "Deseas ver qué carpetas existen? (s/[n]) " res
-            if [[ $res == "S" || $res == "s" ]]; then
-                cd ../../
-                echo "Carpetas disponibles:"
-                ls -d */
-                read -p "Quiero ir a la carpeta... " folder
-                if [ -d "$folder" ]; then
-                    cd "$folder"
-                    menu_de_directorios
-                else
-                    echo "error"
-                fi
-            fi
-            ;;
+    clear
+    read -p "Deseas ver qué carpetas existen? (s/[n]) " res
+    if [[ $res == "S" || $res == "s" ]]; then
+        cd ../../
+        echo "Carpetas disponibles:"
+        ls -d */
+        read -p "Quiero ir a la carpeta... " folder
+        if [ -d "$folder" ]; then
+            cd "$folder"
+            menu_de_directorios
+        else
+            echo "La carpeta '$folder' no existe."
+            read -p "Presione Enter para continuar..."
+            menu_de_directorios
+        fi
+    elif [[ $res == "N" || $res == "n" ]]; then
+        read -p "Quiero ir a la carpeta... " folder
+        if [ -d "$folder" ]; then
+            cd "$folder"
+            menu_de_directorios
+        else
+            echo "La carpeta '$folder' no existe."
+            read -p "Presione Enter para continuar..."
+            menu_de_directorios
+        fi
+    else
+        echo "Opción incorrecta"
+        sleep 1
+    fi
+    ;;
 
 6) 
     while true; do
@@ -180,7 +212,8 @@ while [ $A -ne 0 ]; do
         echo "2. INFO - Docker"
         echo "3. INFO - Cypress"
         echo "4. INFO - WHERE WE EAT"
-        echo "0. Volver al menú principal"
+        echo ""
+        echo "(0) Volver al menu principal..."
         echo ""
         read -p "¿Qué necesita saber? " resp
         case $resp in
@@ -234,6 +267,7 @@ while [ $A -ne 0 ]; do
         *)
             clear
             echo "Opción incorrecta, intente nuevamente."
+            sleep 1.5
             ;;
     esac
 done
