@@ -6,7 +6,7 @@ import DarkMode from '../Buttons/DarkMode';
 import { SlLogout } from 'react-icons/sl';
 import {CgProfile} from 'react-icons/cg'
 import {MdMenuBook} from 'react-icons/md'
-
+import TuristaMobile from './mobile/TuristaMobile';
 const NavBarMb = () => {
 
  const TodoContext = useContext(todoContext)
@@ -42,15 +42,19 @@ usuarioAutenticado();
   ) : usuario && usuario.rol.nacionalidad ?
    // Turista Navbar
    (
-<div className='navbar bg-wwe shadow-xl'>
+    <>
+   <TuristaMobile/>
+{/* <div className='navbar bg-wwe  shadow-xl'>
  <div className='absolute left-5'>
        <DarkMode/>
     </div>
    <Link to='/homeAuth' className='m-auto w-14'>  
     <img src={Image} alt="logo"/>
     </Link>
-</div>
 
+</div> */}
+
+ </>
     ) : usuario && usuario.rol.nro_empleado ? 
   (
     // Admin Navbar

@@ -20,8 +20,8 @@ import ConfiguracionRest from './pages/user/perfil/restaurante/Configuracion/Con
 import ConfiguracionTurista from './pages/user/perfil/turista/Configuracion/ConfiguracionTurista'
 import CrearDescuentos from './pages/user/perfil/restaurante/Descuentos/CrearDescuentos'
 import RutaProtegida from './context/RutaProtegida'
-
-
+import MapContent from './pages/user/auth/home/MapContent'
+import MisReseniasTurista from './pages/user/resenias/misResenias/MisReseniasTurista'
 function App() {
 
 
@@ -45,15 +45,10 @@ function App() {
 {/* Login */}
 <Route path='/login' element={<Login/>} />
 
-
-
-
-
-
 <Route path='/' element={<RutaProtegida/>}/>
 
 <Route path='/homeAuth' element={<HomeAuth/>}/>
-  
+  <Route path='/map' element={<MapContent/>}/>
   {/* Perfiles */}
 
 {/* Turista */}
@@ -62,7 +57,7 @@ function App() {
 {/* Resenias */}
 <Route path='/crearResenia' element={<CrearResenia/>} />
 <Route path='/misResenias' element={<MisResenias/>}/>
-
+<Route path='/misReseniasTurista' element={<MisReseniasTurista/>}/>
 {/* Admin */}
 <Route path='/admin' element={<PerfilAdmin/>} />
 

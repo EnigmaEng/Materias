@@ -1,25 +1,49 @@
-import React from 'react'
+
+import {MdOutlineRateReview} from 'react-icons/md'
+import {IoRestaurantOutline} from 'react-icons/io5'
+import {MdMenuBook} from 'react-icons/md'
+import { Link } from 'react-router-dom'
+import { useContext, useEffect } from 'react'
+import todoContext from '../../context/todoContext'
 
 const CategoriasMb = () => {
+  
+  const TodoContext = useContext(todoContext)
+  const {usuario, usuarioAutenticado, autenticado} = TodoContext;
+
+  useEffect(()=>{
+usuarioAutenticado()
+  },[autenticado])
+
   return (
-       <div className='grid grid-cols-3 p-2  mb-5 gap-2'>
-        <div className=''>
-          <p className='text-center text-[#AA000B] font-bold '>Restaurantes visitados </p>
-            <div className='border text-2xl h-28   shadow-xl rounded-box  bg-[url(https://media-public.canva.com/wfCjA/MAED24wfCjA/1/tl.jpg)] bg-cover '> </div>
-        </div>
-      
-        <div className='mt-6'>
-          <p className='  font-bold text-[#AA000B]  text-center'>Top 10</p>
-               <div className='border h-28   shadow-xl rounded-box bg-[url(https://media-public.canva.com/MADAyEdkg_c/1/thumbnail_large-1.jpg)] bg-cover '>
-          
-        </div>
-        </div>
-   
-        <div className='mt-6'>
-          <p className='text-center text-[#AA000B] font-bold '>Mis Reseñas</p>
-           <div className='border h-28  shadow-xl rounded-box font-bold bg-[url(https://media-public.canva.com/MADOrCJgfqU/1/thumbnail_large-1.jpg)] bg-cover'></div>
-        </div>
-    </div>
+    <>
+    {
+usuario && usuario.rol.nombre ? 
+
+    
+<div className='text-sm text-center flex  justify-center items-center gap-5 '>
+    <Link to='/misResenias' className='p-3 shadow-xl bg-white w-20 rounded-box hover:scale-110 transition-all duration-300 delay-150 h-20 bg-home text-white ' ><p className=''>Mis reseñas</p>
+    <p className='ml-4  text-2xl'><MdOutlineRateReview/></p></Link>
+    <Link to='/menu' className='p-3 shadow-xl bg-white w-20 rounded-box hover:scale-110 transition-all duration-300 delay-150 h-20 bg-home text-white'> <p className=''>Menu </p>  
+    <p className=' ml-4  text-2xl'></p> 
+    </Link>
+    <Link to='/crearMenu' className='p-3 shadow-xl bg-white w-20 rounded-box hover:scale-110 transition-all duration-300 delay-150 h-20 bg-home text-white'> <p className=''>Crear menu</p> 
+    <p className='  ml-4  text-2xl'><IoRestaurantOutline/></p></Link>
+     </div>
+     : usuario && usuario.rol.nacionalidad ? 
+     <div className='text-sm text-center flex  justify-center items-center gap-5 '>
+    <Link to='/misReseniasTurista' className='p-3 shadow-xl bg-white w-20 rounded-box hover:scale-110 transition-all duration-300 delay-150 h-20 bg-home text-white ' ><p className=''>Mis reseñas</p>
+    <p className='ml-4  text-2xl'><MdOutlineRateReview/></p></Link>
+    <Link to='/map' className='p-3 shadow-xl bg-white w-20 rounded-box hover:scale-110 transition-all duration-300 delay-150 h-20 bg-home text-white'> <p className=''>Mapa </p>  
+    <p className=' ml-4  text-2xl'></p> 
+    </Link>
+    <Link to='/perfilTurista' className='p-3 shadow-xl bg-white w-20 rounded-box hover:scale-110 transition-all duration-300 delay-150 h-20 bg-home text-white'> <p className=''>Top 10</p> 
+    <p className='  ml-4  text-2xl'><IoRestaurantOutline/></p></Link>
+     </div>
+     : 
+     <p>Admin</p>
+    }
+     </>
   )
 }
 

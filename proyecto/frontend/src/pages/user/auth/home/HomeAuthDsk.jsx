@@ -1,16 +1,12 @@
 import React, { useContext, useEffect } from 'react'
-import NavBar from '../../../../components/nabvar/NavBar'
-import Map from '../../../../components/maps/Map'
-import ListRestaurantes from '../../../../components/list/ListRestaurantes';
-import Categorias from '../../../../components/categorias/Categorias';
-import FooterDsk from '../../../../components/Footer/FooterDsk';
-import DarkMode from '../../../../components/Buttons/DarkMode';
+
 import todoContext from '../../../../context/todoContext';
-import PerfilDsk from '../../perfil/turista/PerfilDsk';
-import CategoriasTurista from '../../../../components/categorias/CategoriasTurista';
+
 import AdminHome from './adminHome/adminHome';
-import Home from '../../../HomePublic/Home';
-import RestauranteHome from './restauranteHome/restauranteHome';
+
+
+import Home from '../../../HomePublic/Home'
+import HomeMb from '../../../HomePublic/HomeMb';
 import TuristaHome from './turistaHome/turistaHome';
 const HomeAuthDsk = () => {
 
@@ -30,17 +26,20 @@ const HomeAuthDsk = () => {
 { 
 
     usuario && usuario.rol.nombre ?  
-  
-<RestauranteHome/>
-  : usuario && usuario.rol.nacionalidad ? 
+  // Restaurante
+<TuristaHome/>
 
+  : usuario && usuario.rol.nacionalidad ? 
+// Turista
    <TuristaHome/>
 
    : usuario &&
    usuario.rol.nro_empleados ? 
-   
+  //  Admin
 <AdminHome/>
- :   <Home/>
+ :   
+//  No autenticado
+ <Home/>
  } 
     </>
     

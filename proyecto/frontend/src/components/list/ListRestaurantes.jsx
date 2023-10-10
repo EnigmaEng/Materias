@@ -52,8 +52,8 @@ const ListRestaurantes = () => {
    <div className=' grid grid-cols-4 ml-20  py-16 place-content-center gap-5 ' >
     {
         product.map((item, index) => (
-            <div className='border h-7/12 w-52 rounded-lg shadow-xl bg-white  text-center text-black' key={index} >
-<img src={item.url_img_usuario} alt="logo-restaurante" className='w-full m-auto h-52  border ' />
+            <div className=' h-7/12 w-52 rounded-lg shadow-xl bg-white  text-center text-black' key={index} >
+<img src={item.url_img_usuario} alt="logo-restaurante" className='w-full m-auto h-52   ' />
 <h2 className='font-bold p-2 '> {item.nombre_restaurante}</h2>
 
 <div className='gap-5 flex p-4 '>
