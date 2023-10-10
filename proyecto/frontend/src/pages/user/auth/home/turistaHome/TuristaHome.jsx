@@ -4,6 +4,12 @@ import ListRestaurantes from '../../../../../components/list/ListRestaurantes'
 import Map from '../../../../../components/maps/Map'
 import Categorias from '../../../../../components/categorias/Categorias'
 import FooterDsk from '../../../../../components/Footer/FooterDsk'
+import {
+  Ripple,
+  initTE,
+} from "tw-elements";
+
+initTE({ Ripple });
 const TuristaHome = () => {
   return (
    <div className='min-h-screen space-y-5 bg-white bg-opacity-90 dark:bg-zinc-800 dark:bg-opacity-95'>
@@ -14,6 +20,8 @@ const TuristaHome = () => {
     <div className='shadow-xl bg-white w-52 border h-60'>Opcion2</div>
     <div className='shadow-xl bg-white w-52 border h-60'>Opcion3</div>
      </div>
+
+    
  <ListRestaurantes/>
 
     

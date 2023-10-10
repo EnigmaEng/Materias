@@ -1,12 +1,15 @@
-import React, { useReducer} from "react";
+import React, { useReducer, useState} from "react";
 
 import todoContext from "./todoContext";
 import todoReducer from "./todoReducer";
 import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, OBTENER_RESTAURANTE} from "../types/types";
 import clienteAxios from "../config/axios";
+import { useNavigate } from "react-router-dom";
 
 const TodoState = ({ children }) => {
 
+  const [cargando, setCargando] = useState(true)
+  
     const initialState = {
         token: typeof window !== 'undefined' ? localStorage.getItem('token') : '',
         autenticado: false,
@@ -111,6 +114,9 @@ const iniciarSesion = async (datos) => {
       payload: error.response.data.mensaje
     });
   }
+
+  setCargando(false)
+
   setTimeout(() => {
     dispatch({
       type: LIMPIAR_ALERTA
@@ -125,6 +131,7 @@ const usuarioAutenticado = () => {
   const token = localStorage.getItem('token');
 
   if (token) {
+
     //usamos el encabezado authorization y utilizamos el esquema de autorizacion Bearer
     clienteAxios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   
@@ -136,6 +143,8 @@ const usuarioAutenticado = () => {
       payload: usuarioData,
     });
   }
+
+  
 };
 
     const crearPlato = async (datos) => {
@@ -154,6 +163,8 @@ const usuarioAutenticado = () => {
 
 
         const cerrarSesion = async () => {
+
+          
             dispatch({
                 type: CERRAR_SESION,
                 
@@ -161,7 +172,8 @@ const usuarioAutenticado = () => {
             // Eliminamos el token y los datos de usuario del localstorage una vez cerrado sesion
               localStorage.removeItem('token');
               localStorage.removeItem('usuarioData');
-  
+           
+           
         }
     
     return (
@@ -170,6 +182,7 @@ const usuarioAutenticado = () => {
                 autenticado: state.autenticado,
                 usuario: state.usuario,
                 mensaje: state.mensaje,
+               
                 registrarTurista,
                 registrarRestaurante,
                 iniciarSesion,

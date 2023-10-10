@@ -11,16 +11,15 @@ import Login from './pages/user/auth/login/Login'
 import TodoState from './context/todoState'
 import PerfilAdmin from './pages/user/perfil/admin/PerfilAdmin'
 import PerfilTest from './pages/user/perfil/restaurante/PerfilTest'
-import todoContext from './context/todoContext'
-import { useContext, useEffect } from 'react'
 import EditarPerfi from './pages/user/perfil/restaurante/EditarPerfi'
 import Menu from './pages/user/perfil/restaurante/Menu/Menu'
 import CrearMenu from './pages/user/perfil/restaurante/Menu/CrearMenu'
-import Configuracion from './pages/user/perfil/turista/Configuracion'
+
 import Subscripcion from './pages/user/perfil/restaurante/Subscripcion/Subscripcion'
 import ConfiguracionRest from './pages/user/perfil/restaurante/Configuracion/ConfiguracionRest'
+import ConfiguracionTurista from './pages/user/perfil/turista/Configuracion/ConfiguracionTurista'
 import CrearDescuentos from './pages/user/perfil/restaurante/Descuentos/CrearDescuentos'
-
+import RutaProtegida from './context/RutaProtegida'
 
 
 function App() {
@@ -39,17 +38,26 @@ function App() {
     <Routes>
  {/* Home  */}
 <Route path='/' element={<Home/>} />
-<Route path='/homeAuth' element={<HomeAuth/>}/>
+
 
 {/* Registro */}
 <Route path='/registro' element={<RegistroUsuario/>}/>
 {/* Login */}
 <Route path='/login' element={<Login/>} />
 
-{/* Perfiles */}
+
+
+
+
+
+<Route path='/' element={<RutaProtegida/>}/>
+
+<Route path='/homeAuth' element={<HomeAuth/>}/>
+  
+  {/* Perfiles */}
 
 {/* Turista */}
-<Route path='/configuracion' element={<Configuracion/>}/>
+<Route path='/configuracionTurista' element={<ConfiguracionTurista/>}/>
 <Route path='/perfilTurista' element={<PerfilTurista/>}/>
 {/* Resenias */}
 <Route path='/crearResenia' element={<CrearResenia/>} />
@@ -58,7 +66,7 @@ function App() {
 {/* Admin */}
 <Route path='/admin' element={<PerfilAdmin/>} />
 
-{/* Restaurante */}
+  {/* Restaurante */}
 
 <Route path='/perfil' element={<PerfilTest/>}/>
 <Route path='/perfilRestaurante' element={<PerfilRestaurante/>}/>
@@ -69,6 +77,7 @@ function App() {
 <Route path='/subscripcion' element={<Subscripcion/>}/>
 <Route path='/configuracionRest' element={<ConfiguracionRest/>}/>
 <Route path='/crearDescuentos' element={<CrearDescuentos/>}/>
+
     </Routes>
     
     </BrowserRouter>

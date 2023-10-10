@@ -23,10 +23,14 @@ const apiKey = import.meta.env.VITE_GOOGLE_MAP
 
 
 
-   if (!isLoaded) return <button className="btn">
-  <span className="loading loading-spinner text-red-800 bg-white border"></span>
-  loading
-</button>
+   if (!isLoaded) return <div
+  class="ml-96 inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-danger motion-reduce:animate-[spin_1.5s_linear_infinite]"
+  role="status">
+  <span
+    class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+    >Loading...</span
+  >
+</div>
 
 
 

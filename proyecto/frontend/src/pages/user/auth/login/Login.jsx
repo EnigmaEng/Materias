@@ -8,7 +8,7 @@ import Mensaje from '../../../../components/alertas/Mensaje'
 import HomeAuth from "../home/HomeAuth";
 import {BiArrowBack} from 'react-icons/bi';
 import DarkMode from "../../../../components/Buttons/DarkMode";
-
+import Image from '../../../../assets/logo-producto.png'
 const Login = () => {
 
 const Todocontext = useContext(todoContext)
@@ -59,9 +59,9 @@ iniciarSesion(userData)
       </button>
 </Link>
 
-        <form onSubmit={formik.handleSubmit} className="bg-white    p-4 mt-52 mb-4 h-96 rounded-lg shadow-xl  ">
-
-<h2 className="text-center font-bold text-red-800 text-2xl mb-4">Iniciar sesion</h2>
+        <form onSubmit={formik.handleSubmit} className="bg-white   p-4 mt-52 mb-4 h-[500px] rounded-lg shadow-xl  ">
+         <img src={Image} alt="logo" className="w-20 m-auto "/>
+<h2 className="text-center font-bold text-red-800 text-4xl mb-4">Inicia sesión</h2>
       <div className="flex flex-col mb-4  ">
 <div className="" > {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }</div>
       <label htmlFor="email" className="text-red-800   px-2 font-bold"> Correo</label>
@@ -84,13 +84,14 @@ iniciarSesion(userData)
         )
       }
     </div>
+    
 <div className="flex flex-col justify-center items-center mt-10  ">
-    <button type="submit" className="px-4  bg-white  py-1 border w-52 rounded-lg text-black font-bold shadow-xl">Ingresar</button>
+    <button type="submit" className="px-4  bg-wwe py-1  w-80 hover:bg-red-600 text-lg rounded-lg text-white  font-bold shadow-xl">Ingresar</button>
     <div className="py-6  mt-10">
-      <Link to='/' className="text-red-800  underline-offset-1 underline" >Olvide mi contraseña</Link>
+      <Link to='/' className="text-red-800   underline-offset-1 underline" >¿Has olvidado la contraseña?</Link>
     </div>
 </div>
-  
+
     </form>
     </div>)
  }
