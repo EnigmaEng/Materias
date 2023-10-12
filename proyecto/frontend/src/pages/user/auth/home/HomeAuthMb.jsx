@@ -3,6 +3,8 @@ import todoContext from '../../../../context/todoContext'
 import TuristaHomeMb from './turistaHome/TuristaHomeMb'
 import RestauranteHomeMb from './restauranteHome/RestauranteHomeMb'
 import HomeMb from '../../../HomePublic/HomeMb'
+import RestauranteHome from './restauranteHome/RestauranteHome'
+import TuristaHome from './turistaHome/turistaHome'
 const HomeAuthMb = () => {
 
 
@@ -19,10 +21,10 @@ const HomeAuthMb = () => {
 
     usuario && usuario.rol.nombre ?  
   
-<RestauranteHomeMb/>
+<RestauranteHome/>
   : usuario && usuario.rol.nacionalidad ? 
 
-   <TuristaHomeMb/>
+   <TuristaHome/>
 
    : usuario &&
    usuario.rol.nro_empleados ? 

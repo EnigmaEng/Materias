@@ -9,14 +9,12 @@ import { useNavigate } from "react-router-dom";
 const TodoState = ({ children }) => {
 
   const [cargando, setCargando] = useState(true)
-  
+
     const initialState = {
         token: typeof window !== 'undefined' ? localStorage.getItem('token') : '',
         autenticado: false,
         usuario: null,
         mensaje: null,
-        
-        
     }
 
     //Reducer
@@ -24,7 +22,6 @@ const TodoState = ({ children }) => {
 
     //Registrar turista
     const registrarTurista = async datos => {
-    
         try {
             const respuesta = await clienteAxios.post("/turistaController.php", datos,{ 
             headers: {
@@ -48,7 +45,6 @@ const TodoState = ({ children }) => {
                 })
             }, 3000);
     }
-
     //Registrar restaurante
     const registrarRestaurante = async datos => {
         
@@ -115,7 +111,7 @@ const iniciarSesion = async (datos) => {
     });
   }
 
-  setCargando(false)
+
 
   setTimeout(() => {
     dispatch({
@@ -182,14 +178,12 @@ const usuarioAutenticado = () => {
                 autenticado: state.autenticado,
                 usuario: state.usuario,
                 mensaje: state.mensaje,
-               
                 registrarTurista,
                 registrarRestaurante,
                 iniciarSesion,
                 cerrarSesion,
                 usuarioAutenticado,
                 crearPlato,
-                
             }}>
 
             {children}

@@ -7,7 +7,8 @@ import AdminHome from './adminHome/adminHome';
 
 import Home from '../../../HomePublic/Home'
 import HomeMb from '../../../HomePublic/HomeMb';
-import TuristaHome from './turistaHome/turistaHome';
+import TuristaHome from './turistaHome/TuristaHomeDsk';
+import RestauranteHome from './restauranteHome/RestauranteHomeDsk';
 const HomeAuthDsk = () => {
 
   const TodoContext = useContext(todoContext)
@@ -27,7 +28,7 @@ const HomeAuthDsk = () => {
 
     usuario && usuario.rol.nombre ?  
   // Restaurante
-<TuristaHome/>
+<RestauranteHome/>
 
   : usuario && usuario.rol.nacionalidad ? 
 // Turista
