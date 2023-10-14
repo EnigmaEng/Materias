@@ -22,23 +22,34 @@ usuarioAutenticado();
 
   usuario && usuario.rol.nombre ? 
    // Restaurante Navbar
-  ( <div className="navbar  bg-wwe flex justify-center items-center gap-20 shadow-xl">
-  <Link to='/menu' className='gap-5 text-5xl text-white  '>
-  
-    <MdMenuBook/>
-  </Link>
- <div>
-  <Link to='/perfilRestaurante'>
-  <div className='text-5xl text-white'>
-     <CgProfile/>
+  ( <div className="navbar  bg-wwe flex justify-center items-center gap-24 shadow-xl">
+ <DarkMode/>
+
+  <Link to='/homeAuth' className=' w-14 '>  
+    <img src={Image} alt="logo" className=''/>
+    </Link>
+
+ <div className="flex-none ">
+    <div className="dropdown dropdown-end">
+      <label tabIndex={0} className="btn btn-ghost btn-circle avatar w-12">
+        <div className="rounded-full ">
+          <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className='w-14 rounded-full' />
+        </div>
+      </label>
+      <ul tabIndex={0} className="z-10 px-4 py-4 z dropdown-content mt-3 border bg-white rounded-box w-40">
+        <li className=' hover:bg-gray-200 rounded-lg p-2'>
+          <Link to='/perfilRestaurante' className="gap-2 text-center w-40 text-black flex">
+        Perfil 
+          </Link>
+        </li>
+        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/configuracionRest' className='text-black flex gap-4'> Configuracion</Link></li>
+        <li className=' hover:bg-gray-200 rounded-lg p-2'><button onClick={() => cerrarSesion()}  className='text-black flex gap-4  w-24'> <div className='mt-1'>
+          <SlLogout/> </div> Salir </button></li>
+      </ul>
+    </div>
   </div>
- 
-   </Link>
-  </div>
-  <button className='text-white text-4xl' onClick={() => cerrarSesion()}>
-    <SlLogout/>
-  </button>
 </div>
+  
   ) : usuario && usuario.rol.nacionalidad ?
    // Turista Navbar
    (
