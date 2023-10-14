@@ -2,9 +2,9 @@ import React, { useReducer, useState} from "react";
 
 import todoContext from "./todoContext";
 import todoReducer from "./todoReducer";
-import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, OBTENER_RESTAURANTE} from "../types/types";
+import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, OBTENER_RESTAURANTE, DESCUENTO_CREADO} from "../types/types";
 import clienteAxios from "../config/axios";
-import { useNavigate } from "react-router-dom";
+
 
 const TodoState = ({ children }) => {
 
@@ -148,8 +148,22 @@ const usuarioAutenticado = () => {
         const respuesta = await clienteAxios.post('/restauranteController.php', datos)
         
         dispatch({
-        type: PLATO_CREADO,
+        type: DESCUENTO_CREADO,
         payload: 'Plato Guardado!'
+      })
+      } catch (error) {
+        console.log(error)
+      }
+     
+    }
+
+        const crearDescuento = async (datos) => {
+      try {
+        const respuesta = await clienteAxios.post('/restauranteController.php', datos)
+        
+        dispatch({
+        type: PLATO_CREADO,
+        payload: 'Descuento creado!'
       })
       } catch (error) {
         console.log(error)
