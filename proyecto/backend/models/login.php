@@ -72,7 +72,6 @@ class Login
             $usuarioData['rol'] = $rolData;
             
             
-            
             return $usuarioData;
             
             }

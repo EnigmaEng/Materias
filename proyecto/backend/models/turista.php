@@ -1,8 +1,15 @@
 <?php
 include_once 'crud.php';
 include_once 'usuario.php';
+require '../vendor/autoload.php';
 
-class Turista extends Usuario implements Crud
+use Dotenv\Dotenv;
+
+// Carga las variables de entorno desde el archivo .env
+$dotenv = Dotenv::createImmutable('/var/www/html/');
+$dotenv->load();
+
+class Turista extends Usuario
 {
 
     private $idUsuario;
@@ -18,7 +25,12 @@ class Turista extends Usuario implements Crud
 
     public function __construct()
     {
-        $this->setDatCon('../turistaConfig.json');
+        $this->setHost($_ENV['DB_HOST']);
+        $this->setUser($_ENV['DB_USER']);
+        $this->setPassword($_ENV['DB_PASSWORD']);
+        $this->setDatabase($_ENV['DB_NAME']);
+        $this->setDriver($_ENV['DB_DRIVER']);
+        $this->setDatCon();
         parent::__construct();
     }
 
@@ -52,58 +64,24 @@ class Turista extends Usuario implements Crud
         return $this->motivoAlojamiento;
     }
 
-    public function setNombre($nombre){
-        $this->nombre=$nombre;
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
     }
 
-    public function getNombre(){
+    public function getNombre()
+    {
         return $this->nombre;
     }
 
-    public function setApellido($apellido){
-        $this->apellido;
-    }
-
-    public function getApellido(){
-        return $this->apellido;
-    }
-
-    public function create($tabla, $datos)
+    public function setApellido($apellido)
     {
-        try {
-            $query = "SELECT * FROM $tabla WHERE email = :email";
-            $stmt = $this->getConn()->prepare($query);
-            $stmt->bindValue(':email', $datos['email']);
-            $stmt->execute();
+        $this->apellido = $apellido;
+    }
 
-            if ($stmt->rowCount() > 0) {
-                return false;
-            } else {
-                $hashedPass = password_hash($datos['contrasena'],PASSWORD_BCRYPT);
-        
-                //Almaceno nuevamente la contraseña
-                $datos['contrasena'] = $hashedPass;
-
-                $columnNames = implode(', ', array_keys($datos));
-                $placeholders = implode(', ', array_map(function ($key) {
-                    return ':' . $key;
-                }, array_keys($datos)));
-
-                $query = "INSERT INTO $tabla ($columnNames) VALUES ($placeholders)";
-
-                $stmt = $this->getConn()->prepare($query);
-
-                foreach ($datos as $nombre => $valor) {
-                    $stmt->bindValue(':' . $nombre, $valor);
-                }
-
-                $stmt->execute();
-
-                return true;
-            }
-        } catch (PDOException $ex) {
-            echo "Error al insertar: " . $ex->getMessage();
-        }
+    public function getApellido()
+    {
+        return $this->apellido;
     }
 
     public function createInTurista($tabla, $datos, $datosTurista)
@@ -140,95 +118,4 @@ class Turista extends Usuario implements Crud
             throw new Exception("Error al insertar: " . $ex->getMessage());
         }
     }
-
-
-    public function delete($tabla, $datos)
-    {
-        try {
-            $query = "SELECT * FROM $tabla WHERE alias = :alias AND contrasenia = :contrasenia";
-            $stmt = $this->getConn()->prepare($query);
-            $stmt->bindValue(':alias', $datos['alias']);
-            $stmt->bindValue(':contrasenia', $datos['contrasenia']);
-
-            $stmt->execute();
-
-            if ($stmt->rowCount() > 0) {
-                $columnNames = implode(', ', array_keys($datos));
-                $conditions = array_map(function ($key) {
-                    return "$key = :$key";
-                }, array_keys($datos));
-                $query = "DELETE FROM $tabla WHERE " . implode(' AND ', $conditions);
-
-                $stmt = $this->getConn()->prepare($query);
-
-                // Asignar valores a los marcadores de posición en la consulta
-                foreach ($datos as $key => $value) {
-                    $stmt->bindValue(':' . $key, $value);
-                }
-
-                // Ejecutar la consulta con condicional para ver qué retorna
-                if ($stmt->execute()) {
-                    return "Se eliminó correctamente";
-                } else {
-                    return "Error al eliminar el registro";
-                }
-            } else {
-                return "No se encontró ningún registro que coincida con los datos proporcionados";
-            }
-        } catch (PDOException $e) {
-            // Manejar el error de PDO
-            return "Error al eliminar: " . $e->getMessage();
-        }
-    }
-
-
-    public function alter($data)
-    {
-
-    }
-
-
-    public function read($data)
-    {
-        $query = "SELECT {$data['valores']} FROM {$data['tabla']}";
-        $stmt = $this->getConn()->prepare($query);
-
-        $stmt->execute();
-
-        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-        return $result;
-    }
-
-    public function filter($tabla, $datos)
-    {
-        $columnNames = implode(', ', array_keys($datos));
-        $conditions = array_map(function ($key) {
-            return "$key = :$key";
-        }, array_keys($datos));
-        $query = "SELECT $columnNames FROM $tabla WHERE " . implode(' AND ', $conditions);
-
-        $stmt = $this->getConn()->prepare($query);
-
-        // Asignar valores a los marcadores de posición en la consulta
-        foreach ($datos as $key => $value) {
-            $stmt->bindValue(':' . $key, $value);
-        }
-
-        // Mostrar la consulta con los valores reales de los marcadores de posición
-        $debugQuery = $stmt->queryString;
-
-        foreach ($datos as $key => $value) {
-            $debugQuery = str_replace(":$key", $value, $debugQuery);
-        }
-        // Ejecutar la consulta
-        $stmt->execute();
-
-        // Obtener los resultados como objetos y retornarlos
-        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-        return $result;
-    }
-
-
 }

@@ -1,5 +1,4 @@
 <?php
-
 class EntityController{
 
     private $model;

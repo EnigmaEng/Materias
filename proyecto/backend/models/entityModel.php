@@ -1,14 +1,28 @@
 <?php
 
 require_once 'dataBaseConnection.php';
+require '../vendor/autoload.php';
+
+use Dotenv\Dotenv;
 
 class EntityModel extends DataBaseConnection
 {
 
     function __construct()
     {
-        $this->setDatCon('../config.json');
+        // Carga las variables de entorno desde el archivo .env
+$dotenv = Dotenv::createImmutable('/var/www/html/');
+$dotenv->load();
+
+        
+ $this->setHost($_ENV['DB_HOST']);
+        $this->setUser($_ENV['DB_USER']);
+        $this->setPassword($_ENV['DB_PASSWORD']);
+        $this->setDatabase($_ENV['DB_NAME']);
+        $this->setDriver($_ENV['DB_DRIVER']);
+        $this->setDatCon();
         parent::__construct();
+
     }
 
     public function getEntities($page, $perPage) {
