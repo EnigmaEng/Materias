@@ -3,7 +3,8 @@ require_once '../models/turista.php';
 require_once '../models/restaurante.php';
 require_once '../models/login.php';
 require_once '../models/session.php';
-require_once 'cors.php';
+require_once '../models/usuario.php';
+require_once './cors.php';
 require_once '../vendor/autoload.php';
 require '../vendor/autoload.php';
 
@@ -17,16 +18,16 @@ $dotenv->load();
 
 function loginUsuario($tabla, $datos)
 {
-    $restaurante = new Restaurante();
-    $login = new Login($restaurante);
-    $restaurante->setEmail($datos['email']);
-    $restaurante->setContrasenia($datos['contrasena']);
+    $usuario = new Restaurante();
+    $login = new Login($usuario);
+    $usuario->setEmail($datos['email']);
+    $usuario->setContrasenia($datos['contrasena']);
 
     // Llama a la funcion authenticate y verifica si las credenciales son correctas
     $usuarioData = $login->authenticate($tabla);
 
     if ($usuarioData) {
-
+    
         $tokenData = [
             'id_usuario' => $usuarioData['id_usuario'],
             'email' => $usuarioData['email'],
@@ -52,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($data['email']) && isset($data['contrasena'])) {
                     $result = loginUsuario("usuarios", $data);
                     if ($result['success']) {
+                        
                         http_response_code(200);
                         echo json_encode($result);
                     } else {
