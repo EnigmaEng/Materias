@@ -114,6 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         case "obtenerRestaurantes":
                 $resultado = obtenerRestaurante();
+                
                 break;
             default:
                 $resultado = "Error en el tipo de accion, intente nuevamente";
