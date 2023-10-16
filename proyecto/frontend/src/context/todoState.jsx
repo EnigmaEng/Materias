@@ -76,7 +76,6 @@ const iniciarSesion = async (datos) => {
 
     if (respuesta.status === 200) {
       if (respuesta.data.success) {
-     
         //usuarioData trae todos los datos del usuario desde el backend
         const usuarioData = respuesta.data.usuarioData;
         console.log(respuesta.data.token)
@@ -143,13 +142,13 @@ const usuarioAutenticado = () => {
   
 };
 
-    const crearPlato = async (datos) => {
+    const crearPlato = async datos => {
       try {
         const respuesta = await clienteAxios.post('/restauranteController.php', datos)
         
         dispatch({
         type: DESCUENTO_CREADO,
-        payload: 'Plato Guardado!'
+        payload: respuesta.data
       })
       } catch (error) {
         console.log(error)

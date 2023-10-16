@@ -35,7 +35,7 @@ const HomeAuthDsk = () => {
    <TuristaHome/>
 
    : usuario &&
-   usuario.rol.nro_empleados ? 
+   usuario.rol.nro_empleado ? 
   //  Admin
 <AdminHome/>
  :   
