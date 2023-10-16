@@ -31,11 +31,11 @@ const formik = useFormik({
     id_usuario_rest: '', 
   },
   validationSchema: Yup.object({
-    nombre_plato: Yup.string().required('El campo no puede ir vacío'),
-    costo: Yup.number().required('Ingrese un precio válido'),
-    descripcion: Yup.string().required('El campo no puede ir vacío'),
-    url_img_menu: Yup.string().required('El campo no puede ir vacío'),
-    estado_plato: Yup.string().required('El campo no puede ir vacío'),
+    // nombre_plato: Yup.string().required('El campo no puede ir vacío'),
+    // costo: Yup.number().required('Ingrese un precio válido'),
+    // descripcion: Yup.string().required('El campo no puede ir vacío'),
+    // url_img_menu: Yup.string().required('El campo no puede ir vacío'),
+    // estado_plato: Yup.string().required('El campo no puede ir vacío'),
   }),
   onSubmit: (valores, { resetForm }) => {
     const platoData = {
