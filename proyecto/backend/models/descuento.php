@@ -21,11 +21,12 @@ class Descuento extends CrudBasico
 
     public function __construct()
     {
+
         // Carga las variables de entorno desde el archivo .env
-        $dotenv = Dotenv::createImmutable(__DIR__ . '/../../apiWhereWeEat');
+        $dotenv = Dotenv::createImmutable('/var/www/html/');
         $dotenv->load();
         
- $this->setHost($_ENV['DB_HOST']);
+        $this->setHost($_ENV['DB_HOST']);
         $this->setUser($_ENV['DB_USER']);
         $this->setPassword($_ENV['DB_PASSWORD']);
         $this->setDatabase($_ENV['DB_NAME']);
@@ -125,7 +126,7 @@ class Descuento extends CrudBasico
         return $this->fechaFin;
     }
 
-    public function crearDescuento()
+public function crearDescuento()
     {
         try {
             $query = "INSERT INTO descuento(id_descuento,activo,titulo_descuento,descripcion,url_img_descuento) VALUES (:id_descuento,:activo,:titulo_descuento,:descripcion,:url_img_descuento)";

@@ -3,8 +3,12 @@ import clienteAxios from "../config/axios"
 import { useState } from "react"
 
 const restauranteData = () => {
-    
-    const URL = clienteAxios.get('/restauranteController.php'); //clienteAxios.get('/restauranteController.php');
+  const endpoint = '/restauranteController.php';
+  const data = {
+    "accion": "obtenerRestaurantes"
+  }
+  const URL = clienteAxios.post(endpoint, data)
+     //clienteAxios.get('/restauranteController.php');
     const [pagina, setPagina] = useState(1);
     const [busqueda, setBusqueda] = useState('');
     const [buscando, setBuscando] = useState(false);

@@ -62,11 +62,11 @@ const TodoState = ({ children }) => {
                 payload: respuesta.data.mensaje
             })
             }
-            // setTimeout(() => {
-            //     dispatch({
-            //         type: LIMPIAR_ALERTA
-            //     })
-            // }, 3000);
+            setTimeout(() => {
+                dispatch({
+                    type: LIMPIAR_ALERTA
+                })
+            }, 3000);
     }
 
     //Login
@@ -88,12 +88,11 @@ const iniciarSesion = async (datos) => {
         //se guardan los datos del usuario en formato json en el localstorage
         localStorage.setItem('usuarioData', JSON.stringify(usuarioData));
         console.log(usuarioData)
-        
+
         dispatch({
           type: LOGIN_EXITOSO,
           usuario: usuarioData
         });
-
         
       } else {
         dispatch({
@@ -109,9 +108,6 @@ const iniciarSesion = async (datos) => {
       payload: error.response.data.mensaje
     });
   }
-
-
-
   setTimeout(() => {
     dispatch({
       type: LIMPIAR_ALERTA
@@ -148,7 +144,7 @@ const usuarioAutenticado = () => {
         
         dispatch({
         type: DESCUENTO_CREADO,
-        payload: respuesta.data
+        payload: 'Plato creado exitosamente!'
       })
       } catch (error) {
         console.log(error)
@@ -181,8 +177,7 @@ const usuarioAutenticado = () => {
             // Eliminamos el token y los datos de usuario del localstorage una vez cerrado sesion
               localStorage.removeItem('token');
               localStorage.removeItem('usuarioData');
-           
-           
+
         }
     
     return (
@@ -197,6 +192,7 @@ const usuarioAutenticado = () => {
                 cerrarSesion,
                 usuarioAutenticado,
                 crearPlato,
+                crearDescuento
             }}>
 
             {children}

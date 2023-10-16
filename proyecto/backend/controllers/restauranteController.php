@@ -59,6 +59,18 @@ function crearDescuento($idDescuento, $idRestaurante, $activo, $tituloDescuento,
     return $descuento->crearDescuento();
 }
 
+function obtenerRestaurante() {
+    $restaurante = new Restaurante();
+    // Obtener la lista de restaurantes
+    $restaurantes = $restaurante->obtenerRestaurantes();
+
+    if (!empty($restaurantes)) {
+        return json_encode($restaurantes);
+    } else {
+        return "No se encontraron restaurantes";
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
@@ -99,10 +111,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $data['fecha_fin']
                 );
                 break;
+
+        case "obtenerRestaurantes":
+                $resultado = obtenerRestaurante();
+                break;
             default:
                 $resultado = "Error en el tipo de accion, intente nuevamente";
                 break;
         }
     }
     echo $resultado;
+
+
+    // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    //     $json = file_get_contents('php://input');
+    //     $data = json_decode($json, true);
+    
+    //     //se crea la instancia del modelo restaurante
+    //     $restaurante = new Restaurante();
+    //     //llama a la funcion creada dentro del modelo restaurante para obtener los datos del restaurante
+    //     $datos = $restaurante->obtenerRestaurantes();
+    //     //convierte los datos en formato json y los envia como respuesta
+    //     $respuesta = json_encode($datos);
+        
+    //     echo $respuesta;
+        
+        
+    //     }else {
+    // //error en la respuesta
+    //     echo json_encode(false);
+    // }
+
 }
