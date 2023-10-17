@@ -128,6 +128,4 @@ class Restaurante extends Usuario implements Crud
         return $data;
     }
 
-
-
 }

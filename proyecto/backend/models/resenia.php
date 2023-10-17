@@ -103,4 +103,25 @@ class Resenia extends CrudBasico
         return $this->fecha;
     }
 
+    public function usuarioResenia(){
+        try{
+            $query='INSERT INTO turista_resena_rest(id_usuario_turista,id_usuario_rest,fecha,calificacion_instalaciones,calificacion_personal,calificacion_menu,calificacion_general) VALUES(:id_usuario_turista,:id_usuario_rest,:fecha,:calificacion_instalaciones,:calificacion_personal,:calificacion_menu,:calificacion_general)';
+            $stmt=$this->getConn()->prepare($query);
+            $stmt->bindValue(":id_usuario_turista",$this->getIdUsuarioTurista());
+            $stmt->bindValue(":id_usuario_rest",$this->getIdUsuarioRest());
+            $stmt->bindValue(":fecha",$this->getFecha());
+            $stmt->bindValue(":calificacion_instalaciones",$this->getCalificacionInstalaciones());
+            $stmt->bindValue(":calificacion_personal",$this->getCalificacionPersonal());
+            $stmt->bindValue(":calificacion_menu",$this->getCalificacionMenu());
+            $stmt->bindValue(":calificacion_general",$this->getCalificacionGeneral());
+            if($stmt->execute()){
+                return true;
+            }
+            return false;
+        }catch(PDOException $ex){
+            error_log("Error en el insert: ".$ex->getMessage());
+            throw $ex;
+        }        
+    }
+
 }
