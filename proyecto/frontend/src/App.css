@@ -6,9 +6,9 @@ font-family: 'Tourney', cursive;
 }
 
 body{
-  background-image: url('./assets/bg-1.jpg');
+  /* background-image: url('./assets/bg-1.jpg');
  background-repeat: no-repeat;
- background-size: cover;
+ background-size: cover; */
   margin: 0;
   padding: 0;
   

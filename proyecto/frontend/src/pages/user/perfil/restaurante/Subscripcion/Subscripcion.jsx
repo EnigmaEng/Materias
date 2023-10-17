@@ -7,9 +7,10 @@ import {BiArrowBack} from 'react-icons/bi';
 const Subscripcion = () => {
   return (
     <>
-    <NavBar/>
-      <Link to='/configuracionRest' className='absolute md:top-24 md:left-24 left-4 top-20 bg-wwe text-white rounded-lg px-6 py-2'>  <BiArrowBack/> </Link>
+   
     <div class="dark:bg-zinc-800 dark:bg-opacity-95 bg-opacity-75 bg-white py-4 ">
+       <NavBar/>
+      <Link to='/configuracionRest' className='absolute  md:left-24 left-4 top-20 bg-wwe text-white rounded-lg px-6 py-2'>  <BiArrowBack/> </Link>
   <div class="mx-auto max-w-7xl  px-6 lg:px-8">
     <div class="mx-auto max-w-2xl  sm:text-center">
       <h2 class="text-4xl text-center font-bold tracking-tight text-wwe sm:text-4xl py-10">Subscribete </h2>

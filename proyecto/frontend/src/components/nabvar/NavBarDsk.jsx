@@ -15,29 +15,42 @@ useEffect(()=>{
 usuarioAutenticado();
 },[autenticado])
 
+const nombreCompleto = usuario.alias;
+const primeraLetra = nombreCompleto.charAt(0);
+
+
+
   return (
     <>
 {
 
   usuario && usuario.rol.nombre ? 
    // Restaurante Navbar
-  ( <div className="navbar bg-local  bg-wwe  shadow-xl">
-  <div className="flex-1">
-    <div className='absolute left-5'>
-       <DarkMode/>
-    </div>
+  ( <div className=" bg-wwe rounded-full relative top-3 flex  w-[30%] m-auto  shadow-xl">
+<div className='w-24 py-4 px-5'>
+   <DarkMode/>
+</div>
+
    
-    <Link to='/homeAuth' className='m-auto w-14 '>  
-    <img src={Image} alt="logo" className='ml-8'/>
+    <Link to='/homeAuth' className='m-auto '>  
+    <img src={Image} alt="logo" className='w-14 mr-5'/>
     </Link>
+
  
-  </div>
-  <div className="flex-none mr-8">
+
+
+  <div className="flex-none  mr-5">
     <div className="dropdown dropdown-end">
-      <label tabIndex={0} className="btn btn-ghost btn-circle avatar w-14">
+      <label tabIndex={0} id='' className="btn btn-ghost btn-circle  bg-white mt-3 shadow-xl">
         <div className="rounded-full ">
+          {
+            usuario && usuario.url_img_usuario == null ? 
           <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className='w-14 rounded-full' />
+          :
+          <div className=''> <p className='text-4xl text-wwe'>{primeraLetra}</p></div>
+}
         </div>
+        
       </label>
       <ul tabIndex={0} className="z-10 px-4 py-4 z dropdown-content mt-3 border bg-white rounded-box w-40">
         <li className=' hover:bg-gray-200 rounded-lg p-2'>
@@ -51,26 +64,34 @@ usuarioAutenticado();
       </ul>
     </div>
   </div>
+  
 </div>
+
   ) : usuario && usuario.rol.nacionalidad ?
    // Turista Navbar
    (
-  <div className="navbar bg-wwe  shadow-xl">
-  <div className="flex-1">
-    <div className='absolute left-5'>
+  <div className="bg-wwe rounded-full relative top-3 flex  w-[30%] m-auto  shadow-xl">
+
+    <div className='w-24 py-4 px-5'>
        <DarkMode/>
     </div>
    
-    <Link to='/homeAuth' className='m-auto w-14'>  
-    <img src={Image} alt="logo"/>
+    <Link to='/homeAuth' className='m-auto'>  
+    <img src={Image} alt="logo" className='w-14 mr-5'/>
     </Link>
  
-  </div>
-  <div className="flex-none mr-8">
+
+  <div className="flex-none mr-5">
     <div className="dropdown dropdown-end">
-      <label tabIndex={0} className="btn btn-ghost btn-circle avatar w-14">
+      <label tabIndex={0} id='' className="btn btn-ghost btn-circle  bg-white mt-3 shadow-xl ">
         <div className="rounded-full ">
+           {
+            usuario && usuario.url_img_usuario == null ? 
           <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className='w-14 rounded-full' />
+          :
+          <div className=''> <p className='text-4xl text-wwe'>{primeraLetra}</p></div>
+}
+        
         </div>
       </label>
       <ul tabIndex={0} className=" z-10 px-4 py-4 dropdown-content mt-3 border bg-white rounded-box w-40">
