@@ -13,7 +13,7 @@ const TuristaHomeDsk = () => {
   return (
    <div className='min-h-screen space-y-5 bg-white bg-opacity-90 dark:bg-zinc-800 dark:bg-opacity-95'>
   <NavBar/>
-  <div className="collapse bg-white w-6/12 m-auto shadow-xl">
+  <div className="collapse bg-white w-3/12 m-auto shadow-xl">
   <input type="checkbox" className="peer" /> 
   <div className="collapse-title flex font-aref text-3xl bg-white text-white text-center peer-checked:bg-white  peer-checked:text-white">
    <p className='text-black p-5'>Busca en el mapa</p><img src={Image} alt="logo-ubicacion" className='w-14 m-auto' />
@@ -23,12 +23,14 @@ const TuristaHomeDsk = () => {
   </div>
 </div>
   
-   <div className='text-5xl text-center flex  justify-center items-center gap-20'>
-    <div className='shadow-xl bg-white w-52 border h-60' ><p>Opcion1</p></div>
-    <div className='shadow-xl bg-white w-52 border h-60'>Opcion2</div>
-    <div className='shadow-xl bg-white w-52 border h-60'>Opcion3</div>
-     </div>
+<div className='flex border h-52 bg-white  justify-center items-center'>
+<div className='flex '>
 
+<Link to='/map' className='hover:bg-zinc-200 rounded-box p-3'>
+ <p className='text-wwe font-aref'>Busca en el mapa</p><img src={Image} alt="logo-ubicacion" className='w-8 m-auto mt-2' />
+</Link>
+</div>
+</div>
     
  <ListRestaurantes/>
 

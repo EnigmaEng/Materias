@@ -36,9 +36,7 @@ const ListRestaurantes = () => {
     <div className='w-8/12 m-auto px-10 h-8/12  shadow-xl p-4 rounded-lg  dark:bg-zinc-800 bg-white'>
 
     <div className='flex flex-col text-center justify-center items-center mb-2 mt-2'>
-    <Link to='/map' className='text-wwe  border border-wwe rounded-full h-14 w-14 mb-3'>
-    <p className='mt-3.5'>Mapa</p>
-    </Link>
+  
     <input type="text" placeholder='Buscar un restaurante..' className='border ring-2 ring-red-800 focus:border-red-800 focus:outline-none text-black focus:ring-2 focus:ring-red-800 border rounded-lg bg-white w-6/12 text-sm px-2 py-2' 
       value={busqueda}
   onChange={e => setBusqueda(e.target.value)}

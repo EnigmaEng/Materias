@@ -13,12 +13,11 @@ const NavBarDsk = () => {
 
 useEffect(()=>{
 usuarioAutenticado();
-},[autenticado])
-
-const nombreCompleto = usuario.alias;
-const primeraLetra = nombreCompleto.charAt(0);
+},[])
 
 
+// const nombreCompletoTurista = usuario.rol.nombres
+// const primeraLetraTurista = nombreCompletoTurista.charAt(0);
 
   return (
     <>
@@ -43,12 +42,10 @@ const primeraLetra = nombreCompleto.charAt(0);
     <div className="dropdown dropdown-end">
       <label tabIndex={0} id='' className="btn btn-ghost btn-circle  bg-white mt-3 shadow-xl">
         <div className="rounded-full ">
-          {
-            usuario && usuario.url_img_usuario == null ? 
           <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className='w-14 rounded-full' />
-          :
-          <div className=''> <p className='text-4xl text-wwe'>{primeraLetra}</p></div>
-}
+          
+       
+
         </div>
         
       </label>
@@ -75,11 +72,11 @@ const primeraLetra = nombreCompleto.charAt(0);
     <div className='w-24 py-4 px-5'>
        <DarkMode/>
     </div>
-   
-    <Link to='/homeAuth' className='m-auto'>  
-    <img src={Image} alt="logo" className='w-14 mr-5'/>
+  
+    <Link to='/homeAuth' className=' m-auto'>  
+    <img src={Image} alt="logo" className='mr-5 w-14'/>
     </Link>
- 
+
 
   <div className="flex-none mr-5">
     <div className="dropdown dropdown-end">
@@ -89,7 +86,7 @@ const primeraLetra = nombreCompleto.charAt(0);
             usuario && usuario.url_img_usuario == null ? 
           <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className='w-14 rounded-full' />
           :
-          <div className=''> <p className='text-4xl text-wwe'>{primeraLetra}</p></div>
+          <div className=''> <p className='text-4xl text-wwe'></p></div>
 }
         
         </div>

@@ -9,14 +9,17 @@ const TuristaMobile = () => {
 
   return (
 <>
-<div className="bg-wwe navbar bg-local w-full ">
-  <DarkMode/>
-     <Link to='/homeAuth' className='m-auto w-14  '>  
+<div className="bg-wwe rounded-full relative top-3 flex justify-between  w-[80%] m-auto  shadow-xl ">
+  <div className="px-3 py-3">
+     <DarkMode/>
+  </div>
+ 
+     <Link to='/homeAuth' className='m-auto w-14 ml-14  '>  
     <img src={Image} alt="logo" className=''/>
     </Link>
-   <div className="flex-none ">
+   <div className="mr-2 ">
     <div className="dropdown dropdown-end">
-      <label tabIndex={0} className="btn btn-ghost btn-circle avatar w-14">
+      <label tabIndex={0} className="btn btn-ghost btn-circle  bg-white mt-2 shadow-xl">
         <div className="rounded-full ">
           <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className='w-14 rounded-full' />
         </div>

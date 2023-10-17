@@ -16,7 +16,7 @@ const CrearDescuentos = () => {
 
     initialValues : {
       activo: '',
-      id_descuento: '',
+      
       titulo_descuento: '',
       descripcion: '',
       url_img_descuento: '',
@@ -26,7 +26,7 @@ const CrearDescuentos = () => {
     },
 
     validationSchema: Yup.object({
-      activo: Yup.string().required('El campo no puede ir vacío'),
+    
       titulo_descuento: Yup.string().required('El campo no puede ir vacío'),
       descripcion: Yup.string().required('El campo no puede ir vacío'),
       url_img_descuento: Yup.string().required('El campo no puede ir vacío'),
@@ -36,15 +36,18 @@ const CrearDescuentos = () => {
 
     onSubmit: (valores, {resetForm}) => {
 
+      const fechaInicio = formik.values.fecha_inicio
+      const fechaFin = formik.values.fecha_fin
+
     const data = {
     "accion": "crearDescuento",
     activo : "S",
-    id_descuento: null,
+   
     titulo_descuento: valores.titulo_descuento,
     descripcion: valores.descripcion,
     url_img_descuento: valores.url_img_descuento,
-    fecha_inicio: valores.fecha_inicio,
-    fecha_fin: valores.fecha_fin,
+    fecha_inicio: fechaInicio,
+    fecha_fin: fechaFin,
     id_usuario_rest: usuario.id_usuario
   }
   crearDescuento(data)
@@ -58,6 +61,7 @@ const CrearDescuentos = () => {
         <NavBar/>
       
 <form onSubmit={formik.handleSubmit} method='POST' className='bg-white md:w-3/12 m-auto mt-24 p-8 rounded-box shadow-xl'>
+  {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }
     <h2 className='text-center text-4xl mb-5 font-bold text-wwe font-aref'>Crear descuento</h2>
 <div  className='flex flex-col text-center font-aref text-black text-lg mb-6' >
   <label htmlFor="">Titulo del descuento</label>

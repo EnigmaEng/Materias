@@ -22,16 +22,19 @@ usuarioAutenticado();
 
   usuario && usuario.rol.nombre ? 
    // Restaurante Navbar
-  ( <div className="navbar  bg-wwe flex justify-center items-center gap-24 shadow-xl">
- <DarkMode/>
+  ( <div className="bg-wwe rounded-full relative top-3 flex justify-between  w-[80%] m-auto  shadow-xl">
+    <div className='absolute left-5 top-3 '>
+       <DarkMode/>
+    </div>
 
-  <Link to='/homeAuth' className=' w-14 '>  
-    <img src={Image} alt="logo" className=''/>
+
+  <Link to='/homeAuth' className=' m-auto ml-32 '>  
+    <img src={Image} alt="logo" className='w-14'/>
     </Link>
 
- <div className="flex-none ">
+ <div className="mr-3 ">
     <div className="dropdown dropdown-end">
-      <label tabIndex={0} className="btn btn-ghost btn-circle avatar w-12">
+      <label tabIndex={0} className="btn btn-ghost btn-circle  bg-white mt-2 shadow-xl">
         <div className="rounded-full ">
           <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className='w-14 rounded-full' />
         </div>
@@ -69,7 +72,7 @@ usuarioAutenticado();
     ) : usuario && usuario.rol.nro_empleado ? 
   (
     // Admin Navbar
- <div className="navbar bg-wwe  shadow-xl">
+ <div className="bg-wwe rounded-full relative top-3 flex  w-[80%] m-auto  shadow-xl">
   <div className="flex-1 gap-5">
     <div className='absolute left-5'>
        <DarkMode/>

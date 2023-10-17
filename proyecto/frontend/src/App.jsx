@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate  } from 'react-router-dom'
 import './App.css'
 import Home from './pages/HomePublic/Home'
 import PerfilTurista from './pages/user/perfil/turista/PerfilTurista'
@@ -14,13 +14,13 @@ import PerfilTest from './pages/user/perfil/restaurante/PerfilTest'
 import EditarPerfi from './pages/user/perfil/restaurante/EditarPerfi'
 import Menu from './pages/user/perfil/restaurante/Menu/Menu'
 import CrearMenu from './pages/user/perfil/restaurante/Menu/CrearMenu'
-
+import Map from './components/maps/Map'
 import Subscripcion from './pages/user/perfil/restaurante/Subscripcion/Subscripcion'
 import ConfiguracionRest from './pages/user/perfil/restaurante/Configuracion/ConfiguracionRest'
 import ConfiguracionTurista from './pages/user/perfil/turista/Configuracion/ConfiguracionTurista'
 import CrearDescuentos from './pages/user/perfil/restaurante/Descuentos/CrearDescuentos'
 import RutaProtegida from './context/RutaProtegida'
-import MapContent from './pages/user/auth/home/MapContent'
+
 import MisReseniasTurista from './pages/user/resenias/misResenias/MisReseniasTurista'
 function App() {
 
@@ -47,11 +47,14 @@ function App() {
 
 <Route path='/' element={<RutaProtegida/>}/>
 
-<Route path='/homeAuth' element={<HomeAuth/>}/>
-  <Route path='/map' element={<MapContent/>}/>
+  <Route  path='/homeAuth' element={<HomeAuth/>}/>
+  <Route path='/map' element={<Map/>}/>
+
+
   {/* Perfiles */}
 
 {/* Turista */}
+
 <Route path='/configuracionTurista' element={<ConfiguracionTurista/>}/>
 <Route path='/perfilTurista' element={<PerfilTurista/>}/>
 {/* Resenias */}
