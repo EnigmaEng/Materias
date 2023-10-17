@@ -3,6 +3,7 @@ require_once '../models/restaurante.php';
 require_once '../models/platoRestaurante.php';
 require_once '../models/descuento.php';
 require_once 'cors.php';
+
 function insertarController($alias = '', $url_img_usuario = '', $email = '', $contrasena = '', $rol = '', $nombre = '')
 {
     $restaurante = new Restaurante();
@@ -56,7 +57,18 @@ function crearDescuento($idDescuento, $idRestaurante, $activo, $tituloDescuento,
     $descuento->setUrlImagenDesc($urlImgDescuento);
     $descuento->setFechaInicio($fechaInicio);
     $descuento->setFechaFin($fechaFin);
-    return $descuento->crearDescuento();
+    if ($descuento->crearDescuento()) {
+        if ($descuento->restauranteTieneDescuento()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function obtenerPlatos()
+{
+    $plato = new PlatoRestaurante();
+    return $plato->obtenerPlatos();
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -98,6 +110,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $data['fecha_inicio'],
                     $data['fecha_fin']
                 );
+                if ($resultado == true) {
+                    $resultado = "Descuento creado exitosamente";
+                } else {
+                    $resultado = "No se ha podido crear el descuento";
+                }
                 break;
             default:
                 $resultado = "Error en el tipo de accion, intente nuevamente";
@@ -105,4 +122,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
     echo $resultado;
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['accion']) && $_GET['accion'] == 'obtenerPlatos') {
+    $platos = obtenerPlatos();
+
+    header('Content-Type: application/json');
+
+    $platos_array = array();
+    foreach ($platos as $plato) {
+        $platos_array[] = $plato;
+    }
+
+    echo json_encode($platos_array);
 }

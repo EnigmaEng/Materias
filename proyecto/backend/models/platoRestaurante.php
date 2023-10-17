@@ -154,4 +154,39 @@ class PlatoRestaurante extends CrudBasico
             return "Error en la busqueda del usuario restaurante:" . $ex->getMessage();
         }
     }
+
+    public function obtenerPlatos()
+    {
+        try {
+            // Consulta SQL para seleccionar todos los platos de la tabla "plato_restaurantes"
+            $query = "SELECT * FROM `wwe`.`plato_restaurantes`";
+            $stmt = $this->getConn()->prepare($query);
+
+            $stmt->execute();
+
+            $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+            return $result;
+        } catch (PDOException $ex) {
+            // Registra el error o lanza una excepción para el manejo superior
+            error_log("Error en obtenerPlatosAsJSON: " . $ex->getMessage());
+            throw $ex;
+        }
+    }
+
+
+    public function platosRestaurante()
+    {
+        try {
+            $query = "SELECT * FROM plato_restaurantes WHERE id_usuario_rest= :id_usuario_rest";
+            $stmt = $this->getConn()->prepare($query);
+            $stmt->bindValue(":id_usuario_rest", $this->getIdUsuario());
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
+            return $resultado;
+        } catch (PDOException $ex) {
+            return "Error en el select: " . $ex;
+        }
+    }
+
 }

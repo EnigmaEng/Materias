@@ -6,6 +6,8 @@ require '../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 
+$dotenv = Dotenv::createImmutable('/var/www/html/');
+$dotenv->load();
 
 class Descuento extends CrudBasico
 {
@@ -21,18 +23,13 @@ class Descuento extends CrudBasico
 
     public function __construct()
     {
-        // Carga las variables de entorno desde el archivo .env
-        $dotenv = Dotenv::createImmutable(__DIR__ . '/../../apiWhereWeEat');
-        $dotenv->load();
-        
- $this->setHost($_ENV['DB_HOST']);
+        $this->setHost($_ENV['DB_HOST']);
         $this->setUser($_ENV['DB_USER']);
         $this->setPassword($_ENV['DB_PASSWORD']);
         $this->setDatabase($_ENV['DB_NAME']);
         $this->setDriver($_ENV['DB_DRIVER']);
         $this->setDatCon();
         parent::__construct();
-
     }
 
     public function setIdDescuento($idDescuento)
@@ -137,6 +134,33 @@ class Descuento extends CrudBasico
             $stmt->bindValue(":url_img_descuento", $this->getUrlImagenDesc());
             if ($stmt->execute()) {
                 return true;
+            }
+            return false;
+        } catch (PDOException $ex) {
+            echo "Error en el insert: " . $ex->getMessage();
+        }
+    }
+
+    public function restauranteTieneDescuento()
+    {
+        try {
+            $query = "SELECT id_descuento FROM descuento ORDER BY id_descuento DESC";
+            $stmt = $this->getConn()->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($result) {
+                $id_descuento = $result['id_descuento'];
+                $query = "INSERT INTO restaurante_tiene_descuento(id_descuento,id_usuario_rest,fecha_inicio,fecha_fin) VALUES (:id_descuento,:id_usuario_rest,:fecha_inicio,:fecha_fin)";
+                $stmt = $this->getConn()->prepare($query);
+                $stmt->bindValue(":id_descuento", $id_descuento);
+                $stmt->bindValue(":id_usuario_rest", $this->getIdRestaurante());
+                $stmt->bindValue(":fecha_inicio", $this->getFechaInicio());
+                $stmt->bindValue(":fecha_fin", $this->getFechaFin());
+                if ($stmt->execute()) {
+                    return true;
+                }
+            } else {
+                echo "No se encontraron resultados.";
             }
             return false;
         } catch (PDOException $ex) {
