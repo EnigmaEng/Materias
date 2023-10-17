@@ -54,7 +54,7 @@ const ListRestaurantes = () => {
     {
         product.map((item, index) => (
             <div className=' h-7/12 w-52 rounded-lg shadow-xl bg-white  text-center text-black' key={index} >
-<img src={item.url_img_usuario} alt="logo-restaurante" className='w-full m-auto h-52   ' />
+<img src={item.url_img_usuario} alt="logo-restaurante" className='w-full m-auto h-52  rounded-t-lg  border  ' />
 <h2 className='font-bold p-2 '> {item.nombre_restaurante}</h2>
 
 <div className='gap-5 flex p-4 '>

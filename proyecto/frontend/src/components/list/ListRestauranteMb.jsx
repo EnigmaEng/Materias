@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import restauranteData from '../../context/restauranteData';
 import {BsSearch } from 'react-icons/bs'
 import {GoCodeReview} from 'react-icons/go'
+import { Link } from 'react-router-dom';
 const ListRestauranteMb = () => {
    const {product, 
     pagina,
@@ -58,7 +59,7 @@ const ListRestauranteMb = () => {
         </div>
         <h3 class="mt-4 text-lg text-center font-aref pb-5 font-bold ">{item.nombre_restaurante}</h3>
           <div className='gap-5 flex  px-2 '>
-    <button className=' rounded-lg border px-2  shadow-xl border  w-20 flex justify-center py-2 h-8'> <BsSearch/></button>
+    <Link to={`/clientePerfil/${item.id_usuario}`} className=' rounded-lg border px-2  shadow-xl border  w-20 flex justify-center py-2 h-8'> <BsSearch/></Link>
     <button className='rounded-lg border px-2  bg-white shadow-xl  w-20 flex justify-center py-2 h-8'><GoCodeReview/></button>
 </div>
       </a>

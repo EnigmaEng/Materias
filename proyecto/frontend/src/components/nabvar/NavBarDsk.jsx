@@ -82,12 +82,9 @@ usuarioAutenticado();
     <div className="dropdown dropdown-end">
       <label tabIndex={0} id='' className="btn btn-ghost btn-circle  bg-white mt-3 shadow-xl ">
         <div className="rounded-full ">
-           {
-            usuario && usuario.url_img_usuario == null ? 
+          
           <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className='w-14 rounded-full' />
-          :
-          <div className=''> <p className='text-4xl text-wwe'></p></div>
-}
+       
         
         </div>
       </label>

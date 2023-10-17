@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate  } from 'react-router-dom'
+import { BrowserRouter, Routes, Route  } from 'react-router-dom'
 import './App.css'
 import Home from './pages/HomePublic/Home'
 import PerfilTurista from './pages/user/perfil/turista/PerfilTurista'
@@ -22,6 +22,8 @@ import CrearDescuentos from './pages/user/perfil/restaurante/Descuentos/CrearDes
 import RutaProtegida from './context/RutaProtegida'
 
 import MisReseniasTurista from './pages/user/resenias/misResenias/MisReseniasTurista'
+import PerfilCliente from './pages/user/perfil/restaurante/PerfilCliente/PerfilCliente'
+import MapContent from './components/maps/MapContent'
 function App() {
 
 
@@ -48,7 +50,7 @@ function App() {
 <Route path='/' element={<RutaProtegida/>}/>
 
   <Route  path='/homeAuth' element={<HomeAuth/>}/>
-  <Route path='/map' element={<Map/>}/>
+  <Route path='/map' element={<MapContent/>}/>
 
 
   {/* Perfiles */}
@@ -68,13 +70,18 @@ function App() {
 
 <Route path='/perfil' element={<PerfilTest/>}/>
 <Route path='/perfilRestaurante' element={<PerfilRestaurante/>}/>
-<Route path='/perfilRestaurante/:id' element={<PerfilRestaurante/>}/>
+
 <Route path='/editarPerfilRestaurante' element={<EditarPerfi/>}/>
 <Route path='/crearMenu' element={<CrearMenu/>}/>
 <Route path='/menu' element={<Menu/>}/>
 <Route path='/subscripcion' element={<Subscripcion/>}/>
 <Route path='/configuracionRest' element={<ConfiguracionRest/>}/>
 <Route path='/crearDescuentos' element={<CrearDescuentos/>}/>
+
+{/* Switch */}
+
+   <Route path="/clientePerfil/:id_usuario" component={<PerfilCliente/>} />
+
 
     </Routes>
     
