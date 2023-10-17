@@ -64,5 +64,10 @@ echo "Volviendo al menú... 🔙"
 sleep 1.5
 A=0
 ;;
+
+*) clear
+echo "Opción incorrecta."
+sleep 1
+;;
 esac
 done

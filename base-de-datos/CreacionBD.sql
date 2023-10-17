@@ -90,8 +90,7 @@ CREATE TABLE `rest_obtiene_premios` (
     id_usuario_rest INT(10) UNSIGNED,
     PRIMARY KEY (id_premio, fecha_recibido),
     FOREIGN KEY (id_premio) REFERENCES `premios` (id_premio),
-    FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante` (id_usuario),
-    CHECK (fecha_recibido <= SYSDATE())
+    FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante` (id_usuario)
 );
 
 CREATE TABLE `alojamiento` (
@@ -175,13 +174,15 @@ CREATE TABLE `restaurante_tiene_descuento` (
 
 /*DCL Creación de Usuarios*/
 
-drop user if exists 'wweat'@'192.168.56.103';
 drop user if exists 'wwe_rol_r'@'192.168.56.103';
 drop user if exists 'wwe_rol_a'@'192.168.56.103';
 drop user if exists 'wwe_rol_t'@'192.168.56.103';
+drop user if exists 'wweat'@'192.168.56.103';
 
-CREATE USER 'wweat'@'192.168.56.103' IDENTIFIED BY 'ContraBdAdmin';
+CREATE USER 'wweat'@'192.168.56.103' IDENTIFIED BY 'Wweat123**';
 GRANT ALL PRIVILEGES ON wwe.* TO 'wweat'@'192.168.56.103' WITH GRANT OPTION;
+GRANT REPLICATION SLAVE,PROCESS ON *.* TO 'wweat'@'192.168.56.103';
+FLUSH PRIVILEGES;
 
 /*Creacion y Privilegios de Turistas
 CREATE USER 'wwe_rol_t'@'%' IDENTIFIED BY 'ContraTurista';

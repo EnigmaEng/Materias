@@ -5,6 +5,6 @@ describe ('Iniciando Modo Oscuro', () => {
 
     it('Entrando al Login',() =>{
         cy.contains('WHERE WE EAT')
-        cy.get('.flex-col > .absolute > .bg-blue-900').click()
+        cy.get('.flex-col > .absolute > .bg-zinc-800').click()
     })
 })
