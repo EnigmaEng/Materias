@@ -112,10 +112,9 @@ const RegistroUsuario = () => {
     <div className='absolute md:top-16 md:right-28 top-2 right-5'>
       <DarkMode/>
       </div>
-        <Link to='/' >
-    <button className='bg-white rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-16 md:absolute md:left-80 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700 md:border-gray-400 text-red-800'><BiArrowBack/></button>
+    <Link to='/' >
+    <button className='bg-white rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-16 md:absolute md:left-80 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700       md:border-gray-400 text-red-800'><BiArrowBack/></button>
     </Link>
-    
 
 <div className='pb-8  flex justify-center md:block md:w-3/12 md:m-auto md:py-40 '>
     <form onSubmit={formik.handleSubmit}  className='text-black p-4 shadow-xl rounded-lg bg-wwe ' method='POST' encType="multipart/form-data">
@@ -132,8 +131,9 @@ const RegistroUsuario = () => {
         </div>
         <div className='flex flex-col mb-4'>
         <label htmlFor="email" className='font-bold px-4 text-white'>Email</label>
-        <input type="text" placeholder='Email' className='border rounded-full bg-white  border-red-700  px-6 py-2 py-1 focus:outline-none placeholder:italic' id='email' value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
-        {formik.touched.email && formik.errors.email ? (
+        <input type="text" placeholder='Email' className='border rounded-full bg-white  border-red-700  px-6 py-2 py-1 focus:outline-none           placeholder:italic' id='email' value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+        {
+        formik.touched.email && formik.errors.email ? (
           <div> <p className='text-lg px-5 text-white flex'> {formik.errors.email}  <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ): (
             null
           )
@@ -142,16 +142,20 @@ const RegistroUsuario = () => {
           <div className='flex flex-col mb-4'>
         <label htmlFor="contrasena" className='font-bold px-4 text-white'>Contraseña</label>
         <input type="password" placeholder='Contraseña' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic' id='contrasena' value={formik.values.contrasena} onChange={formik.handleChange} onBlur={formik.handleBlur} />
-        {formik.touched.contrasena && formik.errors.contrasena ? (
+        {
+        formik.touched.contrasena && formik.errors.contrasena ? (
           <div> <p className='text-lg px-5 text-white flex'>{formik.errors.contrasena} <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ) : (null)
         }
+
         </div>
         <div className='flex flex-col mb-4'>
         <label htmlFor="confirmContrasena" className='font-bold px-4 text-white'>Repetir contraseña</label>
         <input type="password" placeholder='Contraseña' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic' id='confirmContrasena' onChange={formik.handleChange} value={formik.values.confirmContrasena} onBlur={formik.handleBlur} />
-        {formik.touched.confirmContrasena && formik.errors.confirmContrasena ? (
+        {
+        formik.touched.confirmContrasena && formik.errors.confirmContrasena ? (
           <div> <p className='text-lg px-5 text-white flex'>{formik.errors.confirmContrasena} <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ) : (null)
         }
+        
         </div>
     <div className='flex flex-col mb-4 px-2'>
         <label htmlFor="url_img_usuario" className='font-bold px-4 text-white'>Foto de perfil</label>

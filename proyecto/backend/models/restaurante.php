@@ -19,18 +19,16 @@ class Restaurante extends Usuario implements Crud
     public function __construct()
     {
         // Carga las variables de entorno desde el archivo .env
-$dotenv = Dotenv::createImmutable('/var/www/html/');
-$dotenv->load();
+        $dotenv = Dotenv::createImmutable('/var/www/html/');
+        $dotenv->load();
 
-        
- $this->setHost($_ENV['DB_HOST']);
+        $this->setHost($_ENV['DB_HOST']);
         $this->setUser($_ENV['DB_USER']);
         $this->setPassword($_ENV['DB_PASSWORD']);
         $this->setDatabase($_ENV['DB_NAME']);
         $this->setDriver($_ENV['DB_DRIVER']);
         $this->setDatCon();
         parent::__construct();
-
     }
 
     public function setTipoRestaruante($tipoRestaurante)
@@ -108,6 +106,28 @@ $dotenv->load();
             throw new Exception("Error al insertar: " . $ex->getMessage());
         }
     }
+
+
+    public function obtenerRestaurantes()
+    {
+        $query = "SELECT r.nombre AS nombre_restaurante, u.url_img_usuario AS foto_usuario
+                FROM wwe.restaurante r
+                JOIN wwe.usuarios u ON r.id_usuario = u.id_usuario";
+
+        $stmt = $this->getConn()->prepare($query);
+
+        if ($stmt === false) {
+            die("Error en la preparacion de la consulta");
+        }
+
+        if (!$stmt->execute()) {
+            die("Error en la ejecucion de la consulta");
+        }
+
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
 
 
 }

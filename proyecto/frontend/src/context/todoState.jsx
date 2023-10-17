@@ -62,11 +62,11 @@ const TodoState = ({ children }) => {
                 payload: respuesta.data.mensaje
             })
             }
-            // setTimeout(() => {
-            //     dispatch({
-            //         type: LIMPIAR_ALERTA
-            //     })
-            // }, 3000);
+            setTimeout(() => {
+                dispatch({
+                    type: LIMPIAR_ALERTA
+                })
+            }, 3000);
     }
 
     //Login
@@ -76,7 +76,6 @@ const iniciarSesion = async (datos) => {
 
     if (respuesta.status === 200) {
       if (respuesta.data.success) {
-     
         //usuarioData trae todos los datos del usuario desde el backend
         const usuarioData = respuesta.data.usuarioData;
         console.log(respuesta.data.token)
@@ -89,12 +88,11 @@ const iniciarSesion = async (datos) => {
         //se guardan los datos del usuario en formato json en el localstorage
         localStorage.setItem('usuarioData', JSON.stringify(usuarioData));
         console.log(usuarioData)
-        
+
         dispatch({
           type: LOGIN_EXITOSO,
           usuario: usuarioData
         });
-
         
       } else {
         dispatch({
@@ -110,9 +108,6 @@ const iniciarSesion = async (datos) => {
       payload: error.response.data.mensaje
     });
   }
-
-
-
   setTimeout(() => {
     dispatch({
       type: LIMPIAR_ALERTA
@@ -143,13 +138,13 @@ const usuarioAutenticado = () => {
   
 };
 
-    const crearPlato = async (datos) => {
+    const crearPlato = async datos => {
       try {
         const respuesta = await clienteAxios.post('/restauranteController.php', datos)
         
         dispatch({
         type: DESCUENTO_CREADO,
-        payload: 'Plato Guardado!'
+        payload: 'Plato creado exitosamente!'
       })
       } catch (error) {
         console.log(error)
@@ -182,8 +177,7 @@ const usuarioAutenticado = () => {
             // Eliminamos el token y los datos de usuario del localstorage una vez cerrado sesion
               localStorage.removeItem('token');
               localStorage.removeItem('usuarioData');
-           
-           
+
         }
     
     return (
@@ -198,6 +192,7 @@ const usuarioAutenticado = () => {
                 cerrarSesion,
                 usuarioAutenticado,
                 crearPlato,
+                crearDescuento
             }}>
 
             {children}
