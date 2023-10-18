@@ -23,7 +23,7 @@ usuarioAutenticado()
 
   return (
     <>
-    <div className='min-h-screen bg-white  bg-opacity-75 dark:bg-zinc-800 dark:bg-opacity-95'>
+    <div className='min-h-screen  dark:bg-zinc-800 dark:bg-opacity-95'>
 
     <NavBar/>
       {usuario && usuario.rol.nombre ?

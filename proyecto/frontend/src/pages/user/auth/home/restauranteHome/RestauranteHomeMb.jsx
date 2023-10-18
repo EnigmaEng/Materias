@@ -9,7 +9,7 @@ import CategoriasMb from '../../../../../components/categorias/CategoriasMb'
 
 const RestauranteHomeMb = () => {
   return (
-   <div className='min-h-screen  bg-white bg-opacity-90 dark:bg-zinc-800 dark:bg-opacity-95'>
+   <div className='min-h-screen  dark:bg-zinc-800 dark:bg-opacity-95'>
   <NavBar/>
   <div className="collapse mt-5 mb-5 w-[90%] m-auto shadow-xl">
   <input type="checkbox" className="peer" /> 

@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom'
 const MapContent = () => {
   return (
  
-    <div className=''>
+    <div className='min-h-screen'>
         
         <NavBar/>
-        <Link  to='/homeAuth' className='px-4 m-40 py-1.5 bg-white rounded-lg text-black font-aref'>
+        <Link  to='/homeAuth' className='px-4 m-40 py-1.5 bg-wwe rounded-lg text-white text-lg font-aref'>
         Volver
         </Link>
       <div className='mt-10'>

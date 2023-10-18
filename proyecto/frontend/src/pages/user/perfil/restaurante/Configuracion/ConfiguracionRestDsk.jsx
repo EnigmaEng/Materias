@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const ConfiguracionRestDsk = () => {
   return (
-    <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-95 bg-white bg-opacity-75'>
+    <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-95 '>
     <NavBar/>
     
 <div className='bg-white w-7/12 h-11/12  m-auto mt-20  p-10 text-3xl text-black  rounded-box'>

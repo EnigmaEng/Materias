@@ -12,7 +12,7 @@ const MenuMb = () => {
 ];
 
   return (
-    <div className='min-h-screen space-y-10 pb-10 bg-white bg-opacity-60 dark:bg-zinc-800 dark:bg-opacity-95'>
+    <div className='min-h-screen space-y-10 pb-10  dark:bg-zinc-800 dark:bg-opacity-95'>
         <div className='fiex w-full '>
           <NavBar/>
         </div>

@@ -59,7 +59,7 @@ const formik = useFormik({
     {
 
       usuario && usuario.rol.nombre ? 
- <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-95 bg-white bg-opacity-70 '>
+ <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-95  '>
       <NavBar/>
 
 

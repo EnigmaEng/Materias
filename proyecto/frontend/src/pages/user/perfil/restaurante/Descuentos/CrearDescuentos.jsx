@@ -57,7 +57,7 @@ const CrearDescuentos = () => {
   })
 
   return (
-    <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-95 bg-white bg-opacity-75  '>
+    <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-95   '>
         <NavBar/>
       
 <form onSubmit={formik.handleSubmit} method='POST' className='bg-white md:w-3/12 m-auto mt-24 p-8 rounded-box shadow-xl'>

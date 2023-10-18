@@ -51,7 +51,7 @@ function MapComponents() {
 return (
   <>
 
-     <GoogleMap zoom={10} center={center} mapContainerClassName='rounded-lg  md:h-[600px] h-80  w-full  m-auto '>
+     <GoogleMap zoom={10} center={center} mapContainerClassName='rounded-lg  md:h-[600px] h-80  w-[60%]  m-auto '>
 <MarkerF position={center} />
   </GoogleMap>
 

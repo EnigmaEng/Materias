@@ -8,6 +8,8 @@ const HomeMb = () => {
 <>
 {/* la clase bg-mb trae una foto del css */}
  <div className="min-h-screen   py-32 dark:bg-opacity-95 dark:bg-zinc-800 bg-wwe bg-opacity-75">
+  
+
   <div className="absolute top-5 right-5">
         <DarkMode/>
   </div>

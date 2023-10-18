@@ -11,7 +11,7 @@ import {MdOutlineRateReview} from 'react-icons/md';
 
 const RestauranteHomeDsk = () => {
   return (
-   <div className='min-h-screen space-y-5 font-aref bg-white bg-opacity-90 dark:bg-zinc-800 dark:bg-opacity-95'>
+   <div className='min-h-screen space-y-5 font-aref  dark:bg-zinc-800 dark:bg-opacity-95'>
   <NavBar/>
   <Map/> 
 <div className='text-5xl text-center flex  justify-center items-center gap-20 '>

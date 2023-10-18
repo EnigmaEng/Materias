@@ -10,7 +10,7 @@ const MenuDsk = () => {
 ];
 
   return (
-    <div className='min-h-screen space-y-28 bg-white bg-opacity-60 dark:bg-zinc-800 dark:bg-opacity-95'> 
+    <div className='min-h-screen space-y-28  dark:bg-zinc-800 dark:bg-opacity-95'> 
     <div className='hidden md:block'>
       <NavBar/>
     </div>

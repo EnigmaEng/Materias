@@ -18,7 +18,7 @@ usuarioAutenticado()
     <>
 {
   usuario && usuario.rol.nombre ? 
-    <div className='min-h-screen bg-white text-black font-aref dark:text-white bg-opacity-75 dark:bg-zinc-800 dark:bg-opacity-95'>
+    <div className='min-h-screen  text-black font-aref dark:text-white  dark:bg-zinc-800 dark:bg-opacity-95'>
       <NavBar/>
      <div className='py-20'>
       <div className=' rounded-box m-6 text-black font-aref text-center shadow-xl bg-white p-4  '>
