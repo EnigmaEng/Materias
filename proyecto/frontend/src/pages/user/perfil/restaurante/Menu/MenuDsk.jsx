@@ -1,6 +1,6 @@
 import NavBar from '../../../../../components/nabvar/NavBar'
 import { Link } from 'react-router-dom';
-
+import {MdMenuBook} from 'react-icons/md'
 const MenuDsk = () => {
   const images = [
   { nombre: "Bolognesa", desc: 'Ravioles con salsa Bolognesa' , precio: 300},
@@ -16,9 +16,11 @@ const MenuDsk = () => {
     </div>
     
     <div className='bg-white w-7/12 m-auto space-y-10 py-8 text-black text-3xl flex flex-col  items-center rounded-box'>
-        <div className=' flex flex-col'>
-              <p className='text-5xl text-center font-aref mb-10'>Tus menus:</p> 
-              <Link to='/crearMenu' className='w-48  h-12 hover:bg-red-700 ml-5 rounded-lg px-5  mt-2  text-white py-0.5 bg-wwe '>Crear Plato </Link>
+        <div className='flex '>
+              <p className='text-5xl text-center text-wwe flex gap-3 font-aref mb-10'>
+              
+                 <span className='text-wwe'> <MdMenuBook/></span> Tus menus:</p> 
+             
         </div>
        
          <div className='grid grid-cols-4 gap-5'>

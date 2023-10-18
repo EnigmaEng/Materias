@@ -78,6 +78,7 @@ function App() {
 <Route path='/configuracionRest' element={<ConfiguracionRest/>}/>
 <Route path='/crearDescuentos' element={<CrearDescuentos/>}/>
 
+
 {/* Switch */}
 
    <Route path="/clientePerfil/:id_usuario" component={<PerfilCliente/>} />

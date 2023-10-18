@@ -1,5 +1,5 @@
 import DarkMode from "../../components/Buttons/DarkMode";
-import NavBarDsk from "../../components/nabvar/NavBarDsk";
+
 import { Link } from "react-router-dom";
 import Image from "../../assets/logo-white.png";
 
@@ -18,7 +18,7 @@ const HomeDsk = () => {
     
   </video>
 
-  <div className="z-10 flex flex-col w-6/12 flex-grow dark:bg-zinc-800 bg-wwe bg-opacity-50 dark:text-white dark:bg-opacity-95  place-items-center gap-5 py-52 min-h-screen ">
+  <div className="z-10 flex flex-col w-6/12 flex-grow dark:bg-zinc-800 bg-wwe bg-opacity-50 dark:text-white dark:bg-opacity-60  place-items-center gap-5 py-52 min-h-screen ">
     <div className="absolute top-10 left-10">
        <DarkMode/>
     </div>
@@ -26,7 +26,7 @@ const HomeDsk = () => {
     <h1 className="text-6xl text-white font-aref mb-4 ">WHERE WE EAT</h1>
         <img src={Image} alt="" className="w-40 mb-20"/>
   <h2 className="text-3xl text-white font-aref">BIENVENIDO!</h2>
-    {/* <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="" className="w-28" /> */}
+  
 
     <div className="flex gap-5">
       <Link to='/login'>
