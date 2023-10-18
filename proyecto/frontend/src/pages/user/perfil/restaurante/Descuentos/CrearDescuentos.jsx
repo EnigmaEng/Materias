@@ -42,7 +42,6 @@ const CrearDescuentos = () => {
     const data = {
     "accion": "crearDescuento",
     activo : "S",
-   
     titulo_descuento: valores.titulo_descuento,
     descripcion: valores.descripcion,
     url_img_descuento: valores.url_img_descuento,
