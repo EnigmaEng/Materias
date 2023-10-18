@@ -10,6 +10,7 @@ import {MdMenuBook} from 'react-icons/md';
 import {MdOutlineRateReview} from 'react-icons/md';
 import Image2 from '../../../../../assets/crearPlato.png';
 import Image1 from '../../../../../assets/menu.png';
+import Image3 from '../../../../../assets/resenia.png'
 
 const RestauranteHomeDsk = () => {
   return (
@@ -21,8 +22,7 @@ const RestauranteHomeDsk = () => {
 
 
 <div class="max-w-sm mt-20 w-[50%] rounded-box shadow-xl  lg:max-w-full lg:flex">
-  <div class="bg-[url(https://media.istockphoto.com/id/1307190527/photo/happy-waiter-serving-food-to-group-of-friends-in-a-pub.jpg?s=612x612&w=0&k=20&c=EDqQ0oBcpFGV25p61vWUF5N-6lRJdbmZmQMe5kyuxyA=)] bg-cover h-28 lg:h-auto lg:w-40 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden " >
-  </div>
+<img src={Image3} alt="resenia" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none  bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
   <div class=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div class="mb-8">
       <p class="text-sm text-gray-600 flex items-center">

@@ -8,7 +8,9 @@ import { Link } from 'react-router-dom'
 import Image from '../../../../../assets/logoubi.png'
 import {MdOutlineRateReview} from 'react-icons/md'
 import {BsFillHouseFill} from 'react-icons/bs'
-
+import Image2 from '../../../../../assets/mapa.png'
+import Image3 from '../../../../../assets/resenia.png'
+import Image1 from '../../../../../assets/alojamiento.png'
 const TuristaHomeDsk = () => {
   return (
    <div className='min-h-screen space-y-10  dark:bg-zinc-800 dark:bg-opacity-95'>
@@ -28,15 +30,14 @@ const TuristaHomeDsk = () => {
 
 
 <div class="max-w-sm mt-20 w-[50%] rounded-box shadow-xl  lg:max-w-full lg:flex">
-  <div class="bg-[url(https://media.istockphoto.com/id/1307190527/photo/happy-waiter-serving-food-to-group-of-friends-in-a-pub.jpg?s=612x612&w=0&k=20&c=EDqQ0oBcpFGV25p61vWUF5N-6lRJdbmZmQMe5kyuxyA=)] bg-cover h-28 lg:h-auto lg:w-40 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden " >
-  </div>
+  <img src={Image3} alt="resenia" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
   <div class=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div class="mb-8">
       <p class="text-sm text-gray-600 flex items-center">
         <svg class="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
         </svg>
-        Solo clientes
+        Solo a restaurantes visitados
       </p>
       <div class="text-gray-900 font-bold text-xl mb-2">Tus reseñas creadas</div>
       <p class="text-gray-700 text-sm">Todas las reseñas que hiciste a restauranes concurridos</p>
@@ -47,7 +48,7 @@ const TuristaHomeDsk = () => {
   </div>
 </div>
 <div class="max-w-sm mt-20 w-[50%] rounded-box shadow-xl  lg:max-w-full lg:flex">
-<div className='bg-[url(https://www.lavanguardia.com/files/article_main_microformat/uploads/2015/08/28/5fa28157b6339.jpeg)] bg-cover h-28 lg:h-auto lg:w-40 flex-none  bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden '></div>
+  <img src={Image2} alt="mapa" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
   <div class=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div class="mb-8 mt-5">
   
@@ -60,7 +61,7 @@ const TuristaHomeDsk = () => {
   </div>
 </div>
 <div class="max-w-sm mt-20 w-[50%] rounded-box shadow-xl  lg:max-w-full lg:flex">
-<div className='bg-[url(https://i0.wp.com/aldiaargentina.microjuris.com/wp-content/uploads/2020/03/hotel.jpg?fit=1000%2C665&ssl=1)] bg-cover h-28 lg:h-auto lg:w-40 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden '></div>
+  <img src={Image1} alt="alojamiento" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
   <div class=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div class="mb-8 mt-5">
   
