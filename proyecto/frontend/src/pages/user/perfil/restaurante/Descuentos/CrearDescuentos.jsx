@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 import Mensaje from '../../../../../components/alertas/Mensaje'
 import NavBar from '../../../../../components/nabvar/NavBar'
 import todoContext from '../../../../../context/todoContext'
-
+import { Link } from 'react-router-dom'
 const CrearDescuentos = () => {
 
   const TodoContext = useContext(todoContext)
@@ -59,7 +59,7 @@ const CrearDescuentos = () => {
   return (
     <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-95   '>
         <NavBar/>
-      
+       <Link to='/configuracionRest' className='absolute top-24 left-24 bg-wwe text-white rounded-lg px-6 py-1'>Volver</Link> 
 <form onSubmit={formik.handleSubmit} method='POST' className='bg-white md:w-3/12 m-auto mt-24 p-8 rounded-box shadow-xl'>
   {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }
     <h2 className='text-center text-4xl mb-5 font-bold text-wwe font-aref'>Crear descuento</h2>

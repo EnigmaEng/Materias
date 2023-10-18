@@ -8,21 +8,66 @@ import { Link } from 'react-router-dom'
 import {IoRestaurantOutline} from 'react-icons/io5';
 import {MdMenuBook} from 'react-icons/md';
 import {MdOutlineRateReview} from 'react-icons/md';
+import Image2 from '../../../../../assets/crearPlato.png';
+import Image1 from '../../../../../assets/menu.png';
 
 const RestauranteHomeDsk = () => {
   return (
    <div className='min-h-screen space-y-5 font-aref  dark:bg-zinc-800 dark:bg-opacity-95'>
   <NavBar/>
-  <Map/> 
-<div className='text-5xl text-center flex  justify-center items-center gap-20 '>
-    <Link to='/misResenias' className='shadow-xl bg-white w-52 rounded-box hover:scale-110 transition-all duration-300 delay-150 h-60 bg-home text-white ' ><p className='mt-10'>Mis reseñas</p>
-    <p className='ml-20  mt-5 text-5xl'><MdOutlineRateReview/></p></Link>
-    <Link to='/crearMenu' className='shadow-xl bg-white w-52 rounded-box hover:scale-110 transition-all duration-300 delay-150 h-60 bg-home text-white'> <p className='mt-10'>Crear plato </p>  
-    <p className='ml-20  mt-5 text-5xl'><IoRestaurantOutline/></p> 
-    </Link>
-    <Link to='/menu' className='shadow-xl bg-white w-52 rounded-box hover:scale-110 transition-all duration-300 delay-150 h-60 bg-home text-white'> <p className='mt-10'>Mi menu</p> 
-    <p className='ml-20  mt-10  text-6xl'><MdMenuBook/></p></Link>
-     </div>
+
+<div className='flex    justify-center items-center '>
+<div className='flex  gap-5 '>
+
+
+<div class="max-w-sm mt-20 w-[50%] rounded-box shadow-xl  lg:max-w-full lg:flex">
+  <div class="bg-[url(https://media.istockphoto.com/id/1307190527/photo/happy-waiter-serving-food-to-group-of-friends-in-a-pub.jpg?s=612x612&w=0&k=20&c=EDqQ0oBcpFGV25p61vWUF5N-6lRJdbmZmQMe5kyuxyA=)] bg-cover h-28 lg:h-auto lg:w-40 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden " >
+  </div>
+  <div class=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+    <div class="mb-8">
+      <p class="text-sm text-gray-600 flex items-center">
+        <svg class="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
+        </svg>
+        Solo clientes
+      </p>
+      <div class="text-gray-900 font-bold text-xl mb-2">Reseñas de tus clientes</div>
+      <p class="text-gray-700 text-sm">Reseñas realizadas por tus clientes</p>
+    </div>
+    <div class="flex  justify-center items-center">
+     <Link to='/misResenias' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white w-20 flex justify-center items-center  text-wwe border shadow-xl text-3xl rounded-lg h-12'><MdOutlineRateReview/></Link>
+    </div>
+  </div>
+</div>
+<div class="max-w-sm mt-20 w-[50%] rounded-box shadow-xl  lg:max-w-full lg:flex">
+<img src={Image1} alt="menu" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none  bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
+  <div class=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+    <div class="mb-8 mt-5">
+    
+      <div class="text-gray-900 font-bold text-xl mb-2">Menu</div>
+      <p class="text-gray-700 text-sm">Mira todos tus platos creados en tu menu</p>
+    </div>
+    <div class="flex  justify-center items-center">
+     <Link to='/menu' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white border shadow-xl w-20  text-wwe px-6 text-3xl rounded-lg h-12'>  <MdMenuBook/></Link>
+    </div>
+  </div>
+</div>
+<div class="max-w-sm mt-20 w-[50%] rounded-box shadow-xl  lg:max-w-full lg:flex">
+<img src={Image2} alt="menu" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none  bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
+  <div class=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+    <div class="mb-8 mt-5">
+   
+      <div class="text-gray-900 font-bold text-xl mb-2">Crear plato</div>
+      <p class="text-gray-700 text-sm">Agrega un plato a tu menu </p>
+    </div>
+    <div class="flex  justify-center items-center">
+     <Link to='/crearMenu' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white border shadow-xl w-20  text-wwe text-3xl rounded-lg flex justify-center items-center h-12'> <IoRestaurantOutline/> </Link>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+    
 
  <ListRestaurantes/>
     
