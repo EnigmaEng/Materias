@@ -65,11 +65,11 @@ function crearDescuento($idDescuento, $idRestaurante, $activo, $tituloDescuento,
     return false;
 }
 
-function obtenerPlatos()
-{
-    $plato = new PlatoRestaurante();
-    return $plato->obtenerPlatos();
-}
+// function obtenerPlatos()
+// {
+//     $plato = new PlatoRestaurante();
+//     return $plato->platosRestaurante();
+// }
 
 function obtenerRestaurante()
 {
@@ -140,21 +140,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     echo $resultado;
 
-
-
-
 }
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['accion']) && $_GET['accion'] == 'obtenerPlatos') {
-    $platos = obtenerPlatos();
+    if (isset($_GET['id_usuario_rest'])) {
+        $idUsuarioRest = $_GET['id_usuario_rest'];
 
-    header('Content-Type: application/json');
+    
+        $platoRestaurante = new PlatoRestaurante();
+        
+        $platos = $platoRestaurante->obtenerPlatosPorIdUsuarioRest($idUsuarioRest);
 
-    $platos_array = array();
-    foreach ($platos as $plato) {
-        $platos_array[] = $plato;
+        // Devuelve el resultado como JSON
+        header('Content-Type: application/json');
+        echo json_encode($platos);
+    } else {
+        echo json_encode(array('mensaje' => 'Falta el parámetro "id_usuario_rest".'));
     }
-
-    echo json_encode($platos_array);
 }

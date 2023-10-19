@@ -174,19 +174,15 @@ class PlatoRestaurante extends CrudBasico
         }
     }
 
+ public function obtenerPlatosPorIdUsuarioRest($idUsuarioRest) {
+        $query = "SELECT * FROM plato_restaurantes WHERE id_usuario_rest = :id_usuario_rest";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id_usuario_rest", $idUsuarioRest, PDO::PARAM_INT);
+        $stmt->execute();
 
-    public function platosRestaurante()
-    {
-        try {
-            $query = "SELECT * FROM plato_restaurantes WHERE id_usuario_rest= :id_usuario_rest";
-            $stmt = $this->getConn()->prepare($query);
-            $stmt->bindValue(":id_usuario_rest", $this->getIdUsuario());
-            $stmt->execute();
-            $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
-            return $resultado;
-        } catch (PDOException $ex) {
-            return "Error en el select: " . $ex;
-        }
+        // Obtén los resultados como un arreglo asociativo
+        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultados;
     }
-
 }

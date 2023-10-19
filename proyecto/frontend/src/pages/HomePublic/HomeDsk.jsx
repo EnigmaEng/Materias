@@ -1,9 +1,19 @@
 import DarkMode from "../../components/Buttons/DarkMode";
-
 import { Link } from "react-router-dom";
 import Image from "../../assets/logo-white.png";
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
+import Video from '../../assets/video-fondo.mp4'
 const HomeDsk = () => {
+
+
+  useEffect(() => {
+    AOS.init({ 
+      duration: 1700, // Duración de la animación en milisegundos
+    });
+  }, []);
+
   return (
   <>
 <div className="flex w-full ">
@@ -14,18 +24,24 @@ const HomeDsk = () => {
     muted
     className="absolute  inset-0 w-full h-full object-cover"
   >
-    <source src='https://vod-progressive.akamaized.net/exp=1697646742~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F4025%2F22%2F570129414%2F2695036822.mp4~hmac=c1395630576783b2cea742fe736a28d6cce0f86773d587ebf0afef73590914c5/vimeo-prod-skyfire-std-us/01/4025/22/570129414/2695036822.mp4?filename=file.mp4' type="video/mp4" />
+    <source src={Video}  type="video/mp4" />
     
   </video>
 
-  <div className="z-10 flex flex-col w-6/12 flex-grow dark:bg-zinc-800 bg-wwe bg-opacity-50 dark:text-white dark:bg-opacity-60  place-items-center gap-5 py-52 min-h-screen ">
-    <div className="absolute top-10 left-10">
-       <DarkMode/>
-    </div>
+  <div className="z-10 flex flex-col w-6/12 flex-grow bg-zinc-800 bg-opacity-60 place-items-center gap-5 py-52 min-h-screen ">
    
-    <h1 className="text-6xl text-white font-aref mb-4 ">WHERE WE EAT</h1>
-        <img src={Image} alt="" className="w-40 mb-20"/>
-  <h2 className="text-3xl text-white font-aref">BIENVENIDO!</h2>
+   <div data-aos="fade-down" className="flex flex-col justify-center items-center">
+     <h1 className="text-6xl text-white font-aref font-semibold mb-4 ">WHERE WE EAT</h1>
+     </div>
+     <div>
+           <img src={Image} alt="" className="w-40 mb-20"/>
+     </div>
+   
+   
+   <div data-aos="fade-right">
+      <h2 className="text-4xl text-white font-aref font-semibold">BIENVENIDO!</h2>
+   </div>
+
   
 
     <div className="flex gap-5">
