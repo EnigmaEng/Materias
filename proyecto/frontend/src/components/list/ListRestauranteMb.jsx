@@ -33,7 +33,7 @@ const ListRestauranteMb = () => {
 
 
   return (
-    <div className='p-2 bg-white rounded-box w-11/12 m-auto shadow-xl mb-2 border '>
+    <div className='p-2 bg-white dark:bg-zinc-800 rounded-box w-11/12 m-auto shadow-xl mb-2  '>
       <div className='flex flex-col text-center text-red-800 mb-2 py-4 gap-2'>
        <input
   type='text'
@@ -48,13 +48,13 @@ const ListRestauranteMb = () => {
     <p className='w-80 m-auto px-12 py-10 text-black text-lg'>Restaurante no encontrado..</p>
   ) : (
     product.map((item, index) => (
-     <div class="bg-white" key={index}>
+     <div class="bg-white rounded-lg " key={index}>
   <div class="mx-auto max-w-2xl px-4 py-5 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
 
 
     <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
       <a href="#" class="group">
-        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200  xl:aspect-h-8 xl:aspect-w-7">
           <img src={item.url_img_usuario} alt="Foto-restaurante" class="h-full w-full object-cover object-center group-hover:opacity-75"/>
         </div>
         <h3 class="mt-4 text-lg text-center font-aref pb-5 font-bold ">{item.nombre_restaurante}</h3>

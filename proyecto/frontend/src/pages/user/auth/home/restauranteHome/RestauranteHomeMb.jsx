@@ -1,32 +1,44 @@
 import React from 'react'
 import Image from '../../../../../assets/logoubi.png'
 import NavBar from '../../../../../components/nabvar/NavBar'
-import Map from '../../../../../components/maps/Map'
+import { Link } from 'react-router-dom'
 import ListRestauranteMb from '../../../../../components/list/ListRestauranteMb'
 import FooterDsk from '../../../../../components/Footer/FooterDsk'
-import CategoriasMb from '../../../../../components/categorias/CategoriasMb'
-
+import {IoRestaurantOutline} from 'react-icons/io5'
+import {MdMenuBook} from 'react-icons/md'
+import {MdOutlineRateReview} from 'react-icons/md'
 
 const RestauranteHomeMb = () => {
   return (
    <div className='min-h-screen  dark:bg-zinc-800 dark:bg-opacity-95'>
   <NavBar/>
-  <div className="collapse mt-5 mb-5 w-[90%] m-auto shadow-xl">
-  <input type="checkbox" className="peer" /> 
-  <div className="collapse-title flex font-aref text-3xl bg-gradient-to-r from-wwe via-red-600  to-red-500  bg-opacity-75 text-white text-center peer-checked:bg-white  peer-checked:text-white">
-   <p className='text-white py-5'>Busca en el mapa</p><img src={Image} alt="logo-ubicacion" className='w-14 m-auto' />
-  </div>
-  <div className="collapse-content bg-gradient-to-r via-red-600 from-wwe to-red-500 text-white peer-checked:white peer-checked:text-white"> 
-    <Map/>
-  </div>
+ 
+    <div className='flex justify-center items-center mt-20 gap-2'>
+
+<div className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white rounded-lg shadow-xl w-28 h-24 flex flex-col justify-center items-center'>
+  <p className='text-center text-wwe text-sm mb-2 font-semibold font-aref'>Mis Reseñas</p>
+  <Link to='/misResenias' className='text-wwe text-center text-3xl'>
+<MdOutlineRateReview/>
+  </Link>
 </div>
+
+<div className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white rounded-lg shadow-xl w-28 h-24 flex flex-col justify-center items-center'>
+    <p className='text-center text-wwe text-sm mb-2 font-semibold font-aref'>Mi Menu</p>
+  <Link to='/menu' className='text-wwe text-center text-3xl'>
   
-  <CategoriasMb/>
-   {/* <div className='text-sm text-center flex  justify-center items-center gap-5'>
-    <div className='shadow-xl bg-white w-14 border h-20' ><p>Opcion1</p></div>
-    <div className='shadow-xl bg-white w-14 border h-20'>Opcion2</div>
-    <div className='shadow-xl bg-white w-14 border h-20'>Opcion3</div>
-     </div> */}
+<MdMenuBook/>
+  </Link>
+</div>
+
+<div className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white rounded-lg shadow-xl flex flex-col justify-center items-center w-28 h-24 '>
+  <p className='text-sm text-wwe text-center font-semibold font-aref'>Crear Plato</p>
+  <Link to='/crearMenu' className='text-wwe text-center text-3xl'>
+<IoRestaurantOutline/>
+  </Link>
+</div>
+
+ </div>
+  
 
     <div className='mt-5'>
        <ListRestauranteMb/> 

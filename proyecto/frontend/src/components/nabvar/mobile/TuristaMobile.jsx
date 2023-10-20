@@ -26,11 +26,11 @@ const TuristaMobile = () => {
       </label>
       <ul tabIndex={0} className="z-10 px-4 py-4 z dropdown-content mt-3 border bg-white rounded-box w-40">
         <li className=' hover:bg-gray-200 rounded-lg p-2'>
-          <Link to='/perrfilTurista' className="gap-2 text-center w-40 text-black flex">
+          <Link to='/perfilTurista' className="gap-2 text-center w-40 text-black flex">
          Perfil 
           </Link>
         </li>
-        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/configuracionTurista' className='text-black flex gap-4'> Editar perfil</Link></li>
+        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/editarPerfilTurista' className='text-black flex gap-4'> Editar perfil</Link></li>
         <li className=' hover:bg-gray-200 rounded-lg p-2'><button onClick={() => cerrarSesion()}  className='text-black flex gap-4  w-24'> <div className='mt-1'>
           <SlLogout/> </div> Salir </button></li>
       </ul>

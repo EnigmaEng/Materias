@@ -24,6 +24,7 @@ import RutaProtegida from './context/RutaProtegida'
 import MisReseniasTurista from './pages/user/resenias/misResenias/MisReseniasTurista'
 import PerfilCliente from './pages/user/perfil/restaurante/PerfilCliente/PerfilCliente'
 import MapContent from './components/maps/MapContent'
+import EditarPerfilTurista from './pages/user/perfil/turista/Configuracion/EditarPerfil/EditarPerfilTurista'
 function App() {
 
 
@@ -59,6 +60,7 @@ function App() {
 
 <Route path='/configuracionTurista' element={<ConfiguracionTurista/>}/>
 <Route path='/perfilTurista' element={<PerfilTurista/>}/>
+<Route path='/editarPerfilTurista' element={<EditarPerfilTurista/>}/>
 {/* Resenias */}
 <Route path='/crearResenia' element={<CrearResenia/>} />
 <Route path='/misResenias' element={<MisResenias/>}/>
