@@ -2,7 +2,7 @@
 require_once '../models/restaurante.php';
 require_once '../models/platoRestaurante.php';
 require_once '../models/descuento.php';
-require_once 'cors.php';
+require_once './cors.php';
 
 function insertarController($alias = '', $url_img_usuario = '', $email = '', $contrasena = '', $rol = '', $nombre = '')
 {
@@ -65,11 +65,18 @@ function crearDescuento($idDescuento, $idRestaurante, $activo, $tituloDescuento,
     return false;
 }
 
-// function obtenerPlatos()
-// {
-//     $plato = new PlatoRestaurante();
-//     return $plato->platosRestaurante();
-// }
+function obtenerPlatos($id_usuario_rest)
+{
+    $platos = new PlatoRestaurante();
+    // Obtener la lista de restaurantes
+    $obtenerPlatos = $platos->obtenerPlatosPorIdUsuarioRest($id_usuario_rest);
+
+    if (!empty($obtenerPlatos)) {
+        return json_encode($obtenerPlatos);
+    } else {
+        return "No se encontraron restaurantes";
+    }
+}
 
 function obtenerRestaurante()
 {
@@ -133,6 +140,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case "obtenerRestaurantes":
                 $resultado = obtenerRestaurante();
                 break;
+            case "obtenerPlatos":
+                $resultado = obtenerPlatos($data['id_usuario_rest']);
+                break;
             default:
                 $resultado = "Error en el tipo de accion, intente nuevamente";
                 break;
@@ -142,19 +152,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['accion']) && $_GET['accion'] == 'obtenerPlatos') {
-    if (isset($_GET['id_usuario_rest'])) {
-        $idUsuarioRest = $_GET['id_usuario_rest'];
+// if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['accion']) && $_GET['accion'] == 'obtenerPlatos') {
+//     if (isset($_GET['id_usuario_rest'])) {
+//         $idUsuarioRest = $_GET['id_usuario_rest'];
 
     
-        $platoRestaurante = new PlatoRestaurante();
+//         $platoRestaurante = new PlatoRestaurante();
         
-        $platos = $platoRestaurante->obtenerPlatosPorIdUsuarioRest($idUsuarioRest);
+//         $platos = $platoRestaurante->obtenerPlatosPorIdUsuarioRest($idUsuarioRest);
 
-        // Devuelve el resultado como JSON
-        header('Content-Type: application/json');
-        echo json_encode($platos);
-    } else {
-        echo json_encode(array('mensaje' => 'Falta el parámetro "id_usuario_rest".'));
-    }
-}
+//         // Devuelve el resultado como JSON
+//         header('Content-Type: application/json');
+//         echo json_encode($platos);
+//     } else {
+//         echo json_encode(array('mensaje' => 'Falta el parámetro "id_usuario_rest".'));
+//     }
+// }

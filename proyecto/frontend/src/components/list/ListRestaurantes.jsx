@@ -75,7 +75,7 @@ const ListRestaurantes = () => {
    
     <div className='flex justify-between'>
   <button
-    className=' px-4 py-1 mt-2 bg-white dark:bg-red-800 dark:text-white text-black rounded-lg shadow-xl'
+    className=' px-4 py-1 mt-2 bg-white bg-zinc-100 border dark:bg-wwe dark:border-none dark:text-white text-black rounded-lg shadow-xl'
     onClick={handlePaginaAnterior}
     disabled={pagina === 1 || buscando}
   >
@@ -83,7 +83,7 @@ const ListRestaurantes = () => {
     Anterior
   </button>
   <button
-    className=' px-4 py-1 mt-2 bg-white text-black dark:bg-red-800 dark:text-white rounded-lg shadow-xl'
+    className=' px-4 py-1 mt-2 bg-zinc-100 border dark:border-none text-black dark:bg-wwe dark:text-white rounded-lg shadow-xl'
     onClick={handlePaginaSiguiente}
     disabled={pagina === 2 || buscando}
   >
