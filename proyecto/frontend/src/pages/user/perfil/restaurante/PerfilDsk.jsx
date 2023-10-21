@@ -2,17 +2,14 @@ import React, { useContext, useEffect } from 'react'
 import todoContext from '../../../../context/todoContext'
 import { Link } from 'react-router-dom';
 import NavBar from '../../../../components/nabvar/NavBar';
+import Home from '../../../HomePublic/Home';
 
 
 const PerfilDsk = () => {
   const TodoContext = useContext(todoContext);
-  const { usuario, autenticado, usuarioAutenticado } = TodoContext;
+  const { usuario} = TodoContext;
 
- useEffect(() => {
- 
-usuarioAutenticado()
 
-  }, [autenticado]);
 
   const resenas = [
     { usuario: 'Manolo' , calificacion1: '7', calificacion2: '8', calificacion3: '10', calificacion4: '6'},
@@ -64,9 +61,7 @@ usuarioAutenticado()
         </div>
           </>
        : 
-        <div className='min-h-screen'>
-          <p>No user</p>
-        </div>
+      <Home/>
     }
       </div>
     </>

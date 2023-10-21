@@ -120,11 +120,9 @@ class Restaurante extends Usuario implements Crud
             die("Error en la preparacion de la consulta");
         }
 
-        if (!$stmt->execute()) {
-            die("Error en la ejecucion de la consulta");
-        }
+        $stmt->execute();
 
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $data;
     }
 
