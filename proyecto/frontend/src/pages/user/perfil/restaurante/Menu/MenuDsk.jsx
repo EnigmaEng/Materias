@@ -9,25 +9,27 @@ const MenuDsk = () => {
 const [platos, setPlatos] = useState([])
 
 const TodoContext = useContext(todoContext)
-const {usuario} = TodoContext
+const {usuario, autenticado} = TodoContext
 
 
-console.log(usuario.id_usuario)
-const id = usuario.id_usuario
+
 
     const getPlatos = async () => {
       const accion = {
         "accion": "obtenerPlatos",
-        "id_usuario_rest": id
+        "id_usuario_rest": usuario.id_usuario
       }
       const endpoint = '/restauranteController.php'
       const URL = clienteAxios.post(endpoint, accion)
       const res = await URL
       setPlatos(res.data)
     }
-    useEffect(() =>{  
+ useEffect(() => {
+  if (autenticado && usuario && usuario.id_usuario) {
+
     getPlatos();
-    },[platos])
+  }
+}, [autenticado, usuario]);
 
   return (
     <div className='min-h-screen space-y-28  dark:bg-zinc-800 dark:bg-opacity-95'> 
