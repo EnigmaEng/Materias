@@ -59,7 +59,7 @@ iniciarSesion(userData)
       </button>
 </Link>
 
-        <form onSubmit={formik.handleSubmit} className="bg-white   p-4 mt-52 mb-4 h-[500px] rounded-lg shadow-xl  ">
+        <form onSubmit={formik.handleSubmit} className="bg-white   p-4 mt-52 mb-4 h-[550px] rounded-lg shadow-xl  ">
          <img src={Image} alt="logo" className="w-20 m-auto "/>
 <h2 className="text-center font-bold text-red-800 text-4xl mb-4">Inicia sesión</h2>
       <div className="flex flex-col mb-4  ">
