@@ -156,14 +156,14 @@ CREATE TABLE `turista_resena_rest` (
   FOREIGN KEY (id_usuario_turista) REFERENCES `turista_sealoja_alojamiento` (id_usuario_turista),
   FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante` (id_usuario));
 
-CREATE TABLE turista_visita_rest (
+CREATE TABLE `turista_visita_rest` (
   id_turista INT(10) UNSIGNED,
   id_rest INT (10) UNSIGNED,
   token INT (10) UNSIGNED UNIQUE,
   fecha_visita DATE,
   PRIMARY KEY (id_turista, id_rest),
-  FOREIGN KEY (id_turista) REFERENCES `turista` (id_usuario),
-  FOREIGN KEY (id_rest) REFERENCES `restaurante` (id_usuario)
+  FOREIGN KEY (id_turista) REFERENCES `turista_sealoja_alojamiento` (id_usuario_turista),
+  FOREIGN KEY (id_rest) REFERENCES `admin_aprueba_rest` (id_usuario_rest)
   );
 
 CREATE TABLE `restaurante_tiene_descuento` (
@@ -302,7 +302,7 @@ INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Bulevar España', 'Juan Carlos Gómez', '4321');
 
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
-VALUES (LAST_INSERT_ID(), 'Le Maréchal', LAST_INSERT_ID());
+VALUES (LAST_INSERT_ID(), 'Le Marechal', LAST_INSERT_ID());
 
 -- Restaurante 2
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
@@ -322,7 +322,7 @@ INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Calle Uruguay', 'Plaza Independencia', '5678');
 
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
-VALUES (LAST_INSERT_ID(), 'Sabores del Río', LAST_INSERT_ID());
+VALUES (LAST_INSERT_ID(), 'Sabores del Rio', LAST_INSERT_ID());
 
 -- Restaurante 4
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
@@ -372,7 +372,7 @@ INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Rambla República de México', 'Plaza Gomensoro', '1819');
 
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
-VALUES (LAST_INSERT_ID(), 'Paraíso Gourmet', LAST_INSERT_ID());
+VALUES (LAST_INSERT_ID(), 'Paraiso Gourmet', LAST_INSERT_ID());
 
 -- Restaurante 9
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
