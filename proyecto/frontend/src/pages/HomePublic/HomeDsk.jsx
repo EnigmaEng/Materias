@@ -16,13 +16,13 @@ const HomeDsk = () => {
 
   return (
   <>
-<div className="flex w-full ">
+<div className="flex   ">
 
   <video
     autoPlay
     loop
     muted
-    className="absolute  inset-0 w-full h-full object-cover"
+    className="top-0 fixed w-full "
   >
     <source src={Video}  type="video/mp4" />
     
