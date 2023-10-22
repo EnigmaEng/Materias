@@ -66,9 +66,7 @@ CREATE TABLE `sesiones`(
     fecha_ultima_sesion DATE NOT NULL, #Se crea cuando el usuario INICIA sesion.
     ip VARCHAR (16),
     max_intentos INT (1),
-    id_usuario_rest INT (10) UNSIGNED,
-    PRIMARY KEY (id_sesion,fecha_ultima_sesion),
-    FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante`(id_usuario)
+    PRIMARY KEY (id_sesion,fecha_ultima_sesion)
 );
 
 CREATE TABLE `tipo_restaurantes`(
@@ -155,11 +153,19 @@ CREATE TABLE `turista_resena_rest` (
   calificacion_menu ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
   calificacion_general ENUM('Muy bueno', 'Bueno', 'Medio', 'Malo', 'Muy malo') NOT NULL,
   PRIMARY KEY (id_usuario_turista, id_usuario_rest),
-  /* CHECK (fecha >= fecha_ini_alojamiento AND fecha >= fecha_fin_alojamiento + 90), REVISAR ESTO !!! */
   FOREIGN KEY (id_usuario_turista) REFERENCES `turista_sealoja_alojamiento` (id_usuario_turista),
   FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante` (id_usuario));
 
-  
+CREATE TABLE turista_visita_rest (
+  id_turista INT(10) UNSIGNED,
+  id_rest INT (10) UNSIGNED,
+  token INT (10) UNSIGNED UNIQUE,
+  fecha_visita DATE,
+  PRIMARY KEY (id_turista, id_rest),
+  FOREIGN KEY (id_turista) REFERENCES `turista` (id_usuario),
+  FOREIGN KEY (id_rest) REFERENCES `restaurante` (id_usuario)
+  );
+
 CREATE TABLE `restaurante_tiene_descuento` (
   id_descuento INT(10) UNSIGNED,
   id_usuario_rest INT(10) UNSIGNED,
