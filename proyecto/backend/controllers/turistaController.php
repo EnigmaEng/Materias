@@ -56,9 +56,7 @@ function borrarController($tabla, $datos){
     echo $resultado;
 }
 
-function reseniaRestaurante(){
 
-}
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -116,4 +114,6 @@ if($_SERVER['REQUEST_METHOD'] == 'DELETE' && isset($_GET['accion']) && $_GET['ac
     
     borrarController("usuarios",$datos);
 }
+
+
 

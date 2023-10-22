@@ -81,20 +81,35 @@ function obtenerPlatos($id_usuario_rest)
 function obtenerRestaurante()
 {
     $restaurante = new Restaurante();
-    // Obtener la lista de restaurantes
     $restaurantes = $restaurante->obtenerRestaurantes();
+    
+    header('Content-Type: application/json');
+   
+    $response = "";
 
-    if (!empty($restaurantes)) {
-        return json_encode($restaurantes);
-    } else {
-        return "No se encontraron restaurantes";
+    foreach ($restaurantes as $restaurante) {
+        // Genera un objeto JSON separado en cada iteración
+        $restaurantesDatos = json_encode(array(
+            "nombre_restaurante" => $restaurante->nombre_restaurante,
+            "foto_usuario" => $restaurante->foto_usuario
+        ));
+
+        // Agrega una coma para separar los objetos JSON, excepto en la primera iteración
+        if (!empty($response)) {
+            $response .= ",";
+        }
+
+        $response .= $restaurantesDatos;
     }
+
+    return "[$response]"; 
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
-
+    $resultado="xd";
 
     if (isset($data['accion'])) {
         switch ($data['accion']) {
@@ -137,7 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
                 break;
             case "obtenerRestaurantes":
-                $resultado = obtenerRestaurante();
+                $resultado=obtenerRestaurante();
                 break;
             case "obtenerPlatos":
                 $resultado = obtenerPlatos($data['id_usuario_rest']);
@@ -147,8 +162,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 break;
         }
     }
+
     echo $resultado;
-
 }
-
-

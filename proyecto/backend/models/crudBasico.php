@@ -1,5 +1,8 @@
 <?php
 
+require_once '../models/dataBaseConnection.php';
+require_once (__DIR__.'/crud.php');
+
 class CrudBasico extends DataBaseConnection implements Crud
 {
 
