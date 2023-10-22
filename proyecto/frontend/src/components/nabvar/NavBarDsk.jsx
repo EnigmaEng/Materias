@@ -104,23 +104,29 @@ usuarioAutenticado();
     ) : usuario && usuario.rol.nro_empleado ? 
   (
     // Admin Navbar
- <div className="navbar bg-wwe  shadow-xl">
-  <div className="flex-1 gap-5">
-    <div className='absolute left-5'>
-       <DarkMode/>
+
+    <div className=''>
+      <div className='min-h-screen bg-gray-100'>
+        
+        <div className='absolute left-0 h-full glass p-8 w-80 text-black space-y-10 py-10'>
+          
+          <Link to='/homeAuth'>
+             <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="logo" className='w-14 rounded-full m-auto mb-8' />
+          </Link>
+
+          <div className='shadow-xl px-6 py-3 rounded-box'>
+            <img src={usuario.rol.url_img_usuario} alt="foto-perfil" className='w-24 h-24 rounded-full bg-zinc-500 shadow-xl m-auto' />
+            <p className='text-center text-white mt-2'>{usuario.rol.nombres}</p>
+          </div>
+           <div className='shadow-xl hover:scale-125 transition-all duration-300 delay-150 px-6 py-3 rounded-box'>
+            <p>Solicitudes </p>
+          </div>
+           <div className='shadow-xl hover:scale-125 transition-all duration-300 delay-150 px-6 py-3 rounded-box'>
+            <p>Mas solicitudes </p>
+          </div>
+        </div>
     </div>
-   
-    <Link to='/homeAuth' className='m-auto w-14'>  
-    <img src={Image} alt="logo"/>
-    </Link>
-     
-     <div className='text-white text-lg'>
-      <p className='space-x-5'>{usuario.nombres} {usuario.apellidos}</p>
-      
-     </div>
-  </div>
- 
-</div>
+    </div>
 
   ) :  <div className="navbar bg-wwe  shadow-xl">
   <div className="flex-1 gap-5">

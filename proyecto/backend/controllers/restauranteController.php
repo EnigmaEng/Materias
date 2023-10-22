@@ -136,7 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $resultado = "No se ha podido crear el descuento";
                 }
                 break;
-
             case "obtenerRestaurantes":
                 $resultado = obtenerRestaurante();
                 break;
@@ -152,19 +151,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 }
 
-// if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['accion']) && $_GET['accion'] == 'obtenerPlatos') {
-//     if (isset($_GET['id_usuario_rest'])) {
-//         $idUsuarioRest = $_GET['id_usuario_rest'];
 
-    
-//         $platoRestaurante = new PlatoRestaurante();
-        
-//         $platos = $platoRestaurante->obtenerPlatosPorIdUsuarioRest($idUsuarioRest);
-
-//         // Devuelve el resultado como JSON
-//         header('Content-Type: application/json');
-//         echo json_encode($platos);
-//     } else {
-//         echo json_encode(array('mensaje' => 'Falta el parámetro "id_usuario_rest".'));
-//     }
-// }

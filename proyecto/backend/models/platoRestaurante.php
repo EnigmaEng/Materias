@@ -181,7 +181,7 @@ class PlatoRestaurante extends CrudBasico
         $stmt->execute();
 
         // Obtén los resultados como un arreglo asociativo
-        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $resultados = $stmt->fetchAll(PDO::FETCH_OBJ);
 
         return $resultados;
     }

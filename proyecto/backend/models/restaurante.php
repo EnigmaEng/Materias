@@ -118,6 +118,7 @@ class Restaurante extends Usuario implements Crud
 
         $stmt->execute();
 
+
         $data = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $data;
     }
