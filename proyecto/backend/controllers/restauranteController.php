@@ -136,7 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $resultado = "No se ha podido crear el descuento";
                 }
                 break;
-
             case "obtenerRestaurantes":
                 $resultado = obtenerRestaurante();
                 break;
