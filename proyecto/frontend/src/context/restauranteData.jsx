@@ -37,9 +37,9 @@ const restauranteData = () => {
     } catch (error) {
         console.log(error);
     }
-
-
     };
+
+
 
     //pagina es el valor del estado que esta en ese momento 
  

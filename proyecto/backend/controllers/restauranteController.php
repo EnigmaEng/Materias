@@ -78,6 +78,7 @@ function obtenerPlatos($id_usuario_rest)
     }
 }
 
+
 function obtenerRestaurante()
 {
     $restaurante = new Restaurante();
@@ -105,6 +106,19 @@ function obtenerRestaurante()
     return "[$response]"; 
 }
 
+
+function obtenerRestauranteById($id)
+{
+    $restaurante = new Restaurante();
+    $restauranteById = $restaurante->obtenerRestauranteById($id);
+    header('Content-Type: application/json');
+
+    if (!empty($restauranteById)) {
+        return json_encode($restauranteById);
+    } else {
+        return "No se encontraron restaurantes";
+    }
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
@@ -156,6 +170,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 break;
             case "obtenerPlatos":
                 $resultado = obtenerPlatos($data['id_usuario_rest']);
+                break;
+            case "restauranteById":
+                $resultado = obtenerRestauranteById($data['id_usuario']);
                 break;
             default:
                 $resultado = "Error en el tipo de accion, intente nuevamente";

@@ -83,7 +83,7 @@ function App() {
 
 {/* Switch */}
 
-   <Route path="/clientePerfil/:id_usuario" component={<PerfilCliente/>} />
+   <Route path="/clientePerfil/:id_usuario" component={PerfilCliente} />
 
 
     </Routes>
