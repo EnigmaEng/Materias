@@ -22,7 +22,7 @@ const HomeDsk = () => {
     autoPlay
     loop
     muted
-    className="top-0 fixed w-full "
+    className="fixed w-full  "
   >
     <source src={Video}  type="video/mp4" />
     

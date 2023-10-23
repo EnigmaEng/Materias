@@ -106,7 +106,7 @@ usuarioAutenticado();
     // Admin Navbar
 
     <div className=''>
-      <div className='min-h-screen bg-gray-100'>
+      <div className='min-h-screen'>
         
         <div className='absolute left-0 h-full glass p-8 w-80 text-black space-y-10 py-10'>
           
@@ -118,17 +118,17 @@ usuarioAutenticado();
             <img src={usuario.rol.url_img_usuario} alt="foto-perfil" className='w-24 h-24 rounded-full bg-zinc-500 shadow-xl m-auto' />
             <p className='text-center text-white mt-2'>{usuario.rol.nombres}</p>
           </div>
-           <div className='shadow-xl hover:scale-125 transition-all duration-300 delay-150 px-6 py-3 rounded-box'>
+           <div className='shadow-xl hover:text-wwe px-6 py-3 rounded-box font-aref min-w-max'>
             <p>Solicitudes </p>
           </div>
-           <div className='shadow-xl hover:scale-125 transition-all duration-300 delay-150 px-6 py-3 rounded-box'>
-            <p>Mas solicitudes </p>
+           <div className='shadow-xl hover:text-wwe px-6 py-3 rounded-box font-aref min-w-max'>
+            <p> solicitudes </p>
           </div>
         </div>
     </div>
     </div>
 
-  ) :  <div className="navbar bg-wwe  shadow-xl">
+  ) :  <div className="rounded-full  bg-wwe  shadow-xl">
   <div className="flex-1 gap-5">
     <div className='absolute left-5'>
        <DarkMode/>

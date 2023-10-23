@@ -1,15 +1,18 @@
 import React from 'react'
 import NavBar from '../../../../../components/nabvar/NavBar';
+import AdminHomeDsk from './AdminHomeDsk';
+import AdminHomeMb from './AdminHomeMb';
 
 const AdminHome = () => {
   return (
-    <div className='min-h-screen text-5xl flex'>
-<NavBar/>
-    <div className='w-full'>
-        <p className='text-center'>Tabla </p>
-         <p className='text-center text-5xl font-aref font-bold text-wwe mt-24'>Si clarrooo </p>
-    </div>
-    </div>
+    <>
+   <div className="hidden md:block  ">
+  <AdminHomeDsk/>
+   </div>
+   <div className="md:hidden">
+ <AdminHomeMb/>
+   </div>
+   </>
   )
 }
 
