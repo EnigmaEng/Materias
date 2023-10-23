@@ -110,11 +110,11 @@ class Restaurante extends Usuario implements Crud
 
     public function obtenerRestaurantes()
     {
-        $query = "SELECT r.nombre AS nombre_restaurante, u.url_img_usuario AS foto_usuario
-                FROM wwe.restaurante r
-                JOIN wwe.usuarios u ON r.id_usuario = u.id_usuario
-                JOIN wwe.admin_aprueba_rest m ON m.id_usuario_rest = u.id_usuario
-                WHERE m.fecha_fin_sub >= CURDATE()";
+        $query = "SELECT u.id_usuario AS id_usuario,r.nombre AS nombre_restaurante, u.url_img_usuario AS foto_usuario
+        FROM wwe.restaurante r
+        JOIN wwe.usuarios u ON r.id_usuario = u.id_usuario
+        JOIN wwe.admin_aprueba_rest m ON m.id_usuario_rest = u.id_usuario
+        WHERE m.fecha_fin_sub >= CURDATE()";
 
         $stmt = $this->getConn()->prepare($query);
 
@@ -122,12 +122,13 @@ class Restaurante extends Usuario implements Crud
 
 
         $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-        
+
         return $data;
     }
 
 
-    public function obtenerRestauranteById($id){
+    public function obtenerRestauranteById($id)
+    {
         $query = "  SELECT *
             FROM restaurante, usuarios, admin_aprueba_rest
             WHERE restaurante.id_usuario = usuarios.id_usuario
@@ -135,11 +136,11 @@ class Restaurante extends Usuario implements Crud
             AND admin_aprueba_rest.id_usuario_rest = usuarios.id_usuario
             AND admin_aprueba_rest.fecha_fin_sub >= CURDATE()";
 
-            $stmt = $this->getConn()->prepare($query);
-            $stmt->bindParam(":id_usuario", $id, PDO::PARAM_INT);
-            $stmt->execute();
-            $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-            return $data;
+        $stmt = $this->getConn()->prepare($query);
+        $stmt->bindParam(":id_usuario", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $data;
     }
 
 }

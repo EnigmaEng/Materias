@@ -91,6 +91,7 @@ function obtenerRestaurante()
     foreach ($restaurantes as $restaurante) {
         // Genera un objeto JSON separado en cada iteración
         $restaurantesDatos = json_encode(array(
+            "id_usuario"=>$restaurante->id_usuario,
             "nombre_restaurante" => $restaurante->nombre_restaurante,
             "foto_usuario" => $restaurante->foto_usuario
         ));
