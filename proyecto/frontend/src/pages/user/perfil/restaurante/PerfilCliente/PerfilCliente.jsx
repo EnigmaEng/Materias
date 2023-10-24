@@ -7,15 +7,17 @@ const PerfilCliente = () => {
   const { id_usuario } = useParams();
 
   const [restaurante, setRestaurante] = useState([]);
+const [menu, setMenu] = useState([]);
+
+   const endpoint = '/restauranteController.php';
+ 
 
 const getProductById = async () => {
-
-  try {
-     const endpoint = '/restauranteController.php';
-  const accion = {
+ const accion = {
     "accion": "restauranteById",
     "id_usuario": id_usuario
   }
+  try {
   const res = await clienteAxios.post(endpoint, accion)
   console.log(res.data)
  setRestaurante(res.data);
@@ -26,18 +28,34 @@ const getProductById = async () => {
  
 }
 
+const getMenuById = async() => {
+
+  const accion = {
+    "accion": "obtenerPlatos",
+    "id_usuario_rest": id_usuario
+  }
+  try {
+    const res = await clienteAxios.post(endpoint,accion)
+    setMenu(res.data)
+    console.log(res.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
   useEffect(() => {
     getProductById();
+    getMenuById();
   }, [id_usuario]);
 
   if (!restaurante) {
     return (<div className='min-h-screen'>
-    <p className='text-center font-aref text-2xl text-black'>....</p></div>);
+    <p className='text-center font-aref text-2xl  text-black'>Cagando..</p></div>);
   }
 
   return (
     <>
-    <div className='min-h-screen '>
+    <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-80 '>
       <NavBar/>
     {
       restaurante.map((item,index) => (
@@ -48,9 +66,29 @@ const getProductById = async () => {
      <p className='text-center text-zinc-600 font-semibold text-2xl'>Ubicacion:</p>
      </div>
     </div>
+   
       ))
-      
+     
     }
+    <p  className='text-center text-3xl font-semibold text-wwe mt-5'>Menus</p>
+    <div className=' w-6/12 m-auto mt-5 p-1  grid grid-cols-3  gap-5 ' >
+   
+    {
+      menu.map((item,index) => (
+        
+          <div className='rounded-lg shadow-xl border bg-white text-black  font-aref  m-auto h-64 w-52 text-center ' key={index}>
+            <h2 className='font-semibold text-3xl mt-3'>{item.nombre_plato}</h2>
+            <img src={item.url_img_menu} alt="foto-menu" className='bg-zinc-300 h-28' />
+            <div className=' max-h-min grd grid-cols-1  mt-2 h-[39%]'>
+              <p className='text-lg'>{item.descripcion}</p>
+              <p className='text-2xl'>{item.costo}$</p>
+            </div>
+            
+          </div>
+       
+      ))
+    } 
+    </div>
    </div>
     </>
   );

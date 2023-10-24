@@ -4,32 +4,26 @@ import {MdMenuBook} from 'react-icons/md'
 import { useState, useEffect, useContext } from 'react';
 import clienteAxios from '../../../../../config/axios';
 import todoContext from '../../../../../context/todoContext';
+import menuData from '../../../../../context/menuData';
 const MenuDsk = () => {
 
-const [platos, setPlatos] = useState([])
+
+const {
+  getPlatos,
+  platos
+} = menuData();
 
 const TodoContext = useContext(todoContext)
 const {usuario, autenticado} = TodoContext
 
-
-
-
-    const getPlatos = async () => {
-      const accion = {
-        "accion": "obtenerPlatos",
-        "id_usuario_rest": usuario.id_usuario
-      }
-      const endpoint = '/restauranteController.php'
-      const URL = clienteAxios.post(endpoint, accion)
-      const res = await URL
-      setPlatos(res.data)
-    }
  useEffect(() => {
   if (autenticado && usuario && usuario.id_usuario) {
 
     getPlatos();
   }
 }, [autenticado, usuario]);
+
+
 
   return (
     <div className='min-h-screen space-y-28  dark:bg-zinc-800 dark:bg-opacity-95'> 

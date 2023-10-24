@@ -56,7 +56,7 @@ const ListRestaurantes = () => {
             <div className=' h-7/12 w-52 rounded-lg shadow-xl bg-white  text-center text-black' key={index} >
 <img src={item.url_img_usuario} alt="logo-restaurante" className='w-full m-auto h-52  rounded-t-lg  border  ' />
 <h2 className='font-bold p-2 '> {item.nombre_restaurante}</h2>
-<p className='text-black'>{item.id_usuario}</p>
+
 <div className='gap-5 flex p-4 '>
     <Link to={`/clientePerfil/${item.id_usuario}`} className=' rounded-lg border px-4   shadow-xl border  w-24 flex justify-center py-3 h-10'> <BsSearch/></Link>
     <button className='rounded-lg border px-4  bg-white shadow-xl  w-24 flex justify-center py-3 h-10'><GoCodeReview/></button>
