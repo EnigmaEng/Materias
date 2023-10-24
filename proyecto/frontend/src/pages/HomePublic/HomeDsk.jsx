@@ -46,10 +46,10 @@ const HomeDsk = () => {
 
     <div className="flex gap-5">
       <Link to='/login'>
-      <button className=" bg-white font-bold text-black text-2xl px-4 py-1 shadow-xl  rounded-box w-52 dark:bg-wwe dark:text-white ">Iniciar sesion</button>
+      <button className=" bg-wwe font-bold text-white text-2xl px-4 py-1 shadow-xl  rounded-box w-52  ">Iniciar sesion</button>
       </Link>
       <Link to='/registro'>
-        <button className="font-bold text-black bg-white  shadow-xl text-2xl px-4 py-1 rounded-box w-52 dark:bg-wwe dark:text-white">Registrarse</button>
+        <button className="font-bold text-white  shadow-xl text-2xl px-4 py-1 rounded-box w-52 bg-wwe ">Registrarse</button>
         </Link>
     </div>
   </div>

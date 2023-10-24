@@ -108,75 +108,75 @@ const RegistroUsuario = () => {
   });
 
   return (
-  <div className='bg-white bg-opacity-75 dark:bg-opacity-75 dark:bg-zinc-800'>
+  <div className=' dark:bg-opacity-90 dark:bg-zinc-800'>
     <div className='absolute md:top-16 md:right-28 top-2 right-5'>
       <DarkMode/>
       </div>
     <Link to='/' >
-    <button className='bg-white rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-16 md:absolute md:left-80 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700       md:border-gray-400 text-red-800'><BiArrowBack/></button>
+    <button className='bg-white rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-16 md:absolute md:left-80 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700 md:border-gray-400 text-red-800'><BiArrowBack/></button>
     </Link>
 
 <div className='pb-8  flex justify-center md:block md:w-3/12 md:m-auto md:py-40 '>
-    <form onSubmit={formik.handleSubmit}  className='text-black p-4 shadow-xl rounded-lg bg-wwe ' method='POST' encType="multipart/form-data">
-      <p className='text-white py-4 font-bold text-center text-2xl mb-2'>Crear una cuenta</p>
+    <form onSubmit={formik.handleSubmit}  className='text-black dark:bg-zinc-800 dark:text-white p-4 shadow-xl rounded-lg bg-white ' method='POST' encType="multipart/form-data">
+      <p className='text-wwe font-semibold font-aref py-4 text-center text-3xl mb-2'>Crear una cuenta</p>
  <div> {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }</div>
         <div className='flex flex-col mb-4'>
-        <label htmlFor="alias" className='font-bold px-4 text-white'>Alias</label>
-        <input type="text" placeholder='Alias' className='border  rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic' id='alias' value={formik.values.alias} onChange={formik.handleChange}  onBlur={formik.handleBlur}  />
+        <label htmlFor="alias" className='font-bold px-4 '>Alias</label>
+        <input type="text" placeholder='Alias' className='border  rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic dark:text-black' id='alias' value={formik.values.alias} onChange={formik.handleChange}  onBlur={formik.handleBlur}  />
         {formik.touched.alias && formik.errors.alias ? (
-          <div> <p className='text-lg px-5 text-white flex'> {formik.errors.alias}  <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ): (
+          <div> <p className='text-lg px-5  flex text-wwe'> {formik.errors.alias}  <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ): (
             null
           )
         }
         </div>
         <div className='flex flex-col mb-4'>
-        <label htmlFor="email" className='font-bold px-4 text-white'>Email</label>
-        <input type="text" placeholder='Email' className='border rounded-full bg-white  border-red-700  px-6 py-2 py-1 focus:outline-none           placeholder:italic' id='email' value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+        <label htmlFor="email" className='font-bold px-4 '>Email</label>
+        <input type="text" placeholder='Email' className='border rounded-full bg-white  border-red-700  px-6 py-2 py-1 focus:outline-none dark:text-black placeholder:italic' id='email' value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
         {
         formik.touched.email && formik.errors.email ? (
-          <div> <p className='text-lg px-5 text-white flex'> {formik.errors.email}  <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ): (
+          <div> <p className='text-lg px-5  flex text-wwe'> {formik.errors.email}  <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ): (
             null
           )
         }
         </div>
           <div className='flex flex-col mb-4'>
-        <label htmlFor="contrasena" className='font-bold px-4 text-white'>Contraseña</label>
-        <input type="password" placeholder='Contraseña' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic' id='contrasena' value={formik.values.contrasena} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+        <label htmlFor="contrasena" className='font-bold px-4 '>Contraseña</label>
+        <input type="password" placeholder='Contraseña' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic dark:text-black' id='contrasena' value={formik.values.contrasena} onChange={formik.handleChange} onBlur={formik.handleBlur} />
         {
         formik.touched.contrasena && formik.errors.contrasena ? (
-          <div> <p className='text-lg px-5 text-white flex'>{formik.errors.contrasena} <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ) : (null)
+          <div> <p className='text-lg px-5  flex text-wwe'>{formik.errors.contrasena} <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ) : (null)
         }
 
         </div>
         <div className='flex flex-col mb-4'>
-        <label htmlFor="confirmContrasena" className='font-bold px-4 text-white'>Repetir contraseña</label>
-        <input type="password" placeholder='Contraseña' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic' id='confirmContrasena' onChange={formik.handleChange} value={formik.values.confirmContrasena} onBlur={formik.handleBlur} />
+        <label htmlFor="confirmContrasena" className='font-bold px-4 '>Repetir contraseña</label>
+        <input type="password" placeholder='Contraseña' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic dark:text-black' id='confirmContrasena' onChange={formik.handleChange} value={formik.values.confirmContrasena} onBlur={formik.handleBlur} />
         {
         formik.touched.confirmContrasena && formik.errors.confirmContrasena ? (
-          <div> <p className='text-lg px-5 text-white flex'>{formik.errors.confirmContrasena} <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ) : (null)
+          <div> <p className='text-lg px-5  flex text-wwe'>{formik.errors.confirmContrasena} <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ) : (null)
         }
         
         </div>
     <div className='flex flex-col mb-4 px-2'>
-        <label htmlFor="url_img_usuario" className='font-bold px-4 text-white'>Foto de perfil</label>
-        <input type="text" placeholder='foto' className='border rounded-full bg-white  border-red-700  px-6 py-2 py-1 focus:outline-none placeholder:italic' id='url_img_usuario' 
+        <label htmlFor="url_img_usuario" className='font-bold px-4 '>Foto de perfil</label>
+        <input type="text" placeholder='foto' className='border rounded-full bg-white  border-red-700  px-6 py-2 py-1 focus:outline-none placeholder:italic dark:text-black' id='url_img_usuario' 
         
         onChange={formik.handleChange}
         value={formik.values.url_img_usuario}
         onBlur={formik.handleBlur} />
          {formik.touched.url_img_usuario && formik.errors.url_img_usuario ? (
-          <div> <p className='text-lg px-5 text-white '> {formik.errors.url_img_usuario}</p></div> ): (
+          <div> <p className='text-lg px-5  '> {formik.errors.url_img_usuario}</p></div> ): (
             null
           )
         }
         </div>
         <div className='flex flex-col mb-4'>
-        <label htmlFor='rol' className='font-bold px-4 text-white'>
+        <label htmlFor='rol' className='font-bold px-4 '>
           Turista o Restaurante
         </label>
         <select
           id='rol'
-          className='border rounded-full bg-white border-red-700 p-4 py-2 py-1 focus:outline-none placeholder:italic text-black'
+          className='border rounded-full bg-white border-red-700 p-4 py-2 py-1 focus:outline-none placeholder:italic dark:text-black text-black'
           value={selectedRole}
           onChange={handleRoleChange}
           onBlur={formik.handleBlur}
@@ -189,31 +189,31 @@ const RegistroUsuario = () => {
       {/* Campos adicionales para turista */}
       {selectedRole === 'T' && (
         <div className='flex flex-col mb-4'>
-           <label htmlFor='nombres' className='font-bold px-4 text-white '>
+           <label htmlFor='nombres' className='font-bold px-4  '>
             Nombre
           </label>
           <input
             type='text'
             id='nombres'
             placeholder='Nombres'
-            className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic'
+            className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic dark:text-black'
             value={formik.values.nombres}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           {formik.touched.nombres && formik.errors.nombres && (
             <div>
-              <p className='text-sm px-5 text-white '>{formik.errors.nombres} </p>
+              <p className='text-sm px-5  '>{formik.errors.nombres} </p>
             </div>
           )}
-           <label htmlFor='apellidos' className='font-bold px-4 text-white mt-2'>
+           <label htmlFor='apellidos' className='font-bold px-4  mt-2'>
             Apellidos
           </label>
           <input
             type='text'
             id='apellidos'
             placeholder='Apellidos'
-            className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic'
+            className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic dark:text-black'
             value={formik.values.apellidos}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -223,13 +223,13 @@ const RegistroUsuario = () => {
               <p className='text-sm px-5 text-black'>{formik.errors.apellidos}</p>
             </div>
           )}
-           <label htmlFor='motivo_alojamiento' className='font-bold px-4 text-white mt-2'>
+           <label htmlFor='motivo_alojamiento' className='font-bold px-4  mt-2'>
             Motivo de alojamiento
           </label>
           <select name="motivo_alojamiento" id="motivo_alojamiento"  
            value={formik.values.motivo_alojamiento}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur } className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic'  >
+            onBlur={formik.handleBlur } className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic dark:text-black'  >
                   <option value="Vacaciones" >Vacaciones</option>
             <option value="Trabajo">Trabajo</option>
             <option value="Otro">Otro</option>
@@ -239,13 +239,13 @@ const RegistroUsuario = () => {
               <p className='text-sm px-5 text-black'>{formik.errors.motivo_alojamiento}</p>
             </div>
           )}
-          <label htmlFor='nacionalidad' className='font-bold px-4 text-white mt-2'>
+          <label htmlFor='nacionalidad' className='font-bold px-4  mt-2'>
             Nacionalidad
           </label>
          <select
           id='nacionalidad'
           name='nacionalidad'
-          className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic'
+          className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic dark:text-black'
           value={formik.values.nacionalidad}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -269,8 +269,8 @@ const RegistroUsuario = () => {
 
   <div className='flex flex-col  mb-4'>
    
-      <label htmlFor="nombre" className=' text-white px-4 font-bold mt-4'>Nombre del restaurante</label>
-      <input type="text" id='nombre' placeholder='Nombre...' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic '
+      <label htmlFor="nombre" className='  px-4 font-bold mt-4'>Nombre del restaurante</label>
+      <input type="text" id='nombre' placeholder='Nombre...' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic dark:text-black '
       value={formik.values.nombre} onChange={formik.handleChange} onBlur={formik.handleBlur}
       />
       { formik.touched.nombre && formik.errors.nombre && (
@@ -281,10 +281,10 @@ const RegistroUsuario = () => {
   </div>
 )}
 <div>
-<label htmlFor="" className='md:px-6  px-4 text-white'>Acepta terminos y condiciones?</label> 
+<label htmlFor="" className='md:px-6  px-4 '>Acepta terminos y condiciones?</label> 
      <input type="checkbox" required />
    <br />
-      <a className='px-4 md:px-6 underline hover:text-blue-500 text-white'  href="https://www.impo.com.uy/bases/leyes/18331-2008" target='_blank'>Ver terminos</a>
+      <a className='px-4 md:px-6 underline hover:text-blue-500 '  href="https://www.impo.com.uy/bases/leyes/18331-2008" target='_blank'>Ver terminos</a>
 </div>
  
     

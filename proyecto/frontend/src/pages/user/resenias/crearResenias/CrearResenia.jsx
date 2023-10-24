@@ -13,7 +13,11 @@ const {id_usuario} = useParams();
 const TodoContext = useContext(todoContext)
 const {usuario, autenticado, crearResenia, mensaje} = TodoContext
 
-
+const today = new Date();
+const year = today.getFullYear();
+const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Sumamos 1 al mes ya que en JavaScript los meses van de 0 a 11
+const day = today.getDate().toString().padStart(2, '0');
+const formattedDate = `${year}-${month}-${day}`;
 
   const formik = useFormik({
     initialValues: {
@@ -28,9 +32,10 @@ const {usuario, autenticado, crearResenia, mensaje} = TodoContext
 
     onSubmit: valores => {
       const data = {
+        "accion": "crearResenia",
       id_usuario_turista: usuario.id_usuario,
       id_usuario_rest: id_usuario,
-      fecha: new Date(),
+      fecha: formattedDate,
       calificacion_instalaciones: valores.calificacion_instalaciones,
       calificacion_personal: valores.calificacion_personal,
       calificacion_menu: valores.calificacion_menu,
@@ -40,10 +45,7 @@ const {usuario, autenticado, crearResenia, mensaje} = TodoContext
     }
   });
 
-  // if (autenticado && usuario && usuario.id_usuario) {
-  //   console.log(usuario.id_usuario);
-  //   console.log(id_usuario);
-  // }
+ 
   return (
     <>
   
@@ -57,47 +59,47 @@ const {usuario, autenticado, crearResenia, mensaje} = TodoContext
         </h2>
     <select className="select bg-white border border-red-800 focus:ring-2 focus:ring-red-800  w-full max-w-xs" id='calificacion_instalaciones' onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.calificacion_instalaciones} required>
   <option value='' disabled>Instalaciones</option>
-  <option value='Excelente'>Excelente</option>
-  <option value='Medio'>Medio</option>
-  <option value='Insuficiente'>Insuficiente </option>
+  <option value="Excelente">Excelente</option>
+  <option value="Medio">Medio</option>
+  <option value="Insuficiente">Insuficiente </option>
 </select>
 
 
   <select className="select bg-white border border-red-800 focus:ring-2 focus:ring-red-800  w-full max-w-xs" id='calificacion_personal' onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.calificacion_personal} required>
    <option value='' disabled>Personal</option>
-   <option value='1'>1</option>
-  <option value='2'>2</option>
-  <option value='3'>3 </option>
-  <option value='4'>4</option>
-  <option value='5'>5</option>
-  <option value='6'>6</option>
-  <option value='7'>7</option>
-  <option value='8'>8 </option>
-  <option value='9'>9</option>
-  <option value='10'>10</option>
+   <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3 </option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8 </option>
+  <option value="9">9</option>
+  <option value="10">10</option>
 </select>
 
        <select className="select bg-white border border-red-800 focus:ring-2 focus:ring-red-800  w-full max-w-xs" id='calificacion_menu' onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.calificacion_menu} required>
   <option value='' disabled>Menú gastronómico</option>
-  <option value='1'>1</option>
-  <option value='2'>2</option>
-  <option value='3'>3 </option>
-  <option value='4'>4</option>
-  <option value='5'>5</option>
-  <option value='6'>6</option>
-  <option value='7'>7</option>
-  <option value='8'>8 </option>
-  <option value='9'>9</option>
-  <option value='10'>10</option>
+   <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3 </option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8 </option>
+  <option value="9">9</option>
+  <option value="10">10</option>
   </select>
 
       <select className="select bg-white border border-red-800 focus:ring-2 focus:ring-red-800  w-full max-w-xs" id='calificacion_general' onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.calificacion_general } required>
   <option value='' disabled>Calificacion generanl</option>
- <option value='Muy bueno'>Muy bueno</option>
-  <option value='Bueno'>Bueno</option>
-  <option value='Medio'>Medio </option>
-  <option value='Malo'>Malo </option>
-  <option value='Muy malo'>Muy malo </option>
+ <option value="Muy bueno">Muy bueno</option>
+  <option value="Bueno">Bueno</option>
+  <option value="Medio">Medio </option>
+  <option value="Malo">Malo </option>
+  <option value="Muy malo">Muy malo </option>
 </select>
 
        

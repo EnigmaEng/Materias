@@ -171,7 +171,7 @@ const usuarioAutenticado = () => {
         const respuesta = await clienteAxios.post('/reseniaController.php', datos)
         dispatch({
         type: RESENIA_CREADA,
-        payload: 'Reseña creada con exito!' 
+        payload: respuesta.data.mensaje 
         })
       } catch (error) {
         console.log(error)
