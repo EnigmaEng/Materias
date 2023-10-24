@@ -69,7 +69,7 @@ const TuristaHomeDsk = () => {
       <p class="text-gray-700 text-sm">Mira donde te has alojado</p>
     </div>
     <div class="flex  justify-center items-center">
-     <Link to='/misResenias' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white border shadow-xl w-20  text-wwe text-3xl rounded-lg flex justify-center items-center h-12'> <BsFillHouseFill/> </Link>
+     <Link to='/alojamiento' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white border shadow-xl w-20  text-wwe text-3xl rounded-lg flex justify-center items-center h-12'> <BsFillHouseFill/> </Link>
     </div>
   </div>
 </div>
