@@ -8,7 +8,7 @@ const menuData = () => {
 const [platos, setPlatos] = useState([])
 
 const TodoContext = useContext(todoContext)
-const {usuario, autenticado} = TodoContext
+const {usuario} = TodoContext
 
     const getPlatos = async () => {
       const accion = {

@@ -19,7 +19,7 @@ usuarioAutenticado()
 <>
     {
       usuario && usuario.rol.nacionalidad ? 
- <div className='space-y-24 min-h-screen bg-white text-black font-aref dark:text-white bg-opacity-75 dark:bg-zinc-800 dark:bg-opacity-95'>
+ <div className='space-y-24 min-h-screen  text-black font-aref dark:text-white dark:bg-zinc-800 dark:bg-opacity-95'>
 <NavBar/> 
       <div className='p-4   m-auto shadow-xl rounded-box   w-8/12 bg-white dark:bg-zinc-800    '>
    
@@ -35,22 +35,9 @@ usuarioAutenticado()
                 <p className='p-2 text-2xl  rounded-lg'>Nacionalidad: {usuario.rol.nacionalidad}</p>
               
               </div>   
-         
-       
       <button className='h-10 w-50  flex gap-5 px-6 py-2.5   rounded-lg shadow-lg  bg-red-800 text-white '>Editar  <AiOutlineEdit/></button>
         </div>
-      <div className='dark:border dark:border-none h-80 p-4 mt-5 rounded-box shadow-xl'>
-        <p className='text-center  font-bold text-3xl mt-3'>Reviews:</p>
-
-        <div className='grid grid-cols-3 p-8 '>
-        <div className='border border-wwe space-y-3 rounded-lg h-40 w-64  px-6 py-4  shadow-xl'>
-          <p>Restaurante:</p>
-          <hr />
-          <p>Calificaciones:</p>
-        </div>
-  
-        </div>
-      </div>
+    
       </div>
     
     </div>

@@ -11,7 +11,12 @@ const CrearResenia = () => {
 const {id_usuario} = useParams();
 
 const TodoContext = useContext(todoContext)
-const {usuario, autenticado, crearResenia, mensaje} = TodoContext
+const {usuario, crearResenia, mensaje, autenticado} = TodoContext
+
+if(autenticado && usuario && usuario.id_usuario){
+  console.log(usuario.id_usuario)
+console.log(id_usuario)
+}
 
 const today = new Date();
 const year = today.getFullYear();

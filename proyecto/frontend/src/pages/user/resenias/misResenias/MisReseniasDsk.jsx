@@ -1,49 +1,22 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import NavBar from '../../../../components/nabvar/NavBar'
 import FooterDsk from '../../../../components/Footer/FooterDsk'
 import {MdOutlineRateReview} from 'react-icons/md'
-const people = [
-  {
-    restaurante: 'Annie Restaurant',
-    cocina: '8',
-    imageUrl:
-      'https://images.vexels.com/media/users/3/334657/raw/efc6f41803c9f536f6752a04c49d6805-disea-o-de-logotipo-de-restaurante-tema-tico-de-pizza.jpg',
-  },
-    {
-    restaurante: 'Jose pastas',
-    cocina: '8',
-    imageUrl:
-      'https://images.vexels.com/media/users/3/334657/raw/efc6f41803c9f536f6752a04c49d6805-disea-o-de-logotipo-de-restaurante-tema-tico-de-pizza.jpg',
-  },
-    {
-    restaurante: 'Manolito',
-    cocina: '8',
-    imageUrl:
-      'https://images.vexels.com/media/users/3/334657/raw/efc6f41803c9f536f6752a04c49d6805-disea-o-de-logotipo-de-restaurante-tema-tico-de-pizza.jpg',
-  },
-    {
-    restaurante: 'Alvaro Restaurant',
-    cocina: '8',
-    imageUrl:
-      'https://images.vexels.com/media/users/3/334657/raw/efc6f41803c9f536f6752a04c49d6805-disea-o-de-logotipo-de-restaurante-tema-tico-de-pizza.jpg',
-  },
-    {
-    restaurante: 'Don jaime',
-    cocina: '8',
-    imageUrl:
-      'https://images.vexels.com/media/users/3/334657/raw/efc6f41803c9f536f6752a04c49d6805-disea-o-de-logotipo-de-restaurante-tema-tico-de-pizza.jpg',
-  },
-    {
-    restaurante: 'Lo de Juan',
-    cocina: '8',
-    imageUrl:
-      'https://images.vexels.com/media/users/3/334657/raw/efc6f41803c9f536f6752a04c49d6805-disea-o-de-logotipo-de-restaurante-tema-tico-de-pizza.jpg',
-  },
-  
-]
+import reseniaData from '../../../../context/reseniaData'
+import todoContext from '../../../../context/todoContext'
+
 
 const MisReseniasDsk = () => {
+
+  const {getReseniaById, resenia } = reseniaData();
+  const {usuario, autenticado} = useContext(todoContext)
+
+  useEffect(() => {
+  getReseniaById();
+  },[autenticado, usuario])
+
   return (
+    <>
     <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-95 '>
 
       <NavBar/>
@@ -56,25 +29,33 @@ const MisReseniasDsk = () => {
           </p>
         </div>
         <ul role="list" className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
-          {people.map((item) => (
-            <li key={item.restaurante}>
+        { 
+         resenia.map((item, index) => (
+              <li key={index}>
               <div className="flex items-center gap-x-6 border shadow-xl p-2 rounded-box">
-                <img className="h-16 w-16 rounded-full" src={item.imageUrl} alt="" />
                 <div>
-                  <h3 className="text-base font-semibold leading-7 tracking-tight text-wwe">{item.restaurante}</h3>
-                  <p className="text-sm font-semibold leading-6 text-black">Menu gastronómico: {item.cocina}</p>
-                   <p className="text-sm font-semibold leading-6 text-black">Personal: {item.cocina}</p>
-                    <p className="text-sm font-semibold leading-6 text-black">Instalaciones: {item.cocina}</p>
-                    <p className="text-sm font-semibold leading-6 text-black">General: {item.cocina}</p>
+                  <h3 className="text-base font-semibold leading-7 tracking-tight text-wwe"></h3>
+                  <p className="text-sm font-semibold leading-6 text-black">Menu gastronómico: {item.calificacion_menu} </p>
+                   <p className="text-sm font-semibold leading-6 text-black">Personal: {item.calificacion_personal}</p>
+                    <p className="text-sm font-semibold leading-6 text-black">Instalaciones: {item.calificacion_instalaciones}</p>
+                    <p className="text-sm font-semibold leading-6 text-black">Calificacion General: {item.calificacion_general}</p>
+                    <p className="text-sm font-semibold leading-6 text-black"> {item.fecha}</p>
                 </div>
-              </div>
-            </li>
-          ))}
+              </div> 
+               </li>
+         ))
+      
+        }
+            
+          
+        
         </ul>
       </div>
     </div>
-    <FooterDsk/>
+    
     </div>
+    <FooterDsk/>
+   </>
   )
 }
 

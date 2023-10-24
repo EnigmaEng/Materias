@@ -6,6 +6,7 @@ import NavBar from '../../../../../components/nabvar/NavBar';
 const PerfilCliente = () => {
   const { id_usuario } = useParams();
 
+const [resenia, setResenia] = useState([]);
   const [restaurante, setRestaurante] = useState([]);
 const [menu, setMenu] = useState([]);
 
@@ -43,13 +44,31 @@ const getMenuById = async() => {
   }
 }
 
+const getReseniaById = async () => {
+  const endpoint = '/reseniaController.php'
+  const accion = {
+    "accion": "obtenerReseniaPorId",
+    "id_usuario_rest": id_usuario
+  }
+  try {
+    const res = await clienteAxios.post(endpoint, accion)
+    setResenia(res.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+
+
   useEffect(() => {
     getProductById();
     getMenuById();
+    getReseniaById();
   }, [id_usuario]);
 
   if (!restaurante) {
-    return (<div className='min-h-screen'>
+    return (<div className='min-h-screen '>
     <p className='text-center font-aref text-2xl  text-black'>Cagando..</p></div>);
   }
 
@@ -88,6 +107,28 @@ const getMenuById = async() => {
        
       ))
     } 
+  <div className=' bg-white w-full m-auto justify-center items-center rounded-lg shadow-xl '>
+    <h2 className='text-center font-aref font-semibold text-2xl text-wwe'>Reseñas:</h2>
+  
+      
+    
+    {
+      resenia.map((item, index) => (
+         <li key={index} className='text-white '>
+              <div className="flex items-center gap-x-6 border shadow-xl p-2 rounded-box">
+                <div>
+                  
+                  <p className="text-sm font-semibold leading-6 text-black">Menu gastronómico: {item.calificacion_menu} </p>
+                   <p className="text-sm font-semibold leading-6 text-black">Personal: {item.calificacion_personal}</p>
+                    <p className="text-sm font-semibold leading-6 text-black">Instalaciones: {item.calificacion_instalaciones}</p>
+                    <p className="text-sm font-semibold leading-6 text-black">Calificacion General: {item.calificacion_general}</p>
+                    <p className="text-sm font-semibold leading-6 text-black"> {item.fecha}</p>
+                </div>
+              </div> 
+               </li>
+      ))
+    }
+    </div>
     </div>
    </div>
     </>

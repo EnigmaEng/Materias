@@ -60,7 +60,7 @@ const ListRestauranteMb = () => {
         <h3 class="mt-4 text-lg text-center font-aref pb-5 font-bold ">{item.nombre_restaurante}</h3>
           <div className='gap-5 flex  px-2 '>
     <Link to={`/clientePerfil/${item.id_usuario}`} className=' rounded-lg border px-2  shadow-xl border  w-20 flex justify-center py-2 h-8'> <BsSearch/></Link>
-    <button className='rounded-lg border px-2  bg-white shadow-xl  w-20 flex justify-center py-2 h-8'><GoCodeReview/></button>
+    <Link to={`/crearResenia/${item.id_usuario}`} className='rounded-lg border px-2  bg-white shadow-xl  w-20 flex justify-center py-2 h-8'><GoCodeReview/></Link>
 </div>
       </a>
 
