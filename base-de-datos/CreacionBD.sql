@@ -66,7 +66,9 @@ CREATE TABLE `sesiones`(
     fecha_ultima_sesion DATE NOT NULL, #Se crea cuando el usuario INICIA sesion.
     ip VARCHAR (16),
     max_intentos INT (1),
-    PRIMARY KEY (id_sesion,fecha_ultima_sesion)
+    id_usuario_rest INT (10) UNSIGNED,
+    PRIMARY KEY (id_sesion,fecha_ultima_sesion),
+    FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante`(id_usuario)
 );
 
 CREATE TABLE `tipo_restaurantes`(
@@ -144,6 +146,16 @@ CREATE TABLE `turista_sealoja_alojamiento` (
   FOREIGN KEY (id_alojamiento) REFERENCES `alojamiento` (id_alojamiento)
 );
 
+  CREATE TABLE turista_visita_rest (
+  id_turista INT(10) UNSIGNED,
+  id_rest INT (10) UNSIGNED,
+  token INT (10) UNSIGNED UNIQUE,
+  fecha_visita DATE,
+  PRIMARY KEY (id_turista, id_rest),
+  FOREIGN KEY (id_turista) REFERENCES `turista_sealoja_alojamiento` (id_usuario_turista),
+  FOREIGN KEY (id_rest) REFERENCES `admin_aprueba_rest` (id_usuario_rest)
+  );
+
 CREATE TABLE `turista_resena_rest` (
   id_usuario_turista INT(10) UNSIGNED,
   id_usuario_rest INT(10) UNSIGNED,
@@ -153,18 +165,9 @@ CREATE TABLE `turista_resena_rest` (
   calificacion_menu ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
   calificacion_general ENUM('Muy bueno', 'Bueno', 'Medio', 'Malo', 'Muy malo') NOT NULL,
   PRIMARY KEY (id_usuario_turista, id_usuario_rest),
-  FOREIGN KEY (id_usuario_turista) REFERENCES `turista_sealoja_alojamiento` (id_usuario_turista),
-  FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante` (id_usuario));
-
-CREATE TABLE `turista_visita_rest` (
-  id_turista INT(10) UNSIGNED,
-  id_rest INT (10) UNSIGNED,
-  token INT (10) UNSIGNED UNIQUE,
-  fecha_visita DATE,
-  PRIMARY KEY (id_turista, id_rest),
-  FOREIGN KEY (id_turista) REFERENCES `turista_sealoja_alojamiento` (id_usuario_turista),
-  FOREIGN KEY (id_rest) REFERENCES `admin_aprueba_rest` (id_usuario_rest)
-  );
+  /* CHECK (fecha >= fecha_ini_alojamiento AND fecha >= fecha_fin_alojamiento + 90), REVISAR ESTO !!! */
+  FOREIGN KEY (id_usuario_turista) REFERENCES `turista_visita_rest` (id_turista),
+  FOREIGN KEY (id_usuario_rest) REFERENCES `admin_aprueba_rest` (id_usuario_rest));
 
 CREATE TABLE `restaurante_tiene_descuento` (
   id_descuento INT(10) UNSIGNED,
@@ -302,7 +305,7 @@ INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Bulevar España', 'Juan Carlos Gómez', '4321');
 
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
-VALUES (LAST_INSERT_ID(), 'Le Marechal', LAST_INSERT_ID());
+VALUES (LAST_INSERT_ID(), 'Le Maréchal', LAST_INSERT_ID());
 
 -- Restaurante 2
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
@@ -322,7 +325,7 @@ INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Calle Uruguay', 'Plaza Independencia', '5678');
 
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
-VALUES (LAST_INSERT_ID(), 'Sabores del Rio', LAST_INSERT_ID());
+VALUES (LAST_INSERT_ID(), 'Sabores del Río', LAST_INSERT_ID());
 
 -- Restaurante 4
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
@@ -372,7 +375,7 @@ INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Rambla República de México', 'Plaza Gomensoro', '1819');
 
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
-VALUES (LAST_INSERT_ID(), 'Paraiso Gourmet', LAST_INSERT_ID());
+VALUES (LAST_INSERT_ID(), 'Paraíso Gourmet', LAST_INSERT_ID());
 
 -- Restaurante 9
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
@@ -772,24 +775,33 @@ VALUES ('22','3','2023-09-01','2023-09-07');
 
 /*Insertando resenias de turistas a restaurantes*/
 
+INSERT INTO turista_visita_rest (id_turista, id_rest, token,fecha_visita)
+VALUES
+  (11, 4, FLOOR(1000000 * RAND()) + 1, DATE_ADD(NOW(), INTERVAL 1 MONTH)),  -- Genera un valor aleatorio entre 1 y 1000000
+  (12, 9, FLOOR(1000000 * RAND()) + 1, DATE_ADD(NOW(), INTERVAL 2 MONTH)),
+  (13, 7, FLOOR(1000000 * RAND()) + 1, DATE_ADD(NOW(), INTERVAL 3 MONTH)),
+  (14, 7, FLOOR(1000000 * RAND()) + 1, DATE_ADD(NOW(), INTERVAL 3 MONTH)),
+  (15, 7, FLOOR(1000000 * RAND()) + 1, DATE_ADD(NOW(), INTERVAL 3 MONTH)),
+  (16, 7, FLOOR(1000000 * RAND()) + 1, DATE_ADD(NOW(), INTERVAL 3 MONTH));
+
 -- Inserción de una reseña por un turista para un restaurante
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
-VALUES (20, 1, '2023-08-25', 'Excelente', '9', '8', 'Muy bueno');
+VALUES (11, 4, '2023-08-25', 'Excelente', '9', '8', 'Muy bueno');
 
 -- Otra reseña de turista para otro restaurante
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
-VALUES (15, 2, '2023-08-26', 'Medio', '5', '6', 'Bueno');
+VALUES (12, 9, '2023-08-26', 'Medio', '5', '6', 'Bueno');
 
 -- Una reseña más para un restaurante diferente
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
-VALUES (16, 3, '2023-08-27', 'Insuficiente', '3', '4', 'Medio');
+VALUES (13, 7, '2023-08-27', 'Insuficiente', '3', '4', 'Medio');
 
 -- Otra reseña de turista para otro restaurante
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
-VALUES (14, 5, '2023-08-26', 'Medio', '7', '9', 'Bueno');
+VALUES (14, 4, '2023-08-26', 'Medio', '7', '9', 'Bueno');
 
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
-VALUES (13, 9, '2023-08-26', 'Medio', '7', '9', 'Bueno');
+VALUES (15, 9, '2023-08-26', 'Medio', '7', '9', 'Bueno');
 
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
-VALUES (17, 8, '2023-08-26', 'Medio', '7', '9', 'Bueno');
+VALUES (16, 8, '2023-08-26', 'Medio', '7', '9', 'Bueno');
