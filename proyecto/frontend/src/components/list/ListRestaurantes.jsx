@@ -58,7 +58,7 @@ const ListRestaurantes = () => {
 <h2 className='font-bold p-2 '> {item.nombre_restaurante}</h2>
 <p className='text-black'>{item.id_usuario}</p>
 <div className='gap-5 flex p-4 '>
-    <Link to={`/perfilRestaurante/${item.id_usuario}`} className=' rounded-lg border px-4   shadow-xl border  w-24 flex justify-center py-3 h-10'> <BsSearch/></Link>
+    <Link to={`/clientePerfil/${item.id_usuario}`} className=' rounded-lg border px-4   shadow-xl border  w-24 flex justify-center py-3 h-10'> <BsSearch/></Link>
     <button className='rounded-lg border px-4  bg-white shadow-xl  w-24 flex justify-center py-3 h-10'><GoCodeReview/></button>
 </div>
 
