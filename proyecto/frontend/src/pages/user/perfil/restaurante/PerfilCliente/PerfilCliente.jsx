@@ -74,25 +74,34 @@ const getReseniaById = async () => {
 
   return (
     <>
-    <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-80 '>
+    <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-80  '>
       <NavBar/>
+<div className='flex w-full gap-5  '>
+
+
     {
       
       restaurante.map((item,index) => (
-         <div className=' mt-24 flex justify-center' key={index}>
-          <div className='bg-white  w-6/12 p-8 rounded-lg shadow-xl  '>
-      <h2 className=' text-center text-4xl font-semibold font-aref text-wwe'>{item.nombre}</h2>
-     <img src={item.url_img_usuario} alt="foto-perfil" className='w-24 m-auto mt-5 mb-5 h-24 rounded-lg bg-zinc-300' />
-     <p className='text-center text-zinc-600 font-semibold text-2xl'>Ubicacion:</p>
+         <div className=' mt-24 flex justify-center border bg-white w-[30%] m-4 p-3' key={index}>
+          <div className='bg-white  rounded-lg p-8 '>
+      <h2 className=' text-center text-3xl font-semibold font-aref text-wwe'>{item.nombre}</h2>
+     <img src={item.url_img_usuario} alt="foto-perfil" className=' m-auto shadow-xl mt-5 mb-5 w-72 h-72 rounded-lg bg-zinc-300' />
+     <div className='h-96 w-96  rounded-lg border '>
+       <p className=' px-10 py-10 text-zinc-600 font-semibold text-lg'>Ubicacion:</p>
+     </div>
+    
      </div>
     </div>
    
       ))
      
     }
+
+   <div className='flex flex-col w-full'>
+
+  
+    <div className=' w-6/12 m-auto mt-5 p-1 flex flex-col  gap-5 ' >
     <p  className='text-center text-3xl font-semibold text-wwe mt-5'>Menus</p>
-    <div className=' w-6/12 m-auto mt-5 p-1  grid grid-cols-3  gap-5 ' >
-   
     { 
     Array.isArray(menu) && menu.length > 0 ?
     
@@ -141,6 +150,8 @@ const getReseniaById = async () => {
         <p>Sin reseñas realizadas</p>
       </div>
     }
+     </div>
+    </div>
     </div>
     </div>
    </div>

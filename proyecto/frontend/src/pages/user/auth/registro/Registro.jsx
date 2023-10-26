@@ -113,7 +113,7 @@ const RegistroUsuario = () => {
       <DarkMode/>
       </div>
     <Link to='/' >
-    <button className='bg-white rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-16 md:absolute md:left-80 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700 md:border-gray-400 text-red-800'><BiArrowBack/></button>
+    <button className='bg-wwe  rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-16 md:absolute md:left-80 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700 md:border-gray-400 text-white'><BiArrowBack/></button>
     </Link>
 
 <div className='pb-8  flex justify-center md:block md:w-3/12 md:m-auto md:py-40 '>

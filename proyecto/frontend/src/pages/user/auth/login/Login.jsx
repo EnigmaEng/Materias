@@ -56,6 +56,9 @@ iniciarSesion(userData)
   <div className="flex-start absolute top-10">
     <DarkMode/>
   </div>
+   <Link to='/' className="">
+    <button className='bg-wwe md:w-24  rounded-lg right-0 absolute top-10 m-5  px-4 py-1 mt-2 mb-4  md:absolute md:left-80 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700 md:border-gray-400 text-white'><BiArrowBack/></button>
+    </Link>
   <div className="sm:mx-auto sm:w-full sm:max-w-sm">
     {mensaje && <Mensaje mensaje={mensaje} tipo='alerta'/>}
     <img src={Image} alt="logo" className="w-32 m-auto "/>
@@ -104,7 +107,7 @@ iniciarSesion(userData)
 
     <p className="mt-10 text-center text-xl text-wwe dark:text-white">
       Eres nuevo?
-      <Link to='/' className="font-semibold leading-10 font-aref ml-2 text-wwe hover:text-wwe">Registrate</Link>
+      <Link to='/registro' className="font-semibold leading-10 font-aref ml-2 text-wwe hover:text-wwe">Registrate</Link>
     </p>
   </div>
 </div>
