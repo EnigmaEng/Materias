@@ -1,5 +1,6 @@
 #! /bin/bash
-SERVIDOR="respaldo@192.168.100.5"
+source ../configServer.conf
+SERVIDOR="respaldo@$IPR"
 PASSRESP="Respaldo123**"
 logger -p local1.info "Comenzo respaldo diario..."
 
@@ -28,7 +29,7 @@ sudo cp "/etc/hosts" "$carpetatemp"
 sudo cp "/etc/resolv.conf" "$carpetatemp"
 
 logger -p local1.info "respaldos copiados al directorio intermediario se procede a comprimir..."
-sudo tar -czvf "$ARCH.tar.gz" --directory=$carpetabase $ARCH
+sudo tar -czvf "/home/respaldo/$ARCH.tar.gz" --directory=$carpetabase $ARCH
 sudo rm -r "$carpetatemp"
 
 #respaldamos diariamente la BD

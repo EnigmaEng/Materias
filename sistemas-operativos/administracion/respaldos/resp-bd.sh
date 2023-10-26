@@ -1,9 +1,11 @@
+#! /bin/bash
+source ../configServer.conf
 FILE="./FILE.txt"
 DATABASE="wwe"
 USER="wweat"
 PASSWORD="Wweat123**"
 RESPALDOS="/home/respaldo"
-SERVIDOR="respaldo@192.168.100.5"
+SERVIDOR="respaldo@$IPR"
 PASSRESP="Respaldo123**"
                 logger -p local1.info "Comenzo respaldo de la BD"
                 #echo "Base de datos: "$DATABASE

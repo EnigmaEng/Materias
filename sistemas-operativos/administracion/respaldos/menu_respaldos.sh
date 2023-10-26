@@ -1,10 +1,10 @@
 #!/bin/bash
-
+source ../configServer.conf
 DATABASE="wwe"
 USER="wweat"
 PASSWORD="Wweat123**"
 RESPALDOS="/home/respaldo"
-SERVIDOR="respaldo@192.168.100.5"
+SERVIDOR="respaldo@$IPR"
 PASSRESP="Respaldo123**"
 
 logger -p local1.info "Ingreso al menu de respaldos"
@@ -23,6 +23,9 @@ while [ "$op" != 0 ]
 	echo "4) Realizar el respaldo diario ahora"
 	echo "5) Realziar el respaldo semanal ahora"
 	echo "6) Realizar el respaldo mensual ahora"
+	echo "7) Restaurar desde un respaldo diario"
+	echo "8) Restaurar desde un respaldo semanal"
+	echo "9) Restaurar desde un respaldo mensual"
 	echo ""
 	echo "0) Salir"
 	read -p "Ingrese una opcion: " op
@@ -175,6 +178,63 @@ while [ "$op" != 0 ]
 	echo "Presione enter para volver..."
 	read exit;
 		;;
+
+	7) logger -p local1.info "Restaurar resp diario"
+		 resp=$(rsync -avhn --list-only --progress -e "sshpass -p Respaldo123** ssh -p 50000" "$SERVIDOR:$RESPALDOS/diarios" | grep "tar.gz" | tail -1 | cut -f4 -d"/")
+ rsync --remove-source-files -avhzP -e "sshpass -p "$PASSRESP" ssh -p 50000" "$SERVIDOR:$RESPALDOS/diarios/$resp" $RESPALDOS
+mkdir "$RESPALDOS/temp" 
+tar -xzvf "$RESPALDOS/$resp" -C "$RESPALDOS/temp"
+sudo cp "$RESPALDOS/temp/mariadb.log" "/var/log/mariadb/"
+sudo cp "$RESPALDOS/temp/freshclam.log" "/var/log/" 
+sudo cp "$RESPALDOS/temp/error_log" "/var/log/httpd/"
+sudo cp "$RESPALDOS/temp/access_log" "/var/log/httpd/"
+sudo cp "$RESPALDOS/temp/secure" "/var/log/"
+sudo cp "$RESPALDOS/temp/grafana.log" "/var/log/grafana/"
+sudo cp "$RESPALDOS/temp/lastlog" "/var/log/" 
+sudo cp "$RESPALDOS/temp/passwd" "/etc/" 
+sudo cp "$RESPALDOS/temp/shadow" "/etc/" 
+sudo cp "$RESPALDOS/temp/group" "/etc/" 
+sudo cp "$RESPALDOS/temp/sudoers" "/etc/"
+sudo cp -r "$RESPALDOS/temp/network-scripts/" "/etc/sysconfig/" 
+sudo cp "$RESPALDOS/temp/hosts" "/etc/"
+sudo cp "$RESPALDOS/temp/resolv.conf" "/etc/"
+rm -r "$RESPALDOS/temp"
+		;;
+	8) logger -p local1.info "Restaurar resp semanal"
+	 resp=$(rsync -avhn --list-only --progress -e "sshpass -p Respaldo123** ssh -p 50000" "$SERVIDOR:$RESPALDOS/semanales" | grep "tar.gz" | tail -1 | cut -f4 -d"/")
+ rsync --remove-source-files -avhzP -e "sshpass -p "$PASSRESP" ssh -p 50000" "$SERVIDOR:$RESPALDOS/semanales/$resp" $RESPALDOS
+mkdir "$RESPALDOS/temp"
+tar -xzvf "$RESPALDOS/$resp" -C "$RESPALDOS/temp"
+sudo cp -r "$RESPALDOS/ssh""/etc/"
+sudo cp -r "$RESPALDOS/secure" "/var/log/"
+sudo cp -r "$RESPALDOS/administracion" "/etc/skel/"
+rm -r "$RESPALDOS/temp"
+ ;;
+	9) logger -p local1.info "Restaurar resp mensual"
+		 resp=$(rsync -avhn --list-only --progress -e "sshpass -p Respaldo123** ssh -p 50000" "$SERVIDOR:$RESPALDOS/mensuales" | grep "tar.gz" | tail -1 | cut -f4 -d"/")
+ rsync --remove-source-files -avhzP -e "sshpass -p "$PASSRESP" ssh -p 50000" "$SERVIDOR:$RESPALDOS/mensuales/$resp" $RESPALDOS
+		mkdir "$RESPALDOS/temp"
+tar -xzvf "$RESPALDOS/$resp" -C "$RESPALDOS/temp"
+
+sudo cp -r "$RESPALDOS/my.cnf" "/etc/"
+sudo cp -r "$RESPALDOS/my.cnf.d/" "/etc/"
+sudo cp -r "$RESPALDOS/mysql/" "/var/lib/"
+sudo cp -r "$RESPALDOS/clamd.conf" "/etc/"
+sudo cp -r "$RESPALDOS/freshclam.conf" "/etc/"
+sudo cp -r "$RESPALDOS/clamav/" "/var/lib/"
+sudo cp -r "$RESPALDOS/grafana/" "/etc/"
+sudo cp -r "$RESPALDOS/grafana/" "/var/lib/"
+sudo cp -r "$RESPALDOS/php.ini" "/etc/"
+sudo cp -r "$RESPALDOS/php.d" "/etc/"
+sudo cp -r "$RESPALDOS/php" "/var/lib/"
+sudo cp -r "$RESPALDOS/httpd/" "/etc/"
+sudo cp -r "$RESPALDOS/html/" "/var/www/"
+sudo cp -r "$RESPALDOS/messages" "/var/log/"
+sudo cp -r "$RESPALDOS/syslog" "/var/log/"
+
+rm -r "$RESPALDOS/temp"
+;;
+
 		
 	0)
 		logger -p local1.info "Salio del menu de respaldos"
