@@ -26,6 +26,7 @@ import PerfilCliente from './pages/user/perfil/restaurante/PerfilCliente/PerfilC
 import MapContent from './components/maps/MapContent'
 import EditarPerfilTurista from './pages/user/perfil/turista/Configuracion/EditarPerfil/EditarPerfilTurista'
 import Alojamiento from './pages/user/perfil/turista/Alojamiento/Alojamiento'
+import Descuentos from './pages/user/perfil/restaurante/Descuentos/Descuentos'
 function App() {
 
 
@@ -58,6 +59,7 @@ function App() {
   {/* Perfiles */}
 
 {/* Turista */}
+<Route path='/descuentos' element={<Descuentos/>}/>
 <Route path='/alojamiento' element={<Alojamiento/>}/>
 <Route path='/configuracionTurista' element={<ConfiguracionTurista/>}/>
 <Route path='/perfilTurista' element={<PerfilTurista/>}/>
