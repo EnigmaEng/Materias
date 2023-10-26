@@ -128,19 +128,31 @@ usuarioAutenticado();
     </div>
     </div>
 
-  ) :  <div className="rounded-full  bg-wwe  shadow-xl">
-  <div className="flex-1 gap-5">
-    <div className='absolute left-5'>
-       <DarkMode/>
-    </div>
+  ) : <div className=" bg-wwe rounded-full relative top-3 flex  w-[30%] m-auto  shadow-xl">
+<div className='w-24 py-4 px-5'>
+   <DarkMode/>
+</div>
+
    
-    <Link to='/homeAuth' className='m-auto w-14'>  
-    <img src={Image} alt="logo"/>
+    <Link to='/homeAuth' className='m-auto '>  
+    <img src={Image} alt="logo" className='w-14 mr-5'/>
     </Link>
- <Link to='/login' className='bg-white px-6 py-1 rounded-lg text-wwe text-lg'>Iniciar sesion</Link>
-  <Link to='/registro' className='bg-white px-6 py-1 rounded-lg text-wwe text-lg'>Registrarse</Link>
-  </div>
+
  
+
+
+  <div className="mt-5 space-x-10">
+
+    
+        
+     
+     <div className='flex gap-5 mr-5'>
+      <Link className='bg-white p-2 rounded-lg text-black'>Iniciar sesion</Link>
+      <Link className='bg-white p-2 rounded-lg text-black'>Registrarse</Link>
+
+    </div>
+  </div>
+  
 </div>
 }
 
