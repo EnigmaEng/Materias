@@ -117,12 +117,12 @@ const RegistroUsuario = () => {
     </Link>
 
 <div className='pb-8  flex justify-center md:block md:w-3/12 md:m-auto md:py-40 '>
-    <form onSubmit={formik.handleSubmit}  className='text-black dark:bg-zinc-800 dark:text-white p-4 shadow-xl rounded-lg bg-white ' method='POST' encType="multipart/form-data">
+    <form onSubmit={formik.handleSubmit}  className='text-black dark:bg-zinc-800 dark:text-white p-4 bg-white rounded-lg  ' method='POST' encType="multipart/form-data">
       <p className='text-wwe font-semibold font-aref py-4 text-center text-3xl mb-2'>Crear una cuenta</p>
  <div> {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }</div>
         <div className='flex flex-col mb-4'>
         <label htmlFor="alias" className='font-bold px-4 '>Alias</label>
-        <input type="text" placeholder='Alias' className='border  rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic dark:text-black' id='alias' value={formik.values.alias} onChange={formik.handleChange}  onBlur={formik.handleBlur}  />
+        <input type="text" placeholder='Alias' className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe   focus:outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 " id='alias' value={formik.values.alias} onChange={formik.handleChange}  onBlur={formik.handleBlur}  />
         {formik.touched.alias && formik.errors.alias ? (
           <div> <p className='text-lg px-5  flex text-wwe'> {formik.errors.alias}  <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ): (
             null
@@ -131,7 +131,7 @@ const RegistroUsuario = () => {
         </div>
         <div className='flex flex-col mb-4'>
         <label htmlFor="email" className='font-bold px-4 '>Email</label>
-        <input type="text" placeholder='Email' className='border rounded-full bg-white  border-red-700  px-6 py-2 py-1 focus:outline-none dark:text-black placeholder:italic' id='email' value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+        <input type="text" placeholder='Email' className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none" id='email' value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
         {
         formik.touched.email && formik.errors.email ? (
           <div> <p className='text-lg px-5  flex text-wwe'> {formik.errors.email}  <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ): (
@@ -141,7 +141,7 @@ const RegistroUsuario = () => {
         </div>
           <div className='flex flex-col mb-4'>
         <label htmlFor="contrasena" className='font-bold px-4 '>Contraseña</label>
-        <input type="password" placeholder='Contraseña' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic dark:text-black' id='contrasena' value={formik.values.contrasena} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+        <input type="password" placeholder='Contraseña' className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none" id='contrasena' value={formik.values.contrasena} onChange={formik.handleChange} onBlur={formik.handleBlur} />
         {
         formik.touched.contrasena && formik.errors.contrasena ? (
           <div> <p className='text-lg px-5  flex text-wwe'>{formik.errors.contrasena} <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ) : (null)
@@ -150,7 +150,7 @@ const RegistroUsuario = () => {
         </div>
         <div className='flex flex-col mb-4'>
         <label htmlFor="confirmContrasena" className='font-bold px-4 '>Repetir contraseña</label>
-        <input type="password" placeholder='Contraseña' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic dark:text-black' id='confirmContrasena' onChange={formik.handleChange} value={formik.values.confirmContrasena} onBlur={formik.handleBlur} />
+        <input type="password" placeholder='Contraseña' className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none" id='confirmContrasena' onChange={formik.handleChange} value={formik.values.confirmContrasena} onBlur={formik.handleBlur} />
         {
         formik.touched.confirmContrasena && formik.errors.confirmContrasena ? (
           <div> <p className='text-lg px-5  flex text-wwe'>{formik.errors.confirmContrasena} <span className='py-1.5 px-2'><FiAlertCircle/></span></p></div> ) : (null)
@@ -159,13 +159,13 @@ const RegistroUsuario = () => {
         </div>
     <div className='flex flex-col mb-4 px-2'>
         <label htmlFor="url_img_usuario" className='font-bold px-4 '>Foto de perfil</label>
-        <input type="text" placeholder='foto' className='border rounded-full bg-white  border-red-700  px-6 py-2 py-1 focus:outline-none placeholder:italic dark:text-black' id='url_img_usuario' 
+        <input type="text" placeholder='foto' className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none" id='url_img_usuario' 
         
         onChange={formik.handleChange}
         value={formik.values.url_img_usuario}
         onBlur={formik.handleBlur} />
          {formik.touched.url_img_usuario && formik.errors.url_img_usuario ? (
-          <div> <p className='text-lg px-5  '> {formik.errors.url_img_usuario}</p></div> ): (
+          <div> <p className='text-lg px-5 flex '> {formik.errors.url_img_usuario}</p></div> ): (
             null
           )
         }
@@ -176,7 +176,7 @@ const RegistroUsuario = () => {
         </label>
         <select
           id='rol'
-          className='border rounded-full bg-white border-red-700 p-4 py-2 py-1 focus:outline-none placeholder:italic dark:text-black text-black'
+          className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none"
           value={selectedRole}
           onChange={handleRoleChange}
           onBlur={formik.handleBlur}
@@ -196,7 +196,7 @@ const RegistroUsuario = () => {
             type='text'
             id='nombres'
             placeholder='Nombres'
-            className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic dark:text-black'
+           className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none"
             value={formik.values.nombres}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -213,7 +213,7 @@ const RegistroUsuario = () => {
             type='text'
             id='apellidos'
             placeholder='Apellidos'
-            className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic dark:text-black'
+            className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none"
             value={formik.values.apellidos}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -229,7 +229,7 @@ const RegistroUsuario = () => {
           <select name="motivo_alojamiento" id="motivo_alojamiento"  
            value={formik.values.motivo_alojamiento}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur } className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic dark:text-black'  >
+            onBlur={formik.handleBlur } className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none"  >
                   <option value="Vacaciones" >Vacaciones</option>
             <option value="Trabajo">Trabajo</option>
             <option value="Otro">Otro</option>
@@ -245,7 +245,7 @@ const RegistroUsuario = () => {
          <select
           id='nacionalidad'
           name='nacionalidad'
-          className='border rounded-full bg-white border-red-700 px-4 py-2 focus:outline-none placeholder:italic dark:text-black'
+          className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none"
           value={formik.values.nacionalidad}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -270,7 +270,7 @@ const RegistroUsuario = () => {
   <div className='flex flex-col  mb-4'>
    
       <label htmlFor="nombre" className='  px-4 font-bold mt-4'>Nombre del restaurante</label>
-      <input type="text" id='nombre' placeholder='Nombre...' className='border rounded-full bg-white  border-red-700 px-6 py-2 py-1 focus:outline-none placeholder:italic dark:text-black '
+      <input type="text" id='nombre' placeholder='Nombre...' className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none"
       value={formik.values.nombre} onChange={formik.handleChange} onBlur={formik.handleBlur}
       />
       { formik.touched.nombre && formik.errors.nombre && (
@@ -291,7 +291,7 @@ const RegistroUsuario = () => {
 
 
 
-        <button type='submit' className='px-6 mb-8 ml-8 md:ml-8 md:w-40 md:shadow-xl md:border-gray-400 md:mt-8 py-2 mt-4 rounded-lg bg-white border font-bold text-black '>Registrar</button>
+        <button type='submit' className='px-6 mb-8 ml-8 md:ml-8 md:w-40 md:shadow-xl  md:mt-8 py-2 mt-4 rounded-lg bg-white bg-wwe text-white font-bold text-black '>Registrar</button>
     </form>
 </div>
   </div>

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import clienteAxios from '../../../../../config/axios';
 import NavBar from '../../../../../components/nabvar/NavBar';
-
+import { Link } from 'react-router-dom';
+import {BiArrowBack} from 'react-icons/bi'
 const PerfilCliente = () => {
   const { id_usuario } = useParams();
 
@@ -76,18 +77,23 @@ const getReseniaById = async () => {
     <>
     <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-80  '>
       <NavBar/>
-<div className='flex w-full gap-5  '>
+       <Link to='/homeAuth' >
+    <button className='bg-wwe  rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-8 md:absolute md:left-10 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700 md:border-gray-400 text-white'><BiArrowBack/></button>
+    </Link>
+<div className='flex w-full gap-5 p-4 '>
 
 
     {
       
       restaurante.map((item,index) => (
-         <div className=' mt-24 flex justify-center border bg-white w-[30%] m-4 p-3' key={index}>
+         <div className=' mt-10 flex justify-center border bg-white w-[40%] m-4 p-3' key={index}>
           <div className='bg-white  rounded-lg p-8 '>
       <h2 className=' text-center text-3xl font-semibold font-aref text-wwe'>{item.nombre}</h2>
+      
      <img src={item.url_img_usuario} alt="foto-perfil" className=' m-auto shadow-xl mt-5 mb-5 w-72 h-72 rounded-lg bg-zinc-300' />
      <div className='h-96 w-96  rounded-lg border '>
-       <p className=' px-10 py-10 text-zinc-600 font-semibold text-lg'>Ubicacion:</p>
+       <p className=' px-10 py-10 text-zinc-600 font-semibold text-lg'>Ubicacion: Feliciano Rodriguez y Manuel Alonso, 1234</p>
+       
      </div>
     
      </div>
@@ -97,22 +103,28 @@ const getReseniaById = async () => {
      
     }
 
-   <div className='flex flex-col w-full'>
+   <div className='flex  mt-10 border bg-white rounded-box shadow-xl  flex-col w-full gap-10'>
 
-  
-    <div className=' w-6/12 m-auto mt-5 p-1 flex flex-col  gap-5 ' >
-    <p  className='text-center text-3xl font-semibold text-wwe mt-5'>Menus</p>
+      <div className=' m-auto mt-1 p-1 flex-col ' >
+          <p  className='text-center text-3xl font-semibold text-wwe mt-5'>Menus</p>
+      <div className=' grid grid-cols-4 gap-10 p-10'>
     { 
     Array.isArray(menu) && menu.length > 0 ?
     
       menu.map((item,index) => (
         
-          <div className='rounded-lg shadow-xl border bg-white text-black  font-aref  m-auto h-64 w-52 text-center ' key={index}>
-            <h2 className='font-semibold text-3xl mt-3'>{item.nombre_plato}</h2>
-            <img src={item.url_img_menu} alt="foto-menu" className='bg-zinc-300 h-28' />
-            <div className=' max-h-min grd grid-cols-1  mt-2 h-[39%]'>
-              <p className='text-lg'>{item.descripcion}</p>
+          <div className='rounded-lg shadow-xl rounded-lg bg-white text-black   font-aref  m-auto w-56 text-center ' key={index}>
+          
+            <img src={item.url_img_menu} alt="foto-menu" className='bg-zinc-300 h-48 rounded-t-lg' />
+              <h2 className='font-semibold h-10 text-lg mt-3'>{item.nombre_plato}</h2>
+            <div className=' max-h-min flex flex-col   mt-2 h-[39%]'>
+              <div className='h-20 p-2'>
+                 <p className='text-sm'>{item.descripcion}</p>
+              </div>
+             <div className='h-10 '>
               <p className='text-2xl'>{item.costo}$</p>
+             </div>
+              
             </div>
             
           </div>
@@ -124,11 +136,14 @@ const getReseniaById = async () => {
           </div>
        
     } 
-  <div className='  w-full m-auto justify-center items-center  '>
+      </div>
+  <div className='border shadow-xl h-80 p-4  w-full m-auto justify-center items-center  '>
     <h2 className='text-center font-aref font-semibold text-2xl text-wwe'>Reseñas:</h2>
   
       
-    
+    <div className='grid grid-cols-4'>
+
+   
     {
       Array.isArray(resenia) && resenia.length < 0 ?
       resenia.map((item, index) => (
@@ -146,11 +161,12 @@ const getReseniaById = async () => {
                </li>
       )) 
       : 
-      <div className='text-center text-3xl font-semibold font-aref '>
+      <div className='text-center text-3xl font-semibold font-aref absolute left-[59%] '>
         <p>Sin reseñas realizadas</p>
       </div>
     }
      </div>
+      </div>
     </div>
     </div>
     </div>
