@@ -86,13 +86,13 @@ const getReseniaById = async () => {
     {
       
       restaurante.map((item,index) => (
-         <div className=' mt-10 flex justify-center border bg-white w-[40%] m-4 p-3' key={index}>
-          <div className='bg-white  rounded-lg p-8 '>
+         <div className=' mt-10 flex justify-center dark:bg-zinc-800 bg-white w-[40%] m-4 p-3' key={index}>
+          <div className='  rounded-lg p-8 '>
       <h2 className=' text-center text-3xl font-semibold font-aref text-wwe'>{item.nombre}</h2>
       
      <img src={item.url_img_usuario} alt="foto-perfil" className=' m-auto shadow-xl mt-5 mb-5 w-72 h-72 rounded-lg bg-zinc-300' />
-     <div className='h-96 w-96  rounded-lg border '>
-       <p className=' px-10 py-10 text-zinc-600 font-semibold text-lg'>Ubicacion: Feliciano Rodriguez y Manuel Alonso, 1234</p>
+     <div className='h-96 w-96  rounded-lg '>
+       <p className=' px-10 py-10 dark:text-white text-zinc-600 font-semibold text-lg'>Ubicacion: Feliciano Rodriguez y Manuel Alonso, 1234</p>
        
      </div>
     
@@ -103,7 +103,7 @@ const getReseniaById = async () => {
      
     }
 
-   <div className='flex  mt-10 border bg-white rounded-box shadow-xl  flex-col w-full gap-10'>
+   <div className='flex  mt-10  bg-white dark:bg-zinc-800 rounded-box shadow-xl  flex-col w-full gap-10'>
 
       <div className=' m-auto mt-1 p-1 flex-col ' >
           <p  className='text-center text-3xl font-semibold text-wwe mt-5'>Menus</p>
@@ -137,7 +137,7 @@ const getReseniaById = async () => {
        
     } 
       </div>
-  <div className='border shadow-xl h-80 p-4  w-full m-auto justify-center items-center  '>
+  <div className='  h-80 p-4  w-full m-auto justify-center items-center  '>
     <h2 className='text-center font-aref font-semibold text-2xl text-wwe'>Reseñas:</h2>
   
       
@@ -145,7 +145,7 @@ const getReseniaById = async () => {
 
    
     {
-      Array.isArray(resenia) && resenia.length < 0 ?
+      Array.isArray(resenia) && resenia.length > 0 ?
       resenia.map((item, index) => (
          <li key={index} className='list-none  '>
               <div className="flex items-center gap-x-6 bg-white shadow-xl p-2 rounded-box">
