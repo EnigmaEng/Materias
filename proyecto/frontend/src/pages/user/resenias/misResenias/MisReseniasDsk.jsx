@@ -25,7 +25,7 @@ const MisReseniasDsk = () => {
         <div className="max-w-2xl bg-zinc-100  h-48 p-2 rounded-box shadow-xl  xl:h-80">
           <h2 className="text-3xl font-bold tracking-tight text-black font-aref sm:text-3xl px-5 py-2 flex gap-5 ">Tus reseñas <span className='text-4xl mt-1'><MdOutlineRateReview/></span></h2>
           <p className="mt-6 text-lg leading-8 text-black ">
-            Este es el lugar donde veras tus reseñas creadas hacia otros restaurantes concurridos
+            Este es el lugar donde veras tus reseñas creadas hacia otros restaurantes concurridos.
           </p>
         </div>
         <ul role="list" className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
