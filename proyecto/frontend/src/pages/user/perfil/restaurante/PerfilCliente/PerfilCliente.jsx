@@ -36,7 +36,7 @@ const getMenuById = async() => {
     "id_usuario_rest": id_usuario
   }
   try {
-    const res = await clienteAxios.post(endpoint,accion)
+    const res = await clienteAxios.post('/restauranteController.php',accion)
     setMenu(res.data)
     console.log(res.data)
   } catch (error) {
@@ -77,6 +77,7 @@ const getReseniaById = async () => {
     <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-80 '>
       <NavBar/>
     {
+      
       restaurante.map((item,index) => (
          <div className=' mt-24 flex justify-center' key={index}>
           <div className='bg-white  w-6/12 p-8 rounded-lg shadow-xl  '>
@@ -92,7 +93,9 @@ const getReseniaById = async () => {
     <p  className='text-center text-3xl font-semibold text-wwe mt-5'>Menus</p>
     <div className=' w-6/12 m-auto mt-5 p-1  grid grid-cols-3  gap-5 ' >
    
-    {
+    { 
+    Array.isArray(menu) && menu.length > 0 ?
+    
       menu.map((item,index) => (
         
           <div className='rounded-lg shadow-xl border bg-white text-black  font-aref  m-auto h-64 w-52 text-center ' key={index}>
@@ -104,18 +107,24 @@ const getReseniaById = async () => {
             </div>
             
           </div>
-       
       ))
+        :
+       
+        <div className='h-64 w-52 m-auto text-black font-aref  text-center text-3xl'>
+          <p>Sin menus</p>
+          </div>
+       
     } 
-  <div className=' bg-white w-full m-auto justify-center items-center rounded-lg shadow-xl '>
+  <div className='  w-full m-auto justify-center items-center  '>
     <h2 className='text-center font-aref font-semibold text-2xl text-wwe'>Reseñas:</h2>
   
       
     
     {
+      Array.isArray(resenia) && resenia.length < 0 ?
       resenia.map((item, index) => (
-         <li key={index} className='text-white '>
-              <div className="flex items-center gap-x-6 border shadow-xl p-2 rounded-box">
+         <li key={index} className='list-none  '>
+              <div className="flex items-center gap-x-6 bg-white shadow-xl p-2 rounded-box">
                 <div>
                   
                   <p className="text-sm font-semibold leading-6 text-black">Menu gastronómico: {item.calificacion_menu} </p>
@@ -126,7 +135,11 @@ const getReseniaById = async () => {
                 </div>
               </div> 
                </li>
-      ))
+      )) 
+      : 
+      <div className='text-center text-3xl font-semibold font-aref '>
+        <p>Sin reseñas realizadas</p>
+      </div>
     }
     </div>
     </div>
