@@ -308,6 +308,9 @@ VALUES ('Bulevar España', 'Juan Carlos Gómez', '4321');
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
 VALUES (LAST_INSERT_ID(), 'Le Marechal', LAST_INSERT_ID());
 
+INSERT INTO tipo_restaurantes (descripcion,id_usuario_rest)
+VALUES ('Comida Vegana',LAST_INSERT_ID);
+
 -- Restaurante 2
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
 VALUES ('gourmetparadise', 'gourmetparadise@example.com', 'topsecret', 'S', 'N', 'R');
