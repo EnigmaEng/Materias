@@ -73,7 +73,7 @@ CREATE TABLE `sesiones`(
 );
 
 CREATE TABLE `tipo_restaurantes`(
-	id_tipo_rest INT(10) UNSIGNED PRIMARY KEY,
+	id_tipo_rest INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     descripcion VARCHAR(50) NOT NULL,
     id_usuario_rest INT (10) UNSIGNED,
 	FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante`(id_usuario)
@@ -309,7 +309,7 @@ INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
 VALUES (LAST_INSERT_ID(), 'Le Marechal', LAST_INSERT_ID());
 
 INSERT INTO tipo_restaurantes (descripcion,id_usuario_rest)
-VALUES ('Comida Vegana',LAST_INSERT_ID);
+VALUES ('Comida Vegana',LAST_INSERT_ID());
 
 -- Restaurante 2
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
@@ -321,6 +321,9 @@ VALUES ('Avenida Italia', 'Plaza Cagancha', '1234');
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
 VALUES (LAST_INSERT_ID(), 'Gourmet Paradise', LAST_INSERT_ID());
 
+INSERT INTO tipo_restaurantes (descripcion,id_usuario_rest)
+VALUES ('Comida China',LAST_INSERT_ID());
+
 -- Restaurante 3
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
 VALUES ('saboresdelrio', 'saboresdelrio@example.com', 'delicioso', 'S', 'N', 'R');
@@ -330,6 +333,9 @@ VALUES ('Calle Uruguay', 'Plaza Independencia', '5678');
 
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
 VALUES (LAST_INSERT_ID(), 'Sabores del Rio', LAST_INSERT_ID());
+
+INSERT INTO tipo_restaurantes (descripcion,id_usuario_rest)
+VALUES ('Comida Mexicana',LAST_INSERT_ID());
 
 -- Restaurante 4
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
@@ -341,6 +347,9 @@ VALUES ('Rambla', 'Plaza Virgilio', '9101');
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
 VALUES (LAST_INSERT_ID(), 'Mariscos en Clave', LAST_INSERT_ID());
 
+INSERT INTO tipo_restaurantes (descripcion,id_usuario_rest)
+VALUES ('Comida Vegetariana',LAST_INSERT_ID());
+
 -- Restaurante 5
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
 VALUES ('asadospremium', 'asadospremium@example.com', 'premiumBBQ', 'S', 'N', 'R');
@@ -350,6 +359,9 @@ VALUES ('Avenida Brasil', 'Plaza España', '1213');
 
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
 VALUES (LAST_INSERT_ID(), 'Asados Premium', LAST_INSERT_ID());
+
+INSERT INTO tipo_restaurantes (descripcion,id_usuario_rest)
+VALUES ('Comida Rapida',LAST_INSERT_ID());
 
 -- Restaurante 6
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
@@ -361,6 +373,8 @@ VALUES ('Calle 18 de Julio', 'Plaza Matriz', '1415');
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
 VALUES (LAST_INSERT_ID(), 'Casa de los Platos', LAST_INSERT_ID());
 
+INSERT INTO tipo_restaurantes (descripcion,id_usuario_rest)
+VALUES ('Solo Pick Up y Delivery',LAST_INSERT_ID());
 -- Restaurante 7
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
 VALUES ('saboresdeorientet', 'saboresdeorientet@example.com', 'exoticfood', 'S', 'N', 'R');
