@@ -45,6 +45,7 @@ CREATE TABLE `administrativo` (
 CREATE TABLE `restaurante` (
   id_usuario INT(10) UNSIGNED PRIMARY KEY,
   nombre VARCHAR(50) NOT NULL,
+  nro_local INT(10),
   id_loc_restaurante INT(10) UNSIGNED,
   FOREIGN KEY (id_usuario) REFERENCES `usuarios`(id_usuario),
   FOREIGN KEY (id_loc_restaurante) REFERENCES `localizacion`(id_localizacion)
@@ -53,7 +54,7 @@ CREATE TABLE `restaurante` (
 CREATE TABLE `plato_restaurantes` (
   id_Plato INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   nombre_plato VARCHAR(80) NOT NULL,
-  costo FLOAT(5,2),
+  costo FLOAT(6,2),
   descripcion VARCHAR(300),
   url_img_menu VARCHAR(150),
   estado_plato ENUM ('S','N') DEFAULT 'S',
@@ -146,7 +147,7 @@ CREATE TABLE `turista_sealoja_alojamiento` (
   FOREIGN KEY (id_alojamiento) REFERENCES `alojamiento` (id_alojamiento)
 );
 
-  CREATE TABLE turista_visita_rest (
+  CREATE TABLE `turista_visita_rest` (
   id_turista INT(10) UNSIGNED,
   id_rest INT (10) UNSIGNED,
   token INT (10) UNSIGNED UNIQUE,
@@ -305,7 +306,7 @@ INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Bulevar España', 'Juan Carlos Gómez', '4321');
 
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
-VALUES (LAST_INSERT_ID(), 'Le Maréchal', LAST_INSERT_ID());
+VALUES (LAST_INSERT_ID(), 'Le Marechal', LAST_INSERT_ID());
 
 -- Restaurante 2
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
@@ -325,7 +326,7 @@ INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Calle Uruguay', 'Plaza Independencia', '5678');
 
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
-VALUES (LAST_INSERT_ID(), 'Sabores del Río', LAST_INSERT_ID());
+VALUES (LAST_INSERT_ID(), 'Sabores del Rio', LAST_INSERT_ID());
 
 -- Restaurante 4
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
@@ -375,7 +376,7 @@ INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Rambla República de México', 'Plaza Gomensoro', '1819');
 
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
-VALUES (LAST_INSERT_ID(), 'Paraíso Gourmet', LAST_INSERT_ID());
+VALUES (LAST_INSERT_ID(), 'Paraiso Gourmet', LAST_INSERT_ID());
 
 -- Restaurante 9
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
