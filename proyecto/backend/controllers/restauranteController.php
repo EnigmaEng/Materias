@@ -121,7 +121,7 @@ function obtenerRestaurante()
             "foto_usuario" => $restaurante->foto_usuario
         ));
 
-        // Agrega una coma para separar los objetos JSON, excepto en la primera iteración
+        // Agrega una coma para separar los objetos JSON, excepto en la primera iteración.
         if (!empty($response)) {
             $response .= ",";
         }
