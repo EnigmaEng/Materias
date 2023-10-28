@@ -5,9 +5,12 @@ require '../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 
+
 // Carga las variables de entorno desde el archivo .env
 $dotenv = Dotenv::createImmutable('/var/www/html/');
 $dotenv->load();
+
+
 
 class Turista extends Usuario
 {

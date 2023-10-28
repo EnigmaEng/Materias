@@ -1,14 +1,16 @@
 <?php
+require_once 'dataBaseConnection.php';
 
 
-class Login
+
+class Login extends DataBaseConnection
 {
 
     private $userModel;
 
     function __construct($userModel)
     {
-        $this->userModel = $userModel;
+        $this->userModel=$userModel;
     }
 
 
@@ -23,13 +25,14 @@ class Login
             $stmt->bindValue(":email", $this->userModel->getEmail());
             $stmt->execute();
             $userData = $stmt->fetch(PDO::FETCH_ASSOC);
-            
+
             if (!$userData) {
                 return false;
             }
-            
+
             // Verificar la contraseña utilizando password_verify
             if (password_verify($this->userModel->getContrasenia(), $userData['contrasena'])) {
+
             
             // Obtener el rol del usuario
             $rol = $userData['rol'];
@@ -70,19 +73,10 @@ class Login
                 $stmt->execute();
                 $rolData = $stmt->fetch(PDO::FETCH_ASSOC);
             }
-            // Agregar los datos del rol al arreglo de datos del usuario
-            $usuarioData['rol'] = $rolData;
-            
-            
-            return $usuarioData;
-            
-            }
-                return false;
+            return false;
         } catch (PDOException $ex) {
             echo "Error en la conexión: " . $ex->getMessage();
         }
     }
-
-
-
+}
 }
