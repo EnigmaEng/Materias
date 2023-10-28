@@ -122,22 +122,22 @@ class Restaurante extends Usuario
 
     public function obtenerRestaurantes()
     {
-        $query = "SELECT r.nombre AS nombre_restaurante, u.url_img_usuario AS foto_usuario
-                FROM wwe.restaurante r
-                JOIN wwe.usuarios u ON r.id_usuario = u.id_usuario
-                JOIN wwe.admin_aprueba_rest m ON r.id_usuario = m.id_usuario_rest WHERE m.fecha_fin_sub >= CURDATE()";
+        $query = "SELECT u.id_usuario AS id_usuario,r.nombre AS nombre_restaurante, u.url_img_usuario AS foto_usuario
+        FROM wwe.restaurante r
+        JOIN wwe.usuarios u ON r.id_usuario = u.id_usuario
+        JOIN wwe.admin_aprueba_rest m ON m.id_usuario_rest = u.id_usuario
+        WHERE m.fecha_fin_sub >= CURDATE()";
 
         $stmt = $this->getConn()->prepare($query);
+
         $stmt->execute();
 
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!empty($data)) {
-            return $data;
-        } else {
-            return false;
-        }
+        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $data;
     }
+
 
     public function createInTipoRestaurante($tabla, $datos, $datosRestaurante)
     {
