@@ -4,7 +4,7 @@ require_once '../models/platoRestaurante.php';
 require_once '../models/descuento.php';
 require_once './cors.php';
 
-function insertarController($alias, $url_img_usuario, $email, $contrasena, $rol, $nombre, $nroLocal, $calle, $esquina, $numero,$tipo)
+function insertarController($alias, $url_img_usuario, $email, $contrasena, $rol, $nombre, $nroLocal, $calle, $esquina, $numero, $tipo)
 {
     $restaurante = new Restaurante();
     $datosUsuario = array(
@@ -19,7 +19,7 @@ function insertarController($alias, $url_img_usuario, $email, $contrasena, $rol,
         "nombre" => $nombre,
         "id_usuario" => "",
         "nro_local" => $nroLocal,
-        "id_loc_restaurante"=>""
+        "id_loc_restaurante" => ""
     );
 
     $direccionRestaurante = array(
@@ -34,13 +34,26 @@ function insertarController($alias, $url_img_usuario, $email, $contrasena, $rol,
     );
 
     if ($restaurante->create("usuarios", $datosUsuario)) {
-        if ($restaurante->dataCreate("localizacion", $direccionRestaurante) && $restaurante->createInRestaurante("restaurante", $datosUsuario, $datosRestaurante) && $restaurante->createInTipoRestaurante("tipo_restaurantes",$datosUsuario,$tipoRestaurantes)) {
+        if ($restaurante->dataCreate("localizacion", $direccionRestaurante) && $restaurante->createInRestaurante("restaurante", $datosUsuario, $datosRestaurante) && $restaurante->createInTipoRestaurante("tipo_restaurantes", $datosUsuario, $tipoRestaurantes)) {
             return "Creacion de usuario exitosa";
         } else {
             return "Error en la creacion de usuario";
         }
     } else {
         return "El usuario ya existe";
+    }
+}
+
+function obtenerRestauranteById($id)
+{
+    $restaurante = new Restaurante();
+    $restauranteById = $restaurante->obtenerRestauranteById($id);
+    header('Content-Type: application/json');
+
+    if (!empty($restauranteById)) {
+        return json_encode($restauranteById);
+    } else {
+        return "No se encontraron restaurantes";
     }
 }
 
@@ -112,18 +125,6 @@ function obtenerRestaurante()
             if (!empty($response)) {
                 $response .= ",";
             }
-    foreach ($restaurantes as $restaurante) {
-        // Genera un objeto JSON separado en cada iteración
-        $restaurantesDatos = json_encode(array(
-            "id_usuario"=>$restaurante->id_usuario,
-            "nombre_restaurante" => $restaurante->nombre_restaurante,
-            "foto_usuario" => $restaurante->foto_usuario
-        ));
-
-        // Agrega una coma para separar los objetos JSON, excepto en la primera iteración
-        if (!empty($response)) {
-            $response .= ",";
-        }
 
             $response .= $restaurantesDatos;
         }
@@ -133,19 +134,6 @@ function obtenerRestaurante()
 }
 
 
-
-function obtenerRestauranteById($id)
-{
-    $restaurante = new Restaurante();
-    $restauranteById = $restaurante->obtenerRestauranteById($id);
-    header('Content-Type: application/json');
-
-    if (!empty($restauranteById)) {
-        return json_encode($restauranteById);
-    } else {
-        return "No se encontraron restaurantes";
-    }
-}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
@@ -199,11 +187,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case "obtenerRestaurantes":
                 $resultado = obtenerRestaurante();
                 break;
-            case "obtenerPlatos":
-                $resultado = obtenerPlatos($data['id_usuario_rest']);
-                break;
             case "restauranteById":
                 $resultado = obtenerRestauranteById($data['id_usuario']);
+                break;
+            case "obtenerPlatos":
+                $resultado = obtenerPlatos($data['id_usuario_rest']);
                 break;
             default:
                 $resultado = "Error en el tipo de accion, intente nuevamente";

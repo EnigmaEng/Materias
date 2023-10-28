@@ -11,7 +11,7 @@ $dotenv = Dotenv::createImmutable('/var/www/html/');
 $dotenv->load();
 
 class Restaurante extends Usuario
-{   
+{
     private $tipoRestaurante;
 
     private $nombre;
@@ -83,26 +83,26 @@ class Restaurante extends Usuario
             if (!empty($idRows)) {
                 $datosRestaurante['id_usuario'] = $idRows[0]['id_usuario'];
 
-                
+
                 $query = "SELECT MAX(id_localizacion) AS last_id_localizacion FROM localizacion";
                 $stmt = $this->getConn()->prepare($query);
                 $stmt->execute();
                 $lastIdLocalizacion = $stmt->fetchColumn();
 
-                
+
                 $datosRestaurante['id_loc_restaurante'] = $lastIdLocalizacion;
 
-                
+
                 $columnNames = implode(', ', array_keys($datosRestaurante));
                 $placeholders = implode(', ', array_map(function ($key) {
                     return ':' . $key;
                 }, array_keys($datosRestaurante)));
 
-                
+
                 $query = "INSERT INTO $tabla ($columnNames) VALUES ($placeholders)";
                 $stmt = $this->getConn()->prepare($query);
 
-                
+
                 foreach ($datosRestaurante as $nombre => $valor) {
                     $stmt->bindValue(':' . $nombre, $valor);
                 }
@@ -151,17 +151,17 @@ class Restaurante extends Usuario
             if (!empty($idRows)) {
                 $datosRestaurante['id_usuario_rest'] = $idRows[0]['id_usuario'];
 
-                
+
                 $columnNames = implode(', ', array_keys($datosRestaurante));
                 $placeholders = implode(', ', array_map(function ($key) {
                     return ':' . $key;
                 }, array_keys($datosRestaurante)));
 
-        
+
                 $query = "INSERT INTO $tabla ($columnNames) VALUES ($placeholders)";
                 $stmt = $this->getConn()->prepare($query);
 
-               
+
                 foreach ($datosRestaurante as $nombre => $valor) {
                     $stmt->bindValue(':' . $nombre, $valor);
                 }
@@ -177,4 +177,19 @@ class Restaurante extends Usuario
         }
     }
 
+    public function obtenerRestauranteById($id)
+    {
+        $query = "  SELECT *
+            FROM restaurante, usuarios, admin_aprueba_rest
+            WHERE restaurante.id_usuario = usuarios.id_usuario
+            AND usuarios.id_usuario = :id_usuario
+            AND admin_aprueba_rest.id_usuario_rest = usuarios.id_usuario
+            AND admin_aprueba_rest.fecha_fin_sub >= CURDATE()";
+
+        $stmt = $this->getConn()->prepare($query);
+        $stmt->bindParam(":id_usuario", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+    }
 }
