@@ -41,13 +41,10 @@ class Login extends DataBaseConnection
                     'activo' => $userData['activo'],
                     'bloqueado' => $userData['bloqueado']
                 );
-
+                
                 $rolData = array();
                 if ($userData['rol'] === 'R') {
-                    $query = "SELECT * FROM restaurante r 
-                              JOIN localizacion l ON r.id_loc_restaurante = l.id_localizacion
-                              JOIN tipo_restaurantes t ON r.id_usuario = t.id_usuario_rest
-                              WHERE r.id_usuario = :id_usuario";
+                    $query = "SELECT * FROM restaurante WHERE id_usuario = :id_usuario";
                     $stmt = $conn->prepare($query);
                     $stmt->bindValue(":id_usuario", $userData['id_usuario']);
                     $stmt->execute();
