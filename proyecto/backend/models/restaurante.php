@@ -129,16 +129,15 @@ class Restaurante extends Usuario
         WHERE m.fecha_fin_sub >= CURDATE()";
 
         $stmt = $this->getConn()->prepare($query);
+
         $stmt->execute();
 
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!empty($data)) {
-            return $data;
-        } else {
-            return false;
-        }
+        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $data;
     }
+
 
     public function createInTipoRestaurante($tabla, $datos, $datosRestaurante)
     {

@@ -108,29 +108,28 @@ function obtenerRestaurante()
 {
     $restaurante = new Restaurante();
     $restaurantes = $restaurante->obtenerRestaurantes();
+    
     header('Content-Type: application/json');
+   
     $response = "";
 
-    if ($restaurantes === false) {
-        $response = "mensaje: No se han encontrado restaurantes.";
-    } else {
-        foreach ($restaurantes as $restaurante) {
-            $restaurantesDatos = json_encode(
-                array(
-                    "nombre_restaurante" => $restaurante['nombre_restaurante'],
-                    "foto_usuario" => $restaurante['foto_usuario']
-                )
-            );
+    foreach ($restaurantes as $restaurante) {
+        // Genera un objeto JSON separado en cada iteración
+        $restaurantesDatos = json_encode(array(
+            "id_usuario"=>$restaurante->id_usuario,
+            "nombre_restaurante" => $restaurante->nombre_restaurante,
+            "foto_usuario" => $restaurante->foto_usuario
+        ));
 
-            if (!empty($response)) {
-                $response .= ",";
-            }
-
-            $response .= $restaurantesDatos;
+        // Agrega una coma para separar los objetos JSON, excepto en la primera iteración
+        if (!empty($response)) {
+            $response .= ",";
         }
+
+        $response .= $restaurantesDatos;
     }
 
-    return "[$response]";
+    return "[$response]"; 
 }
 
 
