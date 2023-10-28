@@ -62,7 +62,7 @@ iniciarSesion(userData)
   <div className="sm:mx-auto sm:w-full sm:max-w-sm">
     {mensaje && <Mensaje mensaje={mensaje} tipo='alerta'/>}
     <img src={Image} alt="logo" className="w-32 m-auto "/>
-    <h2 className="mt-10 text-center text-4xl dark:text-white font-bold leading-9 font-aref text-wwe tracking-tight text-gray-900">Inicia sesion</h2>
+    <h2 className="mt-10 text-center text-4xl dark:text-white font-bold leading-9 font-aref text-wwe tracking-tight text-gray-900">Iniciar Sesión</h2>
   </div>
 
   <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">

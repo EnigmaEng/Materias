@@ -24,6 +24,15 @@ const initialValues = {
   nacionalidad: '', //  turista
   motivo_alojamiento: '', //  turista
   nombre: '', // restaurante
+  esquina: '',
+  calle: '',
+  nro_puerta:'',
+  descripcion: '',
+  tipo_restaurantes: '',
+  nro_local: '',
+  // id_tipo_rest
+  // nro_local
+
 };
 
 const validationSchema = Yup.object({
@@ -96,6 +105,11 @@ const RegistroUsuario = () => {
           "accion": "altaRestaurante",
           ...dataUser,
           nombre: valores.nombre,
+          nro_local: valores.nro_local,
+          nro_puerta: valores.nro_puerta,
+          descripcion: valores.descripcion,
+          calle: valores.calle,
+          esquina: valores.esquina
           
         }
         console.log(dataUser)
@@ -266,25 +280,71 @@ const RegistroUsuario = () => {
       )}
 
 {selectedRole === 'R' && (
-
+<>
   <div className='flex flex-col  mb-4'>
    
       <label htmlFor="nombre" className='  px-4 font-bold mt-4'>Nombre del restaurante</label>
-      <input type="text" id='nombre' placeholder='Nombre...' className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none"
-      value={formik.values.nombre} onChange={formik.handleChange} onBlur={formik.handleBlur}
+      <input type="text" id='nombre' placeholder='Nombre' className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none"
+      value={formik.values.nombre} onChange={formik.handleChange} required
       />
-      { formik.touched.nombre && formik.errors.nombre && (
-        <div> <p className='text-sm px-5 text-black'>{formik.errors.nombre}</p></div>
-      )}
-  
     
   </div>
+
+      <div className='flex flex-col  mb-4'>
+      <label htmlFor="calle" className='  px-4 font-bold mt-4'>Calle</label>
+      <input type="text" id='calle' placeholder='Calle..' className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none"
+      value={formik.values.calle} onChange={formik.handleChange}  required
+      />
+     
+      </div>
+       <div className='flex flex-col  mb-4'>
+      <label htmlFor="nro_puerta" className='  px-4 font-bold mt-4'>Nro de puerta</label>
+      <input type="text" id='nro_puerta' placeholder='Nro de puerta' className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none"
+      value={formik.values.nro_puerta} onChange={formik.handleChange} required
+      />
+      </div>
+
+      <div className='flex flex-col mb-4'>
+      <label htmlFor="nro_local" className='px-4 font-bold mt-4'>Nro de local</label>
+      <input type="text" id='nro_local' placeholder='Nro de puerta' className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none"
+      value={formik.values.nro_local} onChange={formik.handleChange}  required
+      />
+    
+      </div>
+      <div className='flex flex-col mb-4'>
+      <label htmlFor="descripcion" className='  px-4 font-bold mt-4'>Tipo de restaurante</label>
+      <select type="text" id='descripcion' placeholder='Descripcion..' className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none"
+      value={formik.values.descripcion} onChange={formik.handleChange}  required>
+        <option value='' disabled>Tipo de restaurante</option>
+        <option value='Restaurante para llevar'>Restaurante para llevar</option>
+        <option value='Comida italiana'>Comida italiana</option>
+        <option value='Comida francesa'>Comida francesa</option>
+        <option value='Comida japonesa'>Comida japonesa</option>
+        <option value='Comida china'>Comida china</option>
+        <option value='Comida mexicana'>Comida mexicana</option>
+        <option value='Comida gourmet'>Comida gourmet</option>
+        <option value='Restaurante de autor'>Restaurante de autor</option>
+        <option value='Restaurante de comida rapida y casual'>Restaurante de comida rapida y casual</option>
+        <option value='Restaurante de comida rapida'>Restaurante de comida rapida</option>
+        <option value='Restaurante buffet'>Restaurante buffet</option>
+         </select>
+     
+      </div>
+        <div className='flex flex-col  mb-4'>
+      <label htmlFor="esquina" className='  px-4 font-bold mt-4'>Esquina</label>
+      <input type="text" id='esquina' placeholder='Esquina' className="block w-full rounded-md ring-wwe  py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-wwe  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-wwe  sm:text-sm sm:leading-6 focus:outline-none"
+      value={formik.values.esquina} onChange={formik.handleChange}  required
+      />
+    
+      </div>
+
+  </>
 )}
 <div>
-<label htmlFor="" className='md:px-6  px-4 '>Acepta terminos y condiciones?</label> 
+<label htmlFor="" className='md:px-6  px-4 '>Acepta términos y condiciones?</label> 
      <input type="checkbox" required />
    <br />
-      <a className='px-4 md:px-6 underline hover:text-blue-500 '  href="https://www.impo.com.uy/bases/leyes/18331-2008" target='_blank'>Ver terminos</a>
+      <a className='px-4 md:px-6 underline hover:text-blue-500 '  href="https://www.impo.com.uy/bases/leyes/18331-2008" target='_blank'>Ver términos</a>
 </div>
  
     

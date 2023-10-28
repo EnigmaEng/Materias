@@ -48,7 +48,9 @@ class Login
             $rolData = array();
             if ($userData['rol'] === 'R') {
                 
-                $query = "SELECT * FROM restaurante WHERE id_usuario = :id_usuario";
+                $query = "SELECT * FROM restaurante r WHERE r.id_usuario = :id_usuario 
+                JOIN localizacion l ON r.id_loc_restaurante = id_localizacion
+                JOIN tipo_restauranes t ON r.id_usuario = id_usuario_rest";
                 $stmt = $conn->prepare($query);
                 $stmt->bindValue(":id_usuario", $userData['id_usuario']);
                 $stmt->execute();

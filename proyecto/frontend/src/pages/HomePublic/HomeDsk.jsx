@@ -42,11 +42,10 @@ const HomeDsk = () => {
       <h2 className="text-4xl text-white font-aref font-semibold">BIENVENIDO!</h2>
    </div>
 
-  
 
     <div className="flex gap-5">
       <Link to='/login'>
-      <button className=" bg-wwe font-bold text-white text-2xl px-4 py-1 shadow-xl  rounded-box w-52  ">Iniciar sesion</button>
+      <button className=" bg-wwe font-bold text-white text-2xl px-4 py-1 shadow-xl  rounded-box w-52  ">Iniciar Sesión</button>
       </Link>
       <Link to='/registro'>
         <button className="font-bold text-white  shadow-xl text-2xl px-4 py-1 rounded-box w-52 bg-wwe ">Registrarse</button>

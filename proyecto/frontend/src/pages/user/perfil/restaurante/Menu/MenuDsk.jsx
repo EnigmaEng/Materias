@@ -38,7 +38,7 @@ const {usuario, autenticado} = TodoContext
         <div className='flex '>
               <p className='text-4xl text-center text-wwe flex gap-3 font-aref font-semibold mb-10'>
               
-                 <span className='text-wwe'> <MdMenuBook/></span> Tus menus:</p> 
+                 <span className='text-wwe'> <MdMenuBook/></span> Tus menús:</p> 
              
         </div>
        

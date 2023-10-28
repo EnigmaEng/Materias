@@ -44,8 +44,8 @@ const RestauranteHomeDsk = () => {
   <div class=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div class="mb-8 mt-5">
     
-      <div class="text-gray-900 font-bold text-xl mb-2">Menu</div>
-      <p class="text-gray-700 text-sm">Mira todos tus platos creados en tu menu</p>
+      <div class="text-gray-900 font-bold text-xl mb-2">Menú</div>
+      <p class="text-gray-700 text-sm">Mira todos tus platos creados en tu menú</p>
     </div>
     <div class="flex  justify-center items-center">
      <Link to='/menu' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white border shadow-xl w-20  text-wwe px-6 text-3xl rounded-lg h-12'>  <MdMenuBook/></Link>
@@ -56,7 +56,6 @@ const RestauranteHomeDsk = () => {
 <img src={Image2} alt="menu" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none  bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
   <div class=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div class="mb-8 mt-5">
-   
       <div class="text-gray-900 font-bold text-xl mb-2">Crear plato</div>
       <p class="text-gray-700 text-sm">Agrega un plato a tu menu </p>
     </div>
