@@ -2,8 +2,13 @@
 
 require_once 'dataBaseConnection.php';
 require_once 'crud.php';
+require '../vendor/autoload.php';
 
-class Usuario extends DataBaseConnection implements Crud{
+ini_set('log_errors', 1);
+ini_set('error_log', '/var/www/html/error_log.txt');
+
+class Usuario extends DataBaseConnection implements Crud
+{
 
     private $alias;
 
@@ -21,98 +26,115 @@ class Usuario extends DataBaseConnection implements Crud{
 
     private $rol;
 
-    function  __construct(){
+    function  __construct()
+    {
         parent::__construct();
     }
 
-  
-	public function getAlias() {
-		return $this->alias;
-	}
-	
 
-	public function setAlias($alias): self {
-		$this->alias = $alias;
-		return $this;
-	}
-	
-
-	public function getEmail() {
-		return $this->email;
-	}
-	
-
-	public function setEmail($email): self {
-		$this->email = $email;
-		return $this;
-	}
-	
-	
-	public function getContrasenia() {
-		return $this->contrasenia;
-	}
-	
-
-	public function setContrasenia($contrasenia): self {
-		$this->contrasenia = $contrasenia;
-		return $this;
-	}
-	
-
-	public function getActivo() {
-		return $this->activo;
-	}
-
-	public function setActivo($activo): self {
-		$this->activo = $activo;
-		return $this;
-	}
-	
-
-	public function getBloqueado() {
-		return $this->bloqueado;
-	}
-	
-
-	public function setBloqueado($bloqueado): self {
-		$this->bloqueado = $bloqueado;
-		return $this;
-	}
-	
-
-	public function getUrlImagenUsuario() {
-		return $this->urlImagenUsuario;
-	}
-	
-
-	public function setUrlImagenUsuario($urlImagenUsuario): self {
-		$this->urlImagenUsuario = $urlImagenUsuario;
-		return $this;
-	}
-	
-	
-	public function getFechaCambioPwd() {
-		return $this->fechaCambioPwd;
-	}
-	
-	public function setFechaCambioPwd($fechaCambioPwd): self {
-		$this->fechaCambioPwd = $fechaCambioPwd;
-		return $this;
-	}
-	
-	
-	public function getRol() {
-		return $this->rol;
-	}
+    public function getAlias()
+    {
+        return $this->alias;
+    }
 
 
-	public function setRol($rol): self {
-		$this->rol = $rol;
-		return $this->rol;
-	}
+    public function setAlias($alias): self
+    {
+        $this->alias = $alias;
+        return $this;
+    }
 
 
-	public function create($tabla, $datos)
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+
+    public function setEmail($email): self
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+
+    public function getContrasenia()
+    {
+        return $this->contrasenia;
+    }
+
+
+    public function setContrasenia($contrasenia): self
+    {
+        $this->contrasenia = $contrasenia;
+        return $this;
+    }
+
+
+    public function getActivo()
+    {
+        return $this->activo;
+    }
+
+    public function setActivo($activo): self
+    {
+        $this->activo = $activo;
+        return $this;
+    }
+
+
+    public function getBloqueado()
+    {
+        return $this->bloqueado;
+    }
+
+
+    public function setBloqueado($bloqueado): self
+    {
+        $this->bloqueado = $bloqueado;
+        return $this;
+    }
+
+
+    public function getUrlImagenUsuario()
+    {
+        return $this->urlImagenUsuario;
+    }
+
+
+    public function setUrlImagenUsuario($urlImagenUsuario): self
+    {
+        $this->urlImagenUsuario = $urlImagenUsuario;
+        return $this;
+    }
+
+
+    public function getFechaCambioPwd()
+    {
+        return $this->fechaCambioPwd;
+    }
+
+    public function setFechaCambioPwd($fechaCambioPwd): self
+    {
+        $this->fechaCambioPwd = $fechaCambioPwd;
+        return $this;
+    }
+
+
+    public function getRol()
+    {
+        return $this->rol;
+    }
+
+
+    public function setRol($rol): self
+    {
+        $this->rol = $rol;
+        return $this->rol;
+    }
+
+
+    public function create($tabla, $datos)
     {
         try {
             $query = "SELECT * FROM $tabla WHERE email = :email";
@@ -123,8 +145,8 @@ class Usuario extends DataBaseConnection implements Crud{
             if ($stmt->rowCount() > 0) {
                 return false;
             } else {
-                $hashedPass = password_hash($datos['contrasena'],PASSWORD_BCRYPT);
-        
+                $hashedPass = password_hash($datos['contrasena'], PASSWORD_BCRYPT);
+
                 //Almaceno nuevamente la contraseña
                 $datos['contrasena'] = $hashedPass;
 
@@ -145,6 +167,31 @@ class Usuario extends DataBaseConnection implements Crud{
 
                 return true;
             }
+        } catch (PDOException $ex) {
+            echo "Error al insertar: " . $ex->getMessage();
+        }
+    }
+
+    public function dataCreate($tabla, $datos)
+    {
+        try {
+                $columnNames = implode(', ', array_keys($datos));
+                $placeholders = implode(', ', array_map(function ($key) {
+                    return ':' . $key;
+                }, array_keys($datos)));
+
+                $query = "INSERT INTO $tabla ($columnNames) VALUES ($placeholders)";
+
+                $stmt = $this->getConn()->prepare($query);
+
+                foreach ($datos as $nombre => $valor) {
+                    $stmt->bindValue(':' . $nombre, $valor);
+                }
+
+                $stmt->execute();
+
+                return true;
+            
         } catch (PDOException $ex) {
             echo "Error al insertar: " . $ex->getMessage();
         }
@@ -192,7 +239,6 @@ class Usuario extends DataBaseConnection implements Crud{
 
     public function alter($data)
     {
-
     }
 
 
@@ -237,5 +283,75 @@ class Usuario extends DataBaseConnection implements Crud{
 
         return $result;
     }
-	
+
+    function blockAccount($id_usuario)
+    {
+        try {
+            error_log("Inicio de bloqueo de usuario");
+
+            $query = "UPDATE usuarios SET bloqueado = :bloqueado WHERE id_usuario = :id_usuario;";
+            $stmt = $this->getConn()->prepare($query);
+            $stmt->bindValue(":id_usuario", $id_usuario);
+            $stmt->bindValue(":bloqueado", "S");
+
+            if ($stmt->execute()) {
+                error_log("Actualización en la base de datos exitosa");
+
+                // Construye el comando con los valores de las variables de entorno
+                $comando = "nohup php -r '"
+                    . " sleep(15); "
+                    . "\$pdo = new PDO(\"mysql:host=" . $_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_NAME'] . "\", \"" . $_ENV['DB_USER'] . "\", \"" . $_ENV['DB_PASSWORD'] . "\");"
+                    . "\$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);"
+                    . "\$stmt = \$pdo->prepare(\"UPDATE usuarios SET bloqueado = :bloqueado WHERE id_usuario = :id_usuario\");"
+                    . "\$stmt->bindValue(\":id_usuario\", $id_usuario);"
+                    . "\$stmt->bindValue(\":bloqueado\", \"N\");"
+                    . "\$stmt->execute();"
+                    . "' > /dev/null 2>&1 &";
+
+                // Registro del comando
+                error_log("Comando en segundo plano: $comando");
+
+                exec($comando);
+
+
+                // Registro de éxito
+                error_log("Ejecución en segundo plano exitosa");
+            } else {
+                // Registro de fallo en la actualización de la base de datos
+                error_log("Error en la actualización de la base de datos");
+            }
+        } catch (PDOException $ex) {
+            error_log("Error de base de datos: " . $ex->getMessage());
+        } catch (Exception $e) {
+            error_log("Error al ejecutar el proceso: " . $e->getMessage());
+        }
+
+        // Registro de finalización
+        error_log("Fin de bloqueo de usuario");
+    }
+
+    public function editUser($idUsuario, $opcion, $valor)
+    {
+        try {
+            $query = "UPDATE usuarios SET :nombreColumna = :valor WHERE id_usuario= :id_usuario";
+            $stmt = $this->getConn()->prepare($query);
+            $stmt->bindValue(":valor", $valor);
+            $stmt->bindValue(":id_usuario", $idUsuario);
+            if (isset($opcion)) {
+                switch ($opcion) {
+                    case "nombre":
+                        $stmt->bindValue(":nombreColumna", "alias");
+                        break;
+                    case "contrasena":
+                        $stmt->bindValue(":nombreColumna", "contrasena");
+                        break;
+                    case "url_img_usuario":
+                        $stmt->bindValue(":nombreColumna", "url_img_usuario");
+                        break;
+                }
+            }
+        } catch (PDOException $ex) {
+            error_log("Error en la actualizacion de datos: " . $ex->getMessage());
+        }
+    }
 }

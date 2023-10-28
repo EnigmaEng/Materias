@@ -2,6 +2,7 @@
 require_once '../models/turista.php';
 require_once '../models/restaurante.php';
 require_once '../models/login.php';
+require_once '../models/usuario.php';
 require_once '../models/session.php';
 require_once '../models/usuario.php';
 require_once './cors.php';
@@ -27,7 +28,7 @@ function loginUsuario($tabla, $datos)
     $usuarioData = $login->authenticate($tabla);
 
     if ($usuarioData) {
-    
+
         $tokenData = [
             'id_usuario' => $usuarioData['id_usuario'],
             'email' => $usuarioData['email'],
@@ -42,6 +43,7 @@ function loginUsuario($tabla, $datos)
     }
 }
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
@@ -53,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($data['email']) && isset($data['contrasena'])) {
                     $result = loginUsuario("usuarios", $data);
                     if ($result['success']) {
-                        
+
                         http_response_code(200);
                         echo json_encode($result);
                     } else {
@@ -64,6 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     http_response_code(400);
                     echo json_encode(array("mensaje" => "Datos incompletos"));
                 }
+                break;
+            case "bloquearUsuario":
+                $id_usuario = $data['id_usuario'];
+                bloquearUsuario($id_usuario);
                 break;
             default:
                 http_response_code(400);

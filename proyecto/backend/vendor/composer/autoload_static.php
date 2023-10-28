@@ -18,6 +18,7 @@ class ComposerStaticInit718ea79836007ccdd2719e27e8c32381
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Symfony\\Component\\Process\\' => 26,
         ),
         'P' => 
         array (
@@ -49,6 +50,10 @@ class ComposerStaticInit718ea79836007ccdd2719e27e8c32381
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Symfony\\Component\\Process\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/process',
         ),
         'PhpOption\\' => 
         array (

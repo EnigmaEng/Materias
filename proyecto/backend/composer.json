@@ -1,6 +1,7 @@
 {
     "require": {
         "firebase/php-jwt": "^6.8",
-        "vlucas/phpdotenv": "^5.5"
+        "vlucas/phpdotenv": "^5.5",
+        "symfony/process": "^6.3"
     }
 }

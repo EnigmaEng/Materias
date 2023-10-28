@@ -4,7 +4,7 @@ require_once '../models/platoRestaurante.php';
 require_once '../models/descuento.php';
 require_once './cors.php';
 
-function insertarController($alias = '', $url_img_usuario = '', $email = '', $contrasena = '', $rol = '', $nombre = '')
+function insertarController($alias, $url_img_usuario, $email, $contrasena, $rol, $nombre, $nroLocal, $calle, $esquina, $numero,$tipo)
 {
     $restaurante = new Restaurante();
     $datosUsuario = array(
@@ -17,11 +17,24 @@ function insertarController($alias = '', $url_img_usuario = '', $email = '', $co
 
     $datosRestaurante = array(
         "nombre" => $nombre,
-        "id_usuario" => ""
+        "id_usuario" => "",
+        "nro_local" => $nroLocal,
+        "id_loc_restaurante"=>""
+    );
+
+    $direccionRestaurante = array(
+        "calle" => $calle,
+        "esquina" => $esquina,
+        "nro_puerta" => $numero
+    );
+
+    $tipoRestaurantes = array(
+        "id_usuario_rest" => "",
+        "descripcion" => $tipo
     );
 
     if ($restaurante->create("usuarios", $datosUsuario)) {
-        if ($restaurante->createInRestaurante("restaurante", $datosUsuario, $datosRestaurante)) {
+        if ($restaurante->dataCreate("localizacion", $direccionRestaurante) && $restaurante->createInRestaurante("restaurante", $datosUsuario, $datosRestaurante) && $restaurante->createInTipoRestaurante("tipo_restaurantes",$datosUsuario,$tipoRestaurantes)) {
             return "Creacion de usuario exitosa";
         } else {
             return "Error en la creacion de usuario";
@@ -82,35 +95,37 @@ function obtenerRestaurante()
 {
     $restaurante = new Restaurante();
     $restaurantes = $restaurante->obtenerRestaurantes();
-    
     header('Content-Type: application/json');
-   
     $response = "";
 
-    foreach ($restaurantes as $restaurante) {
-        // Genera un objeto JSON separado en cada iteración
-        $restaurantesDatos = json_encode(array(
-            "nombre_restaurante" => $restaurante->nombre_restaurante,
-            "foto_usuario" => $restaurante->foto_usuario
-        ));
+    if ($restaurantes === false) {
+        $response = "mensaje: No se han encontrado restaurantes.";
+    } else {
+        foreach ($restaurantes as $restaurante) {
+            $restaurantesDatos = json_encode(
+                array(
+                    "nombre_restaurante" => $restaurante['nombre_restaurante'],
+                    "foto_usuario" => $restaurante['foto_usuario']
+                )
+            );
 
-        // Agrega una coma para separar los objetos JSON, excepto en la primera iteración
-        if (!empty($response)) {
-            $response .= ",";
+            if (!empty($response)) {
+                $response .= ",";
+            }
+
+            $response .= $restaurantesDatos;
         }
-
-        $response .= $restaurantesDatos;
     }
 
-    return "[$response]"; 
+    return "[$response]";
 }
+
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
-    $resultado="xd";
-
+    $resultado = "";
     if (isset($data['accion'])) {
         switch ($data['accion']) {
             case "altaRestaurante":
@@ -120,7 +135,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $data['email'],
                     $data['contrasena'],
                     $data['rol'],
-                    $data['nombre']
+                    $data['nombre'],
+                    $data['nro_local'],
+                    $data['calle'],
+                    $data['esquina'],
+                    $data['nro_puerta'],
+                    $data['descripcion']
                 );
                 break;
             case "crearPlato":
@@ -152,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
                 break;
             case "obtenerRestaurantes":
-                $resultado=obtenerRestaurante();
+                $resultado = obtenerRestaurante();
                 break;
             case "obtenerPlatos":
                 $resultado = obtenerPlatos($data['id_usuario_rest']);

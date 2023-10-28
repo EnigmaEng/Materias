@@ -6,8 +6,12 @@ require '../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 
-class Restaurante extends Usuario implements Crud
-{
+// Carga las variables de entorno desde el archivo .env
+$dotenv = Dotenv::createImmutable('/var/www/html/');
+$dotenv->load();
+
+class Restaurante extends Usuario
+{   
     private $tipoRestaurante;
 
     private $nombre;
@@ -18,10 +22,6 @@ class Restaurante extends Usuario implements Crud
 
     public function __construct()
     {
-        // Carga las variables de entorno desde el archivo .env
-        $dotenv = Dotenv::createImmutable('/var/www/html/');
-        $dotenv->load();
-
         $this->setHost($_ENV['DB_HOST']);
         $this->setUser($_ENV['DB_USER']);
         $this->setPassword($_ENV['DB_PASSWORD']);
@@ -71,7 +71,6 @@ class Restaurante extends Usuario implements Crud
         return $this->direccionRest;
     }
 
-
     public function createInRestaurante($tabla, $datos, $datosRestaurante)
     {
         try {
@@ -83,15 +82,27 @@ class Restaurante extends Usuario implements Crud
 
             if (!empty($idRows)) {
                 $datosRestaurante['id_usuario'] = $idRows[0]['id_usuario'];
+
+                
+                $query = "SELECT MAX(id_localizacion) AS last_id_localizacion FROM localizacion";
+                $stmt = $this->getConn()->prepare($query);
+                $stmt->execute();
+                $lastIdLocalizacion = $stmt->fetchColumn();
+
+                
+                $datosRestaurante['id_loc_restaurante'] = $lastIdLocalizacion;
+
+                
                 $columnNames = implode(', ', array_keys($datosRestaurante));
                 $placeholders = implode(', ', array_map(function ($key) {
                     return ':' . $key;
                 }, array_keys($datosRestaurante)));
 
+                
                 $query = "INSERT INTO $tabla ($columnNames) VALUES ($placeholders)";
-
                 $stmt = $this->getConn()->prepare($query);
 
+                
                 foreach ($datosRestaurante as $nombre => $valor) {
                     $stmt->bindValue(':' . $nombre, $valor);
                 }
@@ -108,20 +119,62 @@ class Restaurante extends Usuario implements Crud
     }
 
 
+
     public function obtenerRestaurantes()
     {
         $query = "SELECT r.nombre AS nombre_restaurante, u.url_img_usuario AS foto_usuario
                 FROM wwe.restaurante r
-                JOIN wwe.usuarios u ON r.id_usuario = u.id_usuario";
+                JOIN wwe.usuarios u ON r.id_usuario = u.id_usuario
+                JOIN wwe.admin_aprueba_rest m ON r.id_usuario = m.id_usuario_rest WHERE m.fecha_fin_sub >= CURDATE()";
 
         $stmt = $this->getConn()->prepare($query);
-
         $stmt->execute();
 
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
+        if (!empty($data)) {
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    public function createInTipoRestaurante($tabla, $datos, $datosRestaurante)
+    {
+        try {
+            $query = "SELECT id_usuario FROM usuarios WHERE email = :email";
+            $stmt = $this->getConn()->prepare($query);
+            $stmt->bindValue(':email', $datos['email']);
+            $stmt->execute();
+            $idRows = $stmt->fetchAll();
+
+            if (!empty($idRows)) {
+                $datosRestaurante['id_usuario_rest'] = $idRows[0]['id_usuario'];
+
+                
+                $columnNames = implode(', ', array_keys($datosRestaurante));
+                $placeholders = implode(', ', array_map(function ($key) {
+                    return ':' . $key;
+                }, array_keys($datosRestaurante)));
+
         
-        return $data;
+                $query = "INSERT INTO $tabla ($columnNames) VALUES ($placeholders)";
+                $stmt = $this->getConn()->prepare($query);
+
+               
+                foreach ($datosRestaurante as $nombre => $valor) {
+                    $stmt->bindValue(':' . $nombre, $valor);
+                }
+
+                $stmt->execute();
+
+                return true;
+            } else {
+                return "No se encontró ningún registro con ese email.";
+            }
+        } catch (PDOException $ex) {
+            throw new Exception("Error al insertar: " . $ex->getMessage());
+        }
     }
 
 }
