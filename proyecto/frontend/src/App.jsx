@@ -25,6 +25,8 @@ import MisReseniasTurista from './pages/user/resenias/misResenias/MisReseniasTur
 import PerfilCliente from './pages/user/perfil/restaurante/PerfilCliente/PerfilCliente'
 import MapContent from './components/maps/MapContent'
 import EditarPerfilTurista from './pages/user/perfil/turista/Configuracion/EditarPerfil/EditarPerfilTurista'
+import Alojamiento from './pages/user/perfil/turista/Alojamiento/Alojamiento'
+import Descuentos from './pages/user/perfil/restaurante/Descuentos/Descuentos'
 function App() {
 
 
@@ -57,12 +59,13 @@ function App() {
   {/* Perfiles */}
 
 {/* Turista */}
-
+<Route path='/descuentos' element={<Descuentos/>}/>
+<Route path='/alojamiento' element={<Alojamiento/>}/>
 <Route path='/configuracionTurista' element={<ConfiguracionTurista/>}/>
 <Route path='/perfilTurista' element={<PerfilTurista/>}/>
 <Route path='/editarPerfilTurista' element={<EditarPerfilTurista/>}/>
 {/* Resenias */}
-<Route path='/crearResenia' element={<CrearResenia/>} />
+<Route path='/crearResenia/:id_usuario' element={<CrearResenia/>} />
 <Route path='/misResenias' element={<MisResenias/>}/>
 <Route path='/misReseniasTurista' element={<MisReseniasTurista/>}/>
 {/* Admin */}
@@ -82,8 +85,8 @@ function App() {
 
 
 {/* Switch */}
+<Route path="/clientePerfil/:id_usuario" element={<PerfilCliente/>} />
 
-   <Route path="/clientePerfil/:id_usuario" component={<PerfilCliente/>} />
 
 
     </Routes>

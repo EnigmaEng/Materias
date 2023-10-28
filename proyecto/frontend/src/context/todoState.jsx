@@ -2,7 +2,7 @@ import React, { useReducer, useState} from "react";
 
 import todoContext from "./todoContext";
 import todoReducer from "./todoReducer";
-import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, OBTENER_RESTAURANTE, DESCUENTO_CREADO} from "../types/types";
+import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, OBTENER_RESTAURANTE, DESCUENTO_CREADO, RESENIA_CREADA} from "../types/types";
 import clienteAxios from "../config/axios";
 
 
@@ -166,6 +166,18 @@ const usuarioAutenticado = () => {
      
     }
 
+    const crearResenia = async (datos) => {
+      try {
+        const respuesta = await clienteAxios.post('/reseniaController.php', datos)
+        dispatch({
+        type: RESENIA_CREADA,
+        payload: respuesta.data.mensaje 
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
 
         const cerrarSesion = async () => {
 
@@ -192,7 +204,8 @@ const usuarioAutenticado = () => {
                 cerrarSesion,
                 usuarioAutenticado,
                 crearPlato,
-                crearDescuento
+                crearDescuento,
+                crearResenia,
             }}>
 
             {children}

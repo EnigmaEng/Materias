@@ -112,6 +112,18 @@ function obtenerRestaurante()
             if (!empty($response)) {
                 $response .= ",";
             }
+    foreach ($restaurantes as $restaurante) {
+        // Genera un objeto JSON separado en cada iteración
+        $restaurantesDatos = json_encode(array(
+            "id_usuario"=>$restaurante->id_usuario,
+            "nombre_restaurante" => $restaurante->nombre_restaurante,
+            "foto_usuario" => $restaurante->foto_usuario
+        ));
+
+        // Agrega una coma para separar los objetos JSON, excepto en la primera iteración
+        if (!empty($response)) {
+            $response .= ",";
+        }
 
             $response .= $restaurantesDatos;
         }
@@ -121,6 +133,19 @@ function obtenerRestaurante()
 }
 
 
+
+function obtenerRestauranteById($id)
+{
+    $restaurante = new Restaurante();
+    $restauranteById = $restaurante->obtenerRestauranteById($id);
+    header('Content-Type: application/json');
+
+    if (!empty($restauranteById)) {
+        return json_encode($restauranteById);
+    } else {
+        return "No se encontraron restaurantes";
+    }
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
@@ -176,6 +201,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 break;
             case "obtenerPlatos":
                 $resultado = obtenerPlatos($data['id_usuario_rest']);
+                break;
+            case "restauranteById":
+                $resultado = obtenerRestauranteById($data['id_usuario']);
                 break;
             default:
                 $resultado = "Error en el tipo de accion, intente nuevamente";

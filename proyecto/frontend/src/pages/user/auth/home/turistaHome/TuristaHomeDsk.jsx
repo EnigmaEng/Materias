@@ -39,11 +39,11 @@ const TuristaHomeDsk = () => {
         </svg>
         Solo a restaurantes visitados
       </p>
-      <div class="text-gray-900 font-bold text-xl mb-2">Tus reseñas creadas</div>
-      <p class="text-gray-700 text-sm">Todas las reseñas que hiciste a restauranes concurridos</p>
+      <div class="text-gray-900 font-bold text-xl mb-2">Descuentos</div>
+      <p class="text-gray-700 text-sm">Mira todos los descuentos que se encuentran actualmente</p>
     </div>
     <div class="flex  justify-center items-center">
-     <Link to='/misResenias' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white w-20 flex justify-center items-center  text-wwe border shadow-xl text-3xl rounded-lg h-12'> <MdOutlineRateReview/></Link>
+     <Link to='/descuentos' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white w-20 flex justify-center items-center  text-wwe border shadow-xl text-3xl rounded-lg h-12'> <MdOutlineRateReview/></Link>
     </div>
   </div>
 </div>
@@ -69,7 +69,7 @@ const TuristaHomeDsk = () => {
       <p class="text-gray-700 text-sm">Mira donde te has alojado</p>
     </div>
     <div class="flex  justify-center items-center">
-     <Link to='/misResenias' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white border shadow-xl w-20  text-wwe text-3xl rounded-lg flex justify-center items-center h-12'> <BsFillHouseFill/> </Link>
+     <Link to='/alojamiento' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white border shadow-xl w-20  text-wwe text-3xl rounded-lg flex justify-center items-center h-12'> <BsFillHouseFill/> </Link>
     </div>
   </div>
 </div>

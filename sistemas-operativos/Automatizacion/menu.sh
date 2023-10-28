@@ -140,6 +140,7 @@ while [ $A -ne 0 ]; do
                 cd ../../proyecto/frontend
                 echo " 😀 Front iniciado 😀"
                 sleep 1.5
+		npm i
                 npm run dev
             }
 

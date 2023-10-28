@@ -149,7 +149,7 @@ public function crearDescuento()
     public function restauranteTieneDescuento()
     {
         try {
-            $query = "SELECT id_descuento FROM descuento ORDER BY id_descuento DESC";
+            $query = "SELECT max(id_descuento) FROM descuento";
             $stmt = $this->getConn()->prepare($query);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);

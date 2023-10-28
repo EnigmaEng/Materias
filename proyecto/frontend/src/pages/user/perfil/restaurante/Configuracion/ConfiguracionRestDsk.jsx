@@ -1,12 +1,16 @@
 import React from 'react'
 import NavBar from '../../../../../components/nabvar/NavBar'
 import { Link } from 'react-router-dom'
+import {BiArrowBack} from 'react-icons/bi'
 
 const ConfiguracionRestDsk = () => {
   return (
     <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-95 '>
     <NavBar/>
-    
+ 
+    <Link to='/homeAuth' className='absolute py-1.5 top-24 left-24 bg-wwe text-white rounded-lg px-6 py-1'><BiArrowBack/></Link>
+ 
+  
 <div className='bg-white w-7/12 h-11/12  m-auto mt-20  p-10 text-3xl text-black  rounded-box'>
     <h2 className='text-center text-4xl  font-aref mb-10'>Configuracion de la cuenta</h2>
     <div className='border  p-4 mb-10 rounded-box shadow-xl'> <h2 className='font-aref mb-5'>Editar perfil</h2> 

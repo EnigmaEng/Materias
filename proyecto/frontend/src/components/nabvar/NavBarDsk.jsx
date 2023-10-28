@@ -94,7 +94,7 @@ usuarioAutenticado();
          Perfil 
           </Link>
         </li>
-        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/configuracion' className='text-black flex gap-4'> Configuracion </Link></li>
+        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/editarPerfilTurista' className='text-black flex gap-4'> Editar perfil </Link></li>
         <li className=' hover:bg-gray-200 rounded-lg p-2'><button onClick={() => cerrarSesion()} className='text-black flex gap-4  w-24'> <div className='mt-1'>
           <SlLogout/> </div> Salir </button></li>
       </ul>
@@ -106,7 +106,7 @@ usuarioAutenticado();
     // Admin Navbar
 
     <div className=''>
-      <div className='min-h-screen bg-gray-100'>
+      <div className='min-h-screen'>
         
         <div className='absolute left-0 h-full glass p-8 w-80 text-black space-y-10 py-10'>
           
@@ -118,29 +118,41 @@ usuarioAutenticado();
             <img src={usuario.rol.url_img_usuario} alt="foto-perfil" className='w-24 h-24 rounded-full bg-zinc-500 shadow-xl m-auto' />
             <p className='text-center text-white mt-2'>{usuario.rol.nombres}</p>
           </div>
-           <div className='shadow-xl hover:scale-125 transition-all duration-300 delay-150 px-6 py-3 rounded-box'>
+           <div className='shadow-xl hover:text-wwe px-6 py-3 rounded-box font-aref min-w-max'>
             <p>Solicitudes </p>
           </div>
-           <div className='shadow-xl hover:scale-125 transition-all duration-300 delay-150 px-6 py-3 rounded-box'>
-            <p>Mas solicitudes </p>
+           <div className='shadow-xl hover:text-wwe px-6 py-3 rounded-box font-aref min-w-max'>
+            <p> solicitudes </p>
           </div>
         </div>
     </div>
     </div>
 
-  ) :  <div className="navbar bg-wwe  shadow-xl">
-  <div className="flex-1 gap-5">
-    <div className='absolute left-5'>
-       <DarkMode/>
-    </div>
+  ) : <div className=" bg-wwe rounded-full relative top-3 flex  w-[30%] m-auto  shadow-xl">
+<div className='w-24 py-4 px-5'>
+   <DarkMode/>
+</div>
+
    
-    <Link to='/homeAuth' className='m-auto w-14'>  
-    <img src={Image} alt="logo"/>
+    <Link to='/homeAuth' className='m-auto '>  
+    <img src={Image} alt="logo" className='w-14 mr-5'/>
     </Link>
- <Link to='/login' className='bg-white px-6 py-1 rounded-lg text-wwe text-lg'>Iniciar sesion</Link>
-  <Link to='/registro' className='bg-white px-6 py-1 rounded-lg text-wwe text-lg'>Registrarse</Link>
-  </div>
+
  
+
+
+  <div className="mt-5 space-x-10">
+
+    
+        
+     
+     <div className='flex gap-5 mr-5'>
+      <Link className='bg-white p-2 rounded-lg text-black'>Iniciar sesion</Link>
+      <Link className='bg-white p-2 rounded-lg text-black'>Registrarse</Link>
+
+    </div>
+  </div>
+  
 </div>
 }
 
