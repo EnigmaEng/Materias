@@ -1,7 +1,6 @@
 -- Where We Eat (DDL)
-
-DROP DATABASE IF EXISTS `wwe`;
-CREATE DATABASE `wwe` CHARSET utf8mb4;
+ drop database if exists wwe;
+create database wwe;
 USE `wwe`;
 
 CREATE TABLE `usuarios` (
@@ -41,11 +40,10 @@ CREATE TABLE `administrativo` (
   FOREIGN KEY (id_usuario) REFERENCES `usuarios`(id_usuario)
 );
 
-
 CREATE TABLE `restaurante` (
   id_usuario INT(10) UNSIGNED PRIMARY KEY,
   nombre VARCHAR(50) NOT NULL,
-  nro_local INT(10),
+  nro_local int (10),
   id_loc_restaurante INT(10) UNSIGNED,
   FOREIGN KEY (id_usuario) REFERENCES `usuarios`(id_usuario),
   FOREIGN KEY (id_loc_restaurante) REFERENCES `localizacion`(id_localizacion)
@@ -67,9 +65,7 @@ CREATE TABLE `sesiones`(
     fecha_ultima_sesion DATE NOT NULL, #Se crea cuando el usuario INICIA sesion.
     ip VARCHAR (16),
     max_intentos INT (1),
-    id_usuario_rest INT (10) UNSIGNED,
-    PRIMARY KEY (id_sesion,fecha_ultima_sesion),
-    FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante`(id_usuario)
+    PRIMARY KEY (id_sesion,fecha_ultima_sesion)
 );
 
 CREATE TABLE `tipo_restaurantes`(
@@ -117,6 +113,14 @@ CREATE TABLE `descuento` (
   url_img_descuento VARCHAR(150) DEFAULT NULL
 );
 
+CREATE TABLE `restaurante_paga_subscripcion` (
+  id_usuario_rest INT(10) UNSIGNED PRIMARY KEY,
+  id_tipo_subscripcion INT(10) UNSIGNED,
+  fecha_pago DATE,
+  FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante`(id_usuario),
+  FOREIGN KEY (id_tipo_subscripcion) REFERENCES `tipo_subscripcion` (id_tipo_subs)
+);
+
 CREATE TABLE `admin_aprueba_rest` (
   id_usuario_rest INT(10) UNSIGNED,
   id_usuario_admin INT(10) UNSIGNED,
@@ -124,16 +128,8 @@ CREATE TABLE `admin_aprueba_rest` (
   fecha_fin_sub DATE,
   PRIMARY KEY (id_usuario_rest, fecha_ini_sub, fecha_fin_sub),
   CHECK (fecha_ini_sub < fecha_fin_sub),
-  FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante` (id_usuario),
+  FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante_paga_subscripcion` (id_usuario_rest),
   FOREIGN KEY (id_usuario_admin) REFERENCES `administrativo` (id_usuario)
-);
-
-CREATE TABLE `restaurante_paga_subscripcion` (
-  id_usuario_rest INT(10) UNSIGNED PRIMARY KEY,
-  id_tipo_subscripcion INT(10) UNSIGNED,
-  fecha_pago DATE,
-  FOREIGN KEY (id_usuario_rest) REFERENCES `admin_aprueba_rest`(id_usuario_rest),
-  FOREIGN KEY (id_tipo_subscripcion) REFERENCES `tipo_subscripcion` (id_tipo_subs)
 );
 
 CREATE TABLE `turista_sealoja_alojamiento` (
@@ -147,16 +143,6 @@ CREATE TABLE `turista_sealoja_alojamiento` (
   FOREIGN KEY (id_alojamiento) REFERENCES `alojamiento` (id_alojamiento)
 );
 
-  CREATE TABLE `turista_visita_rest` (
-  id_turista INT(10) UNSIGNED,
-  id_rest INT (10) UNSIGNED,
-  token INT (10) UNSIGNED UNIQUE,
-  fecha_visita DATE,
-  PRIMARY KEY (id_turista, id_rest),
-  FOREIGN KEY (id_turista) REFERENCES `turista_sealoja_alojamiento` (id_usuario_turista),
-  FOREIGN KEY (id_rest) REFERENCES `admin_aprueba_rest` (id_usuario_rest)
-  );
-
 CREATE TABLE `turista_resena_rest` (
   id_usuario_turista INT(10) UNSIGNED,
   id_usuario_rest INT(10) UNSIGNED,
@@ -166,9 +152,18 @@ CREATE TABLE `turista_resena_rest` (
   calificacion_menu ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
   calificacion_general ENUM('Muy bueno', 'Bueno', 'Medio', 'Malo', 'Muy malo') NOT NULL,
   PRIMARY KEY (id_usuario_turista, id_usuario_rest),
-  /* CHECK (fecha >= fecha_ini_alojamiento AND fecha >= fecha_fin_alojamiento + 90), REVISAR ESTO !!! */
-  FOREIGN KEY (id_usuario_turista) REFERENCES `turista_visita_rest` (id_turista),
-  FOREIGN KEY (id_usuario_rest) REFERENCES `admin_aprueba_rest` (id_usuario_rest));
+  FOREIGN KEY (id_usuario_turista) REFERENCES `turista_sealoja_alojamiento` (id_usuario_turista),
+  FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante` (id_usuario));
+  
+  CREATE TABLE `turista_visita_rest` (
+  id_turista INT(10) UNSIGNED,
+  id_rest INT (10) UNSIGNED,
+  token INT (10) UNSIGNED UNIQUE,
+  fecha_visita DATE,
+  PRIMARY KEY (id_turista, id_rest),
+  FOREIGN KEY (id_turista) REFERENCES `turista_sealoja_alojamiento` (id_usuario_turista),
+  FOREIGN KEY (id_rest) REFERENCES `admin_aprueba_rest` (id_usuario_rest)
+  );
 
 CREATE TABLE `restaurante_tiene_descuento` (
   id_descuento INT(10) UNSIGNED,
@@ -181,8 +176,7 @@ CREATE TABLE `restaurante_tiene_descuento` (
   FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante` (id_usuario)
 );
 
-
-/*DCL Creación de Usuarios*/
+/*DCL Creacion de Usuarios*/
 
 drop user if exists 'wwe_rol_r'@'192.168.56.103';
 drop user if exists 'wwe_rol_a'@'192.168.56.103';
@@ -303,7 +297,7 @@ INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
 VALUES ('michelindelmar', 'michelindelmar@example.com', 'pass123', 'S', 'N', 'R');
 
 INSERT INTO localizacion (calle, esquina, nro_puerta)
-VALUES ('Bulevar España', 'Juan Carlos Gómez', '4321');
+VALUES ('Bulevar Espana', 'Juan Carlos Gomez', '4321');
 
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
 VALUES (LAST_INSERT_ID(), 'Le Marechal', LAST_INSERT_ID());
@@ -355,7 +349,7 @@ INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
 VALUES ('asadospremium', 'asadospremium@example.com', 'premiumBBQ', 'S', 'N', 'R');
 
 INSERT INTO localizacion (calle, esquina, nro_puerta)
-VALUES ('Avenida Brasil', 'Plaza España', '1213');
+VALUES ('Avenida Brasil', 'Plaza Espana', '1213');
 
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
 VALUES (LAST_INSERT_ID(), 'Asados Premium', LAST_INSERT_ID());
@@ -568,7 +562,7 @@ VALUES ('Gran Hotel Plaza', LAST_INSERT_ID(), 'S');
 
 -- Insertar alojamiento 4
 INSERT INTO localizacion (calle, esquina, nro_puerta)
-VALUES ('Pocitos', 'Bvar España', '3456');
+VALUES ('Pocitos', 'Bvar Espana', '3456');
 
 INSERT INTO alojamiento (nombre_alojamiento, id_loc_alojamiento, activo)
 VALUES ('Hostel Pocitos', LAST_INSERT_ID(), 'S');
@@ -583,35 +577,6 @@ VALUES ('Premium', '99.99');
 
 INSERT INTO tipo_subscripcion (nombre, precio_subscripcion)
 VALUES ('VIP', '149.99');
-
-/*Insertando aprobaciones de Admin a las subs de restaurantes...*/
-
-INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
-VALUES (1, 23, SYSDATE(), '27-08-24');
-
-INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
-VALUES (2,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 MONTH));
-
-INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
-VALUES (3,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 2 YEAR));
-
-INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
-VALUES (4,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 YEAR));
-
-INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
-VALUES (5,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 YEAR));
-
-INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
-VALUES (6,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 2 YEAR));
-
-INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
-VALUES (7,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 YEAR));
-
-INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
-VALUES (8,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 MONTH));
-
-INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
-VALUES (9,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 MONTH));
 
 /*Insertando suscripciones...*/
 
@@ -651,41 +616,71 @@ VALUES (8, 3, SYSDATE());
 INSERT INTO restaurante_paga_subscripcion (id_usuario_rest, id_tipo_subscripcion, fecha_pago)
 VALUES (9, 1, SYSDATE());
 
+/*Insertando aprobaciones de Admin a las subs de restaurantes...*/
+
+INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
+VALUES (1, 23, SYSDATE(), '27-08-24');
+
+INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
+VALUES (2,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 MONTH));
+
+INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
+VALUES (3,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 2 YEAR));
+
+INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
+VALUES (4,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 YEAR));
+
+INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
+VALUES (5,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 YEAR));
+
+INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
+VALUES (6,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 2 YEAR));
+
+INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
+VALUES (7,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 YEAR));
+
+INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
+VALUES (8,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 MONTH));
+
+INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
+VALUES (9,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 MONTH));
+
+
 /*Insertando Platos…*/
 
 -- Restaurante 1
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Salmón a la Parrilla', ROUND(RAND() * 150 + 150, 2), 'Salmón fresco a la parrilla con vegetales asados.', 1);
+VALUES ('Salmon a la Parrilla', ROUND(RAND() * 150 + 150, 2), 'Salmon fresco a la parrilla con vegetales asados.', 1);
 
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Filete de Res Wellington', ROUND(RAND() * 200 + 250, 2), 'Filete de res envuelto en hojaldre y cocido a la perfección.', 1);
+VALUES ('Filete de Res Wellington', ROUND(RAND() * 200 + 250, 2), 'Filete de res envuelto en hojaldre y cocido a la perfeccion.', 1);
 
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Tarta de Limón', ROUND(RAND() * 80 + 120, 2), 'Deliciosa tarta de limón con merengue.', 1);
+VALUES ('Tarta de Limon', ROUND(RAND() * 80 + 120, 2), 'Deliciosa tarta de limon con merengue.', 1);
 
 -- Restaurante 2
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
 VALUES ('Risotto de Mariscos', ROUND(RAND() * 170 + 130, 2), 'Risotto cremoso con una variedad de mariscos frescos.', 2);
 
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Chuletón de Ternera', ROUND(RAND() * 250 + 300, 2), 'Chuletón de ternera cocido a la parrilla y acompañado de guarniciones.', 2);
+VALUES ('Chuleton de Ternera', ROUND(RAND() * 250 + 300, 2), 'Chuleton de ternera cocido a la parrilla y acompanado de guarniciones.', 2);
 
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
 VALUES ('Tiramisú', ROUND(RAND() * 60 + 90, 2), 'El clásico postre italiano con capas de café y crema.', 2);
 
 -- Restaurante 3
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Ceviche de Pescado', ROUND(RAND() * 130 + 170, 2), 'Ceviche fresco de pescado con limón y especias.', 3);
+VALUES ('Ceviche de Pescado', ROUND(RAND() * 130 + 170, 2), 'Ceviche fresco de pescado con limon y especias.', 3);
 
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
 VALUES ('Pasta Alfredo con Pollo', ROUND(RAND() * 180 + 200, 2), 'Pasta fettuccine en salsa alfredo con trozos de pollo.', 3);
 
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Mousse de Chocolate', ROUND(RAND() * 50 + 70, 2), 'Suave mousse de chocolate con decoración de frutas.', 3);
+VALUES ('Mousse de Chocolate', ROUND(RAND() * 50 + 70, 2), 'Suave mousse de chocolate con decoracion de frutas.', 3);
 
 -- Restaurante 4
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Parrillada Mixta', ROUND(RAND() * 250 + 350, 2), 'Selección variada de carnes a la parrilla.', 4);
+VALUES ('Parrillada Mixta', ROUND(RAND() * 250 + 350, 2), 'Seleccion variada de carnes a la parrilla.', 4);
 
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
 VALUES ('Pasta Frutti di Mare', ROUND(RAND() * 180 + 220, 2), 'Pasta con mariscos frescos en salsa de tomate.', 4);
@@ -695,10 +690,10 @@ VALUES ('Tartaleta de Frutas', ROUND(RAND() * 70 + 100, 2), 'Tartaleta crujiente
 
 -- Restaurante 5
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Cordero Patagónico', ROUND(RAND() * 320 + 380, 2), 'Cordero asado con hierbas patagónicas.', 5);
+VALUES ('Cordero Patagonico', ROUND(RAND() * 320 + 380, 2), 'Cordero asado con hierbas patagonicas.', 5);
 
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Salmón en Salsa de Mostaza', ROUND(RAND() * 220 + 260, 2), 'Salmón con salsa de mostaza y miel.', 5);
+VALUES ('Salmon en Salsa de Mostaza', ROUND(RAND() * 220 + 260, 2), 'Salmon con salsa de mostaza y miel.', 5);
 
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
 VALUES ('Profiteroles Rellenos', ROUND(RAND() * 80 + 120, 2), 'Profiteroles rellenos de crema y chocolate.', 5);
@@ -745,7 +740,7 @@ VALUES ('Tarta de Frutas del Bosque', ROUND(RAND() * 70 + 100, 2), 'Tarta de fru
 
 -- Restaurante 10
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Parrillada Argentina', ROUND(RAND() * 250 + 350, 2), 'Selección de cortes argentinos a la parrilla.', 10);
+VALUES ('Parrillada Argentina', ROUND(RAND() * 250 + 350, 2), 'Seleccion de cortes argentinos a la parrilla.', 10);
 
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
 VALUES ('Empanadas Criollas', ROUND(RAND() * 160 + 200, 2), 'Empanadas rellenas de carne, huevo y aceitunas.', 10);
@@ -802,19 +797,19 @@ VALUES
   (15, 7, FLOOR(1000000 * RAND()) + 1, DATE_ADD(NOW(), INTERVAL 3 MONTH)),
   (16, 7, FLOOR(1000000 * RAND()) + 1, DATE_ADD(NOW(), INTERVAL 3 MONTH));
 
--- Inserción de una reseña por un turista para un restaurante
+-- Insercion de una resena por un turista para un restaurante
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
 VALUES (11, 4, '2023-08-25', 'Excelente', '9', '8', 'Muy bueno');
 
--- Otra reseña de turista para otro restaurante
+-- Otra resena de turista para otro restaurante
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
 VALUES (12, 9, '2023-08-26', 'Medio', '5', '6', 'Bueno');
 
--- Una reseña más para un restaurante diferente
+-- Una resena más para un restaurante diferente
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
 VALUES (13, 7, '2023-08-27', 'Insuficiente', '3', '4', 'Medio');
 
--- Otra reseña de turista para otro restaurante
+-- Otra resena de turista para otro restaurante
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
 VALUES (14, 4, '2023-08-26', 'Medio', '7', '9', 'Bueno');
 
