@@ -14,22 +14,18 @@ import Image1 from '../../../../../assets/alojamiento.png'
 const TuristaHomeDsk = () => {
   return (
    <div className='min-h-screen space-y-10  dark:bg-zinc-800 dark:bg-opacity-95'>
+
   <NavBar/>
-  {/* <div className="collapse min-w-min m-auto shadow-xl">
-  <input type="checkbox" className="peer" /> 
-  <div className="collapse-title flex  justify-center gap-5  items-center font-aref  bg-white  text-center peer-checked:bg-white   peer-checked:text-white">
-   <p className='text-black  text-lg'>Busca en el mapa </p><img src={Image} alt="logo-ubicacion" className='w-8 ' />
-  </div>
-  <div className="collapse-content text-white peer-checked:w-[80%] peer-checked:bg-white peer-checked:text-white"> 
-    <Map/>
-  </div>
-</div> */}
-  
+
+  <div className='bg-white p-4 w-6/12 m-auto rounded-lg shadow-xl text-center text-wwe font-aref font-semibold h-24  text-2xl'><p className='10'>Obtener descuentos</p></div>
+      
+ <ListRestaurantes/>
+
 <div className='flex    justify-center items-center '>
 <div className='flex  gap-5 '>
 
 
-<div class="max-w-sm mt-20 w-[50%] rounded-box shadow-xl  lg:max-w-full lg:flex">
+<div class="max-w-sm w-[50%] h-[40%] rounded-box shadow-xl  lg:max-w-full lg:flex">
   <img src={Image3} alt="resenia" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
   <div class=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div class="mb-8">
@@ -47,7 +43,7 @@ const TuristaHomeDsk = () => {
     </div>
   </div>
 </div>
-<div class="max-w-sm mt-20 w-[50%] rounded-box shadow-xl  lg:max-w-full lg:flex">
+<div class="max-w-sm  w-[50%] h-[40%] rounded-box shadow-xl  lg:max-w-full lg:flex">
   <img src={Image2} alt="mapa" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
   <div class=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div class="mb-8 mt-5">
@@ -60,7 +56,7 @@ const TuristaHomeDsk = () => {
     </div>
   </div>
 </div>
-<div class="max-w-sm mt-20 w-[50%] rounded-box shadow-xl  lg:max-w-full lg:flex">
+<div class="max-w-sm w-[50%] h-[40%] rounded-box shadow-xl  lg:max-w-full lg:flex">
   <img src={Image1} alt="alojamiento" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
   <div class=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div class="mb-8 mt-5">
@@ -75,8 +71,6 @@ const TuristaHomeDsk = () => {
 </div>
 </div>
 </div>
-    
- <ListRestaurantes/>
 
     
   <div className='mt-24'>

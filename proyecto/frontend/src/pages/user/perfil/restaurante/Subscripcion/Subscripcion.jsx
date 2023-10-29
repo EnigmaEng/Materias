@@ -60,7 +60,7 @@ const Subscripcion = () => {
               <span class="text-sm font-semibold leading-6 tracking-wide text-gray-600">USD</span>
             </p>
             <a href="#" class="mt-10 block w-full rounded-md bg-wwe px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wwe">Contratar</a>
-            <p class="mt-6 text-xs leading-5 text-gray-600">Servicio con devolucion.</p>
+            <p class="mt-6 text-xs leading-5 text-gray-600">Servicio con devolución.</p>
           </div>
         </div>
       </div>

@@ -11,18 +11,19 @@ const AdminHomeDsk = () => {
 
   
   return (
-<div className='min-h-screen bg-white text-5xl flex '>
-<NavBar/>
-<div className="ml-[22%] p-20 border max-h-max ">
-<Aprobaciones/>
+<div className='min-h-screen bg-white text-5xl flex justify-center'>
+  <div>
+    <NavBar/>
+  </div>
+
+<div className=" w-8/12 m-10 p-7 flex justify-center shadow-xl rounded-lg">
+  <div className="w-8/12">
+    <Aprobaciones/>
+  </div>
+
  
       </div>
-      <div>
-       <div className="w-6/12 m-auto flex m-auto justify-center gap-10 absolute top-10 right-10 ">
-        <p>Hola</p>
-        <img src="" alt="fotela-aqui" className="h-20 w-20 rounded-full border bg-gray-300" />
-       </div>
-      </div>
+     
 </div>
   
   )

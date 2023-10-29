@@ -33,27 +33,25 @@ const ListRestaurantes = () => {
   return (
     <>
 
-    <div className='w-8/12 m-auto px-10 h-8/12  shadow-xl p-4 rounded-lg  dark:bg-zinc-800 bg-white'>
+    <div className='w-8/12 m-auto px-10 h-8/12 glass  p-4 rounded-lg  dark:bg-zinc-800 '>
 
-    <div className='flex flex-col text-center justify-center items-center mb-2 mt-2'>
+    <div className='flex flex-col text-center justify-center items-center  mt-2'>
   
     <input type="text" placeholder='Buscar un restaurante..' className='border ring-2 ring-red-800 focus:border-red-800 focus:outline-none text-black focus:ring-2 focus:ring-red-800 border rounded-lg bg-white w-6/12 text-sm px-2 py-2' 
       value={busqueda}
   onChange={e => setBusqueda(e.target.value)}
     />
     </div>
-
-   
       {
         product.length === 0 ? ( 
           <>
         <div className=' py-28'>
-        <p className='text-center text-2xl py-24  '>Restaurante no encontrado</p></div></>) : (
+        <p className='text-center text-2xl py-24 text-wwe font-semibold'>Restaurante no encontrado</p></div></>) : (
 
-   <div className=' grid grid-cols-4 ml-20  py-16 place-content-center gap-5 ' >
+  <div className='grid grid-cols-4 ml-20  py-16 place-content-center gap-5 '>
     {
         product.map((item, index) => (
-            <div className=' h-7/12 w-52 rounded-lg shadow-xl bg-white  text-center text-black' key={index} >
+            <div className='bg-white h-7/12 w-52 rounded-lg shadow-xl   text-center text-black' key={index} >
 <img src={item.url_img_usuario} alt="logo-restaurante" className='w-full m-auto h-52  rounded-t-lg  border  ' />
 <h2 className='font-bold p-2 '> {item.nombre_restaurante}</h2>
 
@@ -67,12 +65,7 @@ const ListRestaurantes = () => {
       }
            </div>
         )
-
       }
-    
-    
-    
-   
     <div className='flex justify-between'>
   <button
     className=' px-4 py-1 mt-2 bg-white bg-zinc-100 border dark:bg-wwe dark:border-none dark:text-white text-black rounded-lg shadow-xl'

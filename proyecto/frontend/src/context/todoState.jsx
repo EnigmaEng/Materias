@@ -2,13 +2,13 @@ import React, { useReducer, useState} from "react";
 
 import todoContext from "./todoContext";
 import todoReducer from "./todoReducer";
-import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, OBTENER_RESTAURANTE, DESCUENTO_CREADO, RESENIA_CREADA} from "../types/types";
+import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, OBTENER_RESTAURANTE, DESCUENTO_CREADO, RESENIA_CREADA, SOLICITUD_SUBSCRIPCION} from "../types/types";
 import clienteAxios from "../config/axios";
 
 
 const TodoState = ({ children }) => {
 
-  const [cargando, setCargando] = useState(true)
+  
 
     const initialState = {
         token: typeof window !== 'undefined' ? localStorage.getItem('token') : '',
@@ -178,6 +178,18 @@ const usuarioAutenticado = () => {
       }
     }
 
+    const solicitudSubscripcion = async (datos) => {
+      try {
+        const respuesta = 'llamada a la solicitud subscripcion'
+        dispatch({
+          type: SOLICITUD_SUBSCRIPCION,
+          payload: respuesta.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
 
         const cerrarSesion = async () => {
 
@@ -206,6 +218,7 @@ const usuarioAutenticado = () => {
                 crearPlato,
                 crearDescuento,
                 crearResenia,
+                solicitudSubscripcion
             }}>
 
             {children}
