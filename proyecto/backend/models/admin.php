@@ -15,6 +15,14 @@ class Admin extends Usuario
 
     private $apellidos;
 
+    private $idUsuarioRest;
+
+    private $idUsuarioAdmin;
+
+    private $fechaIniSub;
+
+    private $fechaFinSub;
+
     public function __construct()
     {
         // Carga las variables de entorno desde el archivo .env
@@ -58,6 +66,44 @@ class Admin extends Usuario
     public function getApellidos()
     {
         return $this->apellidos;
+    }
+
+    public function setIdUsuarioRest($idUsuarioRest){
+        $this->idUsuarioRest=$idUsuarioRest;
+    }
+
+    public function getIdUsuarioRest(){
+        return $this->idUsuarioRest;
+    }
+
+    public function setIdUsuarioAdmin($idUsuarioAdmin){
+        $this->idUsuarioAdmin=$idUsuarioAdmin;
+    }
+
+    public function getIdUsuarioAdmin(){
+        return $this->idUsuarioAdmin;
+    }
+
+    public function setFechaIniSub($fechaIniSub){
+        $this->fechaIniSub=$fechaIniSub;
+    }
+
+    public function getFechaIniSub(){
+        return $this->fechaIniSub;
+    }
+
+    public function setFechaFinSub($fechaFinSub){
+        $this->fechaFinSub=$fechaFinSub;
+    }
+
+    public function getFechaFinSub(){
+        return $this->fechaFinSub;
+    }
+
+    public function aprobarRestaurante(){
+        $query='INSERT INTO admin_aprueba_rest(id_usuario_rest,id_usuario_admin,fecha_ini_sub,fecha_fin_sub) VALUES (:id_usuario_rest,:id_usuario_admin,:fecha_ini_sub,:fecha_fin_sub);';
+        $stmt=$this->getConn()->prepare($query);
+        
     }
 
 }
