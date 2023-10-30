@@ -114,15 +114,18 @@ usuarioAutenticado();
              <img src="https://images-breno.s3.sa-east-1.amazonaws.com/logoproducto+(2).png" alt="logo" className='w-14 rounded-full m-auto mb-8' />
           </Link>
 
-          <div className='shadow-xl px-6 py-3 rounded-box'>
+          <div className=' px-6 py-3  '>
             <img src={usuario.rol.url_img_usuario} alt="foto-perfil" className='w-24 h-24 rounded-full bg-zinc-500 shadow-xl m-auto' />
-            <p className='text-center text-white mt-2'>{usuario.rol.nombres}</p>
+            <p className='text-center text-gray-500 text-2xl mt-2'>@{usuario.alias}</p>
           </div>
-           <div className='shadow-xl hover:text-wwe px-6 py-3 rounded-box font-aref min-w-max'>
+           <div className='shadow-xl hover:text-wwe px-6 py-3 text-2xl rounded-box font-aref min-w-max'>
             <p>Solicitudes </p>
           </div>
-           <div className='shadow-xl hover:text-wwe px-6 py-3 rounded-box font-aref min-w-max'>
+           <div className='shadow-xl hover:text-wwe px-6 py-3 text-2xl rounded-box font-aref min-w-max'>
             <p> solicitudes </p>
+          </div>
+          <div className='absolute bottom-5 shadow-xl hover:text-wwe px-4 py-1 text-2xl rounded-box font-aref min-w-max'>
+           <button onClick={() => cerrarSesion()} className='p-2'>Salir</button> 
           </div>
         </div>
     </div>
