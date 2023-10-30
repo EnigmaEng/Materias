@@ -180,7 +180,7 @@ const usuarioAutenticado = () => {
 
     const solicitudSubscripcion = async (datos) => {
       try {
-        const respuesta = 'llamada a la solicitud subscripcion'
+        const respuesta = await clienteAxios.post('/subscripcionController.php', datos)
         dispatch({
           type: SOLICITUD_SUBSCRIPCION,
           payload: respuesta.data

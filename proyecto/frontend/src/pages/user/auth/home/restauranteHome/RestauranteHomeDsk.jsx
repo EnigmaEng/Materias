@@ -20,7 +20,7 @@ const RestauranteHomeDsk = () => {
 <div className='flex  w-[60%] m-auto justify-center items-center  gap-5 '>
 
 
-<div data-aos="fade-right" className="max-w-sm mt-20 w-[50%] rounded-box   lg:max-w-full lg:flex">
+<div  className="max-w-sm mt-20 w-[50%] h-80 rounded-box   lg:max-w-full lg:flex">
 <img src={Image3} alt="resenia" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none  bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
   <div className=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div className="mb-8">
@@ -31,32 +31,33 @@ const RestauranteHomeDsk = () => {
         Solo clientes
       </p>
       <div className="text-gray-900 font-bold text-xl mb-2">Reseñas de tus clientes</div>
-      <p className="text-gray-700 text-sm">Reseñas realizadas por tus clientes</p>
+      <p className="text-gray-700 text-sm">Reseñas realizadas por turistas que se encuentran hospedados en algún hotel del país y eligieron tu restaurante según sus gustos y preferencias.
+Aquí puedes ver todas las reseñas que haya recibido tu restaurante y llevar un control de las mismas.</p>
     </div>
     <div className="flex  justify-center items-center">
      <Link to='/misResenias' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white w-20 flex justify-center items-center  text-wwe border shadow-xl text-3xl rounded-lg h-12'><MdOutlineRateReview/></Link>
     </div>
   </div>
 </div>
-<div data-aos="fade-left" className="max-w-sm mt-20 w-[50%] rounded-box shadow-xl  lg:max-w-full lg:flex">
+<div  className="max-w-sm mt-20 w-[50%] h-80 rounded-box shadow-xl  lg:max-w-full lg:flex">
 <img src={Image1} alt="menu" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none  bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
   <div className=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div className="mb-8 mt-5">
     
       <div className="text-gray-900 font-bold text-xl mb-2">Menú</div>
-      <p className="text-gray-700 text-sm">Mira todos tus platos creados en tu menú</p>
+      <p className="text-gray-700 text-sm">Encuentra tu menú detallado, modifícalo, agrega platos nuevos, combina tu menú con promociones especiales para los usuarios de Where We Eat y atrae el mayor público posible.</p>
     </div>
     <div className="flex  justify-center items-center">
      <Link to='/menu' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white border shadow-xl w-20  text-wwe px-6 text-3xl rounded-lg h-12'>  <MdMenuBook/></Link>
     </div>
   </div>
 </div>
-<div data-aos="fade-up" className="max-w-sm mt-20 w-[50%] rounded-box shadow-xl  lg:max-w-full lg:flex">
-<img src={Image2} alt="menu" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none  bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
+<div  className="max-w-sm mt-20 w-[50%] h-80  rounded-box shadow-xl  lg:max-w-full lg:flex">
+<img src={Image2} alt="menu" className='bg-cover  lg:h-auto lg:w-40 flex-none  bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
   <div className=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div className="mb-8 mt-5">
-      <div className="text-gray-900 font-bold text-xl mb-2">Crear plato</div>
-      <p className="text-gray-700 text-sm">Agrega un plato a tu menu </p>
+      <div className="text-gray-900 font-bold text-xl mb-2">Suscripciones:</div>
+      <p className="text-gray-700 text-sm">Logra una mayor visibilidad de tu restaurante, descubre el universo Where We Eat y todos sus beneficios para conocer nuevos clientes y llevar al auge a tu establecimiento gastronómico. </p>
     </div>
     <div className="flex  justify-center items-center">
      <Link to='/crearMenu' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white border shadow-xl w-20  text-wwe text-3xl rounded-lg flex justify-center items-center h-12'> <IoRestaurantOutline/> </Link>

@@ -33,7 +33,7 @@ const ListRestaurantes = () => {
   return (
     <>
 
-    <div className='w-8/12 m-auto px-10 h-8/12 glass  p-4 rounded-lg  dark:bg-zinc-800 '>
+    <div className='w-8/12 m-auto px-10 h-8/12 bg-white  p-4 rounded-lg  dark:bg-zinc-800 '>
 
     <div className='flex flex-col text-center justify-center items-center  mt-2'>
   

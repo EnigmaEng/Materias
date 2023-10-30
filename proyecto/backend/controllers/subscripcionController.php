@@ -1,5 +1,5 @@
 <?php
-
+require './cors.php';
 require_once '../models/subscripcion.php';
 function restauranteCompraSub($idUsuarioRest, $idTipoSubs, $fechaPago)
 {

@@ -129,7 +129,7 @@ class Subscripcion extends Usuario
             $stmt = $this->getConn()->prepare($query);
             $stmt->bindValue(":id_usuario_rest", $this->getIdUsuarioRest());
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
             error_log("Error en la consulta de la subscripcion: " . $ex->getMessage());
         }
