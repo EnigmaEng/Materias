@@ -339,11 +339,14 @@ class Usuario extends DataBaseConnection implements Crud
             $stmt->bindValue(":id_usuario", $idUsuario);
             if (isset($opcion)) {
                 switch ($opcion) {
-                    case "nombre":
+                    case "alias":
                         $stmt->bindValue(":nombreColumna", "alias");
+                        $stmt->bindValue(":valor",$this->getAlias());
                         break;
                     case "contrasena":
                         $stmt->bindValue(":nombreColumna", "contrasena");
+                        $hashedPass = password_hash($this->getContrasenia(), PASSWORD_BCRYPT);
+                        $stmt->bindValue(":valor",$hashedPass);
                         break;
                     case "url_img_usuario":
                         $stmt->bindValue(":nombreColumna", "url_img_usuario");

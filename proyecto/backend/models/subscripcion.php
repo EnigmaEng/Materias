@@ -111,6 +111,17 @@ class Subscripcion extends Usuario
         }
     }
 
+    public function obtenerSubscripciones(){
+        try{
+            $query="SELECT * FROM restaurante_paga_subscripcion";
+            $stmt=$this->getConn()->prepare($query);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }catch(PDOException $ex){
+            error_log("Error en obtener todas las subscripciones: ".$ex->getMessage());
+        }
+    }
+
     public function obtenerSubscripcionPorId()
     {
         try {

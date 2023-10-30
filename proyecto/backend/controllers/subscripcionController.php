@@ -1,8 +1,6 @@
 <?php
 
 require_once '../models/subscripcion.php';
-
-
 function restauranteCompraSub($idUsuarioRest, $idTipoSubs, $fechaPago)
 {
     $subscripcion = new Subscripcion();
@@ -11,44 +9,54 @@ function restauranteCompraSub($idUsuarioRest, $idTipoSubs, $fechaPago)
     $subscripcion->setFechaPago($fechaPago);
     if ($subscripcion->usuarioPagaSubscripcion()) {
         return json_encode(array('status' => 'La compra se realizo correctamente'));
-    }else{
+    } else {
         return json_encode(array('status' => 'Error'));
     }
 }
 
-function obtenerSubscripcionPorId($idUsuarioRest){
+function obtenerSubscripcionPorId($idUsuarioRest)
+{
     $subscripcion = new Subscripcion();
     $subscripcion->setIdUsuarioRest($idUsuarioRest);
     return json_encode($subscripcion->obtenerSubscripcionPorId());
 }
 
-function finalizarSubscripcion($idUsuarioRest){
+function finalizarSubscripcion($idUsuarioRest)
+{
     $subscripcion = new Subscripcion();
     $subscripcion->setIdUsuarioRest($idUsuarioRest);
-    if($subscripcion->finalizarSubscripcion()){
-        return json_encode(array('status'=>'La subscripcion ha finalizado correctamente'));
-    }else{
-        return json_encode(array('status'=>'Error en finalizar la subscripcion'));
+    if ($subscripcion->finalizarSubscripcion()) {
+        return json_encode(array('status' => 'La subscripcion ha finalizado correctamente'));
+    } else {
+        return json_encode(array('status' => 'Error en finalizar la subscripcion'));
     }
 }
 
+function obtenerSubscripciones()
+{
+    $subscripcion = new Subscripcion();
+    return json_encode($subscripcion->obtenerSubscripciones());
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
     $resultado = "";
 
-    if(isset($data["accion"])){
-        switch($data['accion']){
+    if (isset($data["accion"])) {
+        switch ($data['accion']) {
             case 'comprarSubscripcion':
-                $resultado=restauranteCompraSub($data['id_usuario_rest'],$data['idTipoSubs'],$data['fechaPago']);
+                $resultado = restauranteCompraSub($data['id_usuario_rest'], $data['idTipoSubs'], $data['fechaPago']);
                 break;
-            case 'obtenerSubscripciones':
-                $resultado=obtenerSubscripcionPorId($data['id_usuario_rest']);
+            case 'obtenerSubscripcionPorId':
+                $resultado = obtenerSubscripcionPorId($data['id_usuario_rest']);
                 break;
             case 'finalizarSubscripcion':
-                $resultado=finalizarSubscripcion($data['id_usuario_rest']);
-                break;    
+                $resultado = finalizarSubscripcion($data['id_usuario_rest']);
+                break;
+            case 'obtenerSubscripciones':
+                $resultado = obtenerSubscripciones();
+                break;
         }
     }
     echo $resultado;
