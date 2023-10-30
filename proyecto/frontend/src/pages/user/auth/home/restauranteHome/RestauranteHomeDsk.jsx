@@ -16,15 +16,8 @@ const RestauranteHomeDsk = () => {
   return (
    <div className='min-h-screen space-y-5 font-aref  dark:bg-zinc-800 dark:bg-opacity-95'>
   <NavBar/>
-
-
-
-  <div className='flex flex-col'>
-
- <ListRestaurantes/>
- </div>
 <div className='flex flex  justify-center items-center '>
-<div className='flex flex-col w-full justify-center items-center  gap-5 '>
+<div className='flex  w-[60%] m-auto justify-center items-center  gap-5 '>
 
 
 <div data-aos="fade-right" className="max-w-sm mt-20 w-[50%] rounded-box   lg:max-w-full lg:flex">
@@ -75,6 +68,10 @@ const RestauranteHomeDsk = () => {
 </div>
     
 
+  <div className='flex flex-col'>
+
+ <ListRestaurantes/>
+ </div>
 
     
   

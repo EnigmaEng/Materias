@@ -27,7 +27,7 @@ const HomeAuthMb = () => {
    <TuristaHome/>
 
    : usuario &&
-   usuario.rol.nro_empleados ? 
+   usuario.rol.nro_empleado ? 
    
 <AdminHome/>
  :  

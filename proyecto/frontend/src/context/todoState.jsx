@@ -88,7 +88,7 @@ const iniciarSesion = async (datos) => {
         //se guardan los datos del usuario en formato json en el localstorage
         localStorage.setItem('usuarioData', JSON.stringify(usuarioData));
         console.log(usuarioData)
-
+        
         dispatch({
           type: LOGIN_EXITOSO,
           usuario: usuarioData
