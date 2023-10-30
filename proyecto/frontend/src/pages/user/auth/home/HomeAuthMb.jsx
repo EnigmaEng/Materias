@@ -5,6 +5,7 @@ import RestauranteHomeMb from './restauranteHome/RestauranteHomeMb'
 import HomeMb from '../../../HomePublic/HomeMb'
 import RestauranteHome from './restauranteHome/RestauranteHome'
 import TuristaHome from './turistaHome/turistaHome'
+import AdminHomeMb from './adminHome/AdminHomeMb'
 const HomeAuthMb = () => {
 
 
@@ -29,7 +30,7 @@ const HomeAuthMb = () => {
    : usuario &&
    usuario.rol.nro_empleado ? 
    
-<AdminHome/>
+<AdminHomeMb/>
  :  
   <HomeMb/>
  } 
