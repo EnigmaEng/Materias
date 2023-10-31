@@ -126,18 +126,44 @@ class Admin extends Usuario
                     // Caso por defecto para manejar valores inesperados
                     throw new Exception("Tipo de suscripción no válido: " . $subscripcion->getIdTipoSubs());
             }
-
+    
             if (!empty($query)) {
-                $stmt = $this->getConn()->prepare($query);
-                $stmt->bindValue(":id_usuario_rest", $this->getIdUsuarioRest());
-                $stmt->bindValue(":id_usuario_admin", $this->getIdUsuarioAdmin());
-                if ($stmt->execute()) {
-                    return true;
+                $conn = $this->getConn();
+                $conn->beginTransaction();
+    
+                try {
+                    $stmt = $conn->prepare($query);
+                    $stmt->bindValue(":id_usuario_rest", $this->getIdUsuarioRest());
+                    $stmt->bindValue(":id_usuario_admin", $this->getIdUsuarioAdmin());
+    
+                    if ($stmt->execute()) {
+                        // La inserción fue exitosa, procedemos con el update
+                        $updateQuery = 'update restaurante_paga_subscripcion set aprobado = "S" where id_usuario_rest = :id_usuario_rest and aprobado = "N";';
+                        $updateStmt = $conn->prepare($updateQuery);
+                        $updateStmt->bindValue(":id_usuario_rest", $this->getIdUsuarioRest());
+    
+                        if ($updateStmt->execute()) {
+                            // Ambas consultas fueron exitosas, confirmamos la transacción
+                            $conn->commit();
+                            return true;
+                        } else {
+                            // Rollback en caso de error en el update
+                            $conn->rollBack();
+                        }
+                    } else {
+                        // Rollback en caso de error en la inserción
+                        $conn->rollBack();
+                    }
+                } catch (PDOException $ex) {
+                    // Rollback en caso de error en la transacción
+                    $conn->rollBack();
+                    error_log('Hubo un error en la transacción: ' . $ex->getMessage());
                 }
             }
+    
             return false;
         } catch (PDOException $ex) {
-            error_log('Hubo error en la persistencia de la aprobación: ' . $ex->getMessage());
+            error_log('Hubo un error en la persistencia de la aprobación: ' . $ex->getMessage());
         }
     }
 }

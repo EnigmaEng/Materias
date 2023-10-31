@@ -119,6 +119,7 @@ CREATE TABLE `restaurante_paga_subscripcion` (
   id_tipo_subscripcion INT(10) UNSIGNED,
   fecha_pago DATE,
   aprobado enum ('S','N') default 'N',
+  baja_solicitud ENUM ('S','N') DEFAULT 'N',
   PRIMARY KEY (fecha_pago,id_usuario_rest),
   FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante`(id_usuario),
   FOREIGN KEY (id_tipo_subscripcion) REFERENCES `tipo_subscripcion` (id_tipo_subs)
@@ -821,3 +822,5 @@ VALUES (15, 9, '2023-08-26', 'Medio', '7', '9', 'Bueno');
 
 INSERT INTO turista_resena_rest (id_usuario_turista, id_usuario_rest, fecha, calificacion_instalaciones, calificacion_personal, calificacion_menu, calificacion_general)
 VALUES (16, 8, '2023-08-26', 'Medio', '7', '9', 'Bueno');
+
+INSERT INTO wwe.descuento (activo,titulo_descuento,descripcion,url_img_descuento,costo) VALUES ('S','Hamburgesas Caseras','Hamburguesas caseras con papa fritas y bebida','FotoHambur.jpg',923);
