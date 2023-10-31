@@ -30,11 +30,11 @@ try {
             "accion": "aprobarRestaurante",
             "id_usuario_rest": id_usuario_rest,
             "id_usuario_admin": usuario.id_usuario,
-            "id_tipo_subscripcion": id_tipo_subscripcion
+            "id_tipo_sub": id_tipo_subscripcion
           }
           console.log(accion)
-          // const respuesta = await clienteAxios.post('/subscripcionController.php', accion)
-          
+          const respuesta = await clienteAxios.post('/subscripcionController.php', accion)
+          console.log(respuesta.data)
     }
 
     useEffect(() => {
