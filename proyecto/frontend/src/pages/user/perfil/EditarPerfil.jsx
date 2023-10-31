@@ -43,7 +43,7 @@ const formik = useFormik({
  
     <div className='min-h-screen text-lg text-wwe  dark:bg-zinc-800 dark:bg-opacity-95   '>
        <NavBar/>
-        <Link to='/configuracionRest' className='absolute  md:left-24 left-4 top-20 bg-wwe text-white rounded-lg px-6 py-2'>  <BiArrowBack/> </Link>
+        <Link to='/homeAuth' className='absolute  md:left-24 left-4 top-20 bg-wwe text-white rounded-lg px-6 py-2'>  <BiArrowBack/> </Link>
         <div className='flex flex-col  items-center justify-center'> 
              <h3 className='text-5xl text-center font-semibold font-aref mt-24'>Editar perfil</h3>
   <form onSubmit={formik.handleSubmit} className='bg-white mt-24 space-y-5 md:w-3/12 p-8 rounded-lg' method='POST' >
