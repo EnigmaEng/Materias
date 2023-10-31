@@ -52,7 +52,7 @@ CREATE TABLE `restaurante` (
 CREATE TABLE `plato_restaurantes` (
   id_Plato INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   nombre_plato VARCHAR(80) NOT NULL,
-  costo FLOAT(6,2),
+  costo FLOAT(7,2) NOT NULL,
   descripcion VARCHAR(300),
   url_img_menu VARCHAR(150),
   estado_plato ENUM ('S','N') DEFAULT 'S',
@@ -110,7 +110,8 @@ CREATE TABLE `descuento` (
   activo ENUM ('S','N') DEFAULT 'S',
   titulo_descuento VARCHAR(50),
   descripcion VARCHAR(300) DEFAULT NULL,
-  url_img_descuento VARCHAR(150) DEFAULT NULL
+  url_img_descuento VARCHAR(150) DEFAULT NULL,
+  costo FLOAT(7,2) NOT NULL
 );
 
 CREATE TABLE `restaurante_paga_subscripcion` (
@@ -384,7 +385,7 @@ INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
 VALUES ('paraisogourmet', 'paraisogourmet@example.com', 'gourmetpass', 'S', 'N', 'R');
 
 INSERT INTO localizacion (calle, esquina, nro_puerta)
-VALUES ('Rambla República de México', 'Plaza Gomensoro', '1819');
+VALUES ('Rambla Republica de Mexico', 'Plaza Gomensoro', '1819');
 
 INSERT INTO restaurante (id_usuario, nombre, id_loc_restaurante)
 VALUES (LAST_INSERT_ID(), 'Paraiso Gourmet', LAST_INSERT_ID());
@@ -431,7 +432,7 @@ INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
 VALUES ('agarcia', 'turista3@example.com', 'mysecret', 'S', 'N', 'T');
 
 INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
-VALUES (LAST_INSERT_ID(), 'Spain', 'Vacaciones', 'Antonio', 'García');
+VALUES (LAST_INSERT_ID(), 'Spain', 'Vacaciones', 'Antonio', 'Garcia');
 
 -- Insertar turista 4
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
@@ -529,19 +530,19 @@ INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
 VALUES ('admin22', 'admin22@wwe.com', 'adminpass22', 'S', 'N', 'A');
 
 INSERT INTO administrativo (id_usuario, nro_empleado, nombres, apellidos)
-VALUES (LAST_INSERT_ID(), 22, 'Juan', 'Pérez');
+VALUES (LAST_INSERT_ID(), 22, 'Juan', 'Perez');
 
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
 VALUES ('admin17', 'admin17@wwe.com', 'adminpass17', 'S', 'N', 'A');
 
 INSERT INTO administrativo (id_usuario, nro_empleado, nombres, apellidos)
-VALUES (LAST_INSERT_ID(), 17, 'María', 'González');
+VALUES (LAST_INSERT_ID(), 17, 'Maria', 'Gonzalez');
 
 /*Insertando Alojamientos*/
 
 -- Insertar alojamiento 1
 INSERT INTO localizacion (calle, esquina, nro_puerta)
-VALUES ('Rambla República de México', '21 de Setiembre', '1234');
+VALUES ('Rambla Republica de Mexico', '21 de Setiembre', '1234');
 
 INSERT INTO alojamiento (nombre_alojamiento, id_loc_alojamiento, activo)
 VALUES ('Hotel del Mar', LAST_INSERT_ID(), 'S');
@@ -666,7 +667,7 @@ INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_res
 VALUES ('Chuleton de Ternera', ROUND(RAND() * 250 + 300, 2), 'Chuleton de ternera cocido a la parrilla y acompanado de guarniciones.', 2);
 
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Tiramisú', ROUND(RAND() * 60 + 90, 2), 'El clásico postre italiano con capas de café y crema.', 2);
+VALUES ('Tiramisu', ROUND(RAND() * 60 + 90, 2), 'El clasico postre italiano con capas de cafe y crema.', 2);
 
 -- Restaurante 3
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
@@ -706,7 +707,7 @@ INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_res
 VALUES ('Ternera a la Parrilla', ROUND(RAND() * 280 + 320, 2), 'Ternera jugosa cocida a la parrilla.', 6);
 
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Tarta de Manzana', ROUND(RAND() * 60 + 90, 2), 'Clásica tarta de manzana con crumble.', 6);
+VALUES ('Tarta de Manzana', ROUND(RAND() * 60 + 90, 2), 'Clasica tarta de manzana con crumble.', 6);
 
 -- Restaurante 7
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
@@ -716,7 +717,7 @@ INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_res
 VALUES ('Paella Valenciana', ROUND(RAND() * 260 + 300, 2), 'Paella tradicional con mariscos y pollo.', 7);
 
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Crema Catalana', ROUND(RAND() * 70 + 100, 2), 'Postre cremoso con capa de azúcar quemado.', 7);
+VALUES ('Crema Catalana', ROUND(RAND() * 70 + 100, 2), 'Postre cremoso con capa de azucar quemado.', 7);
 
 -- Restaurante 8
 INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
