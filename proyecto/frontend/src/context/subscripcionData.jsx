@@ -33,7 +33,7 @@ const subscripcion = async (datos)  => {
 return {
     solicitudes,
     subscripcion,
-    obtenerSubscripcion,
+   
     
   }
 }
