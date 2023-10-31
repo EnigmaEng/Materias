@@ -114,16 +114,31 @@ class Subscripcion extends Usuario
     public function obtenerSubscripciones()
     {
         try {
-            $query = "SELECT rps.*,r.nombre FROM wwe.restaurante_paga_subscripcion rps
-            join wwe.restaurante r on rps.id_usuario_rest = r.id_usuario
-            where rps.aprobado = 'N';";
+            $query = "SELECT rps.*, r.nombre FROM wwe.restaurante_paga_subscripcion rps
+                  JOIN wwe.restaurante r ON rps.id_usuario_rest = r.id_usuario
+                  WHERE rps.aprobado = 'N' AND rps.baja_solicitud = 'N';";
             $stmt = $this->getConn()->prepare($query);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $subscripciones = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($subscripciones as $subscripcion) {
+                $fechaPago = new DateTime($subscripcion['fecha_pago']);
+                $fechaLimite = new DateTime('-10 days');
+                if ($fechaPago <= $fechaLimite) {
+                    $query = "UPDATE wwe.restaurante_paga_subscripcion
+                                   SET baja_solicitud = 'S'
+                                   WHERE id_usuario_rest = :id_usuario_rest;";
+                    $stmt = $this->getConn()->prepare($query);
+                    $stmt->bindValue(':id_usuario_rest', $subscripcion['id_usuario_rest']);
+                    $stmt->execute();
+                }
+            }
+            return $subscripciones;
         } catch (PDOException $ex) {
-            error_log("Error en obtener todas las subscripciones: " . $ex->getMessage());
+            error_log("Error en obtener y actualizar subscripciones: " . $ex->getMessage());
         }
     }
+
 
     public function obtenerSubscripcionPorId()
     {
