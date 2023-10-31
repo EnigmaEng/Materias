@@ -132,6 +132,21 @@ function obtenerRestaurante()
     return "[$response]"; 
 }
 
+function obtenerDescuentos(){
+    $descuento=new Descuento;
+    return json_encode($descuento->mostrarDescuentos());
+}
+
+function obtenerDescuentoPorId($idDescuento){
+    $descuento = new Descuento;
+    $descuento->setIdDescuento($idDescuento);
+    $resultado=$descuento->mostrarDescuentoPorId();
+    if(!empty($resultado)){
+        return json_encode($resultado);
+    }else{
+        return json_encode(array("status"=>"No se ha encontrado un descuento."));
+    }
+}
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -192,6 +207,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case "obtenerPlatos":
                 $resultado = obtenerPlatos($data['id_usuario_rest']);
                 break;
+            case "obtenerDescuentoPorId":
+                $resultado= obtenerDescuentoPorId($data['id_descuento']);
+                break;
+            case "obtenerDescuentos":
+                $resultado= obtenerDescuentos();
+                break;    
             default:
                 $resultado = "Error en el tipo de accion, intente nuevamente";
                 break;
