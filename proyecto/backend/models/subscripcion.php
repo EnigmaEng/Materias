@@ -113,10 +113,11 @@ class Subscripcion extends Usuario
 
     public function obtenerSubscripciones(){
         try{
-            $query="SELECT * FROM restaurante_paga_subscripcion";
+            $query="SELECT rps.*,r.nombre FROM wwe.restaurante_paga_subscripcion rps
+join wwe.restaurante r on rps.id_usuario_rest = r.id_usuario";
             $stmt=$this->getConn()->prepare($query);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }catch(PDOException $ex){
             error_log("Error en obtener todas las subscripciones: ".$ex->getMessage());
         }
@@ -125,11 +126,11 @@ class Subscripcion extends Usuario
     public function obtenerSubscripcionPorId()
     {
         try {
-            $query = "SELECT * FROM restaurante_paga_subscripcion WHERE id_usuario_rest = :id_usuario_rest ;";
+            $query = "SELECT * FROM restaurante_paga_subscripcion WHERE id_usuario_rest = :id_usuario_rest;";
             $stmt = $this->getConn()->prepare($query);
             $stmt->bindValue(":id_usuario_rest", $this->getIdUsuarioRest());
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
             error_log("Error en la consulta de la subscripcion: " . $ex->getMessage());
         }

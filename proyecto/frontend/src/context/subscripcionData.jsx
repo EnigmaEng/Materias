@@ -5,7 +5,7 @@ import { useContext, useState } from "react"
 const subscripcionData = () => {
 
 const {usuario, solicitudSubscripcion} = useContext(todoContext)
-const [solicitudes, setSolicitudes] = useState([])
+
 
 const today = new Date();
 const year = today.getFullYear();
@@ -14,8 +14,8 @@ const day = today.getDate().toString().padStart(2, '0');
 const formattedDate = `${year}-${month}-${day}`;
 
 const subscripcion = async (datos)  => {
-
-    const data  = {
+try {
+     const data  = {
         "accion": "comprarSubscripcion",
         "id_usuario_rest": usuario.id_usuario,
         "idTipoSubs": datos,
@@ -23,6 +23,10 @@ const subscripcion = async (datos)  => {
     }
     solicitudSubscripcion(data)
     console.log(data)
+} catch (error) {
+    console.log(error)
+}
+   
 }
 
 
@@ -31,7 +35,7 @@ const subscripcion = async (datos)  => {
 
 
 return {
-    solicitudes,
+
     subscripcion,
    
     
