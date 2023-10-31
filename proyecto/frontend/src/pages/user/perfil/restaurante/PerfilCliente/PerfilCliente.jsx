@@ -54,6 +54,7 @@ const getReseniaById = async () => {
   try {
     const res = await clienteAxios.post(endpoint, accion)
     setResenia(res.data)
+    
   } catch (error) {
     console.log(error)
   }
@@ -66,6 +67,7 @@ const getReseniaById = async () => {
     getProductById();
     getMenuById();
     getReseniaById();
+    
   }, [id_usuario]);
 
   if (!restaurante) {
@@ -81,8 +83,6 @@ const getReseniaById = async () => {
     <button className='bg-wwe  rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-8 md:absolute md:left-10 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700 md:border-gray-400 text-white'><BiArrowBack/></button>
     </Link>
 <div className='flex w-full gap-5 p-4 '>
-
-
     {
       
       restaurante.map((item,index) => (
@@ -131,40 +131,42 @@ const getReseniaById = async () => {
       ))
         :
        
-        <div className='h-64 w-52 m-auto text-black font-aref  text-center text-3xl'>
-          <p>Sin menus</p>
+        <div className='h-64  text-black font-aref flex justify-center items-center text-center text-3xl '>
+          <p className=' left-[59%]'>Sin menus</p>
           </div>
        
     } 
       </div>
-  <div className='  h-80 p-4  w-full m-auto justify-center items-center  '>
+  <div className=' h-80 p-4  w-full m-auto justify-center items-center  '>
     <h2 className='text-center font-aref font-semibold text-2xl text-wwe'>Reseñas:</h2>
   
       
     <div className='grid grid-cols-4'>
 
    
-    {
-      Array.isArray(resenia) && resenia.length > 0 ?
-      resenia.map((item, index) => (
-         <li key={index} className='list-none  '>
-              <div className="flex items-center gap-x-6 bg-white shadow-xl p-2 rounded-box">
-                <div>
-                  
-                  <p className="text-sm font-semibold leading-6 text-black">Menu gastronómico: {item.calificacion_menu} </p>
-                   <p className="text-sm font-semibold leading-6 text-black">Personal: {item.calificacion_personal}</p>
-                    <p className="text-sm font-semibold leading-6 text-black">Instalaciones: {item.calificacion_instalaciones}</p>
-                    <p className="text-sm font-semibold leading-6 text-black">Calificacion General: {item.calificacion_general}</p>
-                    <p className="text-sm font-semibold leading-6 text-black"> {item.fecha}</p>
-                </div>
-              </div> 
-               </li>
-      )) 
-      : 
-      <div className='text-center text-3xl font-semibold font-aref absolute left-[59%] '>
-        <p>Sin reseñas realizadas</p>
-      </div>
-    }
+{
+  resenia[0] === 'Error en la consulta' ? (
+    <div className='text-center text-black dark:text-white text-3xl font-semibold font-aref absolute left-[59%]'>
+      <p>Sin reseñas realizadas</p>
+    </div>
+  ) : (
+    resenia.map((item, index) => (
+      <li key={index} className='list-none '>
+        <div className="flex items-center gap-x-6 bg-white shadow-xl p-2 rounded-box">
+          <div>
+            <p className="text-sm font-semibold leading-6 text-black">Menu gastronómico: {item.calificacion_menu} </p>
+            <p className="text-sm font-semibold leading-6 text-black">Personal: {item.calificacion_personal}</p>
+            <p className="text-sm font-semibold leading-6 text-black">Instalaciones: {item.calificacion_instalaciones}</p>
+            <p className="text-sm font-semibold leading-6 text-black">Calificacion General: {item.calificacion_general}</p>
+            <p className="text-sm font-semibold leading-6 text-black"> {item.fecha}</p>
+          </div>
+        </div> 
+      </li>
+    ))
+  )
+}
+
+
      </div>
       </div>
     </div>

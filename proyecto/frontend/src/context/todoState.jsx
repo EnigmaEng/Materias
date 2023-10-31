@@ -1,5 +1,4 @@
 import React, { useReducer, useState} from "react";
-
 import todoContext from "./todoContext";
 import todoReducer from "./todoReducer";
 import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, OBTENER_RESTAURANTE, DESCUENTO_CREADO, RESENIA_CREADA, SOLICITUD_SUBSCRIPCION} from "../types/types";
@@ -192,12 +191,11 @@ const usuarioAutenticado = () => {
 
 
         const cerrarSesion = async () => {
-
           
             dispatch({
                 type: CERRAR_SESION,
                 
-            });
+            });     
             // Eliminamos el token y los datos de usuario del localstorage una vez cerrado sesion
               localStorage.removeItem('token');
               localStorage.removeItem('usuarioData');

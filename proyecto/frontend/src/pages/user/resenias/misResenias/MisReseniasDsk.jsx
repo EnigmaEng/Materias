@@ -30,8 +30,12 @@ const MisReseniasDsk = () => {
         </div>
         <ul role="list" className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
         { 
-         Array.isArray(resenia) && resenia.length > 0 ?
-         resenia.map((item, index) => (
+         resenia[0] === 'Error en la consulta' ?
+      <div className='w-full'>
+        <p className='text-center text-2xl mt-5 font-semibold '>Sin reseñas.</p>
+      </div>
+      :
+      resenia.map((item, index) => (
               <li key={index}>
               <div className="flex items-center gap-x-6 border shadow-xl p-2 rounded-box">
                 <div>
@@ -45,10 +49,6 @@ const MisReseniasDsk = () => {
               </div> 
                </li>
          ))
-      :
-      <div>
-        <p>Sin reseñas.</p>
-      </div>
         }
             
           

@@ -27,7 +27,11 @@ getReseniaById();
         
         </div>
         <ul role="list" className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
-          {resenia.map((item, index) => (
+          {
+          
+          resenia[0] === 'Error en la consulta' ?
+          <p>Sin resenas</p> :
+          resenia.map((item, index) => (
             <li key={index}>
               <div className="flex items-center gap-x-6 border shadow-xl p-2 rounded-box">
                 
