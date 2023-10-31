@@ -10,8 +10,8 @@ import RegistroUsuario from './pages/user/auth/registro/Registro'
 import Login from './pages/user/auth/login/Login'
 import TodoState from './context/todoState'
 import PerfilAdmin from './pages/user/perfil/admin/PerfilAdmin'
-import PerfilTest from './pages/user/perfil/restaurante/PerfilTest'
-import EditarPerfi from './pages/user/perfil/restaurante/EditarPerfi'
+
+import EditarPerfi from './pages/user/perfil/EditarPerfil'
 import Menu from './pages/user/perfil/restaurante/Menu/Menu'
 import CrearMenu from './pages/user/perfil/restaurante/Menu/CrearMenu'
 import Map from './components/maps/Map'
@@ -24,7 +24,7 @@ import RutaProtegida from './context/RutaProtegida'
 import MisReseniasTurista from './pages/user/resenias/misResenias/MisReseniasTurista'
 import PerfilCliente from './pages/user/perfil/restaurante/PerfilCliente/PerfilCliente'
 import MapContent from './components/maps/MapContent'
-import EditarPerfilTurista from './pages/user/perfil/turista/Configuracion/EditarPerfil/EditarPerfilTurista'
+
 import Alojamiento from './pages/user/perfil/turista/Alojamiento/Alojamiento'
 import Descuentos from './pages/user/perfil/restaurante/Descuentos/Descuentos'
 function App() {
@@ -63,7 +63,7 @@ function App() {
 <Route path='/alojamiento' element={<Alojamiento/>}/>
 <Route path='/configuracionTurista' element={<ConfiguracionTurista/>}/>
 <Route path='/perfilTurista' element={<PerfilTurista/>}/>
-<Route path='/editarPerfilTurista' element={<EditarPerfilTurista/>}/>
+
 {/* Resenias */}
 <Route path='/crearResenia/:id_usuario' element={<CrearResenia/>} />
 <Route path='/misResenias' element={<MisResenias/>}/>
@@ -73,10 +73,10 @@ function App() {
 
   {/* Restaurante */}
 
-<Route path='/perfil' element={<PerfilTest/>}/>
+
 <Route path='/perfilRestaurante' element={<PerfilRestaurante/>}/>
 
-<Route path='/editarPerfilRestaurante' element={<EditarPerfi/>}/>
+<Route path='/editarPerfil' element={<EditarPerfi/>}/>
 <Route path='/crearMenu' element={<CrearMenu/>}/>
 <Route path='/menu' element={<Menu/>}/>
 <Route path='/subscripcion' element={<Subscripcion/>}/>

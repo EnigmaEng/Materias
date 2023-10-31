@@ -94,7 +94,7 @@ usuarioAutenticado();
          Perfil 
           </Link>
         </li>
-        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/editarPerfilTurista' className='text-black flex gap-4'> Editar perfil </Link></li>
+        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/editarPerfil' className='text-black flex gap-4'> Editar perfil </Link></li>
         <li className=' hover:bg-gray-200 rounded-lg p-2'><button onClick={() => cerrarSesion()} className='text-black flex gap-4  w-24'> <div className='mt-1'>
           <SlLogout/> </div> Salir </button></li>
       </ul>

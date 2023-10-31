@@ -19,7 +19,7 @@ const TuristaHomeDsk = () => {
 
   <div className='bg-white p-4 w-6/12 m-auto rounded-lg shadow-xl text-center text-wwe font-aref font-semibold h-24  text-2xl'><p className='10'>Obtener descuentos</p></div>
       
- <ListRestaurantes/>
+
 
 <div className='flex    justify-center items-center '>
 <div className='flex  gap-5 '>
@@ -72,7 +72,7 @@ const TuristaHomeDsk = () => {
 </div>
 </div>
 
-    
+     <ListRestaurantes/>
   <div className='mt-24'>
       <FooterDsk/>
    </div>

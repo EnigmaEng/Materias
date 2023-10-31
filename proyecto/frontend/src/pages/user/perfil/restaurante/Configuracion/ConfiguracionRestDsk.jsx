@@ -15,7 +15,7 @@ const ConfiguracionRestDsk = () => {
     <h2 className='text-center text-4xl  font-aref mb-10'>Configuración de la cuenta</h2>
     <div className='border  p-4 mb-10 rounded-box shadow-xl'> <h2 className='font-aref mb-5'>Editar perfil</h2> 
     <hr />
-    <Link to='/editarPerfilRestaurante' className='w-80 px-4 py-1 rounded-lg bg-wwe text-white'>Editar</Link></div>
+    <Link to='/editarPerfil' className='w-80 px-4 py-1 rounded-lg bg-wwe text-white'>Editar</Link></div>
     
     <div className='border p-4   mb-10 rounded-box  shadow-xl'>
         <h2 className='mb-5 font-aref px-2'>Pagar Suscripción</h2>
