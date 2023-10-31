@@ -8,6 +8,7 @@ const Aprobaciones = () => {
 const [solicitudes, setSolicitudes] = useState([])
 
 
+const {usuario} = useContext(todoContext)
     const obtenerSubscripcion = async () =>
 {
 try {
@@ -16,13 +17,25 @@ try {
      }
     const respuesta = await clienteAxios.post('/subscripcionController.php', accion)
     setSolicitudes(respuesta.data)
-console.log(respuesta.data)
+
 } catch (error) {
     console.log(error)
 }
 }
 
 
+    const aprobarSub = async (id_usuario_rest, id_tipo_subscripcion) => {
+    
+          const accion = {
+            "accion": "aprobarRestaurante",
+            "id_usuario_rest": id_usuario_rest,
+            "id_usuario_admin": usuario.id_usuario,
+            "id_tipo_subscripcion": id_tipo_subscripcion
+          }
+          console.log(accion)
+          // const respuesta = await clienteAxios.post('/subscripcionController.php', accion)
+          
+    }
 
     useEffect(() => {
   
@@ -74,11 +87,9 @@ console.log(respuesta.data)
     </div>
   </div>
   <div className="mt-5 flex lg:ml-4 lg:mt-0">
- 
-  
 
     <span className="sm:ml-3">
-      <button type="button" className=" inline-flex items-center rounded-md bg-wwe px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-red-700">
+      <button onClick={() => aprobarSub(item.id_usuario_rest, item.id_tipo_subscripcion)} type="button" className=" inline-flex items-center rounded-md bg-wwe px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-red-700">
         <svg className="-ml-0.5 mr-1.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
         </svg>

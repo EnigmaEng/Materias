@@ -34,7 +34,17 @@ const {usuario, autenticado} = TodoContext
       <Link to='/homeAuth' >
     <button className='bg-wwe  rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-8 md:absolute md:left-10 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700 md:border-gray-400 text-white'><BiArrowBack/></button>
     </Link>
-    <div className='bg-white w-8/12 justify-center m-auto space-y-5 py-6 text-black text-3xl flex flex-col  items-center rounded-box'>
+  
+    <div className='bg-white w-8/12 justify-center m-auto space-y-5 py-6 text-black text-3xl flex flex-col  items-center rounded-box '>
+      <div className='space-x-24'>
+         <Link to='/crearDescuentos' className='bg-wwe hover:bg-red-700 rounded-lg px-4 py-1 text-white '>
+    Crear descuento
+    </Link>
+    <Link to='/crearMenu' className='bg-wwe hover:bg-red-700 rounded-lg px-4 py-1 text-white '>
+    Crear plato
+    </Link> 
+      </div>
+
         <div className='flex '>
               <p className='text-4xl text-center text-wwe flex gap-3 font-aref font-semibold mb-10'>
               
@@ -53,7 +63,7 @@ const {usuario, autenticado} = TodoContext
       
         <div className='p-2 h-24'>
           <p className='text-sm h-12'>{item.descripcion}</p>
-          <p className='font-aref '>{item.costo} $</p>
+          <p className='font-aref '>${item.costo} </p>
         </div>
       </div>
     ))
