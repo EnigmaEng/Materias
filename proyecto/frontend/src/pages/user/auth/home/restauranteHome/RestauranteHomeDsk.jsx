@@ -59,7 +59,7 @@ const RestauranteHomeDsk = () => {
       <p className="text-gray-700 text-sm">Logra una mayor visibilidad de tu restaurante, descubre el universo Where We Eat y todos sus beneficios para conocer nuevos clientes y llevar al auge a tu establecimiento gastronómico. </p>
     </div>
     <div className="flex  justify-center items-center">
-     <Link to='/crearMenu' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white border shadow-xl w-20  text-wwe text-3xl rounded-lg flex justify-center items-center h-12'> <IoRestaurantOutline/> </Link>
+     <Link to='/subscripcion' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white border shadow-xl w-20  text-wwe text-3xl rounded-lg flex justify-center items-center h-12'> <IoRestaurantOutline/> </Link>
     </div>
   
 </div>
