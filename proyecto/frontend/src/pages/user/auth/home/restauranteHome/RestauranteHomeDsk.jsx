@@ -31,8 +31,7 @@ const RestauranteHomeDsk = () => {
         Solo clientes
       </p>
       <div className="text-gray-900 font-bold text-xl mb-2">Reseñas de tus clientes</div>
-      <p className="text-gray-700 text-sm">Reseñas realizadas por turistas que se encuentran hospedados en algún hotel del país y eligieron tu restaurante según sus gustos y preferencias.
-Aquí puedes ver todas las reseñas que haya recibido tu restaurante y llevar un control de las mismas.</p>
+      <p className="text-gray-700 text-sm">Reseñas realizadas por turistas que se encuentran hospedados en algún hotel del país y eligieron tu restaurante según sus gustos y preferencias.</p>
     </div>
     <div className="flex  justify-center items-center">
      <Link to='/misResenias' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white w-20 flex justify-center items-center  text-wwe border shadow-xl text-3xl rounded-lg h-12'><MdOutlineRateReview/></Link>
@@ -56,7 +55,7 @@ Aquí puedes ver todas las reseñas que haya recibido tu restaurante y llevar un
 <img src={Image2} alt="menu" className='bg-cover  lg:h-auto lg:w-40 flex-none  bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
   <div className=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div className="mb-8 mt-5">
-      <div className="text-gray-900 font-bold text-xl mb-2">Suscripciones:</div>
+      <div className="text-gray-900 font-bold text-xl mb-2">Suscripciones</div>
       <p className="text-gray-700 text-sm">Logra una mayor visibilidad de tu restaurante, descubre el universo Where We Eat y todos sus beneficios para conocer nuevos clientes y llevar al auge a tu establecimiento gastronómico. </p>
     </div>
     <div className="flex  justify-center items-center">
