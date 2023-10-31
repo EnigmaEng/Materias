@@ -115,7 +115,8 @@ class Subscripcion extends Usuario
     {
         try {
             $query = "SELECT rps.*,r.nombre FROM wwe.restaurante_paga_subscripcion rps
-join wwe.restaurante r on rps.id_usuario_rest = r.id_usuario";
+            join wwe.restaurante r on rps.id_usuario_rest = r.id_usuario
+            where rps.aprobado = 'N';";
             $stmt = $this->getConn()->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
