@@ -120,7 +120,7 @@ class Admin extends Usuario
                     $query = 'insert into wwe.admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub) values (:id_usuario_rest, :id_usuario_admin, curdate(), date_add(curdate(), interval 1 year));';
                     break;
                 case 3:
-                    $query = 'insert into wwe.admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub) values (:id_usuario_rest, :id_usuario_admin, curdate(), date_add(curdate(), interval 2 years));';
+                    $query = 'insert into wwe.admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub) values (:id_usuario_rest, :id_usuario_admin, curdate(), date_add(curdate(), interval 2 year));';
                     break;
                 default:
                     // Caso por defecto para manejar valores inesperados
