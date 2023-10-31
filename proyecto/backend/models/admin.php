@@ -112,29 +112,32 @@ class Admin extends Usuario
     public function aprobarRestaurante($subscripcion)
     {
         try {
-            $subscripcion = new Subscripcion();
-
             switch ($subscripcion->getIdTipoSubs()) {
                 case 1:
-                    $query = 'insert into wwe.admin_aprueba_rest (id_usuario_rest, id_usuario_admin,fecha_ini_sub,fecha_fin_sub) values (:id_usuario_rest,:id_usuario_admin,curdate(), date_add(curdate(), interval 1 month));';
+                    $query = 'insert into wwe.admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub) values (:id_usuario_rest, :id_usuario_admin, curdate(), date_add(curdate(), interval 1 month));';
                     break;
                 case 2:
-                    $query = 'insert into wwe.admin_aprueba_rest (id_usuario_rest, id_usuario_admin,fecha_ini_sub,fecha_fin_sub) values (:id_usuario_rest,:id_usuario_admin,curdate(), date_add(curdate(), interval 1 year));';
+                    $query = 'insert into wwe.admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub) values (:id_usuario_rest, :id_usuario_admin, curdate(), date_add(curdate(), interval 1 year));';
                     break;
                 case 3:
-                    $query = 'insert into wwe.admin_aprueba_rest (id_usuario_rest, id_usuario_admin,fecha_ini_sub,fecha_fin_sub) values (:id_usuario_rest,:id_usuario_admin,curdate(), date_add(curdate(), interval 2 year));';
+                    $query = 'insert into wwe.admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub) values (:id_usuario_rest, :id_usuario_admin, curdate(), date_add(curdate(), interval 2 years));';
                     break;
+                default:
+                    // Caso por defecto para manejar valores inesperados
+                    throw new Exception("Tipo de suscripción no válido: " . $subscripcion->getIdTipoSubs());
             }
 
-            $stmt = $this->getConn()->prepare($query);
-            $stmt->bindValue(":id_usuario_rest", $this->getIdUsuarioRest());
-            $stmt->bindValue(":id_usuario_admin", $this->getIdUsuarioAdmin());
-            if ($stmt->execute()) {
-                return true;
+            if (!empty($query)) {
+                $stmt = $this->getConn()->prepare($query);
+                $stmt->bindValue(":id_usuario_rest", $this->getIdUsuarioRest());
+                $stmt->bindValue(":id_usuario_admin", $this->getIdUsuarioAdmin());
+                if ($stmt->execute()) {
+                    return true;
+                }
             }
             return false;
         } catch (PDOException $ex) {
-            error_log('Hubo error en la persistencia de la aprobacion: '.$ex->getMessage());
+            error_log('Hubo error en la persistencia de la aprobación: ' . $ex->getMessage());
         }
     }
 }

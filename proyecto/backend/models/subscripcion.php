@@ -103,7 +103,7 @@ class Subscripcion extends Usuario
                     return true;
                 }
                 return false;
-            }else{
+            } else {
                 throw new Exception("El tipo de subscripcion no existe o no es correcto.");
             }
         } catch (PDOException $ex) {
@@ -111,15 +111,16 @@ class Subscripcion extends Usuario
         }
     }
 
-    public function obtenerSubscripciones(){
-        try{
-            $query="SELECT rps.*,r.nombre FROM wwe.restaurante_paga_subscripcion rps
+    public function obtenerSubscripciones()
+    {
+        try {
+            $query = "SELECT rps.*,r.nombre FROM wwe.restaurante_paga_subscripcion rps
 join wwe.restaurante r on rps.id_usuario_rest = r.id_usuario";
-            $stmt=$this->getConn()->prepare($query);
+            $stmt = $this->getConn()->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }catch(PDOException $ex){
-            error_log("Error en obtener todas las subscripciones: ".$ex->getMessage());
+        } catch (PDOException $ex) {
+            error_log("Error en obtener todas las subscripciones: " . $ex->getMessage());
         }
     }
 
