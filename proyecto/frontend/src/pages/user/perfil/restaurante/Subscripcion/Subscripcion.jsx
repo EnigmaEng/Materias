@@ -29,7 +29,7 @@ const Subscripcion = () => {
     </div>
     <div className="mx-auto bg-white mt-2 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
       <div className=" p-10">
-        <h3 className="text-2xl font-bold tracking-tight text-gray-900">Estandar</h3>
+        <h3 className="text-2xl font-bold tracking-tight text-gray-900">Estándar</h3>
         <p className="mt-6 text-base leading-7 text-gray-600">Contrata esta suscripción y disfruta de sus servicios</p>
         <div className="mt-10 flex items-center gap-x-4">
           <h4 className="flex-none text-sm font-semibold leading-6 text-wwe">¿Qué incluye?</h4>
