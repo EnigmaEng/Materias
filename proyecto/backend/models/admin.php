@@ -1,6 +1,7 @@
 <?php
 
 require_once 'usuario.php';
+include_once 'subscripcion.php';
 
 require '../vendor/autoload.php';
 
@@ -68,42 +69,72 @@ class Admin extends Usuario
         return $this->apellidos;
     }
 
-    public function setIdUsuarioRest($idUsuarioRest){
-        $this->idUsuarioRest=$idUsuarioRest;
+    public function setIdUsuarioRest($idUsuarioRest)
+    {
+        $this->idUsuarioRest = $idUsuarioRest;
     }
 
-    public function getIdUsuarioRest(){
+    public function getIdUsuarioRest()
+    {
         return $this->idUsuarioRest;
     }
 
-    public function setIdUsuarioAdmin($idUsuarioAdmin){
-        $this->idUsuarioAdmin=$idUsuarioAdmin;
+    public function setIdUsuarioAdmin($idUsuarioAdmin)
+    {
+        $this->idUsuarioAdmin = $idUsuarioAdmin;
     }
 
-    public function getIdUsuarioAdmin(){
+    public function getIdUsuarioAdmin()
+    {
         return $this->idUsuarioAdmin;
     }
 
-    public function setFechaIniSub($fechaIniSub){
-        $this->fechaIniSub=$fechaIniSub;
+    public function setFechaIniSub($fechaIniSub)
+    {
+        $this->fechaIniSub = $fechaIniSub;
     }
 
-    public function getFechaIniSub(){
+    public function getFechaIniSub()
+    {
         return $this->fechaIniSub;
     }
 
-    public function setFechaFinSub($fechaFinSub){
-        $this->fechaFinSub=$fechaFinSub;
+    public function setFechaFinSub($fechaFinSub)
+    {
+        $this->fechaFinSub = $fechaFinSub;
     }
 
-    public function getFechaFinSub(){
+    public function getFechaFinSub()
+    {
         return $this->fechaFinSub;
     }
 
-    public function aprobarRestaurante(){
-        $query='INSERT INTO admin_aprueba_rest(id_usuario_rest,id_usuario_admin,fecha_ini_sub,fecha_fin_sub) VALUES (:id_usuario_rest,:id_usuario_admin,:fecha_ini_sub,:fecha_fin_sub);';
-        $stmt=$this->getConn()->prepare($query);
-        
-    }
+    public function aprobarRestaurante($subscripcion)
+    {
+        try {
+            $subscripcion = new Subscripcion();
 
+            switch ($subscripcion->getIdTipoSubs()) {
+                case 1:
+                    $query = 'insert into wwe.admin_aprueba_rest (id_usuario_rest, id_usuario_admin,fecha_ini_sub,fecha_fin_sub) values (:id_usuario_rest,:id_usuario_admin,curdate(), date_add(curdate(), interval 1 month));';
+                    break;
+                case 2:
+                    $query = 'insert into wwe.admin_aprueba_rest (id_usuario_rest, id_usuario_admin,fecha_ini_sub,fecha_fin_sub) values (:id_usuario_rest,:id_usuario_admin,curdate(), date_add(curdate(), interval 1 year));';
+                    break;
+                case 3:
+                    $query = 'insert into wwe.admin_aprueba_rest (id_usuario_rest, id_usuario_admin,fecha_ini_sub,fecha_fin_sub) values (:id_usuario_rest,:id_usuario_admin,curdate(), date_add(curdate(), interval 2 year));';
+                    break;
+            }
+
+            $stmt = $this->getConn()->prepare($query);
+            $stmt->bindValue(":id_usuario_rest", $this->getIdUsuarioRest());
+            $stmt->bindValue(":id_usuario_admin", $this->getIdUsuarioAdmin());
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $ex) {
+            error_log('Hubo error en la persistencia de la aprobacion: '.$ex->getMessage());
+        }
+    }
 }

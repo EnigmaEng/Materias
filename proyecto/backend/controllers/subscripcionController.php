@@ -1,6 +1,7 @@
 <?php
 require './cors.php';
 require_once '../models/subscripcion.php';
+require_once '../models/admin.php';
 function restauranteCompraSub($idUsuarioRest, $idTipoSubs, $fechaPago)
 {
     $subscripcion = new Subscripcion();
@@ -38,6 +39,19 @@ function obtenerSubscripciones()
     return json_encode($subscripcion->obtenerSubscripciones());
 }
 
+function adminApruebaRest($idUsuarioAdmin,$idUsuarioRest,$idTipoSubs){
+    $subscripcion=new Subscripcion();
+    $subscripcion->setIdTipoSubs($idTipoSubs);
+    $admin=new Admin();
+    $admin->setIdUsuarioAdmin($idUsuarioAdmin);
+    $admin->setIdUsuarioRest($idUsuarioRest);
+    if($admin->aprobarRestaurante($subscripcion)){
+        return json_encode(array('status'=>'Restaurante aprobado correctamente.'));
+    }else{
+        return json_encode(array('status'=>'Hubo error en la aprobacion.'));
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
@@ -56,6 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 break;
             case 'obtenerSubscripciones':
                 $resultado = obtenerSubscripciones();
+                break;
+            case 'aprobarRestaurante':
+                $resultado= adminApruebaRest($data['id_usuario_admin'],$data['id_usuario_rest'],$data['id_tipo_sub']);
                 break;
         }
     }
