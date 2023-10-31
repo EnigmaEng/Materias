@@ -175,23 +175,22 @@ class Usuario extends DataBaseConnection implements Crud
     public function dataCreate($tabla, $datos)
     {
         try {
-                $columnNames = implode(', ', array_keys($datos));
-                $placeholders = implode(', ', array_map(function ($key) {
-                    return ':' . $key;
-                }, array_keys($datos)));
+            $columnNames = implode(', ', array_keys($datos));
+            $placeholders = implode(', ', array_map(function ($key) {
+                return ':' . $key;
+            }, array_keys($datos)));
 
-                $query = "INSERT INTO $tabla ($columnNames) VALUES ($placeholders)";
+            $query = "INSERT INTO $tabla ($columnNames) VALUES ($placeholders)";
 
-                $stmt = $this->getConn()->prepare($query);
+            $stmt = $this->getConn()->prepare($query);
 
-                foreach ($datos as $nombre => $valor) {
-                    $stmt->bindValue(':' . $nombre, $valor);
-                }
+            foreach ($datos as $nombre => $valor) {
+                $stmt->bindValue(':' . $nombre, $valor);
+            }
 
-                $stmt->execute();
+            $stmt->execute();
 
-                return true;
-            
+            return true;
         } catch (PDOException $ex) {
             echo "Error al insertar: " . $ex->getMessage();
         }
@@ -297,7 +296,7 @@ class Usuario extends DataBaseConnection implements Crud
             if ($stmt->execute()) {
                 error_log("Actualización en la base de datos exitosa");
 
-                // Construye el comando con los valores de las variables de entorno
+                
                 $comando = "nohup php -r '"
                     . " sleep(15); "
                     . "\$pdo = new PDO(\"mysql:host=" . $_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_NAME'] . "\", \"" . $_ENV['DB_USER'] . "\", \"" . $_ENV['DB_PASSWORD'] . "\");"
@@ -341,18 +340,23 @@ class Usuario extends DataBaseConnection implements Crud
                 switch ($opcion) {
                     case "alias":
                         $stmt->bindValue(":nombreColumna", "alias");
-                        $stmt->bindValue(":valor",$this->getAlias());
+                        $stmt->bindValue(":valor", $this->getAlias());
                         break;
                     case "contrasena":
                         $stmt->bindValue(":nombreColumna", "contrasena");
                         $hashedPass = password_hash($this->getContrasenia(), PASSWORD_BCRYPT);
-                        $stmt->bindValue(":valor",$hashedPass);
+                        $stmt->bindValue(":valor", $hashedPass);
                         break;
                     case "url_img_usuario":
                         $stmt->bindValue(":nombreColumna", "url_img_usuario");
+                        $stmt->bindValue(":valor", $this->getUrlImagenUsuario());
                         break;
                 }
+                if ($stmt->execute()) {
+                    return true;
+                }
             }
+            return false;
         } catch (PDOException $ex) {
             error_log("Error en la actualizacion de datos: " . $ex->getMessage());
         }
