@@ -4,7 +4,7 @@ import { useContext, useState } from "react"
 
 const subscripcionData = () => {
 
-const {usuario, solicitudSubscripcion} = useContext(todoContext)
+const {usuario, solicitudSubscripcion, } = useContext(todoContext)
 
 
 const today = new Date();
@@ -29,15 +29,9 @@ try {
    
 }
 
-
-
-
-
-
 return {
 
     subscripcion,
-   
     
   }
 }
