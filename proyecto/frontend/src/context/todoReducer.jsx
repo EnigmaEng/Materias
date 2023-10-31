@@ -35,14 +35,12 @@ export default (state, action) => {
                 autenticado:true
             }
         case CERRAR_SESION:
-        
             return {
                 ...state,
                 usuario: null,
                 token: null,
                 autenticado: null
             }
-
         default:
             return state;
     }

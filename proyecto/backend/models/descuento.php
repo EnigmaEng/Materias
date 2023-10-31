@@ -21,12 +21,14 @@ class Descuento extends CrudBasico
     private $fechaInicio;
     private $fechaFin;
 
+    private $costo;
+
     public function __construct()
     {
         // Carga las variables de entorno desde el archivo .env
         $dotenv = Dotenv::createImmutable('/var/www/html/');
         $dotenv->load();
-        
+
 
         $this->setHost($_ENV['DB_HOST']);
         $this->setUser($_ENV['DB_USER']);
@@ -127,16 +129,27 @@ class Descuento extends CrudBasico
         return $this->fechaFin;
     }
 
-public function crearDescuento()
+    public function setCosto($costo)
+    {
+        $this->costo = $costo;
+    }
+
+    public function getCosto()
+    {
+        return $this->costo;
+    }
+
+    public function crearDescuento()
     {
         try {
-            $query = "INSERT INTO descuento(id_descuento,activo,titulo_descuento,descripcion,url_img_descuento) VALUES (:id_descuento,:activo,:titulo_descuento,:descripcion,:url_img_descuento)";
+            $query = "INSERT INTO descuento(id_descuento,activo,titulo_descuento,descripcion,url_img_descuento,costo) VALUES (:id_descuento,:activo,:titulo_descuento,:descripcion,:url_img_descuento,:costo)";
             $stmt = $this->getConn()->prepare($query);
             $stmt->bindValue(":id_descuento", $this->getIdDescuento());
             $stmt->bindValue(":activo", $this->getActivo());
             $stmt->bindValue(":titulo_descuento", $this->getTituloDescuento());
             $stmt->bindValue(":descripcion", $this->getDescripcion());
             $stmt->bindValue(":url_img_descuento", $this->getUrlImagenDesc());
+            $stmt->bindValue(":costo", $this->getCosto());
             if ($stmt->execute()) {
                 return true;
             }
@@ -170,6 +183,37 @@ public function crearDescuento()
             return false;
         } catch (PDOException $ex) {
             echo "Error en el insert: " . $ex->getMessage();
+        }
+    }
+
+    public function mostrarDescuentoPorId()
+    {
+        try {
+            $query = "SELECT * from descuento where id_descuento = :id_descuento";
+            $stmt = $this->getConn()->prepare($query);
+            $stmt->bindValue(":id_descuento", $this->getIdDescuento());
+            if ($stmt->execute()) {
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } else {
+                return false;
+            }
+        } catch (PDOException $ex) {
+            error_log("Error al mostrar el descuento: " . $ex->getMessage());
+        }
+    }
+
+    public function mostrarDescuentos()
+    {
+        try {
+            $query = "SELECT * FROM descuento";
+            $stmt = $this->getConn()->prepare($query);
+            if ($stmt->execute()) {
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } else {
+                return false;
+            }
+        } catch (PDOException $ex) {
+            error_log("" . $ex->getMessage());
         }
     }
 }
