@@ -115,9 +115,11 @@ CREATE TABLE `descuento` (
 );
 
 CREATE TABLE `restaurante_paga_subscripcion` (
-  id_usuario_rest INT(10) UNSIGNED PRIMARY KEY,
+  id_usuario_rest INT(10) UNSIGNED,
   id_tipo_subscripcion INT(10) UNSIGNED,
   fecha_pago DATE,
+  aprobado enum ('S','N') default 'N',
+  PRIMARY KEY (fecha_pago,id_usuario_rest),
   FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante`(id_usuario),
   FOREIGN KEY (id_tipo_subscripcion) REFERENCES `tipo_subscripcion` (id_tipo_subs)
 );
