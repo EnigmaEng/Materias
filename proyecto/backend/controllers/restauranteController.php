@@ -105,8 +105,12 @@ function crearDescuento($idDescuento, $idRestaurante, $activo, $tituloDescuento,
     $descuento->setFechaInicio($fechaInicio);
     $descuento->setFechaFin($fechaFin);
     $descuento->setCosto($costo);
+    $nombreArchivo = $_FILES['imagen']['name'];
+    $carpetaDestino = $_ENV['DIR_IMAGEN'];
+    $descuento->setUrlImagenDesc($nombreArchivo);
     if ($descuento->crearDescuento()) {
         if ($descuento->restauranteTieneDescuento()) {
+            $descuento->guardarImagen($_FILES['imagen']['tmp_name'], $nombreArchivo, $carpetaDestino);
             return true;
         }
     }

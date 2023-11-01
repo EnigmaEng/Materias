@@ -139,6 +139,10 @@ class Descuento extends CrudBasico
         return $this->costo;
     }
 
+    public function guardarImagen($archivo_temporal, $nombre_archivo, $carpeta_destino) {
+        return move_uploaded_file($archivo_temporal, $carpeta_destino . $nombre_archivo);
+    }
+
     public function crearDescuento()
     {
         try {
@@ -148,7 +152,7 @@ class Descuento extends CrudBasico
             $stmt->bindValue(":activo", $this->getActivo());
             $stmt->bindValue(":titulo_descuento", $this->getTituloDescuento());
             $stmt->bindValue(":descripcion", $this->getDescripcion());
-            $stmt->bindValue(":url_img_descuento", $this->getUrlImagenDesc());
+            $stmt->bindValue(":url_img_descuento",$_ENV['DIR_IMAGEN'].$this->getUrlImagenDesc());
             $stmt->bindValue(":costo", $this->getCosto());
             if ($stmt->execute()) {
                 return true;
