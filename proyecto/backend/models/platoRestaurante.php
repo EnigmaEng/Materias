@@ -209,8 +209,7 @@ class PlatoRestaurante extends CrudBasico
                         break;
                     case "contrasena":
                         $stmt->bindValue(":nombreColumna", "costo");
-                        $hashedPass = password_hash($valor, PASSWORD_BCRYPT);
-                        $stmt->bindValue(":valor", $hashedPass);
+                        $stmt->bindValue(":valor", $valor);
                         break;
                     case "url_img_usuario":
                         $stmt->bindValue(":nombreColumna", "descripcion");

@@ -190,6 +190,15 @@ function modificarPlato($idPlato, $opcion, $valor){
     }
 }
 
+function modificarDescuento($idDescuento, $opcion, $valor){
+    $descuento = new Descuento;
+    if($descuento->modificarDescuento($idDescuento,$opcion,$valor)){
+        return json_encode(array("status"=>"Modificacion realizada correctamente."));
+    }else{
+        return json_encode(array("status"=>"Hubo errores en la modificacion."));
+    }
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
@@ -259,6 +268,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case "modificarPlato":
                 $resultado=modificarPlato($data['id_plato'],$data['opcion'],$data['valor']);
                 break;
+            case "modificarDescuento":
+                $resultado=modificarDescuento($data['id_descuento'],$data['opcion'],$data['valor']);
+                break;   
             default:
                 $resultado = "Error en el tipo de accion, intente nuevamente";
                 break;

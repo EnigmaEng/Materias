@@ -139,7 +139,8 @@ class Descuento extends CrudBasico
         return $this->costo;
     }
 
-    public function guardarImagen($archivo_temporal, $nombre_archivo, $carpeta_destino) {
+    public function guardarImagen($archivo_temporal, $nombre_archivo, $carpeta_destino)
+    {
         return move_uploaded_file($archivo_temporal, $carpeta_destino . $nombre_archivo);
     }
 
@@ -152,7 +153,7 @@ class Descuento extends CrudBasico
             $stmt->bindValue(":activo", $this->getActivo());
             $stmt->bindValue(":titulo_descuento", $this->getTituloDescuento());
             $stmt->bindValue(":descripcion", $this->getDescripcion());
-            $stmt->bindValue(":url_img_descuento",$_ENV['DIR_IMAGEN'].$this->getUrlImagenDesc());
+            $stmt->bindValue(":url_img_descuento", $_ENV['DIR_IMAGEN'] . $this->getUrlImagenDesc());
             $stmt->bindValue(":costo", $this->getCosto());
             if ($stmt->execute()) {
                 return true;
@@ -218,6 +219,46 @@ class Descuento extends CrudBasico
             }
         } catch (PDOException $ex) {
             error_log("" . $ex->getMessage());
+        }
+    }
+
+    public function modificarDescuento($idDescuento, $opcion, $valor)
+    {
+        try {
+            $query = "UPDATE descuento SET :nombreColumna = :valor WHERE id_descuento = :id_descuento";
+            $stmt = $this->getConn()->prepare($query);
+            $stmt->bindValue(":valor", $valor);
+            $stmt->bindValue(":id_descuento", $idDescuento);
+            if (isset($opcion)) {
+                switch ($opcion) {
+                    case "activo":
+                        $stmt->bindValue(":nombreColumna", "activo");
+                        $stmt->bindValue(":valor", $valor);
+                        break;
+                    case "titulo_descuento":
+                        $stmt->bindValue(":nombreColumna", "titulo_descuento");
+                        $stmt->bindValue(":valor", $valor);
+                        break;
+                    case "descripcion":
+                        $stmt->bindValue(":nombreColumna", "descripcion");
+                        $stmt->bindValue(":valor", $valor);
+                        break;
+                    case "url_img_descuento":
+                        $stmt->bindValue(":nombreColumna", "url_img_descuento");
+                        $stmt->bindValue(":valor", $valor);
+                        break;
+                    case "costo":
+                        $stmt->bindValue(":nombreColumna", "costo");
+                        $stmt->bindValue(":valor", $valor);
+                        break;
+                }
+                if ($stmt->execute()) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (PDOException $ex) {
+            error_log("Error en la actualizacion de datos: " . $ex->getMessage());
         }
     }
 }
