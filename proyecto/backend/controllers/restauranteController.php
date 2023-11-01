@@ -53,7 +53,7 @@ function insertarController($alias, $url_img_usuario, $email, $contrasena, $rol,
                 echo "La carpeta de destino no es escribible. Verifica los permisos.";
                 exit;
             }
-            $restaurante->guardarImagen($_FILES['imagen']['tmp_name'], $nombreArchivo, $carpetaDestino);
+            move_uploaded_file($_FILES['imagen']['tmp_name'], $carpetaDestino);
             return "Creacion de usuario exitosa";
         } else {
             return "Error en la creacion de usuario";
