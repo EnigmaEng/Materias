@@ -4,7 +4,13 @@ require_once '../models/turista.php';
 require_once '../models/resenia.php';
 require_once './cors.php';
 
-function insertarController($alias = '', $url_img_usuario = '', $email = '', $contrasena = '', $rol = '',$nacionalidad='',$motivoAlojamiento='',$nombres='',$apellidos='')
+use Dotenv\Dotenv;
+
+// Carga las variables de entorno desde el archivo .env
+$dotenv = Dotenv::createImmutable('/var/www/html/');
+$dotenv->load();
+
+function insertarController($alias = '', $url_img_usuario = '', $email = '', $contrasena = '', $rol = '', $nacionalidad = '', $motivoAlojamiento = '', $nombres = '', $apellidos = '')
 {
     $turista = new Turista();
     $datosUsuario = array(
@@ -15,21 +21,26 @@ function insertarController($alias = '', $url_img_usuario = '', $email = '', $co
         "rol" => $rol
     );
 
-    $datosTurista=array(
-        "nacionalidad"=>$nacionalidad,
-        "motivo_alojamiento"=>$motivoAlojamiento,
-        "id_usuario"=>"",
-        "nombres"=>$nombres,
-        "apellidos"=>$apellidos
+    $datosTurista = array(
+        "nacionalidad" => $nacionalidad,
+        "motivo_alojamiento" => $motivoAlojamiento,
+        "id_usuario" => "",
+        "nombres" => $nombres,
+        "apellidos" => $apellidos
     );
 
-    if($turista->create("usuarios", $datosUsuario)){
-       if($turista->createInTurista("turista",$datosUsuario,$datosTurista)){
+    $nombreArchivo = $_FILES['imagen']['name'];
+    $carpetaDestino = $_ENV['DIR_IMAGEN']; // Ruta de la carpeta donde se guardará la imagen
+    $turista->setUrlImagenUsuario($nombreArchivo);
+
+    if ($turista->create("usuarios", $datosUsuario)) {
+        if ($turista->createInTurista("turista", $datosUsuario, $datosTurista)) {
+            $turista->guardarImagen($_FILES['imagen']['tmp_name'], $nombreArchivo, $carpetaDestino);
             return "Creacion de usuario exitosa";
-       }else{
+        } else {
             return "Error en la creacion de usuario";
-       }
-    }else{
+        }
+    } else {
         return "El usuario ya existe";
     }
 }
@@ -50,9 +61,10 @@ function filtrarController($tabla, $datos)
     return $turista->filter($tabla, $datos);
 }
 
-function borrarController($tabla, $datos){
-    $turista=new Turista();
-    $resultado=$turista->delete($tabla,$datos);
+function borrarController($tabla, $datos)
+{
+    $turista = new Turista();
+    $resultado = $turista->delete($tabla, $datos);
     echo $resultado;
 }
 
@@ -76,21 +88,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data['apellidos']
         );
     } else {
-        $resultado='Error en la peticion, intente nuevamente';
+        $resultado = 'Error en la peticion, intente nuevamente';
     }
     echo $resultado;
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['accion']) && $_GET['accion'] == 'listarTuristas') {
     $turistas = listarController("*", "usuarios");
-     
+
     header('Content-Type: application/json');
-    
+
     $turistas_array = array();
     foreach ($turistas as $turista) {
         $turistas_array[] = $turista;
     }
-    
+
 
     echo json_encode($turistas_array);
 }
@@ -106,14 +118,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['accion']) && $_GET['acci
 }
 
 
-if($_SERVER['REQUEST_METHOD'] == 'DELETE' && isset($_GET['accion']) && $_GET['accion'] == 'eliminarTurista'){
+if ($_SERVER['REQUEST_METHOD'] == 'DELETE' && isset($_GET['accion']) && $_GET['accion'] == 'eliminarTurista') {
     $datos = array(
         "alias" => $_GET['alias'],
         "contrasenia" => $_GET['contrasenia']
     );
-    
-    borrarController("usuarios",$datos);
+
+    borrarController("usuarios", $datos);
 }
-
-
-

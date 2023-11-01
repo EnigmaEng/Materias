@@ -133,6 +133,9 @@ class Usuario extends DataBaseConnection implements Crud
         return $this->rol;
     }
 
+    public function guardarImagen($archivo_temporal, $nombre_archivo, $carpeta_destino) {
+        return move_uploaded_file($archivo_temporal, $carpeta_destino . $nombre_archivo);
+    }
 
     public function create($tabla, $datos)
     {
@@ -141,7 +144,6 @@ class Usuario extends DataBaseConnection implements Crud
             $stmt = $this->getConn()->prepare($query);
             $stmt->bindValue(':email', $datos['email']);
             $stmt->execute();
-
             if ($stmt->rowCount() > 0) {
                 return false;
             } else {
@@ -149,6 +151,8 @@ class Usuario extends DataBaseConnection implements Crud
 
                 //Almaceno nuevamente la contraseña
                 $datos['contrasena'] = $hashedPass;
+                //Guardo la url_imagen
+                $datos['url_img_usuario']=$_ENV['DIR_IMAGEN'].$this->getUrlImagenUsuario();
 
                 $columnNames = implode(', ', array_keys($datos));
                 $placeholders = implode(', ', array_map(function ($key) {
@@ -164,7 +168,7 @@ class Usuario extends DataBaseConnection implements Crud
                 }
 
                 $stmt->execute();
-
+                
                 return true;
             }
         } catch (PDOException $ex) {
@@ -296,7 +300,7 @@ class Usuario extends DataBaseConnection implements Crud
             if ($stmt->execute()) {
                 error_log("Actualización en la base de datos exitosa");
 
-                
+
                 $comando = "nohup php -r '"
                     . " sleep(15); "
                     . "\$pdo = new PDO(\"mysql:host=" . $_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_NAME'] . "\", \"" . $_ENV['DB_USER'] . "\", \"" . $_ENV['DB_PASSWORD'] . "\");"

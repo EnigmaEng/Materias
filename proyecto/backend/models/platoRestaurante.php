@@ -52,7 +52,6 @@ class PlatoRestaurante extends CrudBasico
     {
         return $this->nombrePlato;
     }
-
     public function setCosto($costo)
     {
         $this->costo = $costo;
@@ -121,6 +120,12 @@ class PlatoRestaurante extends CrudBasico
         return $this->plato;
     }
 
+
+    public function guardarImagen($archivo_temporal, $nombre_archivo, $carpeta_destino) {
+        return move_uploaded_file($archivo_temporal, $carpeta_destino . $nombre_archivo);
+    }
+
+
     public function persistirPlato()
     {
         //Valido que exista el id del usuario restaurante
@@ -137,10 +142,11 @@ class PlatoRestaurante extends CrudBasico
                     $stmt = $this->getConn()->prepare($query);
                     $stmt->bindValue(":nombre_plato", $this->getNombrePlato());
                     $stmt->bindValue(":costo", $this->getCosto());
-                    $stmt->bindValue(":descripcion", $this->getDescripcion());
+                    $stmt->bindValue(":descripcion",$_ENV['DIR_IMAGEN'].$this->getDescripcion());
                     $stmt->bindValue(":url_img_menu", $this->getUrlImgMenu());
                     $stmt->bindValue(":estado_plato", $this->getEstadoPlato());
                     $stmt->bindValue(":id_usuario_rest", $this->getIdUsuario());
+                    
                     if ($stmt->execute()) {
                         return true;
                     }
@@ -186,5 +192,4 @@ class PlatoRestaurante extends CrudBasico
 
         return $resultados;
     }
-    
 }

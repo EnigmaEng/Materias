@@ -4,6 +4,15 @@ require_once '../models/platoRestaurante.php';
 require_once '../models/descuento.php';
 require_once './cors.php';
 
+require '../vendor/autoload.php';
+
+use Dotenv\Dotenv;
+
+// Carga las variables de entorno desde el archivo .env
+$dotenv = Dotenv::createImmutable('/var/www/html/');
+$dotenv->load();
+
+
 function insertarController($alias, $url_img_usuario, $email, $contrasena, $rol, $nombre, $nroLocal, $calle, $esquina, $numero, $tipo)
 {
     $restaurante = new Restaurante();
@@ -33,8 +42,13 @@ function insertarController($alias, $url_img_usuario, $email, $contrasena, $rol,
         "descripcion" => $tipo
     );
 
+    $nombreArchivo = $_FILES['imagen']['name'];
+    $carpetaDestino = $_ENV['DIR_IMAGEN']; // Ruta de la carpeta donde se guardará la imagen
+    $restaurante->setUrlImagenUsuario($nombreArchivo);
+
     if ($restaurante->create("usuarios", $datosUsuario)) {
         if ($restaurante->dataCreate("localizacion", $direccionRestaurante) && $restaurante->createInRestaurante("restaurante", $datosUsuario, $datosRestaurante) && $restaurante->createInTipoRestaurante("tipo_restaurantes", $datosUsuario, $tipoRestaurantes)) {
+            $restaurante->guardarImagen($_FILES['imagen']['tmp_name'], $nombreArchivo, $carpetaDestino);
             return "Creacion de usuario exitosa";
         } else {
             return "Error en la creacion de usuario";
@@ -68,11 +82,18 @@ function crearPlato($id_plato, $nombre_plato, $costo, $descripcion, $url_img_men
     $plato->setEstadoPlato($estado_plato);
     $plato->setIdUsuario($id_usuario_rest);
     $plato->setPlato();
-    return $plato->persistirPlato();
+
+    $nombreArchivo = $_FILES['imagen']['name'];
+    $carpetaDestino = $_ENV['DIR_IMAGEN'];
+    $plato->setUrlImgMenu($nombreArchivo);
+    if($plato->persistirPlato()){
+        $plato->guardarImagen($_FILES['imagen']['tmp_name'], $nombreArchivo, $carpetaDestino);
+        return true;
+    }
 }
 
 
-function crearDescuento($idDescuento, $idRestaurante, $activo, $tituloDescuento, $descripcion, $urlImgDescuento, $fechaInicio, $fechaFin)
+function crearDescuento($idDescuento, $idRestaurante, $activo, $tituloDescuento, $descripcion, $urlImgDescuento, $fechaInicio, $fechaFin, $costo)
 {
     $descuento = new Descuento();
     $descuento->setIdDescuento($idDescuento);
@@ -83,6 +104,7 @@ function crearDescuento($idDescuento, $idRestaurante, $activo, $tituloDescuento,
     $descuento->setUrlImagenDesc($urlImgDescuento);
     $descuento->setFechaInicio($fechaInicio);
     $descuento->setFechaFin($fechaFin);
+    $descuento->setCosto($costo);
     if ($descuento->crearDescuento()) {
         if ($descuento->restauranteTieneDescuento()) {
             return true;
@@ -108,15 +130,15 @@ function obtenerRestaurante()
 {
     $restaurante = new Restaurante();
     $restaurantes = $restaurante->obtenerRestaurantes();
-    
+
     header('Content-Type: application/json');
-   
+
     $response = "";
 
     foreach ($restaurantes as $restaurante) {
         // Genera un objeto JSON separado en cada iteración
         $restaurantesDatos = json_encode(array(
-            "id_usuario"=>$restaurante->id_usuario,
+            "id_usuario" => $restaurante->id_usuario,
             "nombre_restaurante" => $restaurante->nombre_restaurante,
             "foto_usuario" => $restaurante->foto_usuario
         ));
@@ -129,22 +151,24 @@ function obtenerRestaurante()
         $response .= $restaurantesDatos;
     }
 
-    return "[$response]"; 
+    return "[$response]";
 }
 
-function obtenerDescuentos(){
-    $descuento=new Descuento;
+function obtenerDescuentos()
+{
+    $descuento = new Descuento;
     return json_encode($descuento->mostrarDescuentos());
 }
 
-function obtenerDescuentoPorId($idDescuento){
+function obtenerDescuentoPorId($idDescuento)
+{
     $descuento = new Descuento;
     $descuento->setIdDescuento($idDescuento);
-    $resultado=$descuento->mostrarDescuentoPorId();
-    if(!empty($resultado)){
+    $resultado = $descuento->mostrarDescuentoPorId();
+    if (!empty($resultado)) {
         return json_encode($resultado);
-    }else{
-        return json_encode(array("status"=>"No se ha encontrado un descuento."));
+    } else {
+        return json_encode(array("status" => "No se ha encontrado un descuento."));
     }
 }
 
@@ -190,7 +214,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $data['descripcion'],
                     $data['url_img_descuento'],
                     $data['fecha_inicio'],
-                    $data['fecha_fin']
+                    $data['fecha_fin'],
+                    $data['costo']
                 );
                 if ($resultado == true) {
                     $resultado = "Descuento creado exitosamente";
@@ -208,11 +233,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $resultado = obtenerPlatos($data['id_usuario_rest']);
                 break;
             case "obtenerDescuentoPorId":
-                $resultado= obtenerDescuentoPorId($data['id_descuento']);
+                $resultado = obtenerDescuentoPorId($data['id_descuento']);
                 break;
             case "obtenerDescuentos":
-                $resultado= obtenerDescuentos();
-                break;    
+                $resultado = obtenerDescuentos();
+                break;
             default:
                 $resultado = "Error en el tipo de accion, intente nuevamente";
                 break;
