@@ -133,7 +133,8 @@ class Usuario extends DataBaseConnection implements Crud
         return $this->rol;
     }
 
-    public function guardarImagen($archivo_temporal, $nombre_archivo, $carpeta_destino) {
+    public function guardarImagen($archivo_temporal, $nombre_archivo, $carpeta_destino)
+    {
         return move_uploaded_file($archivo_temporal, $carpeta_destino . $nombre_archivo);
     }
 
@@ -152,7 +153,7 @@ class Usuario extends DataBaseConnection implements Crud
                 //Almaceno nuevamente la contraseña
                 $datos['contrasena'] = $hashedPass;
                 //Guardo la url_imagen
-                $datos['url_img_usuario']=$_ENV['DIR_IMAGEN'].$this->getUrlImagenUsuario();
+                $datos['url_img_usuario'] = $_ENV['DIR_IMAGEN'] . $this->getUrlImagenUsuario();
 
                 $columnNames = implode(', ', array_keys($datos));
                 $placeholders = implode(', ', array_map(function ($key) {
@@ -168,7 +169,7 @@ class Usuario extends DataBaseConnection implements Crud
                 }
 
                 $stmt->execute();
-                
+
                 return true;
             }
         } catch (PDOException $ex) {
@@ -332,37 +333,43 @@ class Usuario extends DataBaseConnection implements Crud
         // Registro de finalización
         error_log("Fin de bloqueo de usuario");
     }
-
     public function editUser($idUsuario, $opcion, $valor)
     {
         try {
-            $query = "UPDATE usuarios SET :nombreColumna = :valor WHERE id_usuario= :id_usuario";
+            $query = "";
+            $nombreColumna = "";
+
+            switch ($opcion) {
+                case "alias":
+                    $nombreColumna = "alias";
+                    $valor = $this->getAlias();
+                    break;
+                case "contrasena":
+                    $nombreColumna = "contrasena";
+                    $hashedPass = password_hash($this->getContrasenia(), PASSWORD_BCRYPT);
+                    $valor = $hashedPass;
+                    break;
+                case "url_img_usuario":
+                    $nombreColumna = "url_img_usuario";
+                    $valor = $this->getUrlImagenUsuario();
+                    break;
+                default:
+                    // Manejar un caso incorrecto o desconocido de $opcion
+                    return false;
+            }
+
+            $query = "UPDATE usuarios SET $nombreColumna = :valor WHERE id_usuario = :id_usuario";
             $stmt = $this->getConn()->prepare($query);
             $stmt->bindValue(":valor", $valor);
             $stmt->bindValue(":id_usuario", $idUsuario);
-            if (isset($opcion)) {
-                switch ($opcion) {
-                    case "alias":
-                        $stmt->bindValue(":nombreColumna", "alias");
-                        $stmt->bindValue(":valor", $this->getAlias());
-                        break;
-                    case "contrasena":
-                        $stmt->bindValue(":nombreColumna", "contrasena");
-                        $hashedPass = password_hash($this->getContrasenia(), PASSWORD_BCRYPT);
-                        $stmt->bindValue(":valor", $hashedPass);
-                        break;
-                    case "url_img_usuario":
-                        $stmt->bindValue(":nombreColumna", "url_img_usuario");
-                        $stmt->bindValue(":valor", $this->getUrlImagenUsuario());
-                        break;
-                }
-                if ($stmt->execute()) {
-                    return true;
-                }
+
+            if ($stmt->execute()) {
+                return true;
             }
+
             return false;
         } catch (PDOException $ex) {
-            error_log("Error en la actualizacion de datos: " . $ex->getMessage());
+            error_log("Error en la actualización de datos: " . $ex->getMessage());
         }
     }
 }

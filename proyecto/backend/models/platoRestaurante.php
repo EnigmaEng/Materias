@@ -197,36 +197,39 @@ class PlatoRestaurante extends CrudBasico
     public function modificarPlato($idPlato, $opcion, $valor)
     {
         try {
-            $query = "UPDATE plato_restaurantes SET :nombreColumna = :valor WHERE id_plato= :id_plato";
+            $query = "";
+            $nombreColumna = "";
+
+            switch ($opcion) {
+                case "nombre_plato":
+                    $nombreColumna = "nombre_plato";
+                    break;
+                case "costo":
+                    $nombreColumna = "costo";
+                    break;
+                case "descripcion":
+                    $nombreColumna = "url_img_usuario";
+                    break;
+                case "estado_plato":
+                    $nombreColumna = "estado_plato";
+                    break;
+                default:
+                    // Manejar un caso incorrecto o desconocido de $opcion
+                    return false;
+            }
+
+            $query = "UPDATE plato_restaurantes SET $nombreColumna = :valor WHERE id_plato = :id_plato";
             $stmt = $this->getConn()->prepare($query);
             $stmt->bindValue(":valor", $valor);
             $stmt->bindValue(":id_plato", $idPlato);
-            if (isset($opcion)) {
-                switch ($opcion) {
-                    case "nombre_plato":
-                        $stmt->bindValue(":nombreColumna", "nombre_plato");
-                        $stmt->bindValue(":valor", $valor);
-                        break;
-                    case "contrasena":
-                        $stmt->bindValue(":nombreColumna", "costo");
-                        $stmt->bindValue(":valor", $valor);
-                        break;
-                    case "url_img_usuario":
-                        $stmt->bindValue(":nombreColumna", "descripcion");
-                        $stmt->bindValue(":valor",$valor);
-                        break;
-                    case "estado_plato":
-                        $stmt->bindValue(":nombreColumna", "estado_plato");
-                        $stmt->bindValue(":valor",$valor);
-                        break;    
-                }
-                if ($stmt->execute()) {
-                    return true;
-                }
+
+            if ($stmt->execute()) {
+                return true;
             }
+
             return false;
         } catch (PDOException $ex) {
-            error_log("Error en la actualizacion de datos: " . $ex->getMessage());
+            error_log("Error en la actualización de datos: " . $ex->getMessage());
         }
     }
 }

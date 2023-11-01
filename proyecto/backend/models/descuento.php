@@ -225,40 +225,42 @@ class Descuento extends CrudBasico
     public function modificarDescuento($idDescuento, $opcion, $valor)
     {
         try {
-            $query = "UPDATE descuento SET :nombreColumna = :valor WHERE id_descuento = :id_descuento";
+            $query = "";
+            $nombreColumna = "";
+
+            switch ($opcion) {
+                case "activo":
+                    $nombreColumna = "activo";
+                    break;
+                case "titulo_descuento":
+                    $nombreColumna = "titulo_descuento";
+                    break;
+                case "descripcion":
+                    $nombreColumna = "descripcion";
+                    break;
+                case "url_img_descuento":
+                    $nombreColumna = "url_img_descuento";
+                    break;
+                case "costo":
+                    $nombreColumna = "costo";
+                    break;
+                default:
+                    // Manejar un caso incorrecto o desconocido de $opcion
+                    return false;
+            }
+
+            $query = "UPDATE descuento SET $nombreColumna = :valor WHERE id_descuento = :id_descuento";
             $stmt = $this->getConn()->prepare($query);
             $stmt->bindValue(":valor", $valor);
             $stmt->bindValue(":id_descuento", $idDescuento);
-            if (isset($opcion)) {
-                switch ($opcion) {
-                    case "activo":
-                        $stmt->bindValue(":nombreColumna", "activo");
-                        $stmt->bindValue(":valor", $valor);
-                        break;
-                    case "titulo_descuento":
-                        $stmt->bindValue(":nombreColumna", "titulo_descuento");
-                        $stmt->bindValue(":valor", $valor);
-                        break;
-                    case "descripcion":
-                        $stmt->bindValue(":nombreColumna", "descripcion");
-                        $stmt->bindValue(":valor", $valor);
-                        break;
-                    case "url_img_descuento":
-                        $stmt->bindValue(":nombreColumna", "url_img_descuento");
-                        $stmt->bindValue(":valor", $valor);
-                        break;
-                    case "costo":
-                        $stmt->bindValue(":nombreColumna", "costo");
-                        $stmt->bindValue(":valor", $valor);
-                        break;
-                }
-                if ($stmt->execute()) {
-                    return true;
-                }
+
+            if ($stmt->execute()) {
+                return true;
             }
+
             return false;
         } catch (PDOException $ex) {
-            error_log("Error en la actualizacion de datos: " . $ex->getMessage());
+            error_log("Error en la actualización de datos: " . $ex->getMessage());
         }
     }
 }
