@@ -121,7 +121,8 @@ class PlatoRestaurante extends CrudBasico
     }
 
 
-    public function guardarImagen($archivo_temporal, $nombre_archivo, $carpeta_destino) {
+    public function guardarImagen($archivo_temporal, $nombre_archivo, $carpeta_destino)
+    {
         return move_uploaded_file($archivo_temporal, $carpeta_destino . $nombre_archivo);
     }
 
@@ -142,11 +143,11 @@ class PlatoRestaurante extends CrudBasico
                     $stmt = $this->getConn()->prepare($query);
                     $stmt->bindValue(":nombre_plato", $this->getNombrePlato());
                     $stmt->bindValue(":costo", $this->getCosto());
-                    $stmt->bindValue(":descripcion",$this->getDescripcion());
-                    $stmt->bindValue(":url_img_menu",$_ENV['DIR_IMAGEN'].$this->getUrlImgMenu());
+                    $stmt->bindValue(":descripcion", $this->getDescripcion());
+                    $stmt->bindValue(":url_img_menu", $_ENV['DIR_IMAGEN'] . $this->getUrlImgMenu());
                     $stmt->bindValue(":estado_plato", $this->getEstadoPlato());
                     $stmt->bindValue(":id_usuario_rest", $this->getIdUsuario());
-                    
+
                     if ($stmt->execute()) {
                         return true;
                     }
@@ -191,5 +192,42 @@ class PlatoRestaurante extends CrudBasico
         $resultados = $stmt->fetchAll(PDO::FETCH_OBJ);
 
         return $resultados;
+    }
+
+    public function modificarPlato($idPlato, $opcion, $valor)
+    {
+        try {
+            $query = "UPDATE plato_restaurantes SET :nombreColumna = :valor WHERE id_plato= :id_plato";
+            $stmt = $this->getConn()->prepare($query);
+            $stmt->bindValue(":valor", $valor);
+            $stmt->bindValue(":id_plato", $idPlato);
+            if (isset($opcion)) {
+                switch ($opcion) {
+                    case "nombre_plato":
+                        $stmt->bindValue(":nombreColumna", "nombre_plato");
+                        $stmt->bindValue(":valor", $valor);
+                        break;
+                    case "contrasena":
+                        $stmt->bindValue(":nombreColumna", "costo");
+                        $hashedPass = password_hash($valor, PASSWORD_BCRYPT);
+                        $stmt->bindValue(":valor", $hashedPass);
+                        break;
+                    case "url_img_usuario":
+                        $stmt->bindValue(":nombreColumna", "descripcion");
+                        $stmt->bindValue(":valor",$valor);
+                        break;
+                    case "estado_plato":
+                        $stmt->bindValue(":nombreColumna", "estado_plato");
+                        $stmt->bindValue(":valor",$valor);
+                        break;    
+                }
+                if ($stmt->execute()) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (PDOException $ex) {
+            error_log("Error en la actualizacion de datos: " . $ex->getMessage());
+        }
     }
 }

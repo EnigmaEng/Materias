@@ -181,6 +181,15 @@ function obtenerDescuentoPorId($idDescuento)
     }
 }
 
+function modificarPlato($idPlato, $opcion, $valor){
+    $plato=new PlatoRestaurante();
+    if($plato->modificarPlato($idPlato,$opcion,$valor)){
+        return json_encode(array("status"=>"Modificacion realizada correctamente."));
+    }else{
+        return json_encode(array("status"=>"Hubo errores en la modificacion."));
+    }
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
@@ -246,6 +255,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 break;
             case "obtenerDescuentos":
                 $resultado = obtenerDescuentos();
+                break;
+            case "modificarPlato":
+                $resultado=modificarPlato($data['id_plato'],$data['opcion'],$data['valor']);
                 break;
             default:
                 $resultado = "Error en el tipo de accion, intente nuevamente";
