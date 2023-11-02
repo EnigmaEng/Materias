@@ -1,6 +1,6 @@
 -- Where We Eat (DDL)
- drop database if exists wwe;
-create database wwe;
+DROP DATABASE IF EXISTS `wwe`;
+CREATE DATABASE `wwe` CHARSET utf8mb4;
 USE `wwe`;
 
 CREATE TABLE `usuarios` (
