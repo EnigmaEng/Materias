@@ -57,13 +57,17 @@ const {usuario, autenticado} = TodoContext
   {Array.isArray(platos) && platos.length > 0 ? (
     platos.map((item, index) => (
       <div className=' hover:scale-125 duration-300 delay-150 transition-all rounded-box  bg-white shadow-xl w-52 h-82 text-center text-black text-2xl' key={index}>
+       
           <img src={item.url_img_menu} alt="foto-plato" className='h-32 bg-gray-700 rounded-t-box' />
         <p className='text-center text-lg font-aref text-black font-semibold'>{item.nombre_plato}</p>
 
       
-        <div className='p-2 h-24'>
+        <div className='p-2 h-auto'>
+          
+          <p className='text-black'>{item.id_Plato}</p>
           <p className='text-sm h-12'>{item.descripcion}</p>
           <p className='font-aref '>${item.costo} </p>
+           <Link className='px-2 py-1 rounded-lg text-sm bg-wwe text-white' to={`/editarPlato/${item.id_Plato}`}>Modificar plato</Link>
         </div>
       </div>
     ))

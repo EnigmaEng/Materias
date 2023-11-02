@@ -54,7 +54,7 @@ const TodoState = ({ children }) => {
                 type: REGISTRO_EXITOSO, 
                 payload: respuesta.data
             });
-            
+           
         } catch (error) {
             dispatch({
                 type:REGISTRO_ERROR,
@@ -183,14 +183,15 @@ const usuarioAutenticado = () => {
         const respuesta = await clienteAxios.post('/subscripcionController.php', datos)
         dispatch({
           type: SOLICITUD_SUBSCRIPCION,
-          payload: respuesta.data
+          payload: respuesta.data.status
         })
+
       } catch (error) {
         console.log(error)
       }
     }
 
-    const editPerfil = async (datos) => {
+    const editarPerfil = async (datos) => {
       try {
         const respuesta = await clienteAxios.post("/usuarioController.php", datos)
         dispatch({
@@ -201,6 +202,8 @@ const usuarioAutenticado = () => {
         console.log(error)
       }
     }
+
+  
 
 
         const cerrarSesion = async () => {
@@ -230,7 +233,7 @@ const usuarioAutenticado = () => {
                 crearDescuento,
                 crearResenia,
                 solicitudSubscripcion,
-                editPerfil
+                editarPerfil
             }}>
 
             {children}

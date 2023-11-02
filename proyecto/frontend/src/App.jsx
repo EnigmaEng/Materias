@@ -27,27 +27,26 @@ import MapContent from './components/maps/MapContent'
 
 import Alojamiento from './pages/user/perfil/turista/Alojamiento/Alojamiento'
 import Descuentos from './pages/user/perfil/restaurante/Descuentos/Descuentos'
+import EditarDescuento from './pages/user/perfil/restaurante/Descuentos/EditarDescuento'
+import todoContext from './context/todoContext'
+import { useContext, useEffect } from 'react'
+import EditarPlato from './pages/user/perfil/restaurante/Menu/EditarPlato'
 function App() {
-
-
 
 
 
   return (
     <>
-
-
-    
-    <TodoState>
+<TodoState>
     <BrowserRouter> 
     <Routes>
- {/* Home  */}
+
+
 <Route path='/' element={<Home/>} />
 
 
-{/* Registro */}
 <Route path='/registro' element={<RegistroUsuario/>}/>
-{/* Login */}
+
 <Route path='/login' element={<Login/>} />
 
 <Route path='/' element={<RutaProtegida/>}/>
@@ -56,7 +55,7 @@ function App() {
   <Route path='/map' element={<MapContent/>}/>
 
 
-  {/* Perfiles */}
+
 
 {/* Turista */}
 <Route path='/descuentos' element={<Descuentos/>}/>
@@ -71,7 +70,7 @@ function App() {
 {/* Admin */}
 <Route path='/admin' element={<PerfilAdmin/>} />
 
-  {/* Restaurante */}
+
 
 
 <Route path='/perfilRestaurante' element={<PerfilRestaurante/>}/>
@@ -83,17 +82,17 @@ function App() {
 <Route path='/configuracionRest' element={<ConfiguracionRest/>}/>
 <Route path='/crearDescuentos' element={<CrearDescuentos/>}/>
 
+<Route path='/editarDescuentos/:id_usuario' element={<EditarDescuento/>}/>
+<Route path='/editarPlato/:id_usuario' element={<EditarPlato/>}/>
 
-{/* Switch */}
 <Route path="/clientePerfil/:id_usuario" element={<PerfilCliente/>} />
-
-
 
     </Routes>
     
     </BrowserRouter>
 
      </TodoState>
+   
     </>
   )
 }

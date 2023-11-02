@@ -18,6 +18,8 @@ const HomeAuthDsk = () => {
   usuarioAutenticado();
   },[autenticado])
 
+  
+
   return (
 
 
@@ -26,16 +28,16 @@ const HomeAuthDsk = () => {
    
 { 
 
-    usuario && usuario.rol.nombre ?  
+    usuario && usuario?.rol.nombre ?  
   // Restaurante
 <RestauranteHome/>
 
-  : usuario && usuario.rol.nacionalidad ? 
+  : usuario && usuario?.rol.nacionalidad ? 
 // Turista
    <TuristaHome/>
 
    : usuario &&
-   usuario.rol.nro_empleado ? 
+   usuario?.rol.nro_empleado ? 
   //  Admin
 <AdminHome/>
  :   

@@ -70,49 +70,52 @@ const RegistroUsuario = () => {
 
 
 
-  const formik = useFormik({
-    initialValues: {
-      ...initialValues,
-      rol: selectedRole,
-    },
-    validationSchema,
+const formik = useFormik({
+  initialValues: {
+    ...initialValues,
+    rol: selectedRole,
+  },
+  validationSchema,
 
-   onSubmit: (valores, { resetForm }) => {
-    const formData = new FormData();
-    formData.append('alias', valores.alias);
-    formData.append('email', valores.email);
-    formData.append('contrasena', valores.contrasena);
-    formData.append('url_img_usuario', valores.url_img_usuario);
-    formData.append('rol', selectedRole);
+  onSubmit: (valores, { resetForm }) => {
+    const data = {
+      alias: valores.alias,
+      email: valores.email,
+      contrasena: valores.contrasena,
+      url_img_usuario: valores.url_img_usuario,
+      rol: selectedRole,
+    };
 
     if (selectedRole === 'T') {
-        formData.append('accion', 'altaTurista');
-        formData.append('nombres', valores.nombres);
-        formData.append('apellidos', valores.apellidos);
-        formData.append('nacionalidad', valores.nacionalidad);
-        formData.append('motivo_alojamiento', valores.motivo_alojamiento);
+      data.accion = 'altaTurista';
+      data.nombres = valores.nombres;
+      data.apellidos = valores.apellidos;
+      data.nacionalidad = valores.nacionalidad;
+      data.motivo_alojamiento = valores.motivo_alojamiento;
     } else if (selectedRole === 'R') {
-        formData.append('accion', 'altaRestaurante');
-        formData.append('nombre', valores.nombre);
-        formData.append('nro_local', valores.nro_local);
-        formData.append('nro_puerta', valores.nro_puerta);
-        formData.append('descripcion', valores.descripcion);
-        formData.append('calle', valores.calle);
-        formData.append('esquina', valores.esquina);
+      data.accion = 'altaRestaurante';
+      data.nombre = valores.nombre;
+      data.nro_local = valores.nro_local;
+      data.nro_puerta = valores.nro_puerta;
+      data.descripcion = valores.descripcion;
+      data.calle = valores.calle;
+      data.esquina = valores.esquina;
     }
 
-    // Aquí ya tendrás todos los datos agregados al formData según el rol seleccionado.
-    console.log(formData); // Verificar los datos antes de enviarlos
+    // Aquí tendrás todos los datos dentro del objeto `data` según el rol seleccionado.
+    console.log(data); // Verificar los datos antes de enviarlos
 
-    // Luego puedes llamar a la función correspondiente para registrar con los datos en formData.
+    // Luego puedes llamar a la función correspondiente para registrar con los datos en `data`.
     if (selectedRole === 'T') {
-        registrarTurista(formData);
+      registrarTurista(data);
     } else if (selectedRole === 'R') {
-        registrarRestaurante(formData);
+      registrarRestaurante(data);
     }
 
     resetForm();
-},
+  },
+
+
   });
 
   return (
@@ -167,9 +170,18 @@ const RegistroUsuario = () => {
         </div>
     <div className='flex flex-col mb-4 px-2'>
         <label htmlFor="url_img_usuario" className='font-bold px-4 '>Foto de perfil</label>
-        <input type="file" placeholder='foto' className="file-input" id='url_img_usuario' 
-          name='imagen' onChange={(event) => {formik.setFieldValue("imagen", event.currentTarget.files[0]) }}
-        onBlur={formik.handleBlur} />
+       <input
+  type="file"
+  id="url_img_usuario"
+  name="url_img_usuario"
+  onChange={(event) => {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      formik.setFieldValue("url_img_usuario", file); // No almacenar el archivo directamente en el campo de Formik
+    }
+  }}
+  onBlur={formik.handleBlur}
+/>
 
          {formik.touched.url_img_usuario && formik.errors.url_img_usuario ? (
           <div> <p className='text-lg px-5 flex '> {formik.errors.url_img_usuario}</p></div> ) : (

@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import NavBar from '../../../../../components/nabvar/NavBar'
 import { Link } from 'react-router-dom'
 import {BiArrowBack} from 'react-icons/bi'
+import { useContext } from 'react'
+import todoContext from '../../../../../context/todoContext'
 
 const ConfiguracionRestDsk = () => {
+
+
+  const {usuario} = useContext(todoContext)
+
+  
   return (
     <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-95 '>
     <NavBar/>
@@ -12,20 +19,26 @@ const ConfiguracionRestDsk = () => {
  
   
 <div className='bg-white w-7/12 h-11/12  m-auto mt-20  p-10 text-3xl text-black  rounded-box'>
-    <h2 className='text-center text-4xl  font-aref mb-10'>Configuración de la cuenta</h2>
-    <div className='border  p-4 mb-10 rounded-box shadow-xl'> <h2 className='font-aref mb-5'>Editar perfil</h2> 
+    <h2 className='text-center  text-center font-aref font-semibold text-wwe font-aref  text-3xl mb-24'>Configuración de la cuenta</h2>
+    <div className='border   p-4 mb-10 rounded-box shadow-xl'> <h2 className='text-center font-aref font-semibold text-white font-aref font-semibold text-wwe mb-5'>Editar perfil</h2> 
     <hr />
-    <Link to='/editarPerfil' className='w-80 px-4 py-1 rounded-lg bg-wwe text-white'>Editar</Link></div>
+    <div className='flex items-center justify-center'>
+      <Link to='/editarPerfil' className=' font-aref font-semibold text-white text-center px-2 py-0.5 rounded-lg bg-wwe text-white font-areft font-semibold w-64 py-1'>Editar</Link>
+    </div>
+    </div>
     
-    <div className='border p-4   mb-10 rounded-box  shadow-xl'>
+    <div className='border   mb-10 rounded-box  text-center font-aref font-semibold text-wwe shadow-xl'>
         <h2 className='mb-5 font-aref px-2'>Pagar Suscripción</h2>
         <hr />
-        <Link to='/subscripcion' className=' md:px-2 md:py-0.5  rounded-lg bg-wwe text-white'>Pagar Suscripción</Link>
+        <Link to='/subscripcion' className='font-aref font-semibold text-white text-center px-2 py-0.5 rounded-lg bg-wwe text-white font-areft font-semibold w-64 py-1 '>Pagar Suscripción</Link>
         </div>
-          <div className='border  p-4 mb-10 rounded-box  shadow-xl'>
+          <div className='border text-center font-aref font-semibold text-wwe p-4 mb-10 rounded-box  shadow-xl'>
         <h2 className='mb-5 font-aref'>Descuentos</h2>
         <hr />
-        <Link to='/crearDescuentos' className=' px-2 py-0.5 rounded-lg bg-wwe text-white'>Crear descuento</Link>
+        <div className='flex items-center justify-center'>
+          <Link to={`/editarDescuentos/${usuario?.id_usuario}`} className=' font-aref font-semibold text-white text-center px-2 py-0.5 rounded-lg bg-wwe text-white font-areft font-semibold w-64 py-1'>Crear descuento</Link>
+        </div>
+        
         </div>
 </div>
     </div>

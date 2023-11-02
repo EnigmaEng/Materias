@@ -1,15 +1,18 @@
+import React from 'react'
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
-import { useParams } from 'react-router-dom'
+const EditarPlato = () => {
 
-const EditarDescuento = () => {
 
-    const {id_usuario, usuario} = useParams();
     
-    
-  
 const formik = useFormik({
     initialValues: {
-     
+        alias: '',
+        email: '',
+        contrasena: '',
+        confirmContrasena:'',
+        url_img_usuario:''
     },
     validationSchema: Yup.object({
       confirmContrasena: Yup.string().oneOf([Yup.ref('contrasena'), null], 'Las contraseñas deben coincidir')
@@ -17,8 +20,8 @@ const formik = useFormik({
 
    onSubmit: (valores, { resetForm }) => {
     const formData = new FormData();
-    formData.append("accion", "editarPlato");
-    formData.append("id_usuario", id_usuario); 
+    formData.append("accion", "editarUsuario");
+    formData.append("id_usuario", usuario?.id_usuario); 
 
     let opcion = "";
     let valor = "";
@@ -56,12 +59,19 @@ const formik = useFormik({
     
 }
 })
-    
-    return (
+  return (
     <div className='min-h-screen'>
-        <p>Editar descuento</p>
+        <form action="POST" />
+            <aside className='py-40'>
+<form action="" className='bg-white rounded-lg p-4 w-6/12 m-auto '>
+    <div className='flex items-center justify-center'>
+        <button className='bg-wwe text-white w-64 text-lg font-aref font-semibold font-border shado-xl  rounded-md p-1' type='submit'>Editar </button>
     </div>
-    )
+
+        </form>
+        </aside>
+    </div>
+  )
 }
 
-export default EditarDescuento
+export default EditarPlato

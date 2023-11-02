@@ -17,7 +17,7 @@ try {
      }
     const respuesta = await clienteAxios.post('/subscripcionController.php', accion)
     setSolicitudes(respuesta.data)
-
+console.log(solicitudes)
 } catch (error) {
     console.log(error)
 }
@@ -34,13 +34,13 @@ try {
           }
           console.log(accion)
           const respuesta = await clienteAxios.post('/subscripcionController.php', accion)
-          console.log(respuesta.data)
+          
     }
 
     useEffect(() => {
   
     obtenerSubscripcion();
-  
+
     },[])
   
 
@@ -53,7 +53,7 @@ try {
 
    
     {
-   Object.keys(solicitudes).length > 0 ?  (
+    solicitudes && solicitudes.length > 0 ?  (
     solicitudes.map((item, index) => ( 
  <div className="lg:flex lg:items-center lg:justify-between border p-8 shadow-xl rounded-lg" key={index}>
   <div className="min-w-0 flex-1">

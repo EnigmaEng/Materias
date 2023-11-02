@@ -8,7 +8,7 @@ import { useContext } from 'react';
 import todoContext from '../../../context/todoContext';
 const EditarPerfi = () => {
 
-const {mensaje, editPerfil ,usuario} = useContext(todoContext)
+const {mensaje, editarPerfil ,usuario} = useContext(todoContext)
 
 const formik = useFormik({
     initialValues: {
@@ -57,7 +57,7 @@ const formik = useFormik({
         formData.append("opcion", opcion);
         formData.append("valor", valor);
       
-        editPerfil(formData);
+        editarPerfil(formData);
     }
 
     
