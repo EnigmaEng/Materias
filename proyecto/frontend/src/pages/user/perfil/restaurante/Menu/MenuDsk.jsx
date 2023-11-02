@@ -63,8 +63,7 @@ const {usuario, autenticado} = TodoContext
 
       
         <div className='p-2 h-auto'>
-          
-          <p className='text-black'>{item.id_Plato}</p>
+     
           <p className='text-sm h-12'>{item.descripcion}</p>
           <p className='font-aref '>${item.costo} </p>
            <Link className='px-2 py-1 rounded-lg text-sm bg-wwe text-white' to={`/editarPlato/${item.id_Plato}`}>Modificar plato</Link>

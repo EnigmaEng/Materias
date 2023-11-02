@@ -1,7 +1,7 @@
 import React, { useReducer} from "react";
 import todoContext from "./todoContext";
 import todoReducer from "./todoReducer";
-import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, EDITAR_PERFIL, DESCUENTO_CREADO, RESENIA_CREADA, SOLICITUD_SUBSCRIPCION} from "../types/types";
+import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, EDITAR_PERFIL, DESCUENTO_CREADO, RESENIA_CREADA,EDITAR_PLATO, SOLICITUD_SUBSCRIPCION} from "../types/types";
 import clienteAxios from "../config/axios";
 
 
@@ -190,12 +190,25 @@ const usuarioAutenticado = () => {
         console.log(error)
       }
     }
+      const editarPlato = async (datos) => {
+      try {
+        const respuesta = await clienteAxios.post("/restauranteController.php", datos)
+        dispatch({
+          type: EDITAR_PERFIL,
+          payload: respuesta.data.status
+        })
+        console.log(respuesta.data.status)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
 
     const editarPerfil = async (datos) => {
       try {
         const respuesta = await clienteAxios.post("/usuarioController.php", datos)
         dispatch({
-          type: EDITAR_PERFIL,
+          type: EDITAR_PLATO,
           payload: respuesta.data.status
         })
         console.log(respuesta.data.status)
@@ -234,7 +247,8 @@ const usuarioAutenticado = () => {
                 crearDescuento,
                 crearResenia,
                 solicitudSubscripcion,
-                editarPerfil
+                editarPerfil,
+                editarPlato
             }}>
 
             {children}

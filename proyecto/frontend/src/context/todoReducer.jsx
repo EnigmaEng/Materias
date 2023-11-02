@@ -1,4 +1,4 @@
-import { REGISTRO_EXITOSO, PLATO_CREADO,  REGISTRO_ERROR, LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, RESENIA_CREADA, USUARIO_AUTENTICADO, CERRAR_SESION, EDITAR_PERFIL, DESCUENTO_CREADO, SOLICITUD_SUBSCRIPCION } from "../types/types.jsx";
+import { REGISTRO_EXITOSO, PLATO_CREADO,  REGISTRO_ERROR, LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, RESENIA_CREADA, USUARIO_AUTENTICADO, CERRAR_SESION, EDITAR_PERFIL,EDITAR_PLATO,  DESCUENTO_CREADO, SOLICITUD_SUBSCRIPCION } from "../types/types.jsx";
 
 
 export default (state, action) => {
@@ -11,6 +11,7 @@ export default (state, action) => {
         case RESENIA_CREADA:
         case SOLICITUD_SUBSCRIPCION:
         case EDITAR_PERFIL:
+        case EDITAR_PLATO:
             return {
                 ...state,
                 mensaje: action.payload
