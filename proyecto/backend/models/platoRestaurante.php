@@ -121,15 +121,9 @@ class PlatoRestaurante extends CrudBasico
     }
 
 
-    public function guardarImagen($archivo_temporal, $nombre_archivo, $carpeta_destino)
-    {
-        return move_uploaded_file($archivo_temporal, $carpeta_destino . $nombre_archivo);
-    }
-
 
     public function persistirPlato()
     {
-        //Valido que exista el id del usuario restaurante
         try {
             $query = "SELECT id_usuario FROM restaurante WHERE id_usuario= :id_usuario";
             $stmt = $this->getConn()->prepare($query);
@@ -138,7 +132,6 @@ class PlatoRestaurante extends CrudBasico
             $idRows = $stmt->fetchAll();
             if (!empty($idRows)) {
                 try {
-                    //Persisto el plato en la tabla plato_restaurantes
                     $query = "INSERT INTO plato_restaurantes(nombre_plato,costo,descripcion,url_img_menu,estado_plato,id_usuario_rest) VALUES (:nombre_plato,:costo,:descripcion,:url_img_menu,:estado_plato,:id_usuario_rest)";
                     $stmt = $this->getConn()->prepare($query);
                     $stmt->bindValue(":nombre_plato", $this->getNombrePlato());

@@ -3,6 +3,7 @@ require_once '../models/restaurante.php';
 require_once '../models/platoRestaurante.php';
 require_once '../models/descuento.php';
 require_once './cors.php';
+require_once '../models/guardarImagen.php';
 
 require '../vendor/autoload.php';
 
@@ -15,10 +16,12 @@ $dotenv->load();
 
 function insertarController($alias, $url_img_usuario, $email, $contrasena, $rol, $nombre, $nroLocal, $calle, $esquina, $numero, $tipo)
 {
+    $directorioDestino = $_ENV['DIR_IMAGEN'];
+
     $restaurante = new Restaurante();
     $datosUsuario = array(
         "alias" => $alias,
-        "url_img_usuario" => $url_img_usuario,
+        "url_img_usuario" => $url_img_usuario,  // Se asume que $url_img_usuario es la ruta de la imagen
         "email" => $email,
         "contrasena" => $contrasena,
         "rol" => $rol
@@ -42,26 +45,25 @@ function insertarController($alias, $url_img_usuario, $email, $contrasena, $rol,
         "descripcion" => $tipo
     );
 
-    $nombreArchivo = $_FILES['imagen']['name'];
-    $carpetaDestino = $_ENV['DIR_IMAGEN']; // Ruta de la carpeta donde se guardará la imagen
-    $restaurante->setUrlImagenUsuario($nombreArchivo);
+    $guardarImagen = new GuardarImagen($directorioDestino);
+
+    if (isset($_FILES['imagen']) && is_array($_FILES['imagen']['name'])) {
+        $nombreArchivo = $_FILES['imagen']['name'][0];
+        $ruta = $guardarImagen->guardarImagen($_FILES['imagen'], $nombreArchivo);
+        $datosUsuario["url_img_usuario"] = $ruta;  // Actualiza la ruta de la imagen
+    }
 
     if ($restaurante->create("usuarios", $datosUsuario)) {
         if ($restaurante->dataCreate("localizacion", $direccionRestaurante) && $restaurante->createInRestaurante("restaurante", $datosUsuario, $datosRestaurante) && $restaurante->createInTipoRestaurante("tipo_restaurantes", $datosUsuario, $tipoRestaurantes)) {
-            var_dump($_FILES["imagen"]);
-            if (!is_writable($carpetaDestino)) {
-                echo "La carpeta de destino no es escribible. Verifica los permisos.";
-                exit;
-            }
-            move_uploaded_file($_FILES['imagen']['tmp_name'], $carpetaDestino);
-            return "Creacion de usuario exitosa";
+            return "Creación de usuario exitosa";
         } else {
-            return "Error en la creacion de usuario";
+            return "Error en la creación de usuario";
         }
     } else {
         return "El usuario ya existe";
     }
 }
+
 
 function obtenerRestauranteById($id)
 {
@@ -87,12 +89,8 @@ function crearPlato($id_plato, $nombre_plato, $costo, $descripcion, $url_img_men
     $plato->setEstadoPlato($estado_plato);
     $plato->setIdUsuario($id_usuario_rest);
     $plato->setPlato();
-
-    $nombreArchivo = $_FILES['imagen']['name'];
-    $carpetaDestino = $_ENV['DIR_IMAGEN'];
-    $plato->setUrlImgMenu($nombreArchivo);
-    if($plato->persistirPlato()){
-        $plato->guardarImagen($_FILES['imagen']['tmp_name'], $nombreArchivo, $carpetaDestino);
+    $plato->setUrlImgMenu($url_img_menu);
+    if ($plato->persistirPlato()) {
         return true;
     }
 }
@@ -176,21 +174,23 @@ function obtenerDescuentoPorId($idDescuento)
     }
 }
 
-function modificarPlato($idPlato, $opcion, $valor){
-    $plato=new PlatoRestaurante();
-    if($plato->modificarPlato($idPlato,$opcion,$valor)){
-        return json_encode(array("status"=>"Modificacion realizada correctamente."));
-    }else{
-        return json_encode(array("status"=>"Hubo errores en la modificacion."));
+function modificarPlato($idPlato, $opcion, $valor)
+{
+    $plato = new PlatoRestaurante();
+    if ($plato->modificarPlato($idPlato, $opcion, $valor)) {
+        return json_encode(array("status" => "Modificacion realizada correctamente."));
+    } else {
+        return json_encode(array("status" => "Hubo errores en la modificacion."));
     }
 }
 
-function modificarDescuento($idDescuento, $opcion, $valor){
+function modificarDescuento($idDescuento, $opcion, $valor)
+{
     $descuento = new Descuento;
-    if($descuento->modificarDescuento($idDescuento,$opcion,$valor)){
-        return json_encode(array("status"=>"Modificacion realizada correctamente."));
-    }else{
-        return json_encode(array("status"=>"Hubo errores en la modificacion."));
+    if ($descuento->modificarDescuento($idDescuento, $opcion, $valor)) {
+        return json_encode(array("status" => "Modificacion realizada correctamente."));
+    } else {
+        return json_encode(array("status" => "Hubo errores en la modificacion."));
     }
 }
 
@@ -260,11 +260,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $resultado = obtenerDescuentos();
                 break;
             case "modificarPlato":
-                $resultado=modificarPlato($data['id_Plato'],$data['opcion'],$data['valor']);
+                $resultado = modificarPlato($data['id_Plato'], $data['opcion'], $data['valor']);
                 break;
             case "modificarDescuento":
-                $resultado=modificarDescuento($data['id_descuento'],$data['opcion'],$data['valor']);
-                break;   
+                $resultado = modificarDescuento($data['id_descuento'], $data['opcion'], $data['valor']);
+                break;
             default:
                 $resultado = "Error en el tipo de accion, intente nuevamente";
                 break;

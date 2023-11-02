@@ -152,8 +152,6 @@ class Usuario extends DataBaseConnection implements Crud
 
                 //Almaceno nuevamente la contraseña
                 $datos['contrasena'] = $hashedPass;
-                //Guardo la url_imagen
-                $datos['url_img_usuario'] = $_ENV['DIR_IMAGEN'] . $this->getUrlImagenUsuario();
 
                 $columnNames = implode(', ', array_keys($datos));
                 $placeholders = implode(', ', array_map(function ($key) {
