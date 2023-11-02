@@ -25,7 +25,7 @@ const PerfilDsk = () => {
     <NavBar/>
       {usuario && usuario.rol.nombre ?
       <>
-        
+      
         <div className=' m-20 bg-white p-8 rounded-box shadow-xl  pb-10 flex gap-10'>
        
               <img
