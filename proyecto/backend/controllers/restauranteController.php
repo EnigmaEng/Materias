@@ -42,18 +42,18 @@ function insertarController($alias, $url_img_usuario, $email, $contrasena, $rol,
         "descripcion" => $tipo
     );
 
-    $nombreArchivo = $_FILES['imagen']['name'];
+    $nombreArchivo = $_FILES['url_imagen_usuario']['url_imagen_usuario'];
     $carpetaDestino = $_ENV['DIR_IMAGEN']; // Ruta de la carpeta donde se guardará la imagen
     $restaurante->setUrlImagenUsuario($nombreArchivo);
 
     if ($restaurante->create("usuarios", $datosUsuario)) {
         if ($restaurante->dataCreate("localizacion", $direccionRestaurante) && $restaurante->createInRestaurante("restaurante", $datosUsuario, $datosRestaurante) && $restaurante->createInTipoRestaurante("tipo_restaurantes", $datosUsuario, $tipoRestaurantes)) {
-            var_dump($_FILES["imagen"]);
+            var_dump($_FILES["url_imagen_usuario"]);
             if (!is_writable($carpetaDestino)) {
                 echo "La carpeta de destino no es escribible. Verifica los permisos.";
                 exit;
             }
-            move_uploaded_file($_FILES['imagen']['tmp_name'], $carpetaDestino);
+            move_uploaded_file($_FILES['url_imagen_usuario']['url_imagen_usuario'], $carpetaDestino);
             return "Creacion de usuario exitosa";
         } else {
             return "Error en la creacion de usuario";
