@@ -147,13 +147,12 @@ class Descuento extends CrudBasico
     public function crearDescuento()
     {
         try {
-            $query = "INSERT INTO descuento(id_descuento,activo,titulo_descuento,descripcion,url_img_descuento,costo) VALUES (:id_descuento,:activo,:titulo_descuento,:descripcion,:url_img_descuento,:costo)";
+            $query = "INSERT INTO descuento(activo,titulo_descuento,descripcion,url_img_descuento,costo) VALUES (:activo,:titulo_descuento,:descripcion,:url_img_descuento,:costo)";
             $stmt = $this->getConn()->prepare($query);
-            $stmt->bindValue(":id_descuento", $this->getIdDescuento());
             $stmt->bindValue(":activo", $this->getActivo());
             $stmt->bindValue(":titulo_descuento", $this->getTituloDescuento());
             $stmt->bindValue(":descripcion", $this->getDescripcion());
-            $stmt->bindValue(":url_img_descuento", $_ENV['DIR_IMAGEN'] . $this->getUrlImagenDesc());
+            $stmt->bindValue(":url_img_descuento", $this->getUrlImagenDesc());
             $stmt->bindValue(":costo", $this->getCosto());
             if ($stmt->execute()) {
                 return true;
@@ -167,29 +166,37 @@ class Descuento extends CrudBasico
     public function restauranteTieneDescuento()
     {
         try {
-            $query = "SELECT max(id_descuento) FROM descuento";
+            $query = "SELECT MAX(id_descuento) AS max_id_descuento FROM descuento";
             $stmt = $this->getConn()->prepare($query);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ($result) {
-                $id_descuento = $result['id_descuento'];
-                $query = "INSERT INTO restaurante_tiene_descuento(id_descuento,id_usuario_rest,fecha_inicio,fecha_fin) VALUES (:id_descuento,:id_usuario_rest,:fecha_inicio,:fecha_fin)";
+
+            if ($result && isset($result['max_id_descuento'])) {
+                $id_descuento = $result['max_id_descuento'];
+
+                $query = "INSERT INTO restaurante_tiene_descuento (id_descuento, id_usuario_rest, fecha_inicio, fecha_fin) 
+                          VALUES (:id_descuento, :id_usuario_rest, :fecha_inicio, :fecha_fin)";
                 $stmt = $this->getConn()->prepare($query);
                 $stmt->bindValue(":id_descuento", $id_descuento);
                 $stmt->bindValue(":id_usuario_rest", $this->getIdRestaurante());
                 $stmt->bindValue(":fecha_inicio", $this->getFechaInicio());
                 $stmt->bindValue(":fecha_fin", $this->getFechaFin());
+
                 if ($stmt->execute()) {
                     return true;
+                } else {
+                    echo "Error en la inserción en la tabla restaurante_tiene_descuento.";
                 }
             } else {
-                echo "No se encontraron resultados.";
+                echo "No se encontraron resultados en la tabla descuento.";
             }
+
             return false;
         } catch (PDOException $ex) {
             echo "Error en el insert: " . $ex->getMessage();
         }
     }
+
 
     public function mostrarDescuentoPorId()
     {

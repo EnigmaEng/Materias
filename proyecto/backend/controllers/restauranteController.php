@@ -98,10 +98,9 @@ function crearPlato($id_plato, $nombre_plato, $costo, $descripcion, $url_img_men
 }
 
 
-function crearDescuento($idDescuento, $idRestaurante, $activo, $tituloDescuento, $descripcion, $urlImgDescuento, $fechaInicio, $fechaFin, $costo)
+function crearDescuento($idRestaurante, $activo, $tituloDescuento, $descripcion, $urlImgDescuento, $fechaInicio, $fechaFin, $costo)
 {
     $descuento = new Descuento();
-    $descuento->setIdDescuento($idDescuento);
     $descuento->setIdRestaurante($idRestaurante);
     $descuento->setActivo($activo);
     $descuento->setTituloDescuento($tituloDescuento);
@@ -110,12 +109,8 @@ function crearDescuento($idDescuento, $idRestaurante, $activo, $tituloDescuento,
     $descuento->setFechaInicio($fechaInicio);
     $descuento->setFechaFin($fechaFin);
     $descuento->setCosto($costo);
-    $nombreArchivo = $_FILES['imagen']['name'];
-    $carpetaDestino = $_ENV['DIR_IMAGEN'];
-    $descuento->setUrlImagenDesc($nombreArchivo);
     if ($descuento->crearDescuento()) {
         if ($descuento->restauranteTieneDescuento()) {
-            $descuento->guardarImagen($_FILES['imagen']['tmp_name'], $nombreArchivo, $carpetaDestino);
             return true;
         }
     }
@@ -234,7 +229,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 break;
             case "crearDescuento":
                 $resultado = crearDescuento(
-                    $data['id_descuento'],
                     $data['id_usuario_rest'],
                     $data['activo'],
                     $data['titulo_descuento'],
