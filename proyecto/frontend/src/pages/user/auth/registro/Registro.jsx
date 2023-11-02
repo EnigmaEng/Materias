@@ -77,43 +77,42 @@ const formik = useFormik({
   },
   validationSchema,
 
-  onSubmit: (valores, { resetForm }) => {
-    const data = {
-      alias: valores.alias,
-      email: valores.email,
-      contrasena: valores.contrasena,
-      url_img_usuario: valores.url_img_usuario,
-      rol: selectedRole,
-    };
+onSubmit: (valores, { resetForm }) => {
+  const formData = new FormData();
 
-    if (selectedRole === 'T') {
-      data.accion = 'altaTurista';
-      data.nombres = valores.nombres;
-      data.apellidos = valores.apellidos;
-      data.nacionalidad = valores.nacionalidad;
-      data.motivo_alojamiento = valores.motivo_alojamiento;
-    } else if (selectedRole === 'R') {
-      data.accion = 'altaRestaurante';
-      data.nombre = valores.nombre;
-      data.nro_local = valores.nro_local;
-      data.nro_puerta = valores.nro_puerta;
-      data.descripcion = valores.descripcion;
-      data.calle = valores.calle;
-      data.esquina = valores.esquina;
-    }
+  formData.append('alias', valores.alias);
+  formData.append('email', valores.email);
+  formData.append('contrasena', valores.contrasena);
+  formData.append('url_img_usuario', valores.url_img_usuario);
+  formData.append('rol', selectedRole);
 
-    // Aquí tendrás todos los datos dentro del objeto `data` según el rol seleccionado.
-    console.log(data); // Verificar los datos antes de enviarlos
+  if (selectedRole === 'T') {
+    formData.append('accion', 'altaTurista');
+    formData.append('nombres', valores.nombres);
+    formData.append('apellidos', valores.apellidos);
+    formData.append('nacionalidad', valores.nacionalidad);
+    formData.append('motivo_alojamiento', valores.motivo_alojamiento);
+  } else if (selectedRole === 'R') {
+    formData.append('accion', 'altaRestaurante');
+    formData.append('nombre', valores.nombre);
+    formData.append('nro_local', valores.nro_local);
+    formData.append('nro_puerta', valores.nro_puerta);
+    formData.append('descripcion', valores.descripcion);
+    formData.append('calle', valores.calle);
+    formData.append('esquina', valores.esquina);
+  }
 
-    // Luego puedes llamar a la función correspondiente para registrar con los datos en `data`.
-    if (selectedRole === 'T') {
-      registrarTurista(data);
-    } else if (selectedRole === 'R') {
-      registrarRestaurante(data);
-    }
+  console.log(formData);
 
-    resetForm();
-  },
+  if (selectedRole === 'T') {
+    registrarTurista(formData);
+  } else if (selectedRole === 'R') {
+    registrarRestaurante(formData);
+  }
+
+  resetForm();
+},
+
 
 
   });
