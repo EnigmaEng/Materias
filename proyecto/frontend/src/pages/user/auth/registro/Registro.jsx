@@ -173,8 +173,8 @@ const formik = useFormik({
        <input
       type="file"
       id="url_img_usuario"
-        name="url_img_usuario"
-   onChange={(event) => {formik.setFieldValue("url_img_usuario", event.currentTarget.files[0])}}
+        name="imagen" accept="image/*"
+   onChange={(event) => {formik.setFieldValue("imagen", event.currentTarget.files[0])}}
   onBlur={formik.handleBlur}
     />
 
