@@ -4,7 +4,7 @@ import { useContext, useState } from "react"
 
 const subscripcionData = () => {
 
-const {usuario, solicitudSubscripcion, } = useContext(todoContext)
+const {usuario, solicitudSubscripcion } = useContext(todoContext)
 
 
 const today = new Date();
@@ -22,7 +22,7 @@ try {
         "fechaPago": formattedDate
     }
     solicitudSubscripcion(data)
-    console.log(data)
+    
 } catch (error) {
     console.log(error)
 }
