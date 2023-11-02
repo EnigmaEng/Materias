@@ -184,7 +184,7 @@ class Usuario extends DataBaseConnection implements Crud
             $placeholders = implode(', ', array_map(function ($key) {
                 return ':' . $key;
             }, array_keys($datos)));
-
+            
             $query = "INSERT INTO $tabla ($columnNames) VALUES ($placeholders)";
 
             $stmt = $this->getConn()->prepare($query);

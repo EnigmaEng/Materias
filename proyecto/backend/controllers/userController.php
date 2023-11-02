@@ -1,5 +1,5 @@
 <?php
-
+include './cors.php';
 require_once '../models/usuario.php';
 function bloquearUsuario($id_usuario)
 {

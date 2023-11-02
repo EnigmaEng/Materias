@@ -1,5 +1,4 @@
 <?php
-
 require_once '../models/session.php';
 include_once '../models/usuario.php';
 require_once './cors.php';

@@ -17,10 +17,10 @@ const CrearDescuentos = () => {
 
     initialValues : {
       activo: '',
-      
       titulo_descuento: '',
       descripcion: '',
       url_img_descuento: '',
+      costo : '',
       fecha_inicio: '',
       fecha_fin: '',
       id_usuario_rest: ''
@@ -30,7 +30,8 @@ const CrearDescuentos = () => {
     
       titulo_descuento: Yup.string().required('El campo no puede ir vacío'),
       descripcion: Yup.string().required('El campo no puede ir vacío'),
-      url_img_descuento: Yup.string().required('El campo no puede ir vacío'),
+      // url_img_descuento: Yup.string().required('El campo no puede ir vacío'),
+      costo: Yup.number('Ingrese un precio valido').required('El campo no puede ir vacío'),
       fecha_inicio: Yup.date().typeError('Ingrese una fecha valida').required('El campo no puede ir vacio'),
       fecha_fin: Yup.date().typeError('Ingrese una fecha valida').required('El campo no puede ir vacio'),
     }),
@@ -46,6 +47,7 @@ const CrearDescuentos = () => {
     titulo_descuento: valores.titulo_descuento,
     descripcion: valores.descripcion,
     url_img_descuento: valores.url_img_descuento,
+    costo: valores.costo,
     fecha_inicio: fechaInicio,
     fecha_fin: fechaFin,
     id_usuario_rest: usuario.id_usuario
@@ -82,10 +84,19 @@ const CrearDescuentos = () => {
 
 <div  className='flex flex-col text-center font-aref text-black text-lg mb-6' >
   <label htmlFor="">Imagen</label>
-<input type="text" id='url_img_descuento' className='input w-64 bg-white text-black border border-wwe focus:ring-2 focus:ring-wwe m-auto ' values={formik.values.url_img_descuento} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder='Imagen'/>
+<input type="text" id='url_img_descuento' className='input w-64 bg-white text-black border border-wwe focus:ring-2 focus:ring-wwe m-auto  ' onChange={formik.handleChange} values={formik.values.url_img_descuento} placeholder='Imagen'/>
 {
   formik.touched.url_img_descuento && formik.errors.url_img_descuento ? 
   <div><p className='text-wwe'>{formik.errors.url_img_descuento}</p></div> : null
+}
+</div>
+
+<div  className='flex flex-col text-center font-aref text-black text-lg mb-6'>
+  <label htmlFor="">Precio</label>
+<input type="text" id='costo' className='input w-64 bg-white text-black border border-wwe focus:ring-2 focus:ring-wwe m-auto ' values={formik.values.costo} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+{
+  formik.touched.costo && formik.errors.costo ? 
+  <div><p className='text-wwe px-6'>{formik.errors.costo}</p></div> : null
 }
 </div>
 

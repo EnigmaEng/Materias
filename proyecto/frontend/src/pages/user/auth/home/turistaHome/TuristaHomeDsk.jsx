@@ -11,13 +11,14 @@ import {BsFillHouseFill} from 'react-icons/bs'
 import Image2 from '../../../../../assets/mapa.png'
 import Image3 from '../../../../../assets/resenia.png'
 import Image1 from '../../../../../assets/alojamiento.png'
+import Descuentos from '../../../../../components/descuentos/Descuentos'
 const TuristaHomeDsk = () => {
   return (
    <div className='min-h-screen space-y-10  dark:bg-zinc-800 dark:bg-opacity-95'>
 
   <NavBar/>
 
-  <div className='bg-white p-4 w-6/12 m-auto rounded-lg shadow-xl text-center text-wwe font-aref font-semibold h-24  text-2xl'><p className='10'>Obtener descuentos</p></div>
+  <Descuentos/>
       
 
 
