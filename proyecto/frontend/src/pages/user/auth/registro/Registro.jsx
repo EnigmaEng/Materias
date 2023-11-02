@@ -170,13 +170,18 @@ const formik = useFormik({
         </div>
     <div className='flex flex-col mb-4 px-2'>
         <label htmlFor="url_img_usuario" className='font-bold px-4 '>Foto de perfil</label>
-       <input
-      type="file"
-      id="url_img_usuario"
-        name="imagen" accept="image/*"
-   onChange={(event) => {formik.setFieldValue("imagen", event.currentTarget.files[0])}}
+<input
+  type="file"
+  id="url_img_usuario"
+  name="imagen"
+  accept="image/*"
+  onChange={(event) => {
+    const selectedFile = event.currentTarget.files[0];
+    const imageUrl = URL.createObjectURL(selectedFile);
+    formik.setFieldValue("url_img_usuario", imageUrl);
+  }}
   onBlur={formik.handleBlur}
-    />
+/>
 
          {formik.touched.url_img_usuario && formik.errors.url_img_usuario ? (
           <div> <p className='text-lg px-5 flex '> {formik.errors.url_img_usuario}</p></div> ) : (
