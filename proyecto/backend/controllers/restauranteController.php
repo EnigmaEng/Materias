@@ -42,26 +42,32 @@ function insertarController($alias, $url_img_usuario, $email, $contrasena, $rol,
         "descripcion" => $tipo
     );
 
-    $nombreArchivo = $_FILES['url_imagen_usuario']['url_imagen_usuario'];
+    $nombreArchivo = $_FILES['url_imagen_usuario']['name'];  // Corregir la obtención del nombre del archivo
     $carpetaDestino = $_ENV['DIR_IMAGEN']; // Ruta de la carpeta donde se guardará la imagen
     $restaurante->setUrlImagenUsuario($nombreArchivo);
 
     if ($restaurante->create("usuarios", $datosUsuario)) {
         if ($restaurante->dataCreate("localizacion", $direccionRestaurante) && $restaurante->createInRestaurante("restaurante", $datosUsuario, $datosRestaurante) && $restaurante->createInTipoRestaurante("tipo_restaurantes", $datosUsuario, $tipoRestaurantes)) {
-            var_dump($_FILES["url_imagen_usuario"]);
             if (!is_writable($carpetaDestino)) {
-                echo "La carpeta de destino no es escribible. Verifica los permisos.";
-                exit;
+                return "La carpeta de destino no es escribible. Verifica los permisos.";
             }
-            move_uploaded_file($_FILES['url_imagen_usuario']['url_imagen_usuario'], $carpetaDestino);
-            return "Creacion de usuario exitosa";
+
+            $archivoTemp = $_FILES['url_imagen_usuario']['tmp_name'];
+            $rutaCompleta = $carpetaDestino . '/' . $nombreArchivo;
+
+            if (move_uploaded_file($archivoTemp, $rutaCompleta)) {
+                return "Creación de usuario exitosa";
+            } else {
+                return "Error al mover la imagen al directorio de destino";
+            }
         } else {
-            return "Error en la creacion de usuario";
+            return "Error en la creación de usuario";
         }
     } else {
         return "El usuario ya existe";
     }
 }
+
 
 function obtenerRestauranteById($id)
 {
