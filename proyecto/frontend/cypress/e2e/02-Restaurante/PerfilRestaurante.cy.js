@@ -3,17 +3,14 @@ describe ('LoginRestaurante', () => {
         cy.visit('http://127.0.0.1:5173/')
     })
 
-    it('Entrando al Login',() =>{
-        cy.contains('WHERE WE EAT')
-        cy.get('.flex-col > .flex > [href="/login"] > .bg-white').click()
-    })
     it('Loguenado user Restaurante',() =>{
-        cy.get('.flex-col > .flex > [href="/login"] > .bg-white').click()
-        cy.contains('Inicia sesión')
-        cy.get('#email').type('RestauranteEmail@gmail.com',{ delay: 40 })
-        cy.get('#contrasena').type('SoyRestaurante123',{ delay: 40 })
-        cy.get('.justify-center > .px-4').click()
-        cy.contains('Mis reseñas')
-        cy.get('ul').click()
+        cy.get('[href="/login"] > .bg-wwe').click()
+        cy.contains('Iniciar Sesión')
+        cy.get('#email').type('RestauranteEmail@gmail.com',{ delay: 45 })
+        cy.get('#contrasena').type('SoyRestaurante123',{ delay: 45 })
+        cy.get(':nth-child(3) > .flex').click()
+        cy.contains('Menú')
+        /*Ingresando al perfil del restaurante*/
+        cy.visit('http://127.0.0.1:5173/perfilRestaurante')
     })
 })

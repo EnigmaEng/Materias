@@ -3,19 +3,12 @@ describe ('PerfilTurista', () => {
         cy.visit('http://127.0.0.1:5173/')
     })
 
-    it('Entrando al Login',() =>{
-        cy.contains('WHERE WE EAT')
-        cy.get('.flex-col > .flex > [href="/login"] > .bg-white').click()
-    })
-
     it('Loguenado user Turista',() =>{
-        cy.get('.flex-col > .flex > [href="/login"] > .bg-white').click()
-        cy.contains('Inicia sesión')
+        cy.get('[href="/login"] > .bg-wwe').click()
+        cy.contains('Iniciar Sesión')
         cy.get('#email').type('TuristaEmail@gmail.com')
         cy.get('#contrasena').type('SoyTurista123')
-        cy.get('.justify-center > .px-4').click()
-        cy.contains('Busca en el mapa')
-        cy.get('#root > :nth-child(1) > .min-h-screen > .md\:block > .navbar > .flex-1 > .m-auto > img').click()
-        /*cy.contains('Perfil').click()*/
+        cy.get(':nth-child(3) > .flex').click()
+        cy.visit('http://127.0.0.1:5173/perfilTurista');
     })
 })
