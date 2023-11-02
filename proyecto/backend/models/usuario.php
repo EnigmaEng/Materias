@@ -336,9 +336,7 @@ class Usuario extends DataBaseConnection implements Crud
     public function editUser($idUsuario, $opcion, $valor)
     {
         try {
-            $query = "";
             $nombreColumna = "";
-
             switch ($opcion) {
                 case "alias":
                     $nombreColumna = "alias";

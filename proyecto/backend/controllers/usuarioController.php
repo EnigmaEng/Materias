@@ -11,6 +11,16 @@ function editarUsuario($idUsuario, $opcion, $valor)
 {
     $usuario = new Turista();
     if ($opcion == "alias" || $opcion == "contrasena" || $opcion == "url_img_usuario") {
+        switch ($opcion) {
+            case "alias":
+                $usuario->setAlias($valor);
+                break;
+            case "contrasena":
+                $usuario->setContrasenia($valor);
+                break;
+            case "url_img_usuario":
+                $usuario->setUrlImagenUsuario($valor);
+        }
         if ($usuario->editUser($idUsuario, $opcion, $valor) == true) {
             return json_encode(array("status" => "Los cambios persistieron correctamente."));
         } else {
@@ -24,14 +34,14 @@ function editarUsuario($idUsuario, $opcion, $valor)
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
-
+    $resultado = "";
 
     if (isset($data)) {
         switch ($data['accion']) {
             case "bloquearUsuario":
                 bloquearUsuario($data['id_usuario']);
                 break;
-            case "editarUsuario":
+            case "modificarUsuario":
                 $resultado = editarUsuario($data["id_usuario"], $data["opcion"], $data["valor"]);
                 break;
             default:
@@ -41,5 +51,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     echo $resultado;
 }
-
-
