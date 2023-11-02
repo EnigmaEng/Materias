@@ -1,13 +1,11 @@
-import React, { useReducer, useState} from "react";
+import React, { useReducer} from "react";
 import todoContext from "./todoContext";
 import todoReducer from "./todoReducer";
-import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, OBTENER_RESTAURANTE, DESCUENTO_CREADO, RESENIA_CREADA, SOLICITUD_SUBSCRIPCION} from "../types/types";
+import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, EDITAR_PERFIL, DESCUENTO_CREADO, RESENIA_CREADA, SOLICITUD_SUBSCRIPCION} from "../types/types";
 import clienteAxios from "../config/axios";
 
 
 const TodoState = ({ children }) => {
-
-  
 
     const initialState = {
         token: typeof window !== 'undefined' ? localStorage.getItem('token') : '',
@@ -18,6 +16,8 @@ const TodoState = ({ children }) => {
 
     //Reducer
     const [state, dispatch] = useReducer(todoReducer, initialState);
+
+    
 
     //Registrar turista
     const registrarTurista = async datos => {
@@ -30,7 +30,7 @@ const TodoState = ({ children }) => {
         });
             dispatch({
                 type: REGISTRO_EXITOSO, 
-                payload: 'Registro exitoso!'
+                payload: respuesta.data
             });
         } catch (error) {
             dispatch({
@@ -52,7 +52,7 @@ const TodoState = ({ children }) => {
             
             dispatch({
                 type: REGISTRO_EXITOSO, 
-                payload: 'Registro exitoso!'
+                payload: respuesta.data
             });
             
         } catch (error) {
@@ -143,7 +143,7 @@ const usuarioAutenticado = () => {
         
         dispatch({
         type: DESCUENTO_CREADO,
-        payload: 'Plato creado exitosamente!'
+        payload: respuesta.data
       })
       } catch (error) {
         console.log(error)
@@ -157,7 +157,7 @@ const usuarioAutenticado = () => {
         
         dispatch({
         type: PLATO_CREADO,
-        payload: 'Descuento creado exitosamente!'
+        payload: respuesta.data
       })
       } catch (error) {
         console.log(error)
@@ -165,12 +165,13 @@ const usuarioAutenticado = () => {
      
     }
 
+
     const crearResenia = async (datos) => {
       try {
         const respuesta = await clienteAxios.post('/reseniaController.php', datos)
         dispatch({
         type: RESENIA_CREADA,
-        payload: respuesta.data.mensaje 
+        payload: respuesta.data 
         })
       } catch (error) {
         console.log(error)
@@ -182,6 +183,18 @@ const usuarioAutenticado = () => {
         const respuesta = await clienteAxios.post('/subscripcionController.php', datos)
         dispatch({
           type: SOLICITUD_SUBSCRIPCION,
+          payload: respuesta.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    const editPerfil = async (datos) => {
+      try {
+        const respuesta = await clienteAxios.post("/usuarioController.php", datos)
+        dispatch({
+          type: EDITAR_PERFIL,
           payload: respuesta.data
         })
       } catch (error) {
@@ -216,7 +229,8 @@ const usuarioAutenticado = () => {
                 crearPlato,
                 crearDescuento,
                 crearResenia,
-                solicitudSubscripcion
+                solicitudSubscripcion,
+                editPerfil
             }}>
 
             {children}

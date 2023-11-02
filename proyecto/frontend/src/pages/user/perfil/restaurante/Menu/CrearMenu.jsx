@@ -46,11 +46,12 @@ const formik = useFormik({
     descripcion: valores.descripcion,
     url_img_menu: valores.url_img_menu,
     estado_plato: 'S',
-    id_usuario_rest: usuario.id_usuario, 
+    id_usuario_rest: usuario?.id_usuario, 
   };
 
     crearPlato(platoData);
     resetForm();
+    console.log(mensaje)
   },
 });
 
@@ -62,14 +63,14 @@ const formik = useFormik({
  <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-95  '>
       <NavBar/>
 
-
-      
       <form onSubmit={formik.handleSubmit} className='mb-20 flex flex-col  text-black m-auto md:mt-28 mt-10 justify-center items-center py-4 space-y-10 bg-white max-w-lg rounded-box shadow-xl font-aref text-lg ' method='POST' >
         <h2 className='text-center text-5xl text-wwe font-bold  font-aref'>Crear tu plato</h2>
       <div> {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }</div> 
       <div className='flex flex-col  '>
 <label htmlFor="" className=''>Foto del plato:</label>
-<input type="text" id='url_img_menu' value={formik.values.url_img_menu} onChange={formik.handleChange} onBlur={formik.handleBlur} className='text-black w-80 rounded-lg bg-white border border-wwe placeholder:italic py-1.5 px-4 ' placeholder='Foto..' />
+<input type="text" id='url_img_menu' 
+onChange={formik.handleChange}
+onBlur={formik.handleBlur} className='w-80 px-4 py-1.5 rounded-lg bg-white border border-wwe  placeholder:italic ' placeholder='Foto..' />
 {
   formik.touched.url_img_menu && formik.errors.url_img_menu ? 
   <div><p className='text-lg px-2 text-wwe'>{formik.errors.url_img_menu}</p></div> : 

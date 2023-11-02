@@ -69,10 +69,8 @@ const {usuario, autenticado} = TodoContext
     ))
   ) : (
     <div className='flex flex-col justify-center items-center gap-4'>
-      <p className='text-gray-500 font-aref mb-20'>No tienes platos creados</p>
-      <Link to='/crearMenu' className='bg-wwe shadow-xl px-3 py-1 text-white rounded-lg'>
-        Crear platos
-      </Link>
+      {/* <p className='text-gray-500 font-aref mb-20 '></p> */}
+     
     </div>
   )}
 

@@ -9,7 +9,7 @@ const PerfilDsk = () => {
 
 const TodoContext = useContext(todoContext)
 const {usuario, usuarioAutenticado, autenticado} = TodoContext
-
+console.log(usuario.url_img_usuario)
 useEffect(() => 
 {
 usuarioAutenticado()
@@ -25,7 +25,7 @@ usuarioAutenticado()
    
       <div className=' space-y-5 border dark:border-zinc-700 h-64 w-full rounded-box p-8 flex'>
              <div className=''>
-          <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' alt="perfil" className='w-48 h-40 rounded-box  shadow-xl' />
+          <img src={usuario.url_img_usuario} alt="perfil" className='w-48 h-40 rounded-box  shadow-xl' />
          <p className='text-center text-lg text-gray-400 mt-2'>@{usuario.alias}</p>
         </div>
         <div className='w-full m-auto text-center'>

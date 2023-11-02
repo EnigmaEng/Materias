@@ -1,6 +1,6 @@
 <?php
 include_once '../models/turista.php';
-
+include './cors.php';
 function bloquearUsuario($idUsuario)
 {
     $usuario = new Turista();

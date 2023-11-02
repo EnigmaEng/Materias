@@ -210,7 +210,9 @@ class Descuento extends CrudBasico
     public function mostrarDescuentos()
     {
         try {
-            $query = "SELECT * FROM descuento";
+            $query = "SELECT r.nombre, r.id_usuario, des.* FROM wwe.descuento des
+            join wwe.restaurante_tiene_descuento rd on des.id_descuento = rd.id_descuento
+            join wwe.restaurante r on r.id_usuario = rd.id_usuario_rest";
             $stmt = $this->getConn()->prepare($query);
             if ($stmt->execute()) {
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
