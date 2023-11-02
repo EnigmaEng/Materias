@@ -185,7 +185,7 @@ const usuarioAutenticado = () => {
           type: SOLICITUD_SUBSCRIPCION,
           payload: respuesta.data.status
         })
-console.log(respuesta.data)
+        console.log(respuesta.data.status)
       } catch (error) {
         console.log(error)
       }
@@ -196,8 +196,9 @@ console.log(respuesta.data)
         const respuesta = await clienteAxios.post("/usuarioController.php", datos)
         dispatch({
           type: EDITAR_PERFIL,
-          payload: respuesta.data
+          payload: respuesta.data.status
         })
+        console.log(respuesta.data.status)
       } catch (error) {
         console.log(error)
       }

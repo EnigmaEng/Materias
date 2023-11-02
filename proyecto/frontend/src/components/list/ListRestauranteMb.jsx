@@ -48,21 +48,21 @@ const ListRestauranteMb = () => {
     <p className='w-80 m-auto px-12 py-10 text-black text-lg'>Restaurante no encontrado..</p>
   ) : (
     product.map((item, index) => (
-     <div class="bg-white rounded-lg " key={index}>
-  <div class="mx-auto max-w-2xl px-4 py-5 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+     <div className="bg-white rounded-lg " key={index}>
+  <div className="mx-auto max-w-2xl px-4 py-5 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
 
 
-    <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-      <a href="#" class="group">
-        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200  xl:aspect-h-8 xl:aspect-w-7">
-          <img src={item.url_img_usuario} alt="Foto-restaurante" class="h-full w-full object-cover object-center group-hover:opacity-75"/>
+    <div className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+      
+        <div className=" aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200  xl:aspect-h-8 xl:aspect-w-7">
+          <img src={item.url_img_usuario} alt="Foto-restaurante" className="h-full w-full object-cover object-center group-hover:opacity-75"/>
         </div>
-        <h3 class="mt-4 text-lg text-center font-aref pb-5 font-bold ">{item.nombre_restaurante}</h3>
+        <h3 className="mt-4 text-lg text-center font-aref font-bold ">{item.nombre_restaurante}</h3>
           <div className='gap-5 flex  px-2 '>
-    <Link to={`/clientePerfil/${item.id_usuario}`} className=' rounded-lg border px-2  shadow-xl border  w-20 flex justify-center py-2 h-8'> <BsSearch/></Link>
-    <Link to={`/crearResenia/${item.id_usuario}`} className='rounded-lg border px-2  bg-white shadow-xl  w-20 flex justify-center py-2 h-8'><GoCodeReview/></Link>
+    <Link to={`/clientePerfil/${item.id_usuario}`} className=' rounded-lg border px-2  shadow-xl border  w-20 flex justify-center py-2 h-auto'> <BsSearch/></Link>
+    <Link to={`/crearResenia/${item.id_usuario}`} className='rounded-lg border px-2  bg-white shadow-xl  w-20 flex justify-center py-2 h-auto'><GoCodeReview/></Link>
 </div>
-      </a>
+     
 
     </div>
   </div>

@@ -12,7 +12,8 @@ const Subscripcion = () => {
   const {mensaje} = useContext(todoContext)
   const {subscripcion} = subscripcionData();
 
-   const realizarInsert = (dato) => {
+  const realizarInsert = (dato) => {
+    
     subscripcion(dato);
     
   };
