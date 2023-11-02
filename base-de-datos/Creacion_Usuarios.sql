@@ -1,8 +1,14 @@
-/*DCL Creación de Usuarios*/
+/*DCL Creacion de Usuarios*/
 
 drop user if exists 'wwe_rol_r'@'192.168.56.103';
 drop user if exists 'wwe_rol_a'@'192.168.56.103';
 drop user if exists 'wwe_rol_t'@'192.168.56.103';
+drop user if exists 'wweat'@'192.168.56.103';
+
+CREATE USER 'wweat'@'192.168.56.103' IDENTIFIED BY 'Wweat123**';
+GRANT ALL PRIVILEGES ON wwe.* TO 'wweat'@'192.168.56.103' WITH GRANT OPTION;
+GRANT REPLICATION SLAVE,PROCESS ON *.* TO 'wweat'@'192.168.56.103';
+FLUSH PRIVILEGES;
 
 /*Creacion y Privilegios de Turistas
 CREATE USER 'wwe_rol_t'@'%' IDENTIFIED BY 'ContraTurista';
