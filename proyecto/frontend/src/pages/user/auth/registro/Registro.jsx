@@ -174,12 +174,7 @@ const formik = useFormik({
   type="file"
   id="url_img_usuario"
   name="url_img_usuario"
-  onChange={(event) => {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      formik.setFieldValue("url_img_usuario", file); // No almacenar el archivo directamente en el campo de Formik
-    }
-  }}
+   onChange={(event) => {formik.setFieldValue("url_img_usuario", event.currentTarget.files[0])}}
   onBlur={formik.handleBlur}
 />
 

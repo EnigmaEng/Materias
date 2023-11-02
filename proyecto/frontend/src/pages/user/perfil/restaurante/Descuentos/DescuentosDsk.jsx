@@ -25,7 +25,8 @@ const [descuentos, setDescuentos] = useState([])
 
     useEffect(() =>{
 getDescuentos();
-    },[descuentos])
+ console.log(descuentos);
+    },[])
 
 
   return (
@@ -42,7 +43,7 @@ getDescuentos();
           
               descuentos.map((item,index) => (
                 <div className='bg-white text-center text-wwe font-aref font-semibold w-auto text-2xl rounded-lg p-4' key={index}>
-                      <h2 className='text-3xl'>{item.nombre}</h2>
+                  
                       <div className='card-body border'>
                             <h4 className='text-2xl'>{item.titulo_descuento}</h4>
                       <p className='text-lg'>{item.descripcion}</p>

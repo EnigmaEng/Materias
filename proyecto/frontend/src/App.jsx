@@ -83,6 +83,7 @@ function App() {
 <Route path='/crearDescuentos' element={<CrearDescuentos/>}/>
 
 <Route path='/editarDescuentos/:id_usuario' element={<EditarDescuento/>}/>
+<Route path='/descuentos' element={<Descuentos/>}/>
 <Route path='/editarPlato/:id_Plato' element={<EditarPlato/>}/>
 
 <Route path="/clientePerfil/:id_usuario" element={<PerfilCliente/>} />
