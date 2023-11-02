@@ -17,7 +17,7 @@ try {
      }
     const respuesta = await clienteAxios.post('/subscripcionController.php', accion)
     setSolicitudes(respuesta.data)
-console.log(solicitudes)
+
 } catch (error) {
     console.log(error)
 }
@@ -32,7 +32,7 @@ console.log(solicitudes)
             "id_usuario_admin": usuario.id_usuario,
             "id_tipo_sub": id_tipo_subscripcion
           }
-          console.log(accion)
+         
           const respuesta = await clienteAxios.post('/subscripcionController.php', accion)
           
     }

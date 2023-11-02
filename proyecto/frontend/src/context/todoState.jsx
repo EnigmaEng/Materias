@@ -77,7 +77,7 @@ const iniciarSesion = async (datos) => {
       if (respuesta.data.success) {
         //usuarioData trae todos los datos del usuario desde el backend
         const usuarioData = respuesta.data.usuarioData;
-        console.log(respuesta.data.token)
+       
         
         // const token = respuesta.data.token
         // clienteAxios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -185,7 +185,7 @@ const usuarioAutenticado = () => {
           type: SOLICITUD_SUBSCRIPCION,
           payload: respuesta.data.status
         })
-
+console.log(respuesta.data)
       } catch (error) {
         console.log(error)
       }

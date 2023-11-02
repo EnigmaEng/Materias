@@ -14,7 +14,7 @@ const Subscripcion = () => {
 
    const realizarInsert = (dato) => {
     subscripcion(dato);
-    console.log(`Realizar insert con dato: ${dato}`);
+    
   };
 
   return (
