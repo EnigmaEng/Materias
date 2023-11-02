@@ -42,32 +42,26 @@ function insertarController($alias, $url_img_usuario, $email, $contrasena, $rol,
         "descripcion" => $tipo
     );
 
-    $nombreArchivo = $_FILES['url_imagen_usuario']['name'];  // Corregir la obtención del nombre del archivo
+    $nombreArchivo = $_FILES['imagen']['name'];
     $carpetaDestino = $_ENV['DIR_IMAGEN']; // Ruta de la carpeta donde se guardará la imagen
     $restaurante->setUrlImagenUsuario($nombreArchivo);
 
     if ($restaurante->create("usuarios", $datosUsuario)) {
         if ($restaurante->dataCreate("localizacion", $direccionRestaurante) && $restaurante->createInRestaurante("restaurante", $datosUsuario, $datosRestaurante) && $restaurante->createInTipoRestaurante("tipo_restaurantes", $datosUsuario, $tipoRestaurantes)) {
+            var_dump($_FILES["imagen"]);
             if (!is_writable($carpetaDestino)) {
-                return "La carpeta de destino no es escribible. Verifica los permisos.";
+                echo "La carpeta de destino no es escribible. Verifica los permisos.";
+                exit;
             }
-
-            $archivoTemp = $_FILES['url_imagen_usuario']['tmp_name'];
-            $rutaCompleta = $carpetaDestino . '/' . $nombreArchivo;
-
-            if (move_uploaded_file($archivoTemp, $rutaCompleta)) {
-                return "Creación de usuario exitosa";
-            } else {
-                return "Error al mover la imagen al directorio de destino";
-            }
+            move_uploaded_file($_FILES['imagen']['tmp_name'], $carpetaDestino);
+            return "Creacion de usuario exitosa";
         } else {
-            return "Error en la creación de usuario";
+            return "Error en la creacion de usuario";
         }
     } else {
         return "El usuario ya existe";
     }
 }
-
 
 function obtenerRestauranteById($id)
 {
@@ -272,7 +266,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $resultado = obtenerDescuentos();
                 break;
             case "modificarPlato":
-                $resultado=modificarPlato($data['id_plato'],$data['opcion'],$data['valor']);
+                $resultado=modificarPlato($data['id_Plato'],$data['opcion'],$data['valor']);
                 break;
             case "modificarDescuento":
                 $resultado=modificarDescuento($data['id_descuento'],$data['opcion'],$data['valor']);

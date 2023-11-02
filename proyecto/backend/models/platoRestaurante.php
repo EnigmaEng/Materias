@@ -218,10 +218,10 @@ class PlatoRestaurante extends CrudBasico
                     return false;
             }
 
-            $query = "UPDATE plato_restaurantes SET $nombreColumna = :valor WHERE id_plato = :id_plato";
+            $query = "UPDATE plato_restaurantes SET $nombreColumna = :valor WHERE id_Plato = :id_Plato";
             $stmt = $this->getConn()->prepare($query);
             $stmt->bindValue(":valor", $valor);
-            $stmt->bindValue(":id_plato", $idPlato);
+            $stmt->bindValue(":id_Plato", $idPlato);
 
             if ($stmt->execute()) {
                 return true;
