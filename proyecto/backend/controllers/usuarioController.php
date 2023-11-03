@@ -1,10 +1,10 @@
 <?php
 include_once '../models/turista.php';
 include './cors.php';
-function bloquearUsuario($idUsuario)
+function bloquearUsuario($emailUsuario)
 {
     $usuario = new Turista();
-    $usuario->blockAccount($idUsuario);
+    $usuario->blockAccount($emailUsuario);
 }
 
 function editarUsuario($idUsuario, $datos)
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($data)) {
         switch ($data['accion']) {
             case "bloquearUsuario":
-                bloquearUsuario($data['id_usuario']);
+                bloquearUsuario($data['email']);
                 break;
             case "modificarUsuario":
                 $resultado = editarUsuario($data["id_usuario"], $data);

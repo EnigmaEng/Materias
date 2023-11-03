@@ -213,12 +213,12 @@ class Usuario extends DataBaseConnection implements Crud
 
                 $stmt = $this->getConn()->prepare($query);
 
-                // Asignar valores a los marcadores de posición en la consulta
+               
                 foreach ($datos as $key => $value) {
                     $stmt->bindValue(':' . $key, $value);
                 }
 
-                // Ejecutar la consulta con condicional para ver qué retorna
+               
                 if ($stmt->execute()) {
                     return "Se eliminó correctamente";
                 } else {
@@ -228,7 +228,7 @@ class Usuario extends DataBaseConnection implements Crud
                 return "No se encontró ningún registro que coincida con los datos proporcionados";
             }
         } catch (PDOException $e) {
-            // Manejar el error de PDO
+           
             return "Error al eliminar: " . $e->getMessage();
         }
     }
@@ -261,60 +261,57 @@ class Usuario extends DataBaseConnection implements Crud
 
         $stmt = $this->getConn()->prepare($query);
 
-        // Asignar valores a los marcadores de posición en la consulta
+        
         foreach ($datos as $key => $value) {
             $stmt->bindValue(':' . $key, $value);
         }
 
-        // Mostrar la consulta con los valores reales de los marcadores de posición
+    
         $debugQuery = $stmt->queryString;
 
         foreach ($datos as $key => $value) {
             $debugQuery = str_replace(":$key", $value, $debugQuery);
         }
-        // Ejecutar la consulta
+        
         $stmt->execute();
 
-        // Obtener los resultados como objetos y retornarlos
+        
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 
         return $result;
     }
 
-    function blockAccount($id_usuario)
+    function blockAccount($emailUsuario)
     {
         try {
             error_log("Inicio de bloqueo de usuario");
 
-            $query = "UPDATE usuarios SET bloqueado = :bloqueado WHERE id_usuario = :id_usuario;";
+            $query = "UPDATE usuarios SET bloqueado = :bloqueado WHERE email = :email;";
             $stmt = $this->getConn()->prepare($query);
-            $stmt->bindValue(":id_usuario", $id_usuario);
+            $stmt->bindValue(":email", $emailUsuario);
             $stmt->bindValue(":bloqueado", "S");
 
             if ($stmt->execute()) {
                 error_log("Actualización en la base de datos exitosa");
 
-
                 $comando = "nohup php -r '"
                     . " sleep(15); "
                     . "\$pdo = new PDO(\"mysql:host=" . $_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_NAME'] . "\", \"" . $_ENV['DB_USER'] . "\", \"" . $_ENV['DB_PASSWORD'] . "\");"
                     . "\$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);"
-                    . "\$stmt = \$pdo->prepare(\"UPDATE usuarios SET bloqueado = :bloqueado WHERE id_usuario = :id_usuario\");"
-                    . "\$stmt->bindValue(\":id_usuario\", $id_usuario);"
+                    . "\$stmt = \$pdo->prepare(\"UPDATE usuarios SET bloqueado = :bloqueado WHERE email = :email\");"
+                    . "\$stmt->bindValue(\":email\", $emailUsuario);"
                     . "\$stmt->bindValue(\":bloqueado\", \"N\");"
                     . "\$stmt->execute();"
                     . "' > /dev/null 2>&1 &";
 
-                // Registro del comando
+                
                 error_log("Comando en segundo plano: $comando");
 
                 exec($comando);
-
-
-                // Registro de éxito
+                
                 error_log("Ejecución en segundo plano exitosa");
             } else {
-                // Registro de fallo en la actualización de la base de datos
+                
                 error_log("Error en la actualización de la base de datos");
             }
         } catch (PDOException $ex) {
@@ -323,7 +320,6 @@ class Usuario extends DataBaseConnection implements Crud
             error_log("Error al ejecutar el proceso: " . $e->getMessage());
         }
 
-        // Registro de finalización
         error_log("Fin de bloqueo de usuario");
     }
     public function editUser($idUsuario, $datos)
