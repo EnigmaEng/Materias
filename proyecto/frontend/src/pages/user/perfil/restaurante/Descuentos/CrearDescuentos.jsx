@@ -94,7 +94,7 @@ resetForm()
 </div>
 
 <div  className='flex flex-col text-center font-aref text-black text-lg mb-6' >
-  <label htmlFor="">Imagen</label>
+  <label htmlFor="">Imagen del descuento</label>
 <input
   type="file"
   id="url_img_descuento"
