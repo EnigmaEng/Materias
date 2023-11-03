@@ -3,15 +3,18 @@
 require_once '../models/turista.php';
 require_once '../models/resenia.php';
 require_once './cors.php';
+require_once '../models/guardarImagen.php';
+
+require '../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 
-// Carga las variables de entorno desde el archivo .env
 $dotenv = Dotenv::createImmutable('/var/www/html/');
 $dotenv->load();
 
 function insertarController($alias = '', $url_img_usuario = '', $email = '', $contrasena = '', $rol = '', $nacionalidad = '', $motivoAlojamiento = '', $nombres = '', $apellidos = '')
 {
+    $directorioDestino = $_ENV['DIR_IMAGEN'];
     $turista = new Turista();
     $datosUsuario = array(
         "alias" => $alias,
@@ -29,13 +32,16 @@ function insertarController($alias = '', $url_img_usuario = '', $email = '', $co
         "apellidos" => $apellidos
     );
 
-    $nombreArchivo = $_FILES['imagen']['name'];
-    $carpetaDestino = $_ENV['DIR_IMAGEN']; // Ruta de la carpeta donde se guardará la imagen
-    $turista->setUrlImagenUsuario($nombreArchivo);
+    $guardarImagen = new GuardarImagen($directorioDestino);
+
+    if (isset($_FILES['imagen']) && is_array($_FILES['imagen']['name'])) {
+        $nombreArchivo = $_FILES['imagen']['name'][0];
+        $ruta = $guardarImagen->guardarImagen($_FILES['imagen'], $nombreArchivo);
+        $datosUsuario["url_img_usuario"] = $ruta;
+    }
 
     if ($turista->create("usuarios", $datosUsuario)) {
         if ($turista->createInTurista("turista", $datosUsuario, $datosTurista)) {
-            $turista->guardarImagen($_FILES['imagen']['tmp_name'], $nombreArchivo, $carpetaDestino);
             return "Creacion de usuario exitosa";
         } else {
             return "Error en la creacion de usuario";

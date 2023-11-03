@@ -2,6 +2,7 @@
 require './cors.php';
 require_once '../models/subscripcion.php';
 require_once '../models/admin.php';
+
 function restauranteCompraSub($idUsuarioRest, $idTipoSubs, $fechaPago)
 {
     $subscripcion = new Subscripcion();

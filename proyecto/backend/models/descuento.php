@@ -233,39 +233,47 @@ class Descuento extends CrudBasico
         }
     }
 
-    public function modificarDescuento($idDescuento, $opcion, $valor)
+    public function modificarDescuento($idDescuento, $datos)
     {
         try {
-            $query = "";
-            $nombreColumna = "";
+            $query = "UPDATE descuento SET ";
+            $valores = [];
 
-            switch ($opcion) {
-                case "activo":
-                    $nombreColumna = "activo";
-                    break;
-                case "titulo_descuento":
-                    $nombreColumna = "titulo_descuento";
-                    break;
-                case "descripcion":
-                    $nombreColumna = "descripcion";
-                    break;
-                case "url_img_descuento":
-                    $nombreColumna = "url_img_descuento";
-                    break;
-                case "costo":
-                    $nombreColumna = "costo";
-                    break;
-                default:
-                    // Manejar un caso incorrecto o desconocido de $opcion
-                    return false;
+            foreach ($datos as $opcion => $valor) {
+                switch ($opcion) {
+                    case "activo":
+                        $query .= "activo = :activo, ";
+                        $valores[":activo"] = $valor;
+                        break;
+                    case "titulo_descuento":
+                        $query .= "titulo_descuento = :titulo_descuento, ";
+                        $valores[":titulo_descuento"] = $valor;
+                        break;
+                    case "descripcion":
+                        $query .= "descripcion = :descripcion, ";
+                        $valores[":descripcion"] = $valor;
+                        break;
+                    case "url_img_descuento":
+                        $query .= "url_img_descuento = :url_img_descuento, ";
+                        $valores[":url_img_descuento"] = $valor;
+                        break;
+                    case "costo":
+                        $query .= "costo = :costo, ";
+                        $valores[":costo"] = $valor;
+                        break;
+                    default:
+                        return false;
+                }
             }
 
-            $query = "UPDATE descuento SET $nombreColumna = :valor WHERE id_descuento = :id_descuento";
-            $stmt = $this->getConn()->prepare($query);
-            $stmt->bindValue(":valor", $valor);
-            $stmt->bindValue(":id_descuento", $idDescuento);
+            $query = rtrim($query, ', ');
 
-            if ($stmt->execute()) {
+            $query .= " WHERE id_descuento = :id_descuento";
+            $valores[":id_descuento"] = $idDescuento;
+
+            $stmt = $this->getConn()->prepare($query);
+
+            if ($stmt->execute($valores)) {
                 return true;
             }
 

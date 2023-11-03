@@ -133,11 +133,6 @@ class Usuario extends DataBaseConnection implements Crud
         return $this->rol;
     }
 
-    public function guardarImagen($archivo_temporal, $nombre_archivo, $carpeta_destino)
-    {
-        return move_uploaded_file($archivo_temporal, $carpeta_destino . $nombre_archivo);
-    }
-
     public function create($tabla, $datos)
     {
         try {

@@ -187,36 +187,43 @@ class PlatoRestaurante extends CrudBasico
         return $resultados;
     }
 
-    public function modificarPlato($idPlato, $opcion, $valor)
+    public function modificarPlato($idPlato, $datos)
     {
         try {
-            $query = "";
-            $nombreColumna = "";
+            $query = "UPDATE plato_restaurantes SET ";
+            $valores = [];
 
-            switch ($opcion) {
-                case "nombre_plato":
-                    $nombreColumna = "nombre_plato";
-                    break;
-                case "costo":
-                    $nombreColumna = "costo";
-                    break;
-                case "descripcion":
-                    $nombreColumna = "url_img_usuario";
-                    break;
-                case "estado_plato":
-                    $nombreColumna = "estado_plato";
-                    break;
-                default:
-                    // Manejar un caso incorrecto o desconocido de $opcion
-                    return false;
+            foreach ($datos as $opcion => $valor) {
+                switch ($opcion) {
+                    case "nombre_plato":
+                        $query .= "nombre_plato = :nombre_plato, ";
+                        $valores[":nombre_plato"] = $valor;
+                        break;
+                    case "costo":
+                        $query .= "costo = :costo, ";
+                        $valores[":costo"] = $valor;
+                        break;
+                    case "descripcion":
+                        $query .= "descripcion = :descripcion, ";
+                        $valores[":descripcion"] = $valor;
+                        break;
+                    case "estado_plato":
+                        $query .= "estado_plato = :estado_plato, ";
+                        $valores[":estado_plato"] = $valor;
+                        break;
+                    default:
+                        return false;
+                }
             }
 
-            $query = "UPDATE plato_restaurantes SET $nombreColumna = :valor WHERE id_Plato = :id_Plato";
-            $stmt = $this->getConn()->prepare($query);
-            $stmt->bindValue(":valor", $valor);
-            $stmt->bindValue(":id_Plato", $idPlato);
+            $query = rtrim($query, ', ');
 
-            if ($stmt->execute()) {
+            $query .= " WHERE id_Plato = :id_Plato";
+            $valores[":id_Plato"] = $idPlato;
+
+            $stmt = $this->getConn()->prepare($query);
+
+            if ($stmt->execute($valores)) {
                 return true;
             }
 

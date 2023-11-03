@@ -9,7 +9,6 @@ require '../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 
-// Carga las variables de entorno desde el archivo .env
 $dotenv = Dotenv::createImmutable('/var/www/html/');
 $dotenv->load();
 
@@ -21,7 +20,7 @@ function insertarController($alias, $url_img_usuario, $email, $contrasena, $rol,
     $restaurante = new Restaurante();
     $datosUsuario = array(
         "alias" => $alias,
-        "url_img_usuario" => $url_img_usuario,  // Se asume que $url_img_usuario es la ruta de la imagen
+        "url_img_usuario" => $url_img_usuario,
         "email" => $email,
         "contrasena" => $contrasena,
         "rol" => $rol
@@ -50,7 +49,7 @@ function insertarController($alias, $url_img_usuario, $email, $contrasena, $rol,
     if (isset($_FILES['imagen']) && is_array($_FILES['imagen']['name'])) {
         $nombreArchivo = $_FILES['imagen']['name'][0];
         $ruta = $guardarImagen->guardarImagen($_FILES['imagen'], $nombreArchivo);
-        $datosUsuario["url_img_usuario"] = $ruta;  // Actualiza la ruta de la imagen
+        $datosUsuario["url_img_usuario"] = $ruta;
     }
 
     if ($restaurante->create("usuarios", $datosUsuario)) {
@@ -80,6 +79,7 @@ function obtenerRestauranteById($id)
 
 function crearPlato($id_plato, $nombre_plato, $costo, $descripcion, $url_img_menu, $estado_plato, $id_usuario_rest)
 {
+    $directorioDestino = $_ENV['DIR_IMAGEN'];
     $plato = new PlatoRestaurante();
     $plato->setIdPlato($id_plato);
     $plato->setNombrePlato($nombre_plato);
@@ -89,7 +89,16 @@ function crearPlato($id_plato, $nombre_plato, $costo, $descripcion, $url_img_men
     $plato->setEstadoPlato($estado_plato);
     $plato->setIdUsuario($id_usuario_rest);
     $plato->setPlato();
-    $plato->setUrlImgMenu($url_img_menu);
+
+    $guardarImagen = new GuardarImagen($directorioDestino);
+
+    if (isset($_FILES['imagen']) && is_array($_FILES['imagen']['name'])) {
+        $nombreArchivo = $_FILES['imagen']['name'][0];
+        $ruta = $guardarImagen->guardarImagen($_FILES['imagen'], $nombreArchivo);
+        $url_img_menu = $ruta;
+        $plato->setUrlImgMenu($url_img_menu);
+    }
+
     if ($plato->persistirPlato()) {
         return true;
     }
@@ -98,15 +107,25 @@ function crearPlato($id_plato, $nombre_plato, $costo, $descripcion, $url_img_men
 
 function crearDescuento($idRestaurante, $activo, $tituloDescuento, $descripcion, $urlImgDescuento, $fechaInicio, $fechaFin, $costo)
 {
+    $directorioDestino = $_ENV['DIR_IMAGEN'];
     $descuento = new Descuento();
     $descuento->setIdRestaurante($idRestaurante);
     $descuento->setActivo($activo);
     $descuento->setTituloDescuento($tituloDescuento);
     $descuento->setDescripcion($descripcion);
-    $descuento->setUrlImagenDesc($urlImgDescuento);
     $descuento->setFechaInicio($fechaInicio);
     $descuento->setFechaFin($fechaFin);
     $descuento->setCosto($costo);
+
+    $guardarImagen = new GuardarImagen($directorioDestino);
+
+    if (isset($_FILES['imagen']) && is_array($_FILES['imagen']['name'])) {
+        $nombreArchivo = $_FILES['imagen']['name'][0];
+        $ruta = $guardarImagen->guardarImagen($_FILES['imagen'], $nombreArchivo);
+        $urlImgDescuento = $ruta;
+        $descuento->setUrlImagenDesc($urlImgDescuento);
+    }
+
     if ($descuento->crearDescuento()) {
         if ($descuento->restauranteTieneDescuento()) {
             return true;
@@ -118,7 +137,7 @@ function crearDescuento($idRestaurante, $activo, $tituloDescuento, $descripcion,
 function obtenerPlatos($id_usuario_rest)
 {
     $platos = new PlatoRestaurante();
-    // Obtener la lista de restaurantes
+
     $obtenerPlatos = $platos->obtenerPlatosPorIdUsuarioRest($id_usuario_rest);
 
     if (!empty($obtenerPlatos)) {
@@ -138,14 +157,13 @@ function obtenerRestaurante()
     $response = "";
 
     foreach ($restaurantes as $restaurante) {
-        // Genera un objeto JSON separado en cada iteración
+
         $restaurantesDatos = json_encode(array(
             "id_usuario" => $restaurante->id_usuario,
             "nombre_restaurante" => $restaurante->nombre_restaurante,
             "foto_usuario" => $restaurante->foto_usuario
         ));
 
-        // Agrega una coma para separar los objetos JSON, excepto en la primera iteración.
         if (!empty($response)) {
             $response .= ",";
         }
@@ -174,26 +192,87 @@ function obtenerDescuentoPorId($idDescuento)
     }
 }
 
-function modificarPlato($idPlato, $opcion, $valor)
+function modificarPlato($idPlato, $datos)
 {
     $plato = new PlatoRestaurante();
-    if ($plato->modificarPlato($idPlato, $opcion, $valor)) {
-        return json_encode(array("status" => "Modificacion realizada correctamente."));
+    $validOptions = ["nombre_plato", "costo", "descripcion", "estado_plato"];
+    $nuevosDatos = [];
+
+    foreach ($datos as $opcion => $valor) {
+        if ($opcion === "accion" || $opcion === "id_Plato") {
+            continue;
+        }
+
+        if (in_array($opcion, $validOptions)) {
+            switch ($opcion) {
+                case "nombre_plato":
+                    $plato->setNombrePlato($valor);
+                    break;
+                case "costo":
+                    $plato->setCosto($valor);
+                    break;
+                case "descripcion":
+                    $plato->setDescripcion($valor);
+                    break;
+                case "estado_plato":
+                    $plato->setEstadoPlato($valor);
+                    break;
+            }
+            $nuevosDatos[$opcion] = $valor;
+        } else {
+            return json_encode(array("status" => "Opción de cambio no válida: " . $opcion));
+        }
+    }
+
+    if ($plato->modificarPlato($idPlato, $nuevosDatos)) {
+        return json_encode(array("status" => "Modificación realizada correctamente."));
     } else {
-        return json_encode(array("status" => "Hubo errores en la modificacion."));
+        return json_encode(array("status" => "Hubo errores en la modificación."));
     }
 }
 
-function modificarDescuento($idDescuento, $opcion, $valor)
+
+function modificarDescuento($idDescuento, $datos)
 {
-    $descuento = new Descuento;
-    if ($descuento->modificarDescuento($idDescuento, $opcion, $valor)) {
-        return json_encode(array("status" => "Modificacion realizada correctamente."));
+    $descuento = new Descuento();
+    $validOptions = ["activo", "titulo_descuento", "descripcion", "url_img_descuento", "costo"];
+    $nuevosDatos = [];
+
+    foreach ($datos as $opcion => $valor) {
+        if ($opcion === "accion" || $opcion === "id_descuento") {
+            continue;
+        }
+
+        if (in_array($opcion, $validOptions)) {
+            switch ($opcion) {
+                case "activo":
+                    $descuento->setActivo($valor);
+                    break;
+                case "titulo_descuento":
+                    $descuento->setTituloDescuento($valor);
+                    break;
+                case "descripcion":
+                    $descuento->setDescripcion($valor);
+                    break;
+                case "url_img_descuento":
+                    $descuento->setUrlImagenDesc($valor);
+                    break;
+                case "costo":
+                    $descuento->setCosto($valor);
+                    break;
+            }
+            $nuevosDatos[$opcion] = $valor;
+        } else {
+            return json_encode(array("status" => "Opción de cambio no válida: " . $opcion));
+        }
+    }
+
+    if ($descuento->modificarDescuento($idDescuento, $nuevosDatos)) {
+        return json_encode(array("status" => "Modificación realizada correctamente."));
     } else {
-        return json_encode(array("status" => "Hubo errores en la modificacion."));
+        return json_encode(array("status" => "Hubo errores en la modificación."));
     }
 }
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
@@ -260,10 +339,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $resultado = obtenerDescuentos();
                 break;
             case "modificarPlato":
-                $resultado = modificarPlato($data['id_Plato'], $data['opcion'], $data['valor']);
+                $resultado = modificarPlato($data['id_Plato'], $data);
                 break;
             case "modificarDescuento":
-                $resultado = modificarDescuento($data['id_descuento'], $data['opcion'], $data['valor']);
+                $resultado = modificarDescuento($data['id_descuento'], $data);
                 break;
             default:
                 $resultado = "Error en el tipo de accion, intente nuevamente";
