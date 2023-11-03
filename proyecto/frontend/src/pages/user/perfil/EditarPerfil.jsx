@@ -66,15 +66,15 @@ onSubmit: async(valores, { resetForm }) => {
              {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/>}
   <form onSubmit={formik.handleSubmit} className='bg-white mt-24 space-y-5 md:w-3/12 p-8 rounded-lg' method='POST' encType="multipart/form-data" autoComplete="off">
 <div className='form-control'>
-    <label htmlFor="" className='font-aref font-semibold text md:ml-16'><span className='text-gray-400 text-lg ml-2'>Alias: {usuario?.alias}</span></label>
+    <label htmlFor="" className='font-aref font-semibold text-center'><span className='text-gray-400 text-lg '>Alias: {usuario?.alias}</span></label>
     <input type="text" placeholder='alias' className='placeholder:italic px-3 py-1 rounded-md bg-gray-100 md:w-9/12 m-auto text-black border border-wwe' id='alias' value={formik.values.alias} onChange={formik.handleChange} autoComplete="off" />
 </div>
 <div className='form-control'>
-    <label htmlFor="" className='font-aref font-semibold md:ml-16'><span className='text-gray-400 text-lg ml-2'>Contraseña: </span></label>
+    <label htmlFor="" className='font-aref font-semibold text-center'><span className='text-gray-400 text-lg '>Contraseña: </span></label>
     <input type="password" placeholder='contraseña' className='placeholder:italic px-3 py-1 rounded-md bg-gray-100 md:w-9/12 m-auto text-black border border-wwe' id='contrasena' value={formik.values.contrasena} onChange={formik.handleChange} autoComplete="off" />
 </div>
-<div className='form-control'>
-    <label htmlFor="" className='text-gray-400 text-lg ml-2 md:ml-16 font-semibold font-aref'>Foto de perfil:</label>
+<div className='form-control flex justify-center items-center'>
+    <label htmlFor="" className='text-gray-400 text-lg ml-2  font-semibold font-aref'>Foto de perfil:</label>
  <input
   type="file"
   id="url_img_usuario"
@@ -84,7 +84,7 @@ onSubmit: async(valores, { resetForm }) => {
     formik.setFieldValue("url_img_usuario", event.currentTarget.files[0]);
   }}
   onBlur={formik.handleBlur}
-  className="file-input file-input-ghost w-full max-w-xs  text-wwe border border-wwe ml-16 mt-2"
+  className="file-input file-input-ghost w-full max-w-xs  text-wwe border border-wwe  mt-2"
 />
 </div>
 <div className='flex items-center justify-center'>

@@ -13,11 +13,27 @@ const CrearMenu = () => {
 
 
 const TodoContext = useContext(todoContext)
-const {crearPlato, mensaje, usuario, usuarioAutenticado, imagenBase64} = TodoContext
+const {crearPlato, mensaje, usuario, usuarioAutenticado} = TodoContext
 
 useEffect(() => {
   usuarioAutenticado()
 },[])
+
+    const imagenBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+      reader.onload = () => {
+      resolve(reader.result);
+     };
+
+     reader.onerror = (error) => {
+      reject(error);
+     };
+
+    reader.readAsDataURL(file);
+  });
+};
 
 
 const formik = useFormik({
@@ -34,7 +50,7 @@ const formik = useFormik({
     nombre_plato: Yup.string().required('El campo no puede ir vacío'),
     costo: Yup.number().typeError('Ingrese un precio válido').required('El campo no puede ir vacio'),
     descripcion: Yup.string().required('El campo no puede ir vacío'),
-    url_img_menu: Yup.string().required('El campo no puede ir vacío'),
+
    
   }),
   onSubmit: async (valores, { resetForm }) => {
@@ -50,11 +66,11 @@ const formik = useFormik({
   };
 
   if(valores.url_img_menu){
-    const file = valores.url_img_usuario;
+    const file = valores.url_img_menu;
 
     try {
       const base64Image = await imagenBase64(file);
-      data.url_img_usuario = base64Image;
+      platoData.url_img_menu = base64Image;
 
 
     crearPlato(platoData);
@@ -91,7 +107,7 @@ const formik = useFormik({
   onChange={(event) => {
     formik.setFieldValue("url_img_menu", event.currentTarget.files[0]);
   }}
-  onBlur={formik.handleBlur}
+  
 className="file-input file-input-ghost w-full max-w-xs text-wwe border border-wwe text-white"
 />
 {

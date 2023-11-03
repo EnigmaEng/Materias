@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import todoContext from '../../../../../context/todoContext';
 import { Link } from 'react-router-dom';
 import Mensaje from '../../../../../components/alertas/Mensaje';
+import NavBar from '../../../../../components/nabvar/NavBar';
 
 const EditarPlato = () => {
 
@@ -69,7 +70,7 @@ const formik = useFormik({
 })
   return (
     <div className='min-h-screen'>
-        <p className='text-center text-4xl font-bold text-wwe'> id: {id_Plato}</p>
+       <NavBar/>
         <div className='absolute left-24 top-24 '>
             <Link to='/menu' className='p-2  text-white bg-wwe rounded-md '>Volver</Link>
         </div>
@@ -106,10 +107,10 @@ const formik = useFormik({
     formik.setFieldValue("url_img_menu", event.currentTarget.files[0]);
   }}
   onBlur={formik.handleBlur}
-  className="file-input file-input-ghost w-full max-w-xs  text-wwe border border-wwe ml-16 mt-2"
+  className="file-input file-input-ghost w-full max-w-xs  text-wwe border border-wwe  mt-2"
 />
     </div>
-    <div className='form-control mb-4'>
+    {/* <div className='form-control mb-4'>
         <label htmlFor="" className='text-wwe text-lg font-semibold fotn-aref' >Estado del plato</label>
         <select name="" id="estado_plato" className='rounded-md p-2 border border-wwe bg-gray-200 text-black '
         onChange={formik.handleChange} value={formik.values.estado_plato}
@@ -118,7 +119,7 @@ const formik = useFormik({
             <option value="S">Activo</option>
             <option value="N">Desactivado</option>
         </select>
-    </div>
+    </div> */}
     <div className='flex items-center justify-center'>
         <button className='bg-wwe text-white w-64 text-lg font-aref font-semibold font-border shado-xl mt-5 rounded-md p-1' type='submit'>Editar </button>
     </div>

@@ -93,7 +93,7 @@ resetForm()
 }
 </div>
 
-<div  className='flex flex-col text-center font-aref text-black text-lg mb-6' >
+<div  className='flex flex-col  justify-center items-center text-center font-aref text-black text-lg mb-6' >
   <label htmlFor="">Imagen del descuento</label>
 <input
   type="file"
@@ -104,7 +104,7 @@ resetForm()
     formik.setFieldValue("url_img_descuento", event.currentTarget.files[0]);
   }}
   onBlur={formik.handleBlur}
-className="file-input file-input-ghost w-full max-w-xs border border-wwe text-wwe ml-20"
+className="file-input file-input-ghost w-full max-w-xs border border-wwe text-wwe "
 />
 {
   formik.touched.url_img_descuento && formik.errors.url_img_descuento ? 
@@ -138,8 +138,10 @@ className="file-input file-input-ghost w-full max-w-xs border border-wwe text-ww
   <div><p className='text-wwe px-4'>{formik.errors.fecha_fin}</p></div> : null
 }
 </div>
+<div className='flex justify-center items-center'>
+    <button type='submit' className=' w-full mt-5   py-1 shadow-xl shadow-gray-400 hover:bg-red-600 bg-wwe rounded-lg text-white text-2xl'>Crear</button>
+</div>
 
-  <button type='submit' className='w-52 mt-5 md:ml-32 ml-12 py-1 shadow-xl shadow-gray-400 hover:bg-red-600 bg-wwe rounded-lg text-white text-2xl'>Crear</button>
 </form>
         
     </div>

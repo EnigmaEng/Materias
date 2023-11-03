@@ -35,7 +35,7 @@ const {usuario, autenticado} = TodoContext
     <button className='bg-wwe  rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-8 md:absolute md:left-10 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700 md:border-gray-400 text-white'><BiArrowBack/></button>
     </Link>
   
-    <div className='bg-white w-8/12 justify-center m-auto space-y-5 py-6 text-black text-3xl flex flex-col  items-center rounded-box '>
+    <div className='bg-white dark:bg-zinc-800 w-8/12 justify-center m-auto space-y-5 py-6 text-black text-3xl flex flex-col  items-center rounded-box '>
       <div className='space-x-24'>
          <Link to='/crearDescuentos' className='bg-wwe hover:bg-red-700 rounded-lg px-4 py-1 text-white '>
     Crear descuento
@@ -56,7 +56,7 @@ const {usuario, autenticado} = TodoContext
 
   {Array.isArray(platos) && platos.length > 0 ? (
     platos.map((item, index) => (
-      <div className=' hover:scale-110 duration-300 delay-150 transition-all rounded-box  bg-white shadow-xl w-52 h-82 text-center text-black text-2xl' key={index}>
+      <div className=' hover:scale-110 duration-300 delay-150 transition-all rounded-box bg-white shadow-xl w-52 h-82 text-center text-black text-2xl' key={index}>
        
           <img src={item.url_img_menu} alt="foto-plato" className='h-32 bg-gray-700 rounded-t-box' />
         <p className='text-center text-lg font-aref text-black font-semibold'>{item.nombre_plato}</p>
