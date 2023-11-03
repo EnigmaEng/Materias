@@ -8,7 +8,7 @@ const restauranteData = () => {
     "accion": "obtenerRestaurantes"
   }
   const URL = clienteAxios.post(endpoint, data)
-     //clienteAxios.get('/restauranteController.php');
+     
     const [pagina, setPagina] = useState(1);
     const [busqueda, setBusqueda] = useState('');
     const [buscando, setBuscando] = useState(false);

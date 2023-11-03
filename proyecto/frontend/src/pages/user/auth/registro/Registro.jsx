@@ -143,7 +143,7 @@ onSubmit: async (valores) => {
         data.esquina = valores.esquina;
       }
 
-      console.log(data); // Verificar los datos antes de enviarlos
+      console.log(data); 
 
       if (selectedRole === 'T') {
         registrarTurista(data);
@@ -155,10 +155,6 @@ onSubmit: async (valores) => {
     }
   }
 },
-
-
-
-
 
   });
 

@@ -13,7 +13,7 @@ const CrearMenu = () => {
 
 
 const TodoContext = useContext(todoContext)
-const {crearPlato, mensaje, usuario, usuarioAutenticado} = TodoContext
+const {crearPlato, mensaje, usuario, usuarioAutenticado, imagenBase64} = TodoContext
 
 useEffect(() => {
   usuarioAutenticado()
@@ -37,21 +37,36 @@ const formik = useFormik({
     url_img_menu: Yup.string().required('El campo no puede ir vacío'),
    
   }),
-  onSubmit: (valores, { resetForm }) => {
+  onSubmit: async (valores, { resetForm }) => {
     const platoData = {
     accion: "crearPlato",
     id_Plato: null, 
     nombre_plato: valores.nombre_plato,
     costo: valores.costo,
     descripcion: valores.descripcion,
-    url_img_menu: valores.url_img_menu,
+    // url_img_menu: valores.url_img_menu,
     estado_plato: 'S',
     id_usuario_rest: usuario?.id_usuario, 
   };
 
+  if(valores.url_img_menu){
+    const file = valores.url_img_usuario;
+
+    try {
+      const base64Image = await imagenBase64(file);
+      data.url_img_usuario = base64Image;
+
+
     crearPlato(platoData);
-    resetForm();
-    console.log(mensaje)
+    
+    
+    } catch (error) {
+      console.log("error al subir la foto: ", error)
+    }
+      resetForm();
+  }
+
+ 
   },
 });
 
@@ -68,9 +83,17 @@ const formik = useFormik({
       <div> {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }</div> 
       <div className='flex flex-col  '>
 <label htmlFor="" className=''>Foto del plato:</label>
-<input type="text" id='url_img_menu' 
-onChange={formik.handleChange}
-onBlur={formik.handleBlur} className='w-80 px-4 py-1.5 rounded-lg bg-white border border-wwe  placeholder:italic ' placeholder='Foto..' />
+<input
+  type="file"
+  id="url_img_menu"
+  name="imagen"
+  accept="image/*"
+  onChange={(event) => {
+    formik.setFieldValue("url_img_menu", event.currentTarget.files[0]);
+  }}
+  onBlur={formik.handleBlur}
+
+/>
 {
   formik.touched.url_img_menu && formik.errors.url_img_menu ? 
   <div><p className='text-lg px-2 text-wwe'>{formik.errors.url_img_menu}</p></div> : 
