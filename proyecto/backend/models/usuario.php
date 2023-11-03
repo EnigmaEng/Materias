@@ -182,7 +182,7 @@ class Usuario extends DataBaseConnection implements Crud
             $placeholders = implode(', ', array_map(function ($key) {
                 return ':' . $key;
             }, array_keys($datos)));
-            
+
             $query = "INSERT INTO $tabla ($columnNames) VALUES ($placeholders)";
 
             $stmt = $this->getConn()->prepare($query);
@@ -331,35 +331,41 @@ class Usuario extends DataBaseConnection implements Crud
         // Registro de finalización
         error_log("Fin de bloqueo de usuario");
     }
-    public function editUser($idUsuario, $opcion, $valor)
+    public function editUser($idUsuario, $datos)
     {
         try {
-            $nombreColumna = "";
-            switch ($opcion) {
-                case "alias":
-                    $nombreColumna = "alias";
-                    $valor = $this->getAlias();
-                    break;
-                case "contrasena":
-                    $nombreColumna = "contrasena";
-                    $hashedPass = password_hash($this->getContrasenia(), PASSWORD_BCRYPT);
-                    $valor = $hashedPass;
-                    break;
-                case "url_img_usuario":
-                    $nombreColumna = "url_img_usuario";
-                    $valor = $this->getUrlImagenUsuario();
-                    break;
-                default:
-                    // Manejar un caso incorrecto o desconocido de $opcion
-                    return false;
+            $query = "UPDATE usuarios SET ";
+            $valores = [];
+
+            foreach ($datos as $opcion => $valor) {
+                switch ($opcion) {
+                    case "alias":
+                        $query .= "alias = :alias, ";
+                        $valores[":alias"] = $valor;
+                        break;
+                    case "contrasena":
+                        $query .= "contrasena = :contrasena, ";
+                        $hashedPass = password_hash($valor, PASSWORD_BCRYPT);
+                        $valores[":contrasena"] = $hashedPass;
+                        break;
+                    case "url_img_usuario":
+                        $query .= "url_img_usuario = :url_img_usuario, ";
+                        $valores[":url_img_usuario"] = $valor;
+                        break;
+                    default:
+                        return false;
+                }
             }
 
-            $query = "UPDATE usuarios SET $nombreColumna = :valor WHERE id_usuario = :id_usuario";
-            $stmt = $this->getConn()->prepare($query);
-            $stmt->bindValue(":valor", $valor);
-            $stmt->bindValue(":id_usuario", $idUsuario);
+            
+            $query = rtrim($query, ', ');
 
-            if ($stmt->execute()) {
+            $query .= " WHERE id_usuario = :id_usuario";
+            $valores[":id_usuario"] = $idUsuario;
+
+            $stmt = $this->getConn()->prepare($query);
+
+            if ($stmt->execute($valores)) {
                 return true;
             }
 

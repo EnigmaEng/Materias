@@ -11,7 +11,7 @@ function restauranteCompraSub($idUsuarioRest, $idTipoSubs, $fechaPago)
     if ($subscripcion->usuarioPagaSubscripcion()) {
         return json_encode(array('status' => 'La compra se realizo correctamente'));
     } else {
-        return json_encode(array('status' => 'Error'));
+        return json_encode(array('status' => 'Ya tienes una subscripcion pendiente o activa.'));
     }
 }
 
