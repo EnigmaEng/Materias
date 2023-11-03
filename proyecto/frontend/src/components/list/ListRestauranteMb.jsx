@@ -54,10 +54,8 @@ const ListRestauranteMb = () => {
 
     <div className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
       
-        <div className=" aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200  xl:aspect-h-8 xl:aspect-w-7">
-          <img src={item.url_img_usuario} alt="Foto-restaurante" className="h-full w-full object-cover object-center group-hover:opacity-75"/>
-        </div>
-        <h3 className="mt-4 text-lg text-center font-aref font-bold ">{item.nombre_restaurante}</h3>
+       
+        <h3 className=" text-lg text-center font-aref font-bold ">{item.nombre_restaurante}</h3>
           <div className='gap-5 flex  px-2 '>
     <Link to={`/clientePerfil/${item.id_usuario}`} className=' rounded-lg border px-2  shadow-xl border  w-20 flex justify-center py-2 h-auto'> <BsSearch/></Link>
     <Link to={`/crearResenia/${item.id_usuario}`} className='rounded-lg border px-2  bg-white shadow-xl  w-20 flex justify-center py-2 h-auto'><GoCodeReview/></Link>

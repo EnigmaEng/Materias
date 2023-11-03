@@ -10,7 +10,7 @@ const EditarPlato = () => {
 
 const {id_Plato} = useParams();
 const TodoContext = useContext(todoContext)
-const { editarPlato, mensaje} = TodoContext
+const { editarPlato, mensaje, imagenBase64} = TodoContext
 
 
 
@@ -26,43 +26,41 @@ const formik = useFormik({
     },
 
 
-       onSubmit: (valores, { resetForm }) => {
+       onSubmit: async(valores, { resetForm }) => {
     const data = {
         accion: "modificarPlato",
         id_Plato: id_Plato,
     };
 
     if (valores.nombre_plato !== "") {
-        data.opcion = "nombre_plato";
-        data.valor = valores.nombre_plato;
+    data.nombre_plato = valores.nombre_plato;
     }
 
     if (valores.costo !== "") {
-        data.opcion = "costo";
-        data.valor = valores.costo;
+    data.costo = valores.costo;
     }
 
-    if (valores.descripcion !== "") {
-        data.opcion = "descripcion";
-        data.valor = valores.descripcion;
+    if(valores.descripcion !== ""){
+        data.descripcion = valores.descripcion;
+    }
+    
+    if(valores.estado_plato !== ""){
+        data.estado_plato = valores.estado_plato;
     }
 
-     if (valores.url_img_menu !== "") {
-        data.opcion = "url_img_menu";
-        data.valor = valores.url_img_menu;
+    if (valores.url_img_menu !== "") {
+        const file = valores.url_img_menu;
+        try {
+        const base64Image = await imagenBase64(file);
+        data.url_img_menu = base64Image;
+        } catch (error) {
+            console.log("Error al cargar la foto: " , error)
+        }
     }
 
-     if (valores.estado_plato !== "") {
-        data.opcion = "estado_plato";
-        data.valor = valores.estado_plato;
-    }
-
-
-
-    // Enviar solo si hay cambios
-    if (data.opcion && data.valor) {
-        editarPlato(data);
-         resetForm();
+    if (Object.keys(data).length > 2) { //ver si hay cambios excepto el accion y el id
+    editarPlato(data);
+    resetForm();
     }
    
 }
@@ -87,7 +85,7 @@ const formik = useFormik({
     </div>
     <div className='form-control mb-4'>
         <label htmlFor="" className='text-wwe text-lg font-semibold fotn-aref'>Costo</label>
-        <input type="number" id='costo' placeholder='Costo' className='rounded-md p-2 border border-wwe bg-gray-200 text-black'
+        <input type="text" id='costo' placeholder='Costo' className='rounded-md p-2 border border-wwe bg-gray-200 text-black'
         value={formik.values.costo} onChange={formik.handleChange}
         />
     </div>
@@ -99,9 +97,17 @@ const formik = useFormik({
     </div>
     <div className='form-control mb-4'>
         <label htmlFor="" className='text-wwe text-lg font-semibold fotn-aref'>Foto:</label>
-        <input type="file" id='url_img_menu' name='url_img_menu'  className='file-input'
-        
-        />
+       <input
+  type="file"
+  id="url_img_menu"
+  name="imagen"
+  accept="image/*"
+  onChange={(event) => {
+    formik.setFieldValue("url_img_menu", event.currentTarget.files[0]);
+  }}
+  onBlur={formik.handleBlur}
+  className="file-input file-input-ghost w-full max-w-xs  text-wwe border border-wwe ml-16 mt-2"
+/>
     </div>
     <div className='form-control mb-4'>
         <label htmlFor="" className='text-wwe text-lg font-semibold fotn-aref' >Estado del plato</label>

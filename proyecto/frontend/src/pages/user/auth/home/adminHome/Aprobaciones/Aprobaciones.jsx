@@ -34,7 +34,7 @@ try {
           }
          
           const respuesta = await clienteAxios.post('/subscripcionController.php', accion)
-          
+          window.location.reload()
     }
 
     useEffect(() => {
@@ -49,7 +49,7 @@ try {
    
   return (
     <>
-    <div className="grid grid-cols-1 gap-5">
+    <div className="grid grid-cols-1 gap-5 ">
 
    
     {
@@ -89,12 +89,23 @@ try {
   <div className="mt-5 flex lg:ml-4 lg:mt-0">
 
     <span className="sm:ml-3">
-      <button onClick={() => aprobarSub(item.id_usuario_rest, item.id_tipo_subscripcion)} type="button" className=" inline-flex items-center rounded-md bg-wwe px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-red-700">
-        <svg className="-ml-0.5 mr-1.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <label htmlFor="my_modal_6" type='button' className="inline-flex items-center rounded-md bg-wwe px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-red-700">
+            <svg className="-ml-0.5 mr-1.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
         </svg>
-        Confirmar
-      </button>
+        
+        Aprobar</label>
+    
+    <input type="checkbox" id="my_modal_6" className="modal-toggle" />
+<div className="modal">
+  <div className="modal-box bg-white text-black">
+    <h3 className="font-bold text-2xl">Aprobar restaurante?</h3>
+    <p className="py-4 text-sm">Estás a punto de confirmar una suscripción para un restaurante, verifica que sea el correcto y tengas todos los datos necesarios para la aprobación.</p>
+    <div className="modal-action">
+      <label htmlFor="my_modal_6" onClick={() => aprobarSub(item.id_usuario_rest, item.id_tipo_subscripcion)} type="button" className="inline-flex items-center rounded-md bg-wwe px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-red-700" >Confirmar</label>
+    </div>
+  </div>
+</div>
     </span>
 
   </div>
@@ -103,7 +114,7 @@ try {
     
 
  ) :
- <p className="text-center text-lg">Sin solicitudes</p>
+ <p className="text-center text-2xl text-gray-600 font-semibold dark:text-white">Sin solicitudes pendientes</p>
     
 }
  </div>

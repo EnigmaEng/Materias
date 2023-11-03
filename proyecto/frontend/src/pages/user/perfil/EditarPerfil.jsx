@@ -8,7 +8,8 @@ import { useContext } from 'react';
 import todoContext from '../../../context/todoContext';
 const EditarPerfi = () => {
 
-const {mensaje, editarPerfil ,usuario} = useContext(todoContext)
+const {mensaje, editarPerfil ,usuario, imagenBase64} = useContext(todoContext)
+
 
  const formik = useFormik({
         initialValues: {
@@ -18,33 +19,34 @@ const {mensaje, editarPerfil ,usuario} = useContext(todoContext)
         },
         
 
-       onSubmit: (valores, { resetForm }) => {
+onSubmit: async(valores, { resetForm }) => {
     const data = {
-        accion: "modificarUsuario",
-        id_usuario: usuario?.id_usuario,
+    accion: "modificarUsuario",
+    id_usuario: usuario?.id_usuario,
     };
 
     if (valores.alias !== "") {
-        data.opcion = "alias";
-        data.valor = valores.alias;
+    data.alias = valores.alias;
     }
 
     if (valores.contrasena !== "") {
-        data.opcion = "contrasena";
-        data.valor = valores.contrasena;
+    data.contrasena = valores.contrasena;
     }
 
     if (valores.url_img_usuario !== "") {
-        data.opcion = "url_img_usuario";
-        data.valor = valores.url_img_usuario;
+        const file = valores.url_img_usuario;
+        try {
+        const base64Image = await imagenBase64(file);
+        data.url_img_usuario = base64Image;
+        } catch (error) {
+            console.log("Error al cargar la foto: " , error)
+        }
     }
 
-    // Enviar solo si hay cambios
-    if (data.opcion && data.valor) {
-        editarPerfil(data);
-         resetForm();
+    if (Object.keys(data).length > 2) { //ver si hay cambios excepto el accion y el id
+    editarPerfil(data);
+    resetForm();
     }
-   
 }
 
     });
@@ -73,10 +75,20 @@ const {mensaje, editarPerfil ,usuario} = useContext(todoContext)
 </div>
 <div className='form-control'>
     <label htmlFor="" className='text-gray-400 text-lg ml-2 md:ml-16 font-semibold font-aref'>Foto de perfil:</label>
-    <input type="file" className='px-3 py-1 ml-12' id='url_img_usuario' name='url_img_usuario' value={formik.values.url_img_usuario} onChange={(event) => {formik.setFieldValue("url_img_usuario", event.currentTarget.files[0]) }} autoComplete="off"/>
+ <input
+  type="file"
+  id="url_img_usuario"
+  name="imagen"
+  accept="image/*"
+  onChange={(event) => {
+    formik.setFieldValue("url_img_usuario", event.currentTarget.files[0]);
+  }}
+  onBlur={formik.handleBlur}
+  className="file-input file-input-ghost w-full max-w-xs  text-wwe border border-wwe ml-16 mt-2"
+/>
 </div>
 <div className='flex items-center justify-center'>
-     <button className=' md:w-64 hover:bg-red-600 px-3 py-1 bg-wwe rounded-lg text-white' type='submit'>Editar</button>
+     <button className=' md:w-64 hover:bg-red-600 px-3 py-1 text-3xl bg-wwe rounded-lg text-white' type='submit'>Editar</button>
 </div>
    
   </form> 

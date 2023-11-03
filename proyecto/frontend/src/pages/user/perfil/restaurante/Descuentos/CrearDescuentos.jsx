@@ -9,7 +9,7 @@ import {BiArrowBack} from 'react-icons/bi';
 const CrearDescuentos = () => {
 
   const TodoContext = useContext(todoContext)
-  const {mensaje, crearDescuento, usuario} = TodoContext
+  const {mensaje, crearDescuento, usuario, imagenBase64} = TodoContext
 
 
 
@@ -36,7 +36,7 @@ const CrearDescuentos = () => {
       fecha_fin: Yup.date().typeError('Ingrese una fecha valida').required('El campo no puede ir vacio'),
     }),
 
-    onSubmit: (valores, {resetForm}) => {
+    onSubmit: async(valores, {resetForm}) => {
 
       const fechaInicio = formik.values.fecha_inicio
       const fechaFin = formik.values.fecha_fin
@@ -51,11 +51,22 @@ const CrearDescuentos = () => {
     fecha_inicio: fechaInicio,
     fecha_fin: fechaFin,
     id_usuario_rest: usuario.id_usuario
-  }
-  crearDescuento(data)
-  resetForm();
-}
+  };
 
+  if(valores.url_img_descuento){
+    const file = valores.url_img_descuento;
+ try {
+      const base64Image = await imagenBase64(file);
+      data.url_img_usuario = base64Image;
+      crearDescuento(data)
+    } catch (error) {
+      console.log("error al subir la foto: ", error)
+    }
+
+resetForm()
+}
+  
+}
   })
 
   return (
@@ -84,7 +95,17 @@ const CrearDescuentos = () => {
 
 <div  className='flex flex-col text-center font-aref text-black text-lg mb-6' >
   <label htmlFor="">Imagen</label>
-<input type="text" id='url_img_descuento' className='input w-64 bg-white text-black border border-wwe focus:ring-2 focus:ring-wwe m-auto  ' onChange={formik.handleChange} values={formik.values.url_img_descuento} placeholder='Imagen'/>
+<input
+  type="file"
+  id="url_img_descuento"
+  name="imagen"
+  accept="image/*"
+  onChange={(event) => {
+    formik.setFieldValue("url_img_descuento", event.currentTarget.files[0]);
+  }}
+  onBlur={formik.handleBlur}
+className="file-input file-input-ghost w-full max-w-xs border border-wwe text-wwe ml-20"
+/>
 {
   formik.touched.url_img_descuento && formik.errors.url_img_descuento ? 
   <div><p className='text-wwe'>{formik.errors.url_img_descuento}</p></div> : null

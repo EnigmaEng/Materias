@@ -92,7 +92,7 @@ const formik = useFormik({
     formik.setFieldValue("url_img_menu", event.currentTarget.files[0]);
   }}
   onBlur={formik.handleBlur}
-
+className="file-input file-input-ghost w-full max-w-xs text-wwe border border-wwe text-white"
 />
 {
   formik.touched.url_img_menu && formik.errors.url_img_menu ? 

@@ -17,6 +17,9 @@ const Subscripcion = () => {
     subscripcion(dato);
     
   };
+//   <label htmlFor="my_modal_6" className="btn">open modal</label>
+
+{/* Put this part before </body> tag */}
 
   return (
     <>
@@ -71,7 +74,23 @@ const Subscripcion = () => {
               <span className="text-5xl font-bold tracking-tight text-gray-900">$9.99</span>
               <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">USD</span>
             </p>
-            <button  onClick={() => realizarInsert(1)} className="mt-10 block w-full rounded-md bg-wwe px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wwe">Suscribirme</button>
+            <label htmlFor="my_modal_6" className="mt-10 block w-full rounded-md bg-wwe px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wwe ">Suscribirme</label>
+            <input type="checkbox" id="my_modal_6" className="modal-toggle " />
+          <div className="modal bg-white text-black">
+        <div className="modal-box">
+        <h3 className="font-bold "></h3>
+       <p className="py-4 text-2xl">Estas seguro que quieres subscribirte?</p>
+       <p className='text-sm'>
+        Para continuar con la suscripción a Where We Eat deberás seguir los siguientes pasos: 
+        1- Acercarte a una red de cobranza (RedPagos o Abitab).
+        2- En la caja debes mencionar que vas a abonar una suscripción a Where We Eat.
+        3- Una vez abonado el monto, enviar una foto del comprobante de pago al siguiente número a través de Whatsapp: +59899123123. Una vez hecho esto la solicitud la aprobará un administrativo de Where We Eat y podrás disfrutar de nuestro servicio.
+      </p>
+      <div className="modal-action">
+      <label htmlFor="my_modal_6"  onClick={() => realizarInsert(1)} className="mt-10 block w-full rounded-md bg-wwe px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wwe">Confirmar subscripción</label>
+    </div>
+      </div>
+      </div>
             <p className="mt-6 text-xs leading-5 text-gray-600">Servicio con devolución.</p>
           </div>
         </div>
@@ -121,7 +140,23 @@ const Subscripcion = () => {
               <span className="text-5xl font-bold tracking-tight text-gray-900">$99.99</span>
               <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">USD</span>
             </p>
-            <button  onClick={() => realizarInsert(2)} className="mt-10 block w-full rounded-md bg-wwe px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wwe">Suscribirme</button>
+              <label htmlFor="my_modal_6" className="mt-10 block w-full rounded-md bg-wwe px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wwe ">Suscribirme</label>
+            <input type="checkbox" id="my_modal_6" className="modal-toggle " />
+          <div className="modal bg-white text-black">
+        <div className="modal-box ">
+        <h3 className="font-bold "></h3>
+       <p className="py-4 text-2xl">Estas seguro que quieres subscribirte?</p>
+        <p className='text-sm'>
+        Para continuar con la suscripción a Where We Eat deberás seguir los siguientes pasos: 
+        1- Acercarte a una red de cobranza (RedPagos o Abitab).
+        2- En la caja debes mencionar que vas a abonar una suscripción a Where We Eat.
+        3- Una vez abonado el monto, enviar una foto del comprobante de pago al siguiente número a través de Whatsapp: +59899123123. Una vez hecho esto la solicitud la aprobará un administrativo de Where We Eat y podrás disfrutar de nuestro servicio.
+      </p>
+      <div className="modal-action">
+      <label htmlFor="my_modal_6"  onClick={() => realizarInsert(2)} className="mt-10 block w-full rounded-md bg-wwe px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wwe">Confirmar subscripción</label>
+    </div>
+      </div>
+      </div>
             <p className="mt-6 text-xs leading-5 text-gray-600">Servicio con devolución.</p>
           </div>
         </div>
@@ -172,7 +207,23 @@ const Subscripcion = () => {
               <span className="text-5xl font-bold tracking-tight text-gray-900">$149.99</span>
               <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">USD</span>
             </p>
-            <button  onClick={() => realizarInsert(3)} className="mt-10 block w-full rounded-md bg-wwe px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wwe">Suscribirme</button>
+            <label htmlFor="my_modal_6" className="mt-10 block w-full rounded-md bg-wwe px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wwe ">Suscribirme</label>
+            <input type="checkbox" id="my_modal_6" className="modal-toggle " />
+          <div className="modal bg-white text-black">
+        <div className="modal-box ">
+        <h3 className="font-bold "></h3>
+       <p className="py-4 text-2xl">Estas seguro que quieres subscribirte?</p>
+        <p className='text-sm'>
+        Para continuar con la suscripción a Where We Eat deberás seguir los siguientes pasos: 
+        1- Acercarte a una red de cobranza (RedPagos o Abitab).
+        2- En la caja debes mencionar que vas a abonar una suscripción a Where We Eat.
+        3- Una vez abonado el monto, enviar una foto del comprobante de pago al siguiente número a través de Whatsapp: +59899123123. Una vez hecho esto la solicitud la aprobará un administrativo de Where We Eat y podrás disfrutar de nuestro servicio.
+      </p>
+      <div className="modal-action">
+      <label htmlFor="my_modal_6"  onClick={() => realizarInsert(3)} className="mt-10 block w-full rounded-md bg-wwe px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wwe">Confirmar subscripción</label>
+    </div>
+      </div>
+      </div>
             <p className="mt-6 text-xs leading-5 text-gray-600">Servicio con devolución.</p>
           </div>
         </div>

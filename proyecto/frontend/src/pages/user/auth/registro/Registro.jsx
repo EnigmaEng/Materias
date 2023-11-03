@@ -219,6 +219,7 @@ onSubmit: async (valores) => {
     formik.setFieldValue("url_img_usuario", event.currentTarget.files[0]);
   }}
   onBlur={formik.handleBlur}
+  className="file-input file-input-ghost w-full max-w-xs bg-wwe text-white"
 />
 
          {formik.touched.url_img_usuario && formik.errors.url_img_usuario ? (
