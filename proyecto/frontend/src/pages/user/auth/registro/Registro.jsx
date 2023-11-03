@@ -68,7 +68,39 @@ const RegistroUsuario = () => {
     setSelectedRole(e.target.value);
   };
 
+// const handleFileChange = async (e) => {
+//   const file = e.currentTarget.files[0];
+//   console.log("El archivo:", file);
 
+//   const formData = new FormData();
+//   formData.append('imagen', file);
+
+//   if (selectedRole === 'T') {
+//     formData.append('accion', 'altaTurista');
+    
+//     registrarTurista(formData); // Enviar formData con todos los datos al backend
+//   } else if (selectedRole === 'R') {
+//     formData.append('accion', 'altaRestaurante');
+//     // Agregar otros datos específicos del restaurante al formData si es necesario
+//     registrarRestaurante(formData); // Enviar formData con todos los datos al backend
+//   }
+// };    
+
+const readFileAsBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+
+    reader.onerror = (error) => {
+      reject(error);
+    };
+
+    reader.readAsDataURL(file);
+  });
+};
 
 const formik = useFormik({
   initialValues: {
@@ -77,43 +109,55 @@ const formik = useFormik({
   },
   validationSchema,
 
-  onSubmit: (valores, { resetForm }) => {
-    const data = {
-      alias: valores.alias,
-      email: valores.email,
-      contrasena: valores.contrasena,
-      url_img_usuario: valores.url_img_usuario,
-      rol: selectedRole,
-    };
 
-    if (selectedRole === 'T') {
-      data.accion = 'altaTurista';
-      data.nombres = valores.nombres;
-      data.apellidos = valores.apellidos;
-      data.nacionalidad = valores.nacionalidad;
-      data.motivo_alojamiento = valores.motivo_alojamiento;
-    } else if (selectedRole === 'R') {
-      data.accion = 'altaRestaurante';
-      data.nombre = valores.nombre;
-      data.nro_local = valores.nro_local;
-      data.nro_puerta = valores.nro_puerta;
-      data.descripcion = valores.descripcion;
-      data.calle = valores.calle;
-      data.esquina = valores.esquina;
+
+onSubmit: async (valores) => {
+  const data = {
+    alias: valores.alias,
+    email: valores.email,
+    contrasena: valores.contrasena,
+    rol: selectedRole,
+    // Agregar otros campos según el rol
+  };
+
+  if (valores.url_img_usuario) {
+    const file = valores.url_img_usuario;
+
+    try {
+      const base64Image = await readFileAsBase64(file);
+      data.url_img_usuario = base64Image;
+
+      if (selectedRole === 'T') {
+        data.accion = 'altaTurista';
+        data.nombres = valores.nombres;
+        data.apellidos = valores.apellidos;
+        data.nacionalidad = valores.nacionalidad;
+        data.motivo_alojamiento = valores.motivo_alojamiento;
+      } else if (selectedRole === 'R') {
+        data.accion = 'altaRestaurante';
+        data.nombre = valores.nombre;
+        data.nro_local = valores.nro_local;
+        data.nro_puerta = valores.nro_puerta;
+        data.descripcion = valores.descripcion;
+        data.calle = valores.calle;
+        data.esquina = valores.esquina;
+      }
+
+      console.log(data); // Verificar los datos antes de enviarlos
+
+      if (selectedRole === 'T') {
+        registrarTurista(data);
+      } else if (selectedRole === 'R') {
+        registrarRestaurante(data);
+      }
+    } catch (error) {
+      console.error("Error al leer la imagen como Base64", error);
     }
+  }
+},
 
-    // Aquí tendrás todos los datos dentro del objeto `data` según el rol seleccionado.
-    console.log(data); // Verificar los datos antes de enviarlos
 
-    // Luego puedes llamar a la función correspondiente para registrar con los datos en `data`.
-    if (selectedRole === 'T') {
-      registrarTurista(data);
-    } else if (selectedRole === 'R') {
-      registrarRestaurante(data);
-    }
 
-    resetForm();
-  },
 
 
   });
@@ -176,9 +220,7 @@ const formik = useFormik({
   name="imagen"
   accept="image/*"
   onChange={(event) => {
-    const selectedFile = event.currentTarget.files[0];
-    const imageUrl = URL.createObjectURL(selectedFile);
-    formik.setFieldValue("url_img_usuario", imageUrl);
+    formik.setFieldValue("url_img_usuario", event.currentTarget.files[0]);
   }}
   onBlur={formik.handleBlur}
 />
