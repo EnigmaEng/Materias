@@ -27,7 +27,7 @@ const HomeMb = () => {
       <div className="text-center ">
        
         <h3 className="text-2xl text-white font-bold font-aref">
-          BIENVENIDO
+          BIENVENIDO!
         </h3>
         <div className="flex items-center justify-center mt-3 gap-5">
           <Link to='/login'>

@@ -45,9 +45,9 @@ const CrearDescuentos = () => {
       titulo_descuento: Yup.string().required('El campo no puede ir vacío'),
       descripcion: Yup.string().required('El campo no puede ir vacío'),
       // url_img_descuento: Yup.string().required('El campo no puede ir vacío'),
-      costo: Yup.number('Ingrese un precio valido').required('El campo no puede ir vacío'),
-      fecha_inicio: Yup.date().typeError('Ingrese una fecha valida').required('El campo no puede ir vacio'),
-      fecha_fin: Yup.date().typeError('Ingrese una fecha valida').required('El campo no puede ir vacio'),
+      costo: Yup.number('Ingrese un precio válido').required('El campo no puede ir vacío'),
+      fecha_inicio: Yup.date().typeError('Ingrese una fecha válida').required('El campo no puede ir vacio'),
+      fecha_fin: Yup.date().typeError('Ingrese una fecha válida').required('El campo no puede ir vacio'),
     }),
 
     onSubmit: async (valores, {resetForm}) => {
@@ -91,18 +91,18 @@ const CrearDescuentos = () => {
        <Link to='/configuracionRest' className='absolute py-1.5 top-24 left-24 bg-wwe text-white rounded-lg px-6 py-1'><BiArrowBack/></Link> 
 <form onSubmit={formik.handleSubmit} method='POST' className='bg-white md:w-3/12 m-auto mt-24 p-8 rounded-box shadow-xl' encType='multipart/form-data'>
   {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }
-    <h2 className='text-center text-4xl mb-5 font-bold text-wwe font-aref'>Crear descuento</h2>
+    <h2 className='text-center text-4xl mb-5 font-bold text-wwe font-aref'>Crear Promoción</h2>
 <div  className='flex flex-col text-center font-aref text-black text-lg mb-6' >
-  <label htmlFor="">Titulo del descuento</label>
-  <input type="text" id='titulo_descuento' className='input w-64 bg-white text-black border border-wwe focus:ring-2 focus:ring-wwe m-auto ' values={formik.values.titulo_descuento} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder='Titulo'/>
+  <label htmlFor="">Título de la promoción</label>
+  <input type="text" id='titulo_descuento' className='input w-64 bg-white text-black border border-wwe focus:ring-2 focus:ring-wwe m-auto ' values={formik.values.titulo_descuento} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder='Título'/>
   {
     formik.touched.titulo_descuento && formik.errors.titulo_descuento ?
     <div><p className='text-wwe '>{formik.errors.titulo_descuento}</p></div> : null
   }
 </div>
 <div  className='flex flex-col text-center font-aref text-black text-lg mb-6' >
-  <label htmlFor="">Descripcion</label>
-<input type="text" id='descripcion' className='input w-64 bg-white text-black border border-wwe focus:ring-2 focus:ring-wwe m-auto ' values={formik.values.descripcion} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder='Descripcion'/>
+  <label htmlFor="">Descripción</label>
+<input type="text" id='descripcion' className='input w-64 bg-white text-black border border-wwe focus:ring-2 focus:ring-wwe m-auto ' values={formik.values.descripcion} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder='Descripción'/>
 {
   formik.touched.descripcion && formik.errors.descripcion ? 
   <div><p className='text-wwe '>{formik.errors.descripcion}</p></div> : null
@@ -110,7 +110,7 @@ const CrearDescuentos = () => {
 </div>
 
 <div  className='flex flex-col  justify-center items-center text-center font-aref text-black text-lg mb-6' >
-  <label htmlFor="">Imagen del descuento</label>
+  <label htmlFor="">Imágen de la promoción</label>
 <input
   type="file"
   id="url_img_descuento"

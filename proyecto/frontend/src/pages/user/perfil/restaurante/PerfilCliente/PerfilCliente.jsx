@@ -72,7 +72,7 @@ const getReseniaById = async () => {
 
   if (!restaurante) {
     return (<div className='min-h-screen '>
-    <p className='text-center font-aref text-2xl  text-black'>Cagando..</p></div>);
+    <p className='text-center font-aref text-2xl  text-black'>Cargando..</p></div>);
   }
 
   return (
@@ -92,7 +92,7 @@ const getReseniaById = async () => {
       
      <img src={item.url_img_usuario} alt="foto-perfil" className=' m-auto shadow-xl mt-5 mb-5 w-72 h-72 rounded-lg bg-zinc-300' />
      <div className='h-96 w-96  rounded-lg '>
-       <p className=' px-10 py-10 dark:text-white text-zinc-600 font-semibold text-lg'>Numero de local: {item.nro_local} </p>
+       <p className=' px-10 py-10 dark:text-white text-zinc-600 font-semibold text-lg'>Número de local: {item.nro_local} </p>
        
      </div>
     
@@ -132,7 +132,7 @@ const getReseniaById = async () => {
         :
        
         <div className='h-64  text-black font-aref flex justify-center items-center text-center text-3xl '>
-          <p className=' left-[59%]'>Sin menus</p>
+          <p className=' left-[59%]'>Sin Menú</p>
           </div>
        
     } 

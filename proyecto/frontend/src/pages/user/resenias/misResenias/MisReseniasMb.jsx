@@ -37,10 +37,10 @@ getReseniaById();
                 
                 <div>
                   <h3 className="text-base font-semibold leading-7 tracking-tight text-wwe">Calificaciones:</h3>
-                     <p className="text-sm font-semibold leading-6 text-black"> Menu gastronómico:{item.calificacion_menu}</p>
+                     <p className="text-sm font-semibold leading-6 text-black"> Menú gastronómico:{item.calificacion_menu}</p>
                   <p className="text-sm font-semibold leading-6 text-black"> Personal:{item.calificacion_personal}</p>
                    <p className="text-sm font-semibold leading-6 text-black">Instalaciones: {item.calificacion_instalaciones}</p>
-                    <p className="text-sm font-semibold leading-6 text-black">Calificacion general: {item.calificacion_general}</p>
+                    <p className="text-sm font-semibold leading-6 text-black">Calificación general: {item.calificacion_general}</p>
                     <p className="text-sm font-semibold leading-6 text-black">{item.fecha}</p>
                 </div>
               </div>

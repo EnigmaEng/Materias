@@ -68,11 +68,11 @@ onSubmit: async(valores, { resetForm }) => {
   <form onSubmit={formik.handleSubmit} className='bg-white mt-24 space-y-5 md:w-3/12 p-8 rounded-lg' method='POST' encType="multipart/form-data" autoComplete="off">
 <div className='form-control'>
     <label htmlFor="" className='font-aref font-semibold text-center'><span className='text-gray-400 text-lg '>Alias: {usuario?.alias}</span></label>
-    <input type="text" placeholder='alias' className='placeholder:italic px-3 py-1 rounded-md bg-gray-100 md:w-9/12 m-auto text-black border border-wwe' id='alias' value={formik.values.alias} onChange={formik.handleChange} autoComplete="off" />
+    <input type="text" placeholder='Alias' className='placeholder:italic px-3 py-1 rounded-md bg-gray-100 md:w-9/12 m-auto text-black border border-wwe' id='alias' value={formik.values.alias} onChange={formik.handleChange} autoComplete="off" />
 </div>
 <div className='form-control'>
     <label htmlFor="" className='font-aref font-semibold text-center'><span className='text-gray-400 text-lg '>Contraseña: </span></label>
-    <input type="password" placeholder='contraseña' className='placeholder:italic px-3 py-1 rounded-md bg-gray-100 md:w-9/12 m-auto text-black border border-wwe' id='contrasena' value={formik.values.contrasena} onChange={formik.handleChange} autoComplete="off" />
+    <input type="password" placeholder='Contraseña' className='placeholder:italic px-3 py-1 rounded-md bg-gray-100 md:w-9/12 m-auto text-black border border-wwe' id='contrasena' value={formik.values.contrasena} onChange={formik.handleChange} autoComplete="off" />
 </div>
 <div className='form-control flex justify-center items-center'>
     <label htmlFor="" className='text-gray-400 text-lg ml-2  font-semibold font-aref'>Foto de perfil:</label>
