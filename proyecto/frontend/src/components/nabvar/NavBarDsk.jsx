@@ -150,7 +150,7 @@ usuarioAutenticado();
         
      
      <div className='flex gap-5 mr-5'>
-      <Link className='bg-white p-2 rounded-lg text-black'>Iniciar sesion</Link>
+      <Link className='bg-white p-2 rounded-lg text-black'>Iniciar Sesión</Link>
       <Link className='bg-white p-2 rounded-lg text-black'>Registrarse</Link>
 
     </div>

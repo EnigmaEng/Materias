@@ -344,16 +344,16 @@ onSubmit: async (valores) => {
       value={formik.values.descripcion} onChange={formik.handleChange}  required>
         <option value='' disabled>Tipo de restaurante</option>
         <option value='Restaurante para llevar'>Restaurante para llevar</option>
-        <option value='Comida italiana'>Comida italiana</option>
-        <option value='Comida francesa'>Comida francesa</option>
-        <option value='Comida japonesa'>Comida japonesa</option>
-        <option value='Comida china'>Comida china</option>
-        <option value='Comida mexicana'>Comida mexicana</option>
-        <option value='Comida gourmet'>Comida gourmet</option>
-        <option value='Restaurante de autor'>Restaurante de autor</option>
-        <option value='Restaurante de comida rapida y casual'>Restaurante de comida rapida y casual</option>
-        <option value='Restaurante de comida rapida'>Restaurante de comida rapida</option>
-        <option value='Restaurante buffet'>Restaurante buffet</option>
+        <option value='Comida italiana'>Comida Italiana</option>
+        <option value='Comida francesa'>Comida Francesa</option>
+        <option value='Comida japonesa'>Comida Japonesa</option>
+        <option value='Comida china'>Comida China</option>
+        <option value='Comida mexicana'>Comida Mexicana</option>
+        <option value='Comida gourmet'>Comida Gourmet</option>
+        <option value='Restaurante de autor'>Restaurante de Autor</option>
+        <option value='Restaurante de comida rapida y casual'>Restaurante de comida rápida y casual</option>
+        <option value='Restaurante de comida rapida'>Restaurante de comida rápida</option>
+        <option value='Restaurante buffet'>Restaurante Buffet</option>
          </select>
      
       </div>

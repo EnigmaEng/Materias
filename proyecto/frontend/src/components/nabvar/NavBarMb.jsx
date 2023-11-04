@@ -45,7 +45,7 @@ usuarioAutenticado();
         Perfil 
           </Link>
         </li>
-        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/configuracionRest' className='text-black flex gap-4'> Configuracion</Link></li>
+        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/configuracionRest' className='text-black flex gap-4'> Configuración</Link></li>
         <li className=' hover:bg-gray-200 rounded-lg p-2'><button onClick={() => cerrarSesion()}  className='text-black flex gap-4  w-24'> <div className='mt-1'>
           <SlLogout/> </div> Salir </button></li>
       </ul>
@@ -91,7 +91,7 @@ usuarioAutenticado();
     <Link to='/homeAuth' className='m-auto w-14'>  
     <img src={Image} alt="logo"/>
     </Link>
- <Link to='/login' className='bg-white px-6 py-1 rounded-lg text-wwe text-lg'>Iniciar sesion</Link>
+ <Link to='/login' className='bg-white px-6 py-1 rounded-lg text-wwe text-lg'>Iniciar Sesión</Link>
   <Link to='/registro' className='bg-white px-6 py-1 rounded-lg text-wwe text-lg'>Registrarse</Link>
   </div>
  

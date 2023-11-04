@@ -99,7 +99,7 @@ const formattedDate = `${year}-${month}-${day}`;
   </select>
 
       <select className="select bg-white border border-red-800 focus:ring-2 focus:ring-red-800  w-full max-w-xs" id='calificacion_general' onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.calificacion_general } required>
-  <option value='' disabled>Calificacion generanl</option>
+  <option value='' disabled>Calificación general</option>
  <option value="Muy bueno">Muy bueno</option>
   <option value="Bueno">Bueno</option>
   <option value="Medio">Medio </option>

@@ -10,7 +10,7 @@ CREATE TABLE `usuarios` (
   contrasena VARCHAR(200) NOT NULL,
   activo ENUM ('S','N') DEFAULT 'S',
   bloqueado ENUM ('S','N') DEFAULT 'N',
-  url_img_usuario VARCHAR(150) DEFAULT NULL,
+  url_img_usuario LONGBLOB DEFAULT NULL,
   fecha_cambio_pwd DATETIME DEFAULT NULL,
   rol ENUM ('T','R','A') NOT NULL,
   CHECK (email LIKE '%_@%_.%')
@@ -50,11 +50,11 @@ CREATE TABLE `restaurante` (
 );
 
 CREATE TABLE `plato_restaurantes` (
-  id_Plato INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  id_Plato INT(10) UNSIGNED PRIMARY KEY,
   nombre_plato VARCHAR(80) NOT NULL,
   costo FLOAT(7,2) NOT NULL,
   descripcion VARCHAR(300),
-  url_img_menu VARCHAR(150),
+  url_img_menu LONGBLOB DEFAULT NULL,
   estado_plato ENUM ('S','N') DEFAULT 'S',
   id_usuario_rest INT (10) UNSIGNED,
   FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante`(id_usuario)
@@ -110,7 +110,7 @@ CREATE TABLE `descuento` (
   activo ENUM ('S','N') DEFAULT 'S',
   titulo_descuento VARCHAR(50),
   descripcion VARCHAR(300) DEFAULT NULL,
-  url_img_descuento VARCHAR(150) DEFAULT NULL,
+  url_img_descuento LONGBLOB DEFAULT NULL,
   costo FLOAT(7,2) NOT NULL
 );
 
@@ -179,6 +179,7 @@ CREATE TABLE `restaurante_tiene_descuento` (
   FOREIGN KEY (id_descuento) REFERENCES `descuento` (id_descuento),
   FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante` (id_usuario)
 );
+
 
 /*DCL Creacion de Usuarios*/
 
@@ -298,7 +299,7 @@ FLUSH PRIVILEGES;
 
 -- Restaurante 1
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('michelindelmar', 'michelindelmar@example.com', 'pass123', 'S', 'N', 'R');
+VALUES ('michelindelmar', 'michelindelmar@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'R');
 
 INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Bulevar Espana', 'Juan Carlos Gomez', '4321');
@@ -311,7 +312,7 @@ VALUES ('Comida Vegana',LAST_INSERT_ID());
 
 -- Restaurante 2
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('gourmetparadise', 'gourmetparadise@example.com', 'topsecret', 'S', 'N', 'R');
+VALUES ('gourmetparadise', 'gourmetparadise@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'R');
 
 INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Avenida Italia', 'Plaza Cagancha', '1234');
@@ -324,7 +325,7 @@ VALUES ('Comida China',LAST_INSERT_ID());
 
 -- Restaurante 3
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('saboresdelrio', 'saboresdelrio@example.com', 'delicioso', 'S', 'N', 'R');
+VALUES ('saboresdelrio', 'saboresdelrio@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'R');
 
 INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Calle Uruguay', 'Plaza Independencia', '5678');
@@ -337,7 +338,7 @@ VALUES ('Comida Mexicana',LAST_INSERT_ID());
 
 -- Restaurante 4
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('mariscosenclave', 'mariscosenclave@example.com', 'clavedemar', 'S', 'N', 'R');
+VALUES ('mariscosenclave', 'mariscosenclave@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'R');
 
 INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Rambla', 'Plaza Virgilio', '9101');
@@ -350,7 +351,7 @@ VALUES ('Comida Vegetariana',LAST_INSERT_ID());
 
 -- Restaurante 5
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('asadospremium', 'asadospremium@example.com', 'premiumBBQ', 'S', 'N', 'R');
+VALUES ('asadospremium', 'asadospremium@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'R');
 
 INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Avenida Brasil', 'Plaza Espana', '1213');
@@ -363,7 +364,7 @@ VALUES ('Comida Rapida',LAST_INSERT_ID());
 
 -- Restaurante 6
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('casadelosplatos', 'casadelosplatos@example.com', 'platos123', 'S', 'N', 'R');
+VALUES ('casadelosplatos', 'casadelosplatos@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'R');
 
 INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Calle 18 de Julio', 'Plaza Matriz', '1415');
@@ -375,7 +376,7 @@ INSERT INTO tipo_restaurantes (descripcion,id_usuario_rest)
 VALUES ('Solo Pick Up y Delivery',LAST_INSERT_ID());
 -- Restaurante 7
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('saboresdeorientet', 'saboresdeorientet@example.com', 'exoticfood', 'S', 'N', 'R');
+VALUES ('saboresdeorientet', 'saboresdeorientet@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'R');
 
 INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Avenida Rivera', 'Plaza Zabala', '1617');
@@ -385,7 +386,7 @@ VALUES (LAST_INSERT_ID(), 'Sabores de Oriente', LAST_INSERT_ID());
 
 -- Restaurante 8
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('paraisogourmet', 'paraisogourmet@example.com', 'gourmetpass', 'S', 'N', 'R');
+VALUES ('paraisogourmet', 'paraisogourmet@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'R');
 
 INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Rambla Republica de Mexico', 'Plaza Gomensoro', '1819');
@@ -395,7 +396,7 @@ VALUES (LAST_INSERT_ID(), 'Paraiso Gourmet', LAST_INSERT_ID());
 
 -- Restaurante 9
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('saborfueguino', 'saborfueguino@example.com', 'fuego123', 'S', 'N', 'R');
+VALUES ('saborfueguino', 'saborfueguino@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'R');
 
 INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Avenida Italia', 'Plaza Seregni', '2021');
@@ -405,7 +406,7 @@ VALUES (LAST_INSERT_ID(), 'Sabor Fueguino', LAST_INSERT_ID());
 
 -- Restaurante 10
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('exquisitezdelmar', 'exquisitezdelmar@example.com', 'mar123', 'S', 'N', 'R');
+VALUES ('exquisitezdelmar', 'exquisitezdelmar@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'R');
 
 INSERT INTO localizacion (calle, esquina, nro_puerta)
 VALUES ('Bulevar Artigas', 'Plaza Cuba', '2223');
@@ -418,83 +419,83 @@ VALUES (LAST_INSERT_ID(), 'Exquisitez del Mar', LAST_INSERT_ID());
 
 -- Insertar turista 1
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('jsmith', 'turista1@example.com', 'contrasena123', 'S', 'N', 'T');
+VALUES ('jsmith', 'turista1@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'T');
 
 INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 'USA', 'Vacaciones', 'John', 'Smith');
 
 -- Insertar turista 2
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('smartin', 'turista2@example.com', 'pass456', 'S', 'N', 'T');
+VALUES ('smartin', 'turista2@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'T');
 
 INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 'France', 'Vacaciones', 'Sophie', 'Martin');
 
 -- Insertar turista 3
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('agarcia', 'turista3@example.com', 'mysecret', 'S', 'N', 'T');
+VALUES ('agarcia', 'turista3@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'T');
 
 INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 'Spain', 'Vacaciones', 'Antonio', 'Garcia');
 
 -- Insertar turista 4
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('lschmidt', 'turista4@example.com', 'mypassword', 'S', 'N', 'T');
+VALUES ('lschmidt', 'turista4@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'T');
 
 INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 'Germany', 'Vacaciones', 'Lukas', 'Schmidt');
 
 -- Insertar turista 5
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('ssilva', 'turista5@example.com', 'securepass', 'S', 'N', 'T');
+VALUES ('ssilva', 'turista5@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'T');
 
 INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 'Brazil', 'Vacaciones', 'Isabella', 'Silva');
 -- Insertar turista 6
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('wchen', 'turista6@example.com', 'topsecret', 'S', 'N', 'T');
+VALUES ('wchen', 'turista6@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'T');
 
 INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 'China', 'Vacaciones', 'Wei', 'Chen');
 
 -- Insertar turista 7
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('ojohnson', 'turista7@example.com', 'hiddenpass', 'S', 'N', 'T');
+VALUES ('ojohnson', 'turista7@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'T');
 
 INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 'Australia', 'Vacaciones', 'Olivia', 'Johnson');
 
 -- Insertar turista 8
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('divanov', 'turista8@example.com', 'confidential', 'S', 'N', 'T');
+VALUES ('divanov', 'turista8@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'T');
 
 INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 'Russia', 'Vacaciones', 'Dmitri', 'Ivanov');
 
 -- Insertar turista 9
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('ebrown', 'turista9@example.com', 'myp@ss123', 'S', 'N', 'T');
+VALUES ('ebrown', 'turista9@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'T');
 
 INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 'Canada', 'Vacaciones', 'Emma', 'Brown');
 
 -- Insertar turista 10
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('mjkim', 'turista10@example.com', 'hiddenpass123', 'S', 'N', 'T');
+VALUES ('mjkim', 'turista10@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'T');
 
 INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 'South Korea', 'Vacaciones', 'Min-Ji', 'Kim');
 
 -- Insertar turista 11
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('asharma', 'turista11@example.com', 'secretpass123', 'S', 'N', 'T');
+VALUES ('asharma', 'turista11@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'T');
 
 INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 'India', 'Vacaciones', 'Aarav', 'Sharma');
 
 -- Insertar turista 12
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('sricci', 'turista12@example.com', 'turista123', 'S', 'N', 'T');
+VALUES ('sricci', 'turista12@example.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'T');
 
 INSERT INTO turista (id_usuario, nacionalidad, motivo_alojamiento, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 'Italy', 'Vacaciones', 'Sophia', 'Ricci');
@@ -530,13 +531,13 @@ VALUES (3, SYSDATE(),3);
 /*Insertando administradores*/
 
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('admin22', 'admin22@wwe.com', 'adminpass22', 'S', 'N', 'A');
+VALUES ('admin22', 'admin22@wwe.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'A');
 
 INSERT INTO administrativo (id_usuario, nro_empleado, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 22, 'Juan', 'Perez');
 
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('admin17', 'admin17@wwe.com', 'adminpass17', 'S', 'N', 'A');
+VALUES ('admin17', 'admin17@wwe.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'A');
 
 INSERT INTO administrativo (id_usuario, nro_empleado, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 17, 'Maria', 'Gonzalez');
@@ -649,108 +650,109 @@ VALUES (8,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 MONTH));
 INSERT INTO admin_aprueba_rest (id_usuario_rest, id_usuario_admin, fecha_ini_sub, fecha_fin_sub)
 VALUES (9,23,SYSDATE(),DATE_ADD(SYSDATE(), INTERVAL 1 MONTH));
 
+UPDATE restaurante_paga_subscripcion SET aprobado = 'S';
 
 /*Insertando Platos…*/
 
 -- Restaurante 1
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Salmon a la Parrilla', ROUND(RAND() * 150 + 150, 2), 'Salmon fresco a la parrilla con vegetales asados.', 1);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (1,'Salmon a la Parrilla', ROUND(RAND() * 150 + 150, 2), 'Salmon fresco a la parrilla con vegetales asados.', 1);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Filete de Res Wellington', ROUND(RAND() * 200 + 250, 2), 'Filete de res envuelto en hojaldre y cocido a la perfeccion.', 1);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (2,'Filete de Res Wellington', ROUND(RAND() * 200 + 250, 2), 'Filete de res envuelto en hojaldre y cocido a la perfeccion.', 1);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Tarta de Limon', ROUND(RAND() * 80 + 120, 2), 'Deliciosa tarta de limon con merengue.', 1);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (3,'Tarta de Limon', ROUND(RAND() * 80 + 120, 2), 'Deliciosa tarta de limon con merengue.', 1);
 
 -- Restaurante 2
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Risotto de Mariscos', ROUND(RAND() * 170 + 130, 2), 'Risotto cremoso con una variedad de mariscos frescos.', 2);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (4,'Risotto de Mariscos', ROUND(RAND() * 170 + 130, 2), 'Risotto cremoso con una variedad de mariscos frescos.', 2);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Chuleton de Ternera', ROUND(RAND() * 250 + 300, 2), 'Chuleton de ternera cocido a la parrilla y acompanado de guarniciones.', 2);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (5,'Chuleton de Ternera', ROUND(RAND() * 250 + 300, 2), 'Chuleton de ternera cocido a la parrilla y acompanado de guarniciones.', 2);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Tiramisu', ROUND(RAND() * 60 + 90, 2), 'El clasico postre italiano con capas de cafe y crema.', 2);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (6,'Tiramisu', ROUND(RAND() * 60 + 90, 2), 'El clasico postre italiano con capas de cafe y crema.', 2);
 
 -- Restaurante 3
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Ceviche de Pescado', ROUND(RAND() * 130 + 170, 2), 'Ceviche fresco de pescado con limon y especias.', 3);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (7,'Ceviche de Pescado', ROUND(RAND() * 130 + 170, 2), 'Ceviche fresco de pescado con limon y especias.', 3);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Pasta Alfredo con Pollo', ROUND(RAND() * 180 + 200, 2), 'Pasta fettuccine en salsa alfredo con trozos de pollo.', 3);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (8,'Pasta Alfredo con Pollo', ROUND(RAND() * 180 + 200, 2), 'Pasta fettuccine en salsa alfredo con trozos de pollo.', 3);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Mousse de Chocolate', ROUND(RAND() * 50 + 70, 2), 'Suave mousse de chocolate con decoracion de frutas.', 3);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (9,'Mousse de Chocolate', ROUND(RAND() * 50 + 70, 2), 'Suave mousse de chocolate con decoracion de frutas.', 3);
 
 -- Restaurante 4
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Parrillada Mixta', ROUND(RAND() * 250 + 350, 2), 'Seleccion variada de carnes a la parrilla.', 4);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (10,'Parrillada Mixta', ROUND(RAND() * 250 + 350, 2), 'Seleccion variada de carnes a la parrilla.', 4);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Pasta Frutti di Mare', ROUND(RAND() * 180 + 220, 2), 'Pasta con mariscos frescos en salsa de tomate.', 4);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (11,'Pasta Frutti di Mare', ROUND(RAND() * 180 + 220, 2), 'Pasta con mariscos frescos en salsa de tomate.', 4);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Tartaleta de Frutas', ROUND(RAND() * 70 + 100, 2), 'Tartaleta crujiente rellena de frutas frescas.', 4);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (12,'Tartaleta de Frutas', ROUND(RAND() * 70 + 100, 2), 'Tartaleta crujiente rellena de frutas frescas.', 4);
 
 -- Restaurante 5
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Cordero Patagonico', ROUND(RAND() * 320 + 380, 2), 'Cordero asado con hierbas patagonicas.', 5);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (13,'Cordero Patagonico', ROUND(RAND() * 320 + 380, 2), 'Cordero asado con hierbas patagonicas.', 5);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Salmon en Salsa de Mostaza', ROUND(RAND() * 220 + 260, 2), 'Salmon con salsa de mostaza y miel.', 5);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (14,'Salmon en Salsa de Mostaza', ROUND(RAND() * 220 + 260, 2), 'Salmon con salsa de mostaza y miel.', 5);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Profiteroles Rellenos', ROUND(RAND() * 80 + 120, 2), 'Profiteroles rellenos de crema y chocolate.', 5);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (15,'Profiteroles Rellenos', ROUND(RAND() * 80 + 120, 2), 'Profiteroles rellenos de crema y chocolate.', 5);
 
 -- Restaurante 6
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Raviolis de Calabaza', ROUND(RAND() * 160 + 200, 2), 'Raviolis rellenos de calabaza en salsa de salvia.', 6);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (16,'Raviolis de Calabaza', ROUND(RAND() * 160 + 200, 2), 'Raviolis rellenos de calabaza en salsa de salvia.', 6);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Ternera a la Parrilla', ROUND(RAND() * 280 + 320, 2), 'Ternera jugosa cocida a la parrilla.', 6);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (17,'Ternera a la Parrilla', ROUND(RAND() * 280 + 320, 2), 'Ternera jugosa cocida a la parrilla.', 6);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Tarta de Manzana', ROUND(RAND() * 60 + 90, 2), 'Clasica tarta de manzana con crumble.', 6);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (18,'Tarta de Manzana', ROUND(RAND() * 60 + 90, 2), 'Clasica tarta de manzana con crumble.', 6);
 
 -- Restaurante 7
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Pulpo a la Gallega', ROUND(RAND() * 190 + 220, 2), 'Pulpo cocido con paprika y aceite de oliva.', 7);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (19,'Pulpo a la Gallega', ROUND(RAND() * 190 + 220, 2), 'Pulpo cocido con paprika y aceite de oliva.', 7);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Paella Valenciana', ROUND(RAND() * 260 + 300, 2), 'Paella tradicional con mariscos y pollo.', 7);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (20,'Paella Valenciana', ROUND(RAND() * 260 + 300, 2), 'Paella tradicional con mariscos y pollo.', 7);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Crema Catalana', ROUND(RAND() * 70 + 100, 2), 'Postre cremoso con capa de azucar quemado.', 7);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (21,'Crema Catalana', ROUND(RAND() * 70 + 100, 2), 'Postre cremoso con capa de azucar quemado.', 7);
 
 -- Restaurante 8
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Tacos de Carnitas', ROUND(RAND() * 140 + 180, 2), 'Tacos de cerdo asado con condimentos mexicanos.', 8);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (22,'Tacos de Carnitas', ROUND(RAND() * 140 + 180, 2), 'Tacos de cerdo asado con condimentos mexicanos.', 8);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Enchiladas Verdes', ROUND(RAND() * 160 + 200, 2), 'Enchiladas rellenas de pollo con salsa verde.', 8);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (23,'Enchiladas Verdes', ROUND(RAND() * 160 + 200, 2), 'Enchiladas rellenas de pollo con salsa verde.', 8);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Churros con Chocolate', ROUND(RAND() * 50 + 80, 2), 'Churros crujientes servidos con chocolate caliente.', 8);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (24,'Churros con Chocolate', ROUND(RAND() * 50 + 80, 2), 'Churros crujientes servidos con chocolate caliente.', 8);
 
 -- Restaurante 9
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Risotto de Hongos', ROUND(RAND() * 180 + 220, 2), 'Risotto cremoso con hongos silvestres.', 9);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (25,'Risotto de Hongos', ROUND(RAND() * 180 + 220, 2), 'Risotto cremoso con hongos silvestres.', 9);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Bife de Lomo con Salsa de Vino', ROUND(RAND() * 280 + 320, 2), 'Bife de lomo cocido con salsa de vino tinto.', 9);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (26,'Bife de Lomo con Salsa de Vino', ROUND(RAND() * 280 + 320, 2), 'Bife de lomo cocido con salsa de vino tinto.', 9);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Tarta de Frutas del Bosque', ROUND(RAND() * 70 + 100, 2), 'Tarta de frutas del bosque con crema chantilly.', 9);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (27,'Tarta de Frutas del Bosque', ROUND(RAND() * 70 + 100, 2), 'Tarta de frutas del bosque con crema chantilly.', 9);
 
 -- Restaurante 10
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Parrillada Argentina', ROUND(RAND() * 250 + 350, 2), 'Seleccion de cortes argentinos a la parrilla.', 10);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (28,'Parrillada Argentina', ROUND(RAND() * 250 + 350, 2), 'Seleccion de cortes argentinos a la parrilla.', 10);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Empanadas Criollas', ROUND(RAND() * 160 + 200, 2), 'Empanadas rellenas de carne, huevo y aceitunas.', 10);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (29,'Empanadas Criollas', ROUND(RAND() * 160 + 200, 2), 'Empanadas rellenas de carne, huevo y aceitunas.', 10);
 
-INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES ('Flan Casero', ROUND(RAND() * 50 + 80, 2), 'Flan casero con caramelo y crema.', 10);
+INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES (30,'Flan Casero', ROUND(RAND() * 50 + 80, 2), 'Flan casero con caramelo y crema.', 10);
 
 /*Insertando Turistas Alojados*/
 
@@ -794,7 +796,7 @@ VALUES ('22','3','2023-09-01','2023-09-07');
 
 INSERT INTO turista_visita_rest (id_turista, id_rest, token,fecha_visita)
 VALUES
-  (11, 4, FLOOR(1000000 * RAND()) + 1, DATE_ADD(NOW(), INTERVAL 1 MONTH)),  -- Genera un valor aleatorio entre 1 y 1000000
+  (11, 2, FLOOR(1000000 * RAND()) + 1, curdate()),  -- Genera un valor aleatorio entre 1 y 1000000
   (12, 9, FLOOR(1000000 * RAND()) + 1, DATE_ADD(NOW(), INTERVAL 2 MONTH)),
   (13, 7, FLOOR(1000000 * RAND()) + 1, DATE_ADD(NOW(), INTERVAL 3 MONTH)),
   (14, 7, FLOOR(1000000 * RAND()) + 1, DATE_ADD(NOW(), INTERVAL 3 MONTH)),
