@@ -38,7 +38,7 @@ const ListRestaurantes = () => {
     <div className='flex flex-col text-center justify-center items-center  mt-2'>
   
     <input type="text" placeholder='Buscar un restaurante..' className='border ring-2 ring-red-800 focus:border-red-800 focus:outline-none text-black focus:ring-2 focus:ring-red-800 border rounded-lg bg-white w-6/12 text-sm px-2 py-2' 
-      value={Búsqueda}
+      value={busqueda}
   onChange={e => setBusqueda(e.target.value)}
     />
     </div>

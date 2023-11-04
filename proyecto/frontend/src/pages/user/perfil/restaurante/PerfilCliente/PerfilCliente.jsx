@@ -106,7 +106,7 @@ const getReseniaById = async () => {
    <div className='flex  mt-10  bg-white dark:bg-zinc-800 rounded-box shadow-xl  flex-col w-full gap-10'>
 
       <div className=' m-auto mt-1 p-1 flex-col ' >
-          <p  className='text-center text-3xl font-semibold text-wwe mt-5'>Menus</p>
+          <p  className='text-center text-3xl font-semibold text-wwe mt-5'>Menús</p>
       <div className=' grid grid-cols-4 gap-10 p-10'>
     { 
     Array.isArray(menu) && menu.length > 0 ?
@@ -154,10 +154,10 @@ const getReseniaById = async () => {
       <li key={index} className='list-none '>
         <div className="flex items-center gap-x-6 bg-white shadow-xl p-2 rounded-box">
           <div>
-            <p className="text-sm font-semibold leading-6 text-black">Menu gastronómico: {item.calificacion_menu} </p>
+            <p className="text-sm font-semibold leading-6 text-black">Menú gastronómico: {item.calificacion_menu} </p>
             <p className="text-sm font-semibold leading-6 text-black">Personal: {item.calificacion_personal}</p>
             <p className="text-sm font-semibold leading-6 text-black">Instalaciones: {item.calificacion_instalaciones}</p>
-            <p className="text-sm font-semibold leading-6 text-black">Calificacion General: {item.calificacion_general}</p>
+            <p className="text-sm font-semibold leading-6 text-black">Calificación General: {item.calificacion_general}</p>
             <p className="text-sm font-semibold leading-6 text-black"> {item.fecha}</p>
           </div>
         </div> 

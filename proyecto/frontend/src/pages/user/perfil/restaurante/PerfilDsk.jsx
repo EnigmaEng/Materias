@@ -47,7 +47,7 @@ const PerfilDsk = () => {
                 <p>Nombre: {item.usuario}</p>
                 <p>Personal: {item.calificacion2}</p>
                 <p>Instalaciones: {item.calificacion3}</p>
-                <p> Comida: {item.calificacion4}</p>
+                <p>Comida: {item.calificacion4}</p>
                
               </div>
             ))
