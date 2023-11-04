@@ -4,6 +4,9 @@ import { Link, useParams } from 'react-router-dom';
 import NavBar from '../../../../../components/nabvar/NavBar';
 import {BiArrowBack} from 'react-icons/bi'
 import DarkMode from '../../../../../components/Buttons/DarkMode';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const PerfilClienteMb = () => {
 
@@ -17,7 +20,14 @@ menu,
 restaurante
   } = perfilData();
 
-
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1, // Cantidad de productos a mostrar
+    slidesToScroll: 2,
+    variableWidth: true
+  };
 
   useEffect(() => {
     getProductById(id_usuario);
@@ -28,7 +38,7 @@ restaurante
 
 
   return (
-    <div className=''>
+    <div className='bg-white dark:bg-zinc-900'>
         <div className='absolute top-2 left-2 bg-wwe p-2 h-8 w-8 text-white  rounded-lg'>
             <Link to='/homeAuth' className=' '>
 <BiArrowBack/>
@@ -38,8 +48,8 @@ restaurante
 {
    restaurante.map((item,index) => (
     <>
-    <div className='w-full'>
-<img src={item.url_img_usuario} alt="foto-rest-mobile" className='bg-zinc-800 bg-opacity-80 shadow-xl bg-white shadow-gray-800' />
+    <div className='w-full ' key={index}>
+<img src={item.url_img_usuario} alt="foto-rest-mobile" className='bg-zinc-800 bg-opacity-80 shadow-xl bg-white shadow-gray-800 w-full' />
 
 <span className='absolute top-3 right-3'>
     <DarkMode/>
@@ -51,28 +61,31 @@ restaurante
     </div>
     <>
     
-<article className='bg-white dark:bg-zinc-900 flex flex-col  '>
-<p className='text-center font-semibold font-aref text-lg text-wwe mb-1'>Menús:</p>
-{
-    Array.isArray(menu) && menu.length > 0 ? 
-
-       menu.map((item, index)=> (
-        <div className='flex border dark:border-zinc-900 space-x-2 ' key={index}>
-                <img src={item.url_img_menu}alt="foto-plato" className='w-40 h-32 bg-gray-800 rounded-md' />
-                <div className='flex flex-col m-2 space-y-5  text-wwe dark:text-white font-aref  '>
-                    <p className='text-center font-semibold dark:text-wwe text-xl'>{item.nombre_plato}</p>
-                    <p className='text-lg ml-5'>{item.descripcion}</p>
-                    <p className='text-center text-lg'>${item.costo}</p>
-                </div>
-
-        </div>
-       ))
-    :
-        <div className='text-wwe text-2xl font-aref font-semibold'>Sin platos</div>
-}
-</article>
+ <article className='bg-white dark:bg-zinc-900  flex flex-col  '>
+      <p className='text-center font-semibold  font-aref text-lg text-wwe mb-1 dark:text-white'>Menús:</p>
+      {Array.isArray(menu) && menu.length > 0 ? ( 
+    
+        <Slider {...settings}>
+           
+          {menu.map((item, index) => (
+            <div className='flex flex-col  items-center border dark:border-zinc-900 shadow-xl' key={index}>
+              <img src={item.url_img_menu} alt="foto-plato" className='h-28 w-full ' />
+              <div className='text-center '>
+                <p className='text-xl font-semibold leading-7 tracking-tight text-wwe text-center dark:text-white'>{item.nombre_plato}</p>
+                <p className='text-sm font-semibold leading-6 text-black h-24 dark:text-white rounded-lg m-2'>{item.descripcion}</p>
+                <p className='text-xl font-semibold leading-6 text-black dark:text-white'>${item.costo}</p>
+              </div>
+            </div>
+          ))}
+          
+        </Slider>
+     
+      ) : (
+        <div className='text-gray-600 text-sm font-aref font-semibold'>Sin platos</div>
+      )}
+    </article>
 </>
-<aside className=''>
+<aside className='mt-10'>
 {
     resenia[0] === 'Error en la consulta' ?
     <div className='bg-white dark:bg-zinc-900 h-24 '><p className='text-center  font-semibold font-aref dark:bg-zinc-900  text-gray-400'>Sin reseñas</p></div>

@@ -46,7 +46,7 @@ const ListRestaurantes = () => {
         product.length === 0 ? ( 
           <>
         <div className=' py-28'>
-        <p className='text-center text-2xl py-24 text-wwe font-semibold'>Restaurante no encontrado</p></div></>) : (
+        <p className='text-center text-2xl py-24 text-wwe font-semibold'>Cargando..</p></div></>) : (
 
   <div className='grid grid-cols-4 ml-20  py-16 place-content-center gap-5 '>
     {

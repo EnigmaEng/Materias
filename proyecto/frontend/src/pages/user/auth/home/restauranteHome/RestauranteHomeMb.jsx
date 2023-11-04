@@ -33,7 +33,7 @@ const RestauranteHomeMb = () => {
 
 <div className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white rounded-lg shadow-xl flex flex-col justify-center items-center w-28 h-24 '>
   <p className='text-sm text-wwe text-center font-semibold font-aref'>Suscripciones</p>
-  <Link to='/crearMenu' className='text-wwe text-center text-3xl'>
+  <Link to='/subscripcion' className='text-wwe text-center text-3xl'>
       <LuChefHat/>
   </Link>
 </div>

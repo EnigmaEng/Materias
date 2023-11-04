@@ -1,42 +1,86 @@
 import React from 'react'
 import NavBar from '../../../../../components/nabvar/NavBar'
-
+import menuData from '../../../../../context/menuData';
+import { useEffect, useContext } from 'react';
+import todoContext from '../../../../../context/todoContext';
+import {BiArrowBack} from 'react-icons/bi'
+import {MdMenuBook} from 'react-icons/md'
+import { Link } from 'react-router-dom';
 const MenuMb = () => {
 
+const {
+  getPlatos,
+  platos
+} = menuData();
 
-      const images = [
-  { nombre: "Bolognesa", desc: 'Ravioles con salsa Bolognesa' , precio: 300},
-  { nombre: "Americana", desc: 'Pizza de 30 cm, panceta, cheddar', precio: 400 },
-  { nombre: "Sushi", desc: '5 rollos Panko', precio: 300 },
-  { nombre: "Napolitana con fritas", desc: 'Napolitana para dos personas con papas fritas o rusticas', precio: 600 },
-];
+const TodoContext = useContext(todoContext)
+const {usuario, autenticado} = TodoContext
+
+ useEffect(() => {
+  if (autenticado && usuario && usuario.id_usuario) {
+
+    getPlatos();
+  }
+}, [autenticado, usuario]);
+
+
 
   return (
-    <div className='min-h-screen space-y-10 pb-10  dark:bg-zinc-800 dark:bg-opacity-95'>
-        <div className='fiex w-full '>
-          <NavBar/>
+    <div className='min-h-screen space-y-28  dark:bg-zinc-800 dark:bg-opacity-95'> 
+    <div className='hidden md:block'>
+  <NavBar/>
+    </div>
+      <Link to='/homeAuth' >
+    <button className='bg-wwe  rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-8 md:absolute md:left-10 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700 md:border-gray-400 text-white'><BiArrowBack/></button>
+    </Link>
+  
+    <div className='bg-white dark:bg-zinc-800 w-8/12 justify-center m-auto space-y-5 py-6 text-black text-3xl flex flex-col  items-center rounded-box '>
+      <div className='space-x-24'>
+         <Link to='/crearDescuentos' className='bg-wwe hover:bg-red-700 rounded-lg px-4 py-1 text-white '>
+    Crear descuento
+    </Link>
+    <Link to='/crearMenu' className='bg-wwe hover:bg-red-700 rounded-lg px-4 py-1 text-white '>
+    Crear plato
+    </Link> 
+      </div>
+
+        <div className='flex '>
+              <p className='text-4xl text-center text-wwe flex gap-3 font-aref font-semibold mb-10'>
+              
+                 <span className='text-wwe'> <MdMenuBook/></span> Tus menús:</p> 
+             
         </div>
-        
-        
-        <div className='p-4 bg-white m-4  rounded-box shadow-xl'>
-            <p className='text-center text-wwe  font-aref font-bold text-3xl mb-5'>Menu</p>
+       
+<div className='grid grid-cols-4  items-center gap-8'>
+
+  {Array.isArray(platos) && platos.length > 0 ? (
+    platos.map((item, index) => (
+      <div className=' hover:scale-110 duration-300 delay-150 transition-all rounded-box bg-white shadow-xl w-52 h-82 text-center text-black text-2xl' key={index}>
+       
+          <img src={item.url_img_menu} alt="foto-plato" className='h-32 bg-gray-700 rounded-t-box w-full' />
+        <p className='text-center text-lg font-aref text-black font-semibold'>{item.nombre_plato}</p>
+
       
-        <div className='grid grid-cols-1 gap-4'>
-{
-    images.map((item, index) => (
-        <div className='border w-64 m-auto p-4 text-black shadow-xl rounded-box text-center' key={index}>
-        <p className='font-bold mb-2'>{item.nombre}</p>
-      
-          <p> {item.precio}$</p>
-        <p>{item.desc}</p>  
-        
-        
+        <div className='p-2 h-auto'>
+     
+          <p className='text-sm h-12'>{item.descripcion}</p>
+          <p className='font-aref '>${item.costo} </p>
+           <Link className='px-2 py-1 rounded-lg text-sm bg-wwe text-white' to={`/editarPlato/${item.id_Plato}`}>Modificar plato</Link>
         </div>
+      </div>
     ))
-}
-        </div>
-          </div>
-        </div>
+  ) : (
+    <div className='flex flex-col justify-center items-center gap-4'>
+      {/* <p className='text-gray-500 font-aref mb-20 '></p> */}
+     
+    </div>
+  )}
+
+</div>
+
+    </div>
+  
+   </div>
   )
 }
 

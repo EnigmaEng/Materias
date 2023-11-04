@@ -26,9 +26,9 @@ const Subscripcion = () => {
    
     <div className="dark:bg-zinc-800 dark:bg-opacity-95  py-4 ">
        <NavBar/>
-      <Link to='/homeAuth' className='absolute  md:left-24 left-4 top-20 bg-wwe text-white rounded-lg px-6 py-2'>  <BiArrowBack/> </Link>
+      <Link to='/homeAuth' className='absolute  md:left-24 left-4 top-24 bg-wwe text-white rounded-lg px-6 py-2 '>  <BiArrowBack/> </Link>
       {mensaje && <Mensaje mensaje={mensaje} tipo='alerta'/>}
-  <div className="mx-auto max-w-7xl  px-6 lg:px-8">
+  <div className="mx-auto max-w-7xl mt-20 px-6 lg:px-8">
     <div className="mx-auto max-w-2xl  sm:text-center">
     </div>
     <div className="mx-auto bg-white mt-2 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
