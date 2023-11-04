@@ -180,11 +180,14 @@ class Restaurante extends Usuario
     public function obtenerRestauranteById($id)
     {
         $query = "  SELECT *
-            FROM restaurante, usuarios, admin_aprueba_rest
+            FROM restaurante, usuarios, admin_aprueba_rest, tipo_restaurantes, localizacion
             WHERE restaurante.id_usuario = usuarios.id_usuario
             AND usuarios.id_usuario = :id_usuario
             AND admin_aprueba_rest.id_usuario_rest = usuarios.id_usuario
-            AND admin_aprueba_rest.fecha_fin_sub >= CURDATE()";
+            AND admin_aprueba_rest.fecha_fin_sub >= CURDATE()
+            AND tipo_restaurantes.id_usuario_rest = restaurante.id_usuario
+            AND restaurante.id_loc_restaurante = localizacion.id_localizacion"
+            ;
 
         $stmt = $this->getConn()->prepare($query);
         $stmt->bindParam(":id_usuario", $id, PDO::PARAM_INT);
