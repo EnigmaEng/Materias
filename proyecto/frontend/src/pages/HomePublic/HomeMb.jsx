@@ -20,8 +20,7 @@ const HomeMb = () => {
         <source src={Video} type="video/mp4" />
       </video>
 
-
-      <div className="z-10 flex flex-col flex-grow bg-zinc-800 bg-opacity-60 place-items-center py-24 gap-10">
+      <div className="z-10 flex flex-col flex-grow bg-zinc-800 bg-opacity-60 place-items-center min-h-screen py-24 gap-10">
         <div data-aos="fade-down" className="flex flex-col justify-center items-center">
           <h1 className="text-4xl text-white font-aref font-semibold mb-4">WHERE WE EAT</h1>
         </div>
@@ -36,7 +35,6 @@ const HomeMb = () => {
             <button className="bg-wwe font-semibold text-white text-2xl px-4 py-1 shadow-xl w-46 rounded-box">
               Iniciar Sesión
             </button>
-
           </Link>
           <Link to="/registro">
             <button className="font-semibold text-2xl text-white shadow-xl px-4 py-1 rounded-box w-46 bg-wwe">

@@ -143,7 +143,7 @@ onSubmit: async (valores) => {
 
   return (
   <div className=' dark:bg-opacity-90 dark:bg-zinc-800'>
-    <div className='absolute md:top-16 md:right-28 top-2 right-5'>
+    <div className='absolute md:top-16 md:right-28 top-1 right-5'>
       <DarkMode/>
       </div>
     <Link to='/' >

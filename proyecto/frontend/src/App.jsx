@@ -22,9 +22,9 @@ import CrearDescuentos from './pages/user/perfil/restaurante/Descuentos/CrearDes
 import RutaProtegida from './context/RutaProtegida'
 
 import MisReseniasTurista from './pages/user/resenias/misResenias/MisReseniasTurista'
-import PerfilCliente from './pages/user/perfil/restaurante/PerfilCliente/PerfilCliente'
+import PerfilClienteDsk from './pages/user/perfil/restaurante/PerfilCliente/PerfilClienteDsk'
 import MapContent from './components/maps/MapContent'
-
+import PerfilCliente from './pages/user/perfil/restaurante/PerfilCliente/PerfilCliente'
 import Alojamiento from './pages/user/perfil/turista/Alojamiento/Alojamiento'
 import Descuentos from './pages/user/perfil/restaurante/Descuentos/Descuentos'
 import EditarDescuento from './pages/user/perfil/restaurante/Descuentos/EditarDescuento'

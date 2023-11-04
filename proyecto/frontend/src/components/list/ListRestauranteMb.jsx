@@ -33,7 +33,8 @@ const ListRestauranteMb = () => {
 
 
   return (
-    <div className='p-2 bg-white dark:bg-zinc-800 rounded-box w-11/12 m-auto shadow-xl mb-2  '>
+    <div className='p-2  w-11/12 m-auto   rounded-lg mb-2  '> 
+
       <div className='flex flex-col text-center text-red-800 mb-2 py-4 gap-2'>
        <input
   type='text'
@@ -43,24 +44,29 @@ const ListRestauranteMb = () => {
   onChange={e => setBusqueda(e.target.value)}
 />
       </div>
-    <div className='rounded-lg grid grid-cols-2 gap-5 text-black'>
+     
+    <div className=' grid grid-cols-1 gap-2 bg-white p-2 rounded-md text-black'>
+
+{/* Si no hay restauranes */}
   {product.length === 0 ? (
     <p className='w-80 m-auto px-12 py-10 text-black text-lg'>Restaurante no encontrado..</p>
-  ) : (
+  ) 
+  
+  : (
     product.map((item, index) => (
-     <div className="bg-white rounded-lg " key={index}>
-      <img src={item.foto_usuario} alt="foto-rest" className='w-full h-24 rounded-t-lg ' />
-  <div className="mx-auto max-w-2xl px-4 py-5 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+     <div className="bg-white flex border " key={index}>
+      <div className=''>
+         <img src={item.foto_usuario} alt="foto-rest" className='w-full h-24 p-2 rounded-xl ' />
+      </div>
+     
+ 
+    <div className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 p-2">
 
-
-    <div className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-      
-       
         <h3 className=" text-lg text-center font-aref font-bold ">{item.nombre_restaurante}</h3>
-          <div className='gap-5 flex  px-2 '>
+          <div className='gap-5 flex justify-center space-x-4 px-2 '>
     <Link to={`/clientePerfil/${item.id_usuario}`} className=' rounded-lg border px-2  shadow-xl border  w-20 flex justify-center py-2 h-auto'> <BsSearch/></Link>
     <Link to={`/crearResenia/${item.id_usuario}`} className='rounded-lg border px-2  bg-white shadow-xl  w-20 flex justify-center py-2 h-auto'><GoCodeReview/></Link>
-</div>
+
      
 
     </div>

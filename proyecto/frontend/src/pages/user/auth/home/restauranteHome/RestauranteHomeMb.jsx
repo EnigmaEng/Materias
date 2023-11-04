@@ -7,7 +7,7 @@ import FooterDsk from '../../../../../components/Footer/FooterDsk'
 import {IoRestaurantOutline} from 'react-icons/io5'
 import {MdMenuBook} from 'react-icons/md'
 import {MdOutlineRateReview} from 'react-icons/md'
-import {GrRestaurant} from 'react-icons/gr';
+import {LuChefHat} from 'react-icons/lu';
 
 const RestauranteHomeMb = () => {
   return (
@@ -32,9 +32,9 @@ const RestauranteHomeMb = () => {
 </div>
 
 <div className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white rounded-lg shadow-xl flex flex-col justify-center items-center w-28 h-24 '>
-  <p className='text-sm text-wwe text-center font-semibold font-aref'>Crear Plato</p>
+  <p className='text-sm text-wwe text-center font-semibold font-aref'>Suscripciones</p>
   <Link to='/crearMenu' className='text-wwe text-center text-3xl'>
-      <GrRestaurant/>
+      <LuChefHat/>
   </Link>
 </div>
 
