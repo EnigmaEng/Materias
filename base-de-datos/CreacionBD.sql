@@ -50,7 +50,7 @@ CREATE TABLE `restaurante` (
 );
 
 CREATE TABLE `plato_restaurantes` (
-  id_Plato INT(10) UNSIGNED PRIMARY KEY,
+  id_plato INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   nombre_plato VARCHAR(80) NOT NULL,
   costo FLOAT(7,2) NOT NULL,
   descripcion VARCHAR(300),
@@ -655,104 +655,104 @@ UPDATE restaurante_paga_subscripcion SET aprobado = 'S';
 /*Insertando Platos…*/
 
 -- Restaurante 1
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (1,'Salmon a la Parrilla', ROUND(RAND() * 150 + 150, 2), 'Salmon fresco a la parrilla con vegetales asados.', 1);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Salmon a la Parrilla', ROUND(RAND() * 150 + 150, 2), 'Salmon fresco a la parrilla con vegetales asados.', 1);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (2,'Filete de Res Wellington', ROUND(RAND() * 200 + 250, 2), 'Filete de res envuelto en hojaldre y cocido a la perfeccion.', 1);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Filete de Res Wellington', ROUND(RAND() * 200 + 250, 2), 'Filete de res envuelto en hojaldre y cocido a la perfeccion.', 1);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (3,'Tarta de Limon', ROUND(RAND() * 80 + 120, 2), 'Deliciosa tarta de limon con merengue.', 1);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Tarta de Limon', ROUND(RAND() * 80 + 120, 2), 'Deliciosa tarta de limon con merengue.', 1);
 
 -- Restaurante 2
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (4,'Risotto de Mariscos', ROUND(RAND() * 170 + 130, 2), 'Risotto cremoso con una variedad de mariscos frescos.', 2);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Risotto de Mariscos', ROUND(RAND() * 170 + 130, 2), 'Risotto cremoso con una variedad de mariscos frescos.', 2);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (5,'Chuleton de Ternera', ROUND(RAND() * 250 + 300, 2), 'Chuleton de ternera cocido a la parrilla y acompanado de guarniciones.', 2);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Chuleton de Ternera', ROUND(RAND() * 250 + 300, 2), 'Chuleton de ternera cocido a la parrilla y acompanado de guarniciones.', 2);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (6,'Tiramisu', ROUND(RAND() * 60 + 90, 2), 'El clasico postre italiano con capas de cafe y crema.', 2);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Tiramisu', ROUND(RAND() * 60 + 90, 2), 'El clasico postre italiano con capas de cafe y crema.', 2);
 
 -- Restaurante 3
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (7,'Ceviche de Pescado', ROUND(RAND() * 130 + 170, 2), 'Ceviche fresco de pescado con limon y especias.', 3);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Ceviche de Pescado', ROUND(RAND() * 130 + 170, 2), 'Ceviche fresco de pescado con limon y especias.', 3);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (8,'Pasta Alfredo con Pollo', ROUND(RAND() * 180 + 200, 2), 'Pasta fettuccine en salsa alfredo con trozos de pollo.', 3);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Pasta Alfredo con Pollo', ROUND(RAND() * 180 + 200, 2), 'Pasta fettuccine en salsa alfredo con trozos de pollo.', 3);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (9,'Mousse de Chocolate', ROUND(RAND() * 50 + 70, 2), 'Suave mousse de chocolate con decoracion de frutas.', 3);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Mousse de Chocolate', ROUND(RAND() * 50 + 70, 2), 'Suave mousse de chocolate con decoracion de frutas.', 3);
 
 -- Restaurante 4
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (10,'Parrillada Mixta', ROUND(RAND() * 250 + 350, 2), 'Seleccion variada de carnes a la parrilla.', 4);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Parrillada Mixta', ROUND(RAND() * 250 + 350, 2), 'Seleccion variada de carnes a la parrilla.', 4);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (11,'Pasta Frutti di Mare', ROUND(RAND() * 180 + 220, 2), 'Pasta con mariscos frescos en salsa de tomate.', 4);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Pasta Frutti di Mare', ROUND(RAND() * 180 + 220, 2), 'Pasta con mariscos frescos en salsa de tomate.', 4);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (12,'Tartaleta de Frutas', ROUND(RAND() * 70 + 100, 2), 'Tartaleta crujiente rellena de frutas frescas.', 4);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Tartaleta de Frutas', ROUND(RAND() * 70 + 100, 2), 'Tartaleta crujiente rellena de frutas frescas.', 4);
 
 -- Restaurante 5
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (13,'Cordero Patagonico', ROUND(RAND() * 320 + 380, 2), 'Cordero asado con hierbas patagonicas.', 5);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Cordero Patagonico', ROUND(RAND() * 320 + 380, 2), 'Cordero asado con hierbas patagonicas.', 5);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (14,'Salmon en Salsa de Mostaza', ROUND(RAND() * 220 + 260, 2), 'Salmon con salsa de mostaza y miel.', 5);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Salmon en Salsa de Mostaza', ROUND(RAND() * 220 + 260, 2), 'Salmon con salsa de mostaza y miel.', 5);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (15,'Profiteroles Rellenos', ROUND(RAND() * 80 + 120, 2), 'Profiteroles rellenos de crema y chocolate.', 5);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Profiteroles Rellenos', ROUND(RAND() * 80 + 120, 2), 'Profiteroles rellenos de crema y chocolate.', 5);
 
 -- Restaurante 6
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (16,'Raviolis de Calabaza', ROUND(RAND() * 160 + 200, 2), 'Raviolis rellenos de calabaza en salsa de salvia.', 6);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Raviolis de Calabaza', ROUND(RAND() * 160 + 200, 2), 'Raviolis rellenos de calabaza en salsa de salvia.', 6);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (17,'Ternera a la Parrilla', ROUND(RAND() * 280 + 320, 2), 'Ternera jugosa cocida a la parrilla.', 6);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Ternera a la Parrilla', ROUND(RAND() * 280 + 320, 2), 'Ternera jugosa cocida a la parrilla.', 6);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (18,'Tarta de Manzana', ROUND(RAND() * 60 + 90, 2), 'Clasica tarta de manzana con crumble.', 6);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Tarta de Manzana', ROUND(RAND() * 60 + 90, 2), 'Clasica tarta de manzana con crumble.', 6);
 
 -- Restaurante 7
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (19,'Pulpo a la Gallega', ROUND(RAND() * 190 + 220, 2), 'Pulpo cocido con paprika y aceite de oliva.', 7);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Pulpo a la Gallega', ROUND(RAND() * 190 + 220, 2), 'Pulpo cocido con paprika y aceite de oliva.', 7);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (20,'Paella Valenciana', ROUND(RAND() * 260 + 300, 2), 'Paella tradicional con mariscos y pollo.', 7);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Paella Valenciana', ROUND(RAND() * 260 + 300, 2), 'Paella tradicional con mariscos y pollo.', 7);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (21,'Crema Catalana', ROUND(RAND() * 70 + 100, 2), 'Postre cremoso con capa de azucar quemado.', 7);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Crema Catalana', ROUND(RAND() * 70 + 100, 2), 'Postre cremoso con capa de azucar quemado.', 7);
 
 -- Restaurante 8
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (22,'Tacos de Carnitas', ROUND(RAND() * 140 + 180, 2), 'Tacos de cerdo asado con condimentos mexicanos.', 8);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Tacos de Carnitas', ROUND(RAND() * 140 + 180, 2), 'Tacos de cerdo asado con condimentos mexicanos.', 8);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (23,'Enchiladas Verdes', ROUND(RAND() * 160 + 200, 2), 'Enchiladas rellenas de pollo con salsa verde.', 8);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Enchiladas Verdes', ROUND(RAND() * 160 + 200, 2), 'Enchiladas rellenas de pollo con salsa verde.', 8);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (24,'Churros con Chocolate', ROUND(RAND() * 50 + 80, 2), 'Churros crujientes servidos con chocolate caliente.', 8);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Churros con Chocolate', ROUND(RAND() * 50 + 80, 2), 'Churros crujientes servidos con chocolate caliente.', 8);
 
 -- Restaurante 9
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (25,'Risotto de Hongos', ROUND(RAND() * 180 + 220, 2), 'Risotto cremoso con hongos silvestres.', 9);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Risotto de Hongos', ROUND(RAND() * 180 + 220, 2), 'Risotto cremoso con hongos silvestres.', 9);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (26,'Bife de Lomo con Salsa de Vino', ROUND(RAND() * 280 + 320, 2), 'Bife de lomo cocido con salsa de vino tinto.', 9);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Bife de Lomo con Salsa de Vino', ROUND(RAND() * 280 + 320, 2), 'Bife de lomo cocido con salsa de vino tinto.', 9);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (27,'Tarta de Frutas del Bosque', ROUND(RAND() * 70 + 100, 2), 'Tarta de frutas del bosque con crema chantilly.', 9);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Tarta de Frutas del Bosque', ROUND(RAND() * 70 + 100, 2), 'Tarta de frutas del bosque con crema chantilly.', 9);
 
 -- Restaurante 10
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (28,'Parrillada Argentina', ROUND(RAND() * 250 + 350, 2), 'Seleccion de cortes argentinos a la parrilla.', 10);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Parrillada Argentina', ROUND(RAND() * 250 + 350, 2), 'Seleccion de cortes argentinos a la parrilla.', 10);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (29,'Empanadas Criollas', ROUND(RAND() * 160 + 200, 2), 'Empanadas rellenas de carne, huevo y aceitunas.', 10);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Empanadas Criollas', ROUND(RAND() * 160 + 200, 2), 'Empanadas rellenas de carne, huevo y aceitunas.', 10);
 
-INSERT INTO plato_restaurantes (id_Plato,nombre_plato, costo, descripcion, id_usuario_rest)
-VALUES (30,'Flan Casero', ROUND(RAND() * 50 + 80, 2), 'Flan casero con caramelo y crema.', 10);
+INSERT INTO plato_restaurantes (nombre_plato, costo, descripcion, id_usuario_rest)
+VALUES ('Flan Casero', ROUND(RAND() * 50 + 80, 2), 'Flan casero con caramelo y crema.', 10);
 
 /*Insertando Turistas Alojados*/
 
