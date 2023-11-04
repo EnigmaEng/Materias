@@ -58,7 +58,7 @@ const {usuario, autenticado} = TodoContext
     platos.map((item, index) => (
       <div className=' hover:scale-110 duration-300 delay-150 transition-all rounded-box bg-white shadow-xl w-52 h-82 text-center text-black text-2xl' key={index}>
        
-          <img src={item.url_img_menu} alt="foto-plato" className='h-32 bg-gray-700 rounded-t-box' />
+          <img src={item.url_img_menu} alt="foto-plato" className='h-32 bg-gray-700 rounded-t-box w-full' />
         <p className='text-center text-lg font-aref text-black font-semibold'>{item.nombre_plato}</p>
 
       

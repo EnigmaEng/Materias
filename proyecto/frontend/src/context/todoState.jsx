@@ -134,7 +134,6 @@ const usuarioAutenticado = () => {
     });
   }
 
-  
 };
 
     const crearPlato = async datos => {
@@ -156,13 +155,13 @@ const usuarioAutenticado = () => {
         const respuesta = await clienteAxios.post('/restauranteController.php', datos)
         
         dispatch({
-        type: PLATO_CREADO,
+        type: DESCUENTO_CREADO,
         payload: respuesta.data
       })
       } catch (error) {
         console.log(error)
       }
-     
+    
     }
 
 
@@ -190,6 +189,7 @@ const usuarioAutenticado = () => {
         console.log(error)
       }
     }
+
       const editarPlato = async (datos) => {
       try {
         const respuesta = await clienteAxios.post("/restauranteController.php", datos)
@@ -202,7 +202,6 @@ const usuarioAutenticado = () => {
         console.log(error)
       }
     }
-
 
     const editarPerfil = async (datos) => {
       try {
@@ -232,8 +231,6 @@ const usuarioAutenticado = () => {
     reader.readAsDataURL(file);
   });
 };
-
-  
 
 
         const cerrarSesion = async () => {

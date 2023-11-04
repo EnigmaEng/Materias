@@ -9,9 +9,23 @@ import {BiArrowBack} from 'react-icons/bi';
 const CrearDescuentos = () => {
 
   const TodoContext = useContext(todoContext)
-  const {mensaje, crearDescuento, usuario, imagenBase64} = TodoContext
+  const {mensaje, crearDescuento, usuario} = TodoContext
 
+    const imagenBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+    const reader = new FileReader();
 
+      reader.onload = () => {
+      resolve(reader.result);
+     };
+
+     reader.onerror = (error) => {
+      reject(error);
+     };
+
+    reader.readAsDataURL(file);
+  });
+};
 
   const formik = useFormik({
 
@@ -36,17 +50,16 @@ const CrearDescuentos = () => {
       fecha_fin: Yup.date().typeError('Ingrese una fecha valida').required('El campo no puede ir vacio'),
     }),
 
-    onSubmit: async(valores, {resetForm}) => {
+    onSubmit: async (valores, {resetForm}) => {
 
       const fechaInicio = formik.values.fecha_inicio
       const fechaFin = formik.values.fecha_fin
 
     const data = {
-    "accion": "crearDescuento",
+    accion: "crearDescuento",
     activo : "S",
     titulo_descuento: valores.titulo_descuento,
     descripcion: valores.descripcion,
-    url_img_descuento: valores.url_img_descuento,
     costo: valores.costo,
     fecha_inicio: fechaInicio,
     fecha_fin: fechaFin,
@@ -55,17 +68,20 @@ const CrearDescuentos = () => {
 
   if(valores.url_img_descuento){
     const file = valores.url_img_descuento;
+   
  try {
       const base64Image = await imagenBase64(file);
-      data.url_img_usuario = base64Image;
+      data.url_img_descuento = base64Image;
+      console.log(base64Image);
+      
       crearDescuento(data)
     } catch (error) {
       console.log("error al subir la foto: ", error)
     }
 
-resetForm()
+
 }
-  
+  resetForm()
 }
   })
 
@@ -73,7 +89,7 @@ resetForm()
     <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-95   '>
         <NavBar/>
        <Link to='/configuracionRest' className='absolute py-1.5 top-24 left-24 bg-wwe text-white rounded-lg px-6 py-1'><BiArrowBack/></Link> 
-<form onSubmit={formik.handleSubmit} method='POST' className='bg-white md:w-3/12 m-auto mt-24 p-8 rounded-box shadow-xl'>
+<form onSubmit={formik.handleSubmit} method='POST' className='bg-white md:w-3/12 m-auto mt-24 p-8 rounded-box shadow-xl' encType='multipart/form-data'>
   {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }
     <h2 className='text-center text-4xl mb-5 font-bold text-wwe font-aref'>Crear descuento</h2>
 <div  className='flex flex-col text-center font-aref text-black text-lg mb-6' >
@@ -103,7 +119,7 @@ resetForm()
   onChange={(event) => {
     formik.setFieldValue("url_img_descuento", event.currentTarget.files[0]);
   }}
-  onBlur={formik.handleBlur}
+  
 className="file-input file-input-ghost w-full max-w-xs border border-wwe text-wwe "
 />
 {

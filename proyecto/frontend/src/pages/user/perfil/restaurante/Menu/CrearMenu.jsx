@@ -79,9 +79,9 @@ const formik = useFormik({
     } catch (error) {
       console.log("error al subir la foto: ", error)
     }
-      resetForm();
+      
   }
-
+resetForm();
  
   },
 });

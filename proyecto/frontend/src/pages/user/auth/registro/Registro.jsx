@@ -67,24 +67,7 @@ const RegistroUsuario = () => {
   const handleRoleChange = (e) => {
     setSelectedRole(e.target.value);
   };
-
-// const handleFileChange = async (e) => {
-//   const file = e.currentTarget.files[0];
-//   console.log("El archivo:", file);
-
-//   const formData = new FormData();
-//   formData.append('imagen', file);
-
-//   if (selectedRole === 'T') {
-//     formData.append('accion', 'altaTurista');
-    
-//     registrarTurista(formData); // Enviar formData con todos los datos al backend
-//   } else if (selectedRole === 'R') {
-//     formData.append('accion', 'altaRestaurante');
-//     // Agregar otros datos específicos del restaurante al formData si es necesario
-//     registrarRestaurante(formData); // Enviar formData con todos los datos al backend
-//   }
-// };    
+  
 
 const readFileAsBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -117,7 +100,7 @@ onSubmit: async (valores) => {
     email: valores.email,
     contrasena: valores.contrasena,
     rol: selectedRole,
-    // Agregar otros campos según el rol
+ 
   };
 
   if (valores.url_img_usuario) {
@@ -218,7 +201,7 @@ onSubmit: async (valores) => {
   onChange={(event) => {
     formik.setFieldValue("url_img_usuario", event.currentTarget.files[0]);
   }}
-  onBlur={formik.handleBlur}
+
   className="file-input file-input-ghost w-full max-w-xs bg-wwe text-white"
 />
 

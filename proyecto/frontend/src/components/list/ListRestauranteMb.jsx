@@ -49,6 +49,7 @@ const ListRestauranteMb = () => {
   ) : (
     product.map((item, index) => (
      <div className="bg-white rounded-lg " key={index}>
+      <img src={item.foto_usuario} alt="foto-rest" className='w-full h-24 rounded-t-lg ' />
   <div className="mx-auto max-w-2xl px-4 py-5 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
 
 

@@ -113,6 +113,7 @@ function crearDescuento($idRestaurante, $activo, $tituloDescuento, $descripcion,
     $descuento->setActivo($activo);
     $descuento->setTituloDescuento($tituloDescuento);
     $descuento->setDescripcion($descripcion);
+    $descuento->setUrlImagenDesc($urlImgDescuento);
     $descuento->setFechaInicio($fechaInicio);
     $descuento->setFechaFin($fechaFin);
     $descuento->setCosto($costo);
@@ -191,6 +192,17 @@ function obtenerDescuentoPorId($idDescuento)
         return json_encode(array("status" => "No se ha encontrado un descuento."));
     }
 }
+
+function obtenerDescuentoByIdUsuario($id){
+    $descuento = new Descuento;
+    $resultado = $descuento->mostrarDescuentosByIdUsuario($id);
+    if(!empty($resultado)){
+        return json_encode($resultado);
+    }else{
+            return json_encode(array("status" => "No hay descuentos del restaurante"));
+        }
+    }
+
 
 function modificarPlato($idPlato, $datos)
 {
@@ -335,6 +347,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case "obtenerDescuentoPorId":
                 $resultado = obtenerDescuentoPorId($data['id_descuento']);
                 break;
+            case "obtenerDescuentosByIdUsuario":
+                $resultado = obtenerDescuentoByIdUsuario($data['id_usuario']);
             case "obtenerDescuentos":
                 $resultado = obtenerDescuentos();
                 break;

@@ -137,7 +137,7 @@ class PlatoRestaurante extends CrudBasico
                     $stmt->bindValue(":nombre_plato", $this->getNombrePlato());
                     $stmt->bindValue(":costo", $this->getCosto());
                     $stmt->bindValue(":descripcion", $this->getDescripcion());
-                    $stmt->bindValue(":url_img_menu", $_ENV['DIR_IMAGEN'] . $this->getUrlImgMenu());
+                    $stmt->bindValue(":url_img_menu", $this->getUrlImgMenu());
                     $stmt->bindValue(":estado_plato", $this->getEstadoPlato());
                     $stmt->bindValue(":id_usuario_rest", $this->getIdUsuario());
 

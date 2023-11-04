@@ -55,7 +55,7 @@ try {
     {
     solicitudes && solicitudes.length > 0 ?  (
     solicitudes.map((item, index) => ( 
- <div className="lg:flex lg:items-center lg:justify-between border p-8 shadow-xl rounded-lg" key={index}>
+ <div className="lg:flex lg:items-center bg-white lg:justify-between border p-8 shadow-xl rounded-lg" key={index}>
   <div className="min-w-0 flex-1">
     <h2 className="text-lg font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Restaurante: {item.nombre}</h2>
     <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
@@ -99,7 +99,7 @@ try {
     <input type="checkbox" id="my_modal_6" className="modal-toggle" />
 <div className="modal">
   <div className="modal-box bg-white text-black">
-    <h3 className="font-bold text-2xl">Aprobar restaurante?</h3>
+    <h3 className="font-bold text-2xl">¿Aprobar restaurante?</h3>
     <p className="py-4 text-sm">Estás a punto de confirmar una suscripción para un restaurante, verifica que sea el correcto y tengas todos los datos necesarios para la aprobación.</p>
     <div className="modal-action">
       <label htmlFor="my_modal_6" onClick={() => aprobarSub(item.id_usuario_rest, item.id_tipo_subscripcion)} type="button" className="inline-flex items-center rounded-md bg-wwe px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-red-700" >Confirmar</label>

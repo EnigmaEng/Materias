@@ -45,8 +45,9 @@ onSubmit: async(valores, { resetForm }) => {
 
     if (Object.keys(data).length > 2) { //ver si hay cambios excepto el accion y el id
     editarPerfil(data);
-    resetForm();
+   
     }
+     resetForm();
 }
 
     });

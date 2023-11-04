@@ -30,7 +30,7 @@ const restauranteData = () => {
 
         const slicedData = datosFiltrados.slice(startIndex, endIndex);  // crea un nuevo array tomando datosFiltrados que va desde startIndex hasta endIndex
 
-        setProduct(slicedData);    // actualiza el valor product con los datos filtrados y paginados 
+        setProduct(slicedData);  // actualiza el valor product con los datos filtrados y paginados 
     }else{
         console.log("Error para leer los datos de restaurante")
     }

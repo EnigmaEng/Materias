@@ -233,6 +233,26 @@ class Descuento extends CrudBasico
         }
     }
 
+      public function mostrarDescuentosByIdUsuario($id)
+    {
+        try {
+            $query = "SELECT r.nombre, r.id_usuario, des.* FROM wwe.descuento des
+            join wwe.restaurante_tiene_descuento rd on des.id_descuento = rd.id_descuento
+            join wwe.restaurante r on r.id_usuario = rd.id_usuario_rest
+            WHERE r.id_usuario = :id_usuario
+            ";
+            $stmt = $this->getConn()->prepare($query);
+            $stmt->bindValue(":id_usuario", $this->getIdRestaurante());
+            if ($stmt->execute()) {
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } else {
+                return false;
+            }
+        } catch (PDOException $ex) {
+            error_log("" . $ex->getMessage());
+        }
+    }
+
     public function modificarDescuento($idDescuento, $datos)
     {
         try {

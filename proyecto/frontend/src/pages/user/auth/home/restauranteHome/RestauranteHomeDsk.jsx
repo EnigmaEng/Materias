@@ -9,7 +9,7 @@ import {IoRestaurantOutline} from 'react-icons/io5';
 import {MdMenuBook} from 'react-icons/md';
 import {MdOutlineRateReview} from 'react-icons/md';
 import Image2 from '../../../../../assets/crearPlato.png';
-import Image1 from '../../../../../assets/logoubi.png';
+import Image1 from '../../../../../assets/subscripcion.png';
 import Image3 from '../../../../../assets/resenia.png'
 
 

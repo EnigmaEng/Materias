@@ -19,7 +19,7 @@ const ConfiguracionRestDsk = () => {
  
   
 <div className='bg-white w-7/12 h-11/12  m-auto mt-20  p-10 text-3xl text-black  rounded-box'>
-    <h2 className='text-center  text-center font-aref font-semibold text-wwe font-aref  text-3xl mb-24'>Configuración de la cuenta</h2>
+    <h2 className='text-center text-center font-aref font-semibold text-wwe font-aref  text-3xl mb-24'>Configuración de la cuenta</h2>
     <div className='border   p-4 mb-10 rounded-box shadow-xl'> <h2 className='text-center font-aref font-semibold text-white font-aref font-semibold text-wwe mb-5'>Editar perfil</h2> 
     <hr />
     <div className='flex items-center justify-center'>
@@ -27,10 +27,10 @@ const ConfiguracionRestDsk = () => {
     </div>
     </div>
     
-    <div className='border   mb-10 rounded-box  text-center font-aref font-semibold text-wwe shadow-xl'>
-        <h2 className='mb-5 font-aref px-2'>Pagar Suscripción</h2>
+    <div className='border text-center font-aref font-semibold text-wwe p-4 mb-10 rounded-box  shadow-xl'>
+        <h2 className='mb-5 font-aref px-2'>Crear promoción</h2>
         <hr />
-        <Link to='/subscripcion' className='font-aref font-semibold text-white text-center px-2 py-0.5 rounded-lg bg-wwe text-white font-areft font-semibold w-64 py-1 '>Pagar Suscripción</Link>
+        <Link to='/crearDescuentos' className='font-aref font-semibold text-white text-center px-2 py-0.5 rounded-lg bg-wwe text-white font-areft font-semibold w-64 py-1 '>Crear promoción</Link>
         </div>
           <div className='border text-center font-aref font-semibold text-wwe p-4 mb-10 rounded-box  shadow-xl'>
         <h2 className='mb-5 font-aref'>Promociones</h2>
