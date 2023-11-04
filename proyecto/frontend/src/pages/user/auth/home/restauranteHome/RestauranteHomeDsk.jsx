@@ -9,8 +9,9 @@ import {IoRestaurantOutline} from 'react-icons/io5';
 import {MdMenuBook} from 'react-icons/md';
 import {MdOutlineRateReview} from 'react-icons/md';
 import Image2 from '../../../../../assets/crearPlato.png';
-import Image1 from '../../../../../assets/subscripcion.png';
+//import Image1 from '../../../../../assets/Suscribirte.mp4';
 import Image3 from '../../../../../assets/resenia.png'
+import video from '../../../../../assets/Suscribirte.mp4';
 
 
 const RestauranteHomeDsk = () => {
@@ -53,8 +54,16 @@ const RestauranteHomeDsk = () => {
   </div>
 </div>
 <div  className="max-w-sm mt-20 w-[50%]   rounded-box shadow-xl  lg:max-w-full lg:flex">
-<img src={Image1} alt="menu" className='bg-cover bg-white  lg:h-auto lg:w-40 flex-none  bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
-  <div className=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+<video
+    autoPlay
+    loop
+    muted
+    className="h-[285px] w-30"
+  >
+    <source src={video}  type="video/mp4" />
+
+  </video>
+  <div className=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal" >
     <div className="mb-8 mt-5">
       <div className="text-gray-900 font-bold text-xl mb-2">Suscripciones</div>
       <p className="text-gray-700 text-sm">Logra una mayor visibilidad de tu restaurante, descubre el universo Where We Eat y todos sus beneficios para conocer nuevos clientes y llevar al auge a tu establecimiento gastronómico. </p>
