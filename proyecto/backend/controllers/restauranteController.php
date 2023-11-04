@@ -95,12 +95,10 @@ function crearPlato($id_plato, $nombre_plato, $costo, $descripcion, $url_img_men
     if (isset($_FILES['imagen']) && is_array($_FILES['imagen']['name'])) {
         $nombreArchivo = $_FILES['imagen']['name'][0];
         $ruta = $guardarImagen->guardarImagen($_FILES['imagen'], $nombreArchivo);
-        $url_img_menu = $ruta;
-        $plato->setUrlImgMenu($url_img_menu);
     }
 
     if ($plato->persistirPlato()) {
-        return true;
+        return json_encode(array('status'=>'Plato creado correctamente!'));
     }
 }
 
