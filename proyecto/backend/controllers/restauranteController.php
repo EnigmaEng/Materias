@@ -347,6 +347,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 break;
             case "obtenerDescuentosByIdUsuario":
                 $resultado = obtenerDescuentoByIdUsuario($data['id_usuario']);
+                break;
             case "obtenerDescuentos":
                 $resultado = obtenerDescuentos();
                 break;
