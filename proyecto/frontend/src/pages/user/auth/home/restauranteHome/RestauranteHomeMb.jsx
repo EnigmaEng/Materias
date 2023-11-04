@@ -7,6 +7,7 @@ import FooterDsk from '../../../../../components/Footer/FooterDsk'
 import {IoRestaurantOutline} from 'react-icons/io5'
 import {MdMenuBook} from 'react-icons/md'
 import {MdOutlineRateReview} from 'react-icons/md'
+import {GrRestaurant} from 'react-icons/gr';
 
 const RestauranteHomeMb = () => {
   return (
@@ -15,7 +16,7 @@ const RestauranteHomeMb = () => {
  
     <div className='flex justify-center items-center mt-20 gap-2'>
 
-<div className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white rounded-lg shadow-xl w-28 h-24 flex flex-col justify-center items-center'>
+<div className=' p-2 bg-white rounded-lg shadow-xl w-28 h-24 flex flex-col justify-center items-center'>
   <p className='text-center text-wwe text-sm mb-2 font-semibold font-aref'>Mis Reseñas</p>
   <Link to='/misResenias' className='text-wwe text-center text-3xl'>
 <MdOutlineRateReview/>
@@ -23,7 +24,7 @@ const RestauranteHomeMb = () => {
 </div>
 
 <div className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white rounded-lg shadow-xl w-28 h-24 flex flex-col justify-center items-center'>
-    <p className='text-center text-wwe text-sm mb-2 font-semibold font-aref'>Mi Menu</p>
+    <p className='text-center text-wwe text-sm mb-2 font-semibold font-aref'>Mi Menú</p>
   <Link to='/menu' className='text-wwe text-center text-3xl'>
   
 <MdMenuBook/>
@@ -33,7 +34,7 @@ const RestauranteHomeMb = () => {
 <div className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white rounded-lg shadow-xl flex flex-col justify-center items-center w-28 h-24 '>
   <p className='text-sm text-wwe text-center font-semibold font-aref'>Crear Plato</p>
   <Link to='/crearMenu' className='text-wwe text-center text-3xl'>
-<IoRestaurantOutline/>
+      <GrRestaurant/>
   </Link>
 </div>
 

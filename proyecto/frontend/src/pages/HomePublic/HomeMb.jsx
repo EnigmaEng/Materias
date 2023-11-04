@@ -3,44 +3,46 @@ import '../../App.css'
 import { Link } from "react-router-dom";
 import Image from "../../assets/logo-white.png";
 import DarkMode from "../../components/Buttons/DarkMode";
+import Image1 from '../../assets/logo-producto.png'
+import Video from '../../assets/video-fondo.mp4'
 const HomeMb = () => {
   return (
 <>
 {/* la clase bg-mb trae una foto del css */}
- <div className="min-h-screen   py-32 dark:bg-opacity-95 dark:bg-zinc-800 bg-wwe bg-opacity-75">
-  
+ <div className="flex min-h-screen relative">
+      <video
+        autoPlay
+        loop
+        muted
+        className="fixed w-full min-h-screen z-0"
+        style={{ objectFit: 'cover' }}
+      >
+        <source src={Video} type="video/mp4" />
+      </video>
 
-  <div className="absolute top-5 right-5">
-        <DarkMode/>
-  </div>
-
-    <aside className="w-full p-6 ">
-
-  
-      
-        <h1 className="text-center  font-bold text-white text-4xl mb-8 font-aref  ">WHERE WE EAT</h1>
-        <Link to='/'>
-        <img src={Image} alt="logo" className="w-24 m-auto mb-10" />
-        </Link>
-    
-      
-      <div className="text-center ">
-       
-        <h3 className="text-2xl text-white font-bold font-aref">
-          BIENVENIDO
-        </h3>
-        <div className="flex items-center justify-center mt-3 gap-5">
-          <Link to='/login'>
-            <button className="rounded-full border hover:bg-gray-300  py-1 shadow-xl shadow-gray-900 w-40 bg-white active:outline-none active:ring-1 active:ring-red-800 font-bold text-black">Iniciar sesion</button>
+      <div className="z-10 flex flex-col flex-grow bg-zinc-800 bg-opacity-60 place-items-center py-24 gap-10">
+        <div data-aos="fade-down" className="flex flex-col justify-center items-center">
+          <h1 className="text-4xl text-white font-aref font-semibold mb-4">WHERE WE EAT</h1>
+        </div>
+        <div>
+          <img src={Image1} alt="" className="w-40" />
+        </div>
+        <div data-aos="fade-right">
+          <h2 className="text-2xl text-white font-aref font-semibold">BIENVENIDO!</h2>
+        </div>
+        <div className="flex gap-5">
+          <Link to="/login">
+            <button className="bg-wwe font-semibold text-white text-2xl px-4 py-1 shadow-xl w-46 rounded-box">
+              Iniciar Sesión
+            </button>
           </Link>
-          
-          <Link to='/registro'>
-            <button className="font-bold bg-white rounded-full border  py-1 shadow-xl shadow-gray-900  hover:bg-gray-300 w-40 active:outline-none active:ring-1 active:ring-red-800 text-black">Registrarse</button>
+          <Link to="/registro">
+            <button className="font-semibold text-2xl text-white shadow-xl px-4 py-1 rounded-box w-46 bg-wwe">
+              Registrarse
+            </button>
           </Link>
         </div>
       </div>
-      
-      </aside>
     </div>
 
  

@@ -52,7 +52,7 @@ iniciarSesion(userData)
  {
   usuario ? (<HomeAuth/>) : (
   <> 
- <div className="flex min-h-screen dark:bg-opacity-80 dark:bg-zinc-800 flex-col justify-center px-6 py-12 lg:px-8">
+ <div className="flex min-h-screen dark:bg-opacity-80 dark:bg-zinc-800 flex-col justify-center bg-white bg-opacity-60  px-6 py-12 lg:px-8">
   <div className="flex-start absolute top-10">
     <DarkMode/>
   </div>
@@ -68,7 +68,7 @@ iniciarSesion(userData)
   <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
     <form className="space-y-6" onSubmit={formik.handleSubmit} method="POST">
       <div>
-        <label htmlFor="email" className="block text-sm font-medium leading-6 text-wwe">Correo</label>
+        <label htmlFor="email" className="block text-lg font-semibold leading-6 text-wwe">Correo</label>
         <div className="mt-2">
           <input id="email" name="" type="email" autoComplete="email" required className="block w-full rounded-md ring-wwe py-1.5 px-3 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
            value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur}
@@ -83,7 +83,7 @@ iniciarSesion(userData)
 
       <div>
         <div className="flex items-center justify-between">
-          <label htmlFor="password" className="block text-sm font-medium leading-6 text-wwe">Contraseña</label>
+          <label htmlFor="password" className="block text-lg font-semibold leading-6 text-wwe">Contraseña</label>
           <div className="text-sm">
             <a href="#" className="font-semibold text-wwe dark:text-white hover:text-wwe">Olvidaste tu contraseña?</a>
           </div>
@@ -105,8 +105,8 @@ iniciarSesion(userData)
       </div>
     </form>
 
-    <p className="mt-10 text-center text-xl text-wwe dark:text-white">
-      Eres nuevo?
+    <p className="mt-10 text-center text-xl text-wwe dark:text-white ">
+      ¿Eres nuevo?
       <Link to='/registro' className="font-semibold leading-10 font-aref ml-2 text-wwe hover:text-wwe">Registrate</Link>
     </p>
   </div>

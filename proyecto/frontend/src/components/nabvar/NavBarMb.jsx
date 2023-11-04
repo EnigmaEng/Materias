@@ -34,9 +34,9 @@ usuarioAutenticado();
 
  <div className="mr-3 ">
     <div className="dropdown dropdown-end">
-      <label tabIndex={0} className="btn btn-ghost btn-circle  bg-white mt-2 shadow-xl">
-        <div className="rounded-full ">
-          <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className='w-14 rounded-full' />
+      <label tabIndex={0} className="btn btn-ghost btn-circle   m-2 shadow-xl">
+        <div className=" ">
+          <img src={usuario.url_img_usuario} className='w-12  h-12 rounded-full' />
         </div>
       </label>
       <ul tabIndex={0} className="z-10 px-4 py-4 z dropdown-content mt-3 border bg-white rounded-box w-40">
@@ -58,15 +58,7 @@ usuarioAutenticado();
    (
     <>
    <TuristaMobile/>
-{/* <div className='navbar bg-wwe  shadow-xl'>
- <div className='absolute left-5'>
-       <DarkMode/>
-    </div>
-   <Link to='/homeAuth' className='m-auto w-14'>  
-    <img src={Image} alt="logo"/>
-    </Link>
 
-</div> */}
 
  </>
     ) : usuario && usuario.rol.nro_empleado ? 
