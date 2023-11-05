@@ -79,7 +79,7 @@ usuarioAutenticado();
 
   <div className="flex-none mr-5">
     <div className="dropdown dropdown-end">
-      <label tabIndex={0} id='' className="btn btn-ghost btn-circle   mt-3 shadow-xl ">
+      <label tabIndex={0} id='cypress' className="btn btn-ghost btn-circle   mt-3 shadow-xl ">
         <div className="rounded-full ">
           
           <img src={usuario.url_img_usuario} className='w-12 h-12 rounded-full' />
