@@ -1,7 +1,7 @@
 import React, { useReducer} from "react";
 import todoContext from "./todoContext";
 import todoReducer from "./todoReducer";
-import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, EDITAR_PERFIL, DESCUENTO_CREADO, RESENIA_CREADA,EDITAR_PLATO, SOLICITUD_SUBSCRIPCION} from "../types/types";
+import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, EDITAR_PERFIL, DESCUENTO_CREADO, RESENIA_CREADA,EDITAR_PLATO, SOLICITUD_SUBSCRIPCION, ALOJAMIENTO_CREADO} from "../types/types";
 import clienteAxios from "../config/axios";
 
 
@@ -141,7 +141,7 @@ const usuarioAutenticado = () => {
         const respuesta = await clienteAxios.post('/restauranteController.php', datos)
         
         dispatch({
-        type: DESCUENTO_CREADO,
+        type: PLATO_CREADO,
         payload: respuesta.data
       })
       } catch (error) {
@@ -210,7 +210,7 @@ const usuarioAutenticado = () => {
           type: EDITAR_PLATO,
           payload: respuesta.data.status
         })
-        console.log(respuesta.data.status)
+        
       } catch (error) {
         console.log(error)
       }
@@ -232,6 +232,18 @@ const usuarioAutenticado = () => {
   });
 };
 
+const crearAlojamiento = async (datos) => {
+  try {
+      const respuesta  = await clienteAxios.post("/", datos)
+  dispatch({
+    type: ALOJAMIENTO_CREADO ,
+    payload: respuesta.data
+  })
+  } catch (error) {
+    console.log(error)
+  }
+
+}
 
         const cerrarSesion = async () => {
           
