@@ -20,6 +20,6 @@ describe ('Registro_Rest', () => {
         cy.get('#esquina').type('Springfield')
         cy.get(':nth-child(15) > input').click()
         cy.get('.mb-8').click()
-        cy.contains('Registro exitoso')
+        cy.contains('Creacion de usuario exitosa')
     })
 })
