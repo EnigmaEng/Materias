@@ -42,7 +42,7 @@ const ListRestaurantes = () => {
   return (
     <>
 
-     <div className='w-5/12 m-auto px-10 h-8/12 p-4 rounded-lg dark:bg-zinc-800'>
+     <div className='w-full m-auto px-10 h-8/12 p-4 rounded-lg dark:bg-zinc-800'>
       <div className='flex flex-col text-center justify-center items-center mt-2 '>
         <input
           type='text'
@@ -57,7 +57,10 @@ const ListRestaurantes = () => {
           <p className='text-center text-2xl py-24 text-wwe font-semibold'>Cargando..</p>
         </div>
       ) : (
-        <Slider {...settings}>
+<>
+<div className='grid grid-cols-6 gap-2'>
+
+
           {product.map((item, index) => (
             <div className='bg-white h-7/12 w-52 rounded-lg shadow-xl text-center text-black mt-10' key={index}>
               <img src={item.foto_usuario} alt="logo-restaurante" className='w-full m-auto h-52 rounded-t-lg' />
@@ -72,7 +75,7 @@ const ListRestaurantes = () => {
               </div>
             </div>
           ))}
-        </Slider>
+     </div> </>
       )}
     </div>
     
