@@ -17,9 +17,7 @@ const Subscripcion = () => {
     subscripcion(dato);
     
   };
-//   <label htmlFor="my_modal_6" className="btn">open modal</label>
 
-{/* Put this part before </body> tag */}
 
   return (
     <>

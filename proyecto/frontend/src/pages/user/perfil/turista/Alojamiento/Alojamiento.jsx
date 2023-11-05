@@ -16,13 +16,19 @@ const Alojamiento = () => {
     initialValues: {
       nombre_alojamiento:'',
       fecha_ini_alojamiento:'',
-      fecha_fin_alojamiento:''
+      fecha_fin_alojamiento:'',
+      calle: '',
+      nro_puerta: '',
+      esquina: ''
     },
 
     validationSchema: Yup.object({
       nombre_alojamiento: Yup.string().required("Campo obligatorio"),
       fecha_ini_alojamiento: Yup.date().required('El campo no puede ir vacio'),
       fecha_fin_alojamiento: Yup.date().required('El campo no puede ir vacio'),
+      calle: Yup.string().required("Campo obligatorio"),
+      nro_puerta: Yup.string().required("Campo obligatorio"),
+      esquina: Yup.string().required("Campo obligatorio"),
       
     }),
     onSubmit: (valores, {resetForm}) => {
@@ -33,7 +39,10 @@ const Alojamiento = () => {
         accion: "",
         nombre_alojamiento : valores.nombre_alojamiento,
         fecha_ini_alojamiento : fechaInicio,
-        fecha_fin_alojamiento : fechaFin
+        fecha_fin_alojamiento : fechaFin,
+        calle: valores.calle,
+        nro_puerta: valores.nro_puerta,
+        esquina: valores.esquina
       }
       crearAlojamiento(data)
       resetForm();
@@ -72,6 +81,30 @@ const Alojamiento = () => {
                                                 {
     formik.touched.fecha_fin_alojamiento && formik.errors.fecha_fin_alojamiento ?
     <div><p className='text-wwe '>{formik.errors.fecha_fin_alojamiento}</p></div> : null
+  }
+                </div>
+                    <div className='form-control'>
+                    <label htmlFor="" id='fecha_fin_alojamiento' className='font-semibold font-aref text-wwe text-lg'>Calle: </label>
+                    <input type="text" id='fecha_fin_alojamiento' value={formik.values.calle} onChange={formik.handleChange} onBlur={formik.handleBlur} className='border border-wwe input bg-white text-black'  />
+                                                {
+    formik.touched.calle && formik.errors.calle ?
+    <div><p className='text-wwe '>{formik.errors.calle}</p></div> : null
+  }
+                </div>
+                   <div className='form-control'>
+                    <label htmlFor="" id='fecha_fin_alojamiento' className='font-semibold font-aref text-wwe text-lg'>Nro de puerta: </label>
+                    <input type="text" id='fecha_fin_alojamiento' value={formik.values.calle} onChange={formik.handleChange} onBlur={formik.handleBlur} className='border border-wwe input bg-white text-black'  />
+                                                {
+    formik.touched.calle && formik.errors.calle ?
+    <div><p className='text-wwe '>{formik.errors.calle}</p></div> : null
+  }
+                </div>
+                             <div className='form-control'>
+                    <label htmlFor="" id='fecha_fin_alojamiento' className='font-semibold font-aref text-wwe text-lg'>Esquina: </label>
+                    <input type="text" id='fecha_fin_alojamiento' value={formik.values.esquina} onChange={formik.handleChange} onBlur={formik.handleBlur} className='border border-wwe input bg-white text-black'  />
+                                                {
+    formik.touched.esquina && formik.errors.esquina ?
+    <div><p className='text-wwe '>{formik.errors.calle}</p></div> : null
   }
                 </div>
                 <button type='submit' className=' w-full mt-5   py-1 shadow-xl shadow-gray-400 hover:bg-red-600 bg-wwe rounded-lg text-white text-2xl'>Ingresar</button>

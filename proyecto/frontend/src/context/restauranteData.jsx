@@ -17,7 +17,6 @@ const restauranteData = () => {
     const startIndex = (pagina - 1) * itemsPorPagina; //es el primer indice del primer elemento que mostrara
     const endIndex = startIndex + itemsPorPagina;  //el indice del elemento DESPUES del ultimo elemento que mostrara
     const itemsTotales = 4;  //la cantidad de productos totales que trae la api
-
     
     const getProduct = async () => {
         try {

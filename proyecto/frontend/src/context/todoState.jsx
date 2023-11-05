@@ -1,7 +1,7 @@
 import React, { useReducer} from "react";
 import todoContext from "./todoContext";
 import todoReducer from "./todoReducer";
-import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, EDITAR_PERFIL, DESCUENTO_CREADO, RESENIA_CREADA,EDITAR_PLATO, SOLICITUD_SUBSCRIPCION, ALOJAMIENTO_CREADO} from "../types/types";
+import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, EDITAR_PERFIL, DESCUENTO_CREADO, RESENIA_CREADA,EDITAR_PLATO, SOLICITUD_SUBSCRIPCION, ALOJAMIENTO_CREADO, EDITAR_DESCUENTO} from "../types/types";
 import clienteAxios from "../config/axios";
 
 
@@ -216,27 +216,27 @@ const usuarioAutenticado = () => {
       }
     }
 
-    const imagenBase64 = (file) => {
-      return new Promise((resolve, reject) => {
-    const reader = new FileReader();
+      const editarDescuento = async(datos) => {
+        try {
+           const respuesta = clienteAxios.post('/restauranteController.php', datos)
+            dispatch({
+          type: EDITAR_DESCUENTO,
+          payload: respuesta.data
+        })
+        } catch (error) {
+          console.log(error)
+        }
+       
 
-      reader.onload = () => {
-      resolve(reader.result);
-     };
+        
+    }
 
-     reader.onerror = (error) => {
-      reject(error);
-     };
-
-    reader.readAsDataURL(file);
-  });
-};
 
 const crearAlojamiento = async (datos) => {
   try {
-      const respuesta  = await clienteAxios.post("/", datos)
+      const respuesta  = await clienteAxios.post("/turistaController", datos)
   dispatch({
-    type: ALOJAMIENTO_CREADO ,
+    type: ALOJAMIENTO_CREADO,
     payload: respuesta.data
   })
   } catch (error) {
@@ -274,7 +274,7 @@ const crearAlojamiento = async (datos) => {
                 solicitudSubscripcion,
                 editarPerfil,
                 editarPlato,
-                imagenBase64
+                editarDescuento
             }}>
 
             {children}

@@ -31,6 +31,8 @@ import EditarDescuento from './pages/user/perfil/restaurante/Descuentos/EditarDe
 import todoContext from './context/todoContext'
 import { useContext, useEffect } from 'react'
 import EditarPlato from './pages/user/perfil/restaurante/Menu/EditarPlato'
+import DescuentoByIdUsuario from './pages/user/perfil/restaurante/Descuentos/DescuentoByIdUsuario'
+import DescuentoById from './pages/user/perfil/restaurante/Descuentos/DescuentoById'
 function App() {
 
 
@@ -88,6 +90,8 @@ function App() {
 
 <Route path="/clientePerfil/:id_usuario" element={<PerfilCliente/>} />
 
+<Route path="/descuentoByIdUsuario" element={<DescuentoByIdUsuario/>} />
+<Route path="/descuentoById/:id_descuento" element={<DescuentoById/>} />
     </Routes>
     
     </BrowserRouter>

@@ -22,7 +22,7 @@ try {
         "fechaPago": formattedDate
     }
     solicitudSubscripcion(data)
-    
+
 } catch (error) {
     console.log(error)
 }
