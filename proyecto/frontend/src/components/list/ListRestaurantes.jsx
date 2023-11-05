@@ -22,8 +22,8 @@ const ListRestaurantes = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: product.length > 3 ? 3 : product.length,
-    slidesToScroll: 1,
+    slidesToShow: product.length < 4 ? product.length : 4,
+    slidesToScroll: 3,
   };
 
   useEffect(() => {

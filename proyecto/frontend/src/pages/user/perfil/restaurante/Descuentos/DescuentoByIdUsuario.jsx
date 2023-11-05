@@ -21,6 +21,7 @@ const DescuentoByIdUsuario = () => {
     }
     const respuesta = await clienteAxios.post('/restauranteController.php', accion);
     setDescuentoUser(respuesta.data);
+    console.log(respuesta.data)
     }
     
     useEffect(() => {
@@ -31,14 +32,13 @@ const DescuentoByIdUsuario = () => {
        
     },[descuentoUser, usuario, autenticado])
 
-     const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-     slidesToShow: descuentoUser.length > 3 ? 3 : descuentoUser.length,
-    slidesToScroll: 1,
-     variableWidth: true,
-  };
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 4,
+  slidesToScroll: 3,
+};
 
     return (
     <>
