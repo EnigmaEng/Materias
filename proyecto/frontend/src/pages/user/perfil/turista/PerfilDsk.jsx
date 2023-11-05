@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const PerfilDsk = () => {
 
 const TodoContext = useContext(todoContext)
-const {usuario, usuarioAutenticado, autenticado} = TodoContext
+const {usuario} = TodoContext
 
 
   return (

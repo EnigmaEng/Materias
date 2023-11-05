@@ -25,7 +25,7 @@ const [descuentos, setDescuentos] = useState([])
 
     useEffect(() =>{
 getDescuentos();
- console.log(descuentos);
+
     },[])
 
 

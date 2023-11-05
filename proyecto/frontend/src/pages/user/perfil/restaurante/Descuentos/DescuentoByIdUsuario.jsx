@@ -14,7 +14,7 @@ const DescuentoByIdUsuario = () => {
     const [descuentoUser, setDescuentoUser] = useState([])
 
     const getDescuentosById = async() => {
-      
+
     const accion = {
         'accion': 'obtenerDescuentosByIdUsuario',
         'id_usuario': usuario?.id_usuario
@@ -35,7 +35,7 @@ const DescuentoByIdUsuario = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3, // Cantidad de promociones a mostrar
+     slidesToShow: descuentoUser.length > 3 ? 3 : descuentoUser.length,
     slidesToScroll: 1,
      variableWidth: true,
   };
@@ -51,6 +51,7 @@ const DescuentoByIdUsuario = () => {
             <div key={index} className='bg-white  shadow-xl mt-5 text-center'>
               <img src={item.url_img_descuento} alt="foto-descuento" className='w-64 m-auto h-24 ' />
               <div className='card-body  p-2'>
+            <p className='text-wwe'>{item.id_descuento}</p>
                 <p className='text-wwe text-xl font-semibold'>{item.titulo_descuento}</p>
                 <p className='text-wwe text-sm '>{item.descripcion}</p>
                 <p className='text-wwe font-aref font-semibold'>${item.costo}</p>
