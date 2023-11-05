@@ -11,10 +11,6 @@ const PerfilDsk = () => {
 const TodoContext = useContext(todoContext)
 const {usuario, usuarioAutenticado, autenticado} = TodoContext
 
-useEffect(() => 
-{
-usuarioAutenticado()
-},[autenticado])
 
   return (
 <>

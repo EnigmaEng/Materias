@@ -14,12 +14,11 @@ const DescuentoByIdUsuario = () => {
     const [descuentoUser, setDescuentoUser] = useState([])
 
     const getDescuentosById = async() => {
-
+      
     const accion = {
         'accion': 'obtenerDescuentosByIdUsuario',
         'id_usuario': usuario?.id_usuario
     }
-    
     const respuesta = await clienteAxios.post('/restauranteController.php', accion);
     setDescuentoUser(respuesta.data);
     }

@@ -10,16 +10,11 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const ListRestauranteMb = () => {
    const {product, 
-    pagina,
+
     getProduct, 
-    buscando, 
-    endIndex, 
-    itemsTotales,
     setBuscando, 
     busqueda, 
     setBusqueda,
-    handlePaginaAnterior, 
-    handlePaginaSiguiente,
   } = restauranteData();
 
   useEffect(() => {
@@ -78,22 +73,7 @@ const ListRestauranteMb = () => {
             ))}
           </Slider>
           
-          <div className='flex justify-between'>
-            <button
-              className='border px-4 py-1 mt-2 bg-white text-black rounded-lg shadow-xl'
-              onClick={handlePaginaAnterior}
-              disabled={pagina === 1 || buscando}
-            >
-              Anterior
-            </button>
-            <button
-              className='border px-4 py-1 mt-2 bg-white text-black rounded-lg shadow-xl'
-              onClick={handlePaginaSiguiente}
-              disabled={endIndex >= itemsTotales || buscando}
-            >
-              Siguiente
-            </button>
-          </div>
+
         </>
       )}
     </div>

@@ -15,4 +15,4 @@ const Descuentos = () => {
   )
 }
 
-export default Descuentos
+export default Descuentos;

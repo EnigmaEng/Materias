@@ -7,4 +7,4 @@ const DescuentosMb = () => {
   )
 }
 
-export default DescuentosMb
+export default DescuentosMb;
