@@ -29,7 +29,7 @@ const ListRestaurantes = () => {
   useEffect(() => {
     getProduct();    
   }, [product]);    
-
+console.log(product)
   useEffect(() => {
 
     if (busqueda.trim() !== '') {  //si el valor busqueda es distinto de vacio 
