@@ -57,7 +57,7 @@ restaurante
     <div className=' ' > 
     <div className='flex flex-col justify-center items-center bg-white dark:bg-zinc-900'>
         <p className='text-center text-4xl text-wwe font-aref font-semibold'>{item.nombre}</p>
-   <button className='bg-wwe text-white px-2 rounded-md m-4 w-64 h-8'>¡Quiero ir!</button>  <p className='text-wwe font-semibold text-center text-sm m-2 dark:text-white'>Númeroro de local: {item.nro_local}</p>  
+   <button className='bg-wwe text-white px-2 rounded-md m-4 w-64 h-8'>¡Quiero ir!</button>  <p className='text-wwe font-semibold text-center text-sm m-2 dark:text-white'>Número de local: {item.nro_local}</p>  
     </div>
     <>
     

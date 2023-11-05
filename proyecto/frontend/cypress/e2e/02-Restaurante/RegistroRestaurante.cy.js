@@ -1,6 +1,6 @@
 describe ('Registro_Rest', () => {
     beforeEach (() => { 
-        cy.visit('http://127.0.0.1:5173/')
+        cy.visit('http://wweat.ddns.net/')
     })
     it('Entrando al Registro',() =>{
         cy.contains('WHERE WE EAT')
@@ -9,7 +9,7 @@ describe ('Registro_Rest', () => {
         cy.get('#email').type('RestauranteEmail@gmail.com',{ delay: 30 })
         cy.get('#contrasena').type('SoyRestaurante123',{ delay: 30 })
         cy.get('#confirmContrasena').type('SoyRestaurante123')
-        /*cy.get('#url_img_usuario').type('Foto_Resto.jpg',{ delay: 30 })*/
+        cy.get('#url_img_usuario').selectFile("./cypress/imgs/restaurante.png");
         cy.get('#rol').select('Restaurante')
         cy.wait(200)
         cy.get('#nombre').type('Resto Cypress',{ delay: 30 })
@@ -20,6 +20,6 @@ describe ('Registro_Rest', () => {
         cy.get('#esquina').type('Springfield')
         cy.get(':nth-child(15) > input').click()
         cy.get('.mb-8').click()
-        cy.contains('Registro exitoso')
+        cy.contains('Creacion de usuario exitosa')
     })
 })

@@ -1,6 +1,6 @@
 describe ('Registro_Turista', () => {
     beforeEach (() => { 
-        cy.visit('http://127.0.0.1:5173/')
+        cy.visit('http://wweat.ddns.net/')
     })
     it('Entrando al Registro',() =>{
         cy.contains('WHERE WE EAT')
@@ -9,7 +9,7 @@ describe ('Registro_Turista', () => {
         cy.get('#email').type('TuristaEmail@gmail.com',{ delay: 30 })
         cy.get('#contrasena').type('SoyTurista123',{ delay: 30 })
         cy.get('#confirmContrasena').type('SoyTurista123',{ delay: 30 })
-        /*cy.get('#url_img_usuario').type('Foto_Turista.jpg',{ delay: 30 })*/
+        cy.get('#url_img_usuario').selectFile("./cypress/imgs/turista_hombre.jpeg");
         cy.get('#rol').select('Turista')
         cy.wait(200)
         cy.get('#nombres').type('Turista Cy',{ delay: 30 })
@@ -20,6 +20,6 @@ describe ('Registro_Turista', () => {
         cy.wait(200)
         cy.get(':nth-child(10) > input').click()
         cy.get('.mb-8').click()
-        cy.contains('Registro exitoso')
+        cy.contains('Creacion de usuario exitosa')
     })
 })
