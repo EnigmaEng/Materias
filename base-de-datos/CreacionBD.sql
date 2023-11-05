@@ -531,7 +531,7 @@ VALUES (3, SYSDATE(),3);
 /*Insertando administradores*/
 
 INSERT INTO usuarios (alias, email, contrasena, activo, bloqueado, rol)
-VALUES ('admin22', 'admin22@wwe.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'A');
+VALUES ('admin22', 'admin@admin.com', '$2y$10$UADHYcQi2TCTP6OE5hUoc.UUypcvxTBtKVbSlWzz.GDGRb/mOrmU2', 'S', 'N', 'A');
 
 INSERT INTO administrativo (id_usuario, nro_empleado, nombres, apellidos)
 VALUES (LAST_INSERT_ID(), 22, 'Juan', 'Perez');

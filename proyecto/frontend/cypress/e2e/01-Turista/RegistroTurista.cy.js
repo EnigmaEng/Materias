@@ -1,6 +1,6 @@
 describe ('Registro_Turista', () => {
     beforeEach (() => { 
-        cy.visit('http://127.0.0.1:5173/')
+        cy.visit('http://wweat.ddns.net/')
     })
     it('Entrando al Registro',() =>{
         cy.contains('WHERE WE EAT')
@@ -20,6 +20,6 @@ describe ('Registro_Turista', () => {
         cy.wait(200)
         cy.get(':nth-child(10) > input').click()
         cy.get('.mb-8').click()
-        cy.contains('Registro exitoso')
+        cy.contains('Creacion de usuario exitosa')
     })
 })
