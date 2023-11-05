@@ -13,10 +13,12 @@ describe ('LoginRestaurante', () => {
         cy.contains('Crear descuento').click()
         cy.get('#titulo_descuento').type('2x1 Tacos mexicanos',{ delay: 20 })
         cy.get('#descripcion').type('Tacos mexicanos super picantes', { delay: 20 })
+        cy.get('#url_img_descuento').selectFile("./cypress/imgs/tacos.jpg")
         cy.get('#costo').type('600')
         cy.get('#fecha_inicio').type('2023-11-14')
         cy.get('#fecha_fin').type('2023-11-20')
         cy.wait(1000)
-        cy.get('.w-52').click()
+        cy.get('button[type="submit"].w-full').click();
+        cy.contains('Descuento creado exitosamente')
     })
 })
