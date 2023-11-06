@@ -31,8 +31,6 @@ restaurante
 
   }, [id_usuario]);
 
-  
-
   const handleClick = () => {
     const accion = {
     "accion":"turistaVisitaRest",

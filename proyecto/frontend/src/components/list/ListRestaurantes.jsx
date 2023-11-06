@@ -27,6 +27,7 @@ const ListRestaurantes = () => {
     speed: 500,
     slidesToShow: product.length < 4 ? product.length : 4,
     slidesToScroll: 3,
+    
   };
 
   useEffect(() => {
@@ -77,14 +78,14 @@ const ListRestaurantes = () => {
         
           {product.map((item, index) => (
             
-            <div className='bg-white h-6/12  w-52 rounded-lg shadow-xl text-center text-black mt-10' key={index}>
+            <div className='bg-white h-6/12  border border-wwe  rounded-lg shadow-xl text-center text-black mt-10' key={index}>
               <img src={item.foto_usuario} alt="logo-restaurante" className='w-full m-auto h-52 rounded-t-lg' />
               <h2 className='text-2xl py-10 text-wwe font-semibold font-aref'>{item.nombre_restaurante}</h2>
-              <div className='gap-20 flex p-4 items-center justify-center'>
+              <div className=' flex p-4 gap-5 items-center justify-center'>
                 <Link to={`/clientePerfil/${item.id_usuario}`} className='rounded-lg border px-4 shadow-xl border w-24 flex justify-center py-3 h-10'>
                   <BsSearch />
                 </Link>
-                <button className='bg-wwe w-24 hover:bg-red-700 p-2 rounded-lg text-white' onClick={()=> handleClick(`${item.id_usuario}`)}>Visitar</button>
+                <button className='bg-wwe  hover:bg-red-700 p-2 rounded-lg text-white' onClick={()=> handleClick(`${item.id_usuario}`)}>Visitar</button>
                 <Link to={`/crearResenia/${item.id_usuario}`} className='rounded-lg border px-4 bg-white shadow-xl w-24 flex justify-center py-3 h-10'>
                   <GoCodeReview />
                 </Link>

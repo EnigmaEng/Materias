@@ -10,13 +10,14 @@ const [menu, setMenu] = useState([]);
 
     const getProductById = async (id_usuario) => {
         const accion = {
-    "accion": "obtenerRestauranteById",
+    "accion": "restauranteById",
     "id_usuario": id_usuario
   }
   try {
   const res = await clienteAxios.post('/restauranteController.php', accion)
   
  setRestaurante(res.data);
+console.log("restaurante perfil aqui: ", res.data)
   } catch (error) {
     console.log(error)
   }
