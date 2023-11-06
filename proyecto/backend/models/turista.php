@@ -138,4 +138,12 @@ class Turista extends Usuario
             throw new Exception("Error en el insert de turista visita rest: " . $ex->getMessage());
         }
     }
+
+    public function obtenerVisitasTurista(){
+        try {
+
+        }catch(PDOException $ex) {
+            throw new Exception("". $ex->getMessage());
+        }
+    }
 }

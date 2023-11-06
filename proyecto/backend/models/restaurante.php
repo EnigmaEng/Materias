@@ -204,4 +204,21 @@ class Restaurante extends Usuario
         $data = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $data;
     }
+
+    public function obtenerVisitasTurista(){
+        try {
+            $query="select tur.nombres,tur.apellidos,tur.nacionalidad,tvr.token,tvr.fecha_visita as fecha_solicitado from turista tur
+            join wwe.turista_visita_rest tvr on tur.id_usuario = tvr.id_turista
+            where tvr.id_rest = :id_rest ;";
+            $stmt=$this->getConn()->prepare($query);
+            $stmt->bindValue(":id_rest",$this->getIdUsuarioRest());
+            $stmt->execute();
+            $resultado=$stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(!empty($resultado)){
+                return $resultado;
+            }
+        }catch(PDOException $ex) {
+            throw new Exception("". $ex->getMessage());
+        }
+    }
 }

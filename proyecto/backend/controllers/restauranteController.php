@@ -304,6 +304,14 @@ function modificarDescuento($idDescuento, $datos)
     }
 }
 
+function obtenerVisitasTurista($idRestaurante){
+    $restaurante=new Restaurante();
+    $restaurante->setIdUsuarioRest($idRestaurante);
+    $resultado= $restaurante->obtenerVisitasTurista();
+    return json_encode($resultado);
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
@@ -377,6 +385,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case "modificarDescuento":
                 $resultado = modificarDescuento($data['id_descuento'], $data);
                 break;
+            case "obtenerVisitasDeTuristas":
+                $resultado= obtenerVisitasTurista($data['id_restaurante']);
+                break;    
             default:
                 $resultado = "Error en el tipo de accion, intente nuevamente";
                 break;
