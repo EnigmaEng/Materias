@@ -1,6 +1,7 @@
 <?php
 include_once '../models/turista.php';
 include './cors.php';
+require_once '../models/guardarImagen.php';
 
 require '../vendor/autoload.php';
 
@@ -58,8 +59,6 @@ function editarUsuario($idUsuario, $datos)
         return json_encode(array("status" => "Error en la persistencia de los cambios."));
     }
 }
-
-
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

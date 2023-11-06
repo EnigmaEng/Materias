@@ -120,6 +120,18 @@ function consultarAlojamiento()
     }
 }
 
+function turistaVisitaRest($idTurista,$idUsuarioRest){
+    $turista = new Turista();
+    $restaurante=new Restaurante();
+    $turista->setIdUsuario($idTurista);
+    $restaurante->setIdUsuarioRest($idUsuarioRest);
+    if($turista->turistaVisitaRest($restaurante)){
+        return json_encode(array("status"=> "Token creado correctamente"));
+    }else{
+        return  json_encode(array("status"=> "Error en la creacion del Token"));
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
@@ -153,6 +165,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case "consultarAlojamiento":
                 $resultado = consultarAlojamiento();
                 break;
+            case "turistaVisitaRest":
+                $resultado=turistaVisitaRest($data['id_usuario_turista'],$data['id_usuario_rest']);
+                break;    
         }
     } else {
         $resultado = 'Error en la peticion, intente nuevamente';

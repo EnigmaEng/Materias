@@ -11,7 +11,8 @@ $dotenv = Dotenv::createImmutable('/var/www/html/');
 $dotenv->load();
 
 class Restaurante extends Usuario
-{
+{   
+    private $idRestaurante;
     private $tipoRestaurante;
 
     private $nombre;
@@ -29,6 +30,14 @@ class Restaurante extends Usuario
         $this->setDriver($_ENV['DB_DRIVER']);
         $this->setDatCon();
         parent::__construct();
+    }
+
+    public function setIdUsuarioRest($idRestaurante){
+        $this->idRestaurante=$idRestaurante;
+    }
+
+    public function getIdUsuarioRest(){
+        return $this->idRestaurante;
     }
 
     public function setTipoRestaruante($tipoRestaurante)
