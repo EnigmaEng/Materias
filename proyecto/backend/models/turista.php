@@ -121,4 +121,21 @@ class Turista extends Usuario
             throw new Exception("Error al insertar: " . $ex->getMessage());
         }
     }
+
+    public function turistaVisitaRest($modeloRestaurante)
+    {
+        try {
+            $query = "INSERT INTO turista_visita_rest (id_turista, id_rest, token,fecha_visita)
+            VALUES (:id_turista, :id_rest, FLOOR(1000000 * RAND()) + 1, curdate());";
+            $stmt = $this->getConn()->prepare($query);
+            $stmt->bindValue(":id_turista", $this->getIdUsuario());
+            $stmt->bindValue(":id_rest", $modeloRestaurante->getIdUsuarioRest());
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $ex) {
+            throw new Exception("Error en el insert de turista visita rest: " . $ex->getMessage());
+        }
+    }
 }
