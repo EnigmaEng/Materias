@@ -18,15 +18,7 @@ const HomeDsk = () => {
   <>
 <div className="flex   ">
 
-  <video
-    autoPlay
-    loop
-    muted
-    className="fixed w-full  "
-  >
-    <source src={Video}  type="video/mp4" />
-    
-  </video>
+
 
   <div className="z-10 flex flex-col w-6/12 flex-grow bg-zinc-800 bg-opacity-60 place-items-center gap-5 py-52 min-h-screen ">
    

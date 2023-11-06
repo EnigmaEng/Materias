@@ -27,10 +27,12 @@ import MapContent from './components/maps/MapContent'
 import PerfilCliente from './pages/user/perfil/restaurante/PerfilCliente/PerfilCliente'
 import Alojamiento from './pages/user/perfil/turista/Alojamiento/Alojamiento'
 import Descuentos from './pages/user/perfil/restaurante/Descuentos/Descuentos'
-import EditarDescuento from './pages/user/perfil/restaurante/Descuentos/EditarDescuento'
+
 import todoContext from './context/todoContext'
 import { useContext, useEffect } from 'react'
 import EditarPlato from './pages/user/perfil/restaurante/Menu/EditarPlato'
+import DescuentoByIdUsuario from './pages/user/perfil/restaurante/Descuentos/DescuentoByIdUsuario'
+import DescuentoById from './pages/user/perfil/restaurante/Descuentos/DescuentoById'
 function App() {
 
 
@@ -82,12 +84,13 @@ function App() {
 <Route path='/configuracionRest' element={<ConfiguracionRest/>}/>
 <Route path='/crearDescuentos' element={<CrearDescuentos/>}/>
 
-<Route path='/editarDescuentos/:id_usuario' element={<EditarDescuento/>}/>
 <Route path='/descuentos' element={<Descuentos/>}/>
 <Route path='/editarPlato/:id_Plato' element={<EditarPlato/>}/>
 
 <Route path="/clientePerfil/:id_usuario" element={<PerfilCliente/>} />
 
+<Route path="/descuentoByIdUsuario" element={<DescuentoByIdUsuario/>} />
+<Route path="/descuentoById/:id_descuento" element={<DescuentoById/>} />
     </Routes>
     
     </BrowserRouter>

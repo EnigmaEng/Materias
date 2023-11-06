@@ -42,6 +42,7 @@ GRANT INSERT, SELECT, UPDATE ON wwe.alojamiento TO 'wwe_rol_t'@'192.168.56.103';
 GRANT INSERT, SELECT ON wwe.turista_sealoja_alojamiento TO 'wwe_rol_t'@'192.168.56.103';
 GRANT SELECT ON wwe.restaurante_tiene_descuento TO 'wwe_rol_t'@'192.168.56.103';
 GRANT SELECT ON wwe.rest_obtiene_premios TO 'wwe_rol_t'@'192.168.56.103';
+GRANT SELECT, INSERT ON wwe.turista_visita_rest TO 'wwe_rol_t'@'192.168.56.103';
 FLUSH PRIVILEGES;
 
 /*Creacion y Privilegios de Restaurantes
@@ -79,6 +80,7 @@ GRANT INSERT, SELECT ON wwe.localizacion TO 'wwe_rol_r'@'192.168.56.103';
 GRANT SELECT, UPDATE ON wwe.tipo_subscripcion TO 'wwe_rol_r'@'192.168.56.103';
 GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.restaurante_tiene_descuento TO 'wwe_rol_r'@'192.168.56.103';
 GRANT INSERT, SELECT, UPDATE, DELETE ON wwe.rest_obtiene_premios TO 'wwe_rol_r'@'192.168.56.103';
+GRANT SELECT ON wwe.turista_visita_rest TO 'wwe_rol_r'@'192.168.56.103';
 FLUSH PRIVILEGES;
 
 /*Creacion y Privilegios de Admin

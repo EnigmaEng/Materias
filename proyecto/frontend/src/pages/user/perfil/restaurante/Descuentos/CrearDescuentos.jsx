@@ -49,7 +49,7 @@ const CrearDescuentos = () => {
       fecha_inicio: Yup.date().typeError('Ingrese una fecha válida').required('El campo no puede ir vacio'),
       fecha_fin: Yup.date().typeError('Ingrese una fecha válida').required('El campo no puede ir vacio'),
     }),
-
+    
     onSubmit: async (valores, {resetForm}) => {
 
       const fechaInicio = formik.values.fecha_inicio
@@ -78,7 +78,6 @@ const CrearDescuentos = () => {
     } catch (error) {
       console.log("error al subir la foto: ", error)
     }
-
 
 }
   resetForm()

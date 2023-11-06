@@ -36,10 +36,11 @@ const ConfiguracionRestDsk = () => {
         <h2 className='mb-5 font-aref'>Promociones</h2>
         <hr />
         <div className='flex items-center justify-center'>
-          <Link to='/descuentos' className=' font-aref font-semibold text-white text-center px-2 py-0.5 rounded-lg bg-wwe text-white font-areft font-semibold w-64 py-1'>Ver promociones</Link>
+          <Link to='/descuentoByIdUsuario' className=' font-aref font-semibold text-white text-center px-2 py-0.5 rounded-lg bg-wwe text-white font-areft font-semibold w-64 py-1'>Ver promociones</Link>
         </div>
         
         </div>
+        
 </div>
     </div>
   )

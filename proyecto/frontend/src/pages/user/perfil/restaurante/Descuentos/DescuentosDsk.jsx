@@ -25,7 +25,7 @@ const [descuentos, setDescuentos] = useState([])
 
     useEffect(() =>{
 getDescuentos();
- console.log(descuentos);
+
     },[])
 
 
@@ -45,7 +45,7 @@ getDescuentos();
                 <div className='bg-white text-center text-wwe font-aref font-semibold w-auto text-2xl rounded-lg rounded-lg' key={index}>
                   <img src={item.url_img_descuento} alt='foto' className='w-full rounded-t-lg h-40 bg-gray-800'/>
                       <div className='card-body border'>
-                        
+                        <h2>Restaurante: {item.nombre}</h2>
                             <h4 className='text-2xl'>{item.titulo_descuento}</h4>
                       <p className='text-lg'>{item.descripcion}</p>
                        <p className=''>${item.costo}</p>
