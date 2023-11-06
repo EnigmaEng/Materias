@@ -234,10 +234,10 @@ const usuarioAutenticado = () => {
 
 const crearAlojamiento = async (datos) => {
   try {
-      const respuesta  = await clienteAxios.post("/turistaController", datos)
+      const respuesta  = await clienteAxios.post("/turistaController.php", datos)
   dispatch({
     type: ALOJAMIENTO_CREADO,
-    payload: respuesta.data
+    payload: respuesta.data.status
   })
   } catch (error) {
     console.log(error)

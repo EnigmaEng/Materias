@@ -12,6 +12,8 @@ const Alojamiento = () => {
   const {crearAlojamiento, mensaje, usuario} = useContext(todoContext)
 
 
+   
+
   const formik = useFormik({
     initialValues: {
       nombre_alojamiento:'',
@@ -38,7 +40,7 @@ const Alojamiento = () => {
         esquina: valores.esquina
       }
       crearAlojamiento(data)
-      
+      resetForm();
     }
 
     
