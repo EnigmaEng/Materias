@@ -74,7 +74,7 @@ const DescuentoById = () => {
         const base64Image = await imagenBase64(file);
         data.url_img_descuento = base64Image;
         } catch (error) {
-            console.log("Error al cargar la foto: " , error)
+            console.log("Error al cargar la foto: " , error);
         }
     }
     if (Object.keys(data).length > 2) {
