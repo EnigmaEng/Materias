@@ -1,8 +1,16 @@
 describe('LoginRestaurante', () => {
     beforeEach(() => {
+<<<<<<< HEAD
       //cy.visit('http://127.0.0.1:5173/')
       cy.visit('http://wweat.ddns.net/')
 
+=======
+<<<<<<< HEAD
+      cy.visit('http://localhost:5173/')
+=======
+      cy.visit('http://127.0.0.1:5173/')
+>>>>>>> eb85bb4c240810292c12a9139a2da7b22575a86c
+>>>>>>> 2071a7e3a27ad28c65ae28890a5c0d8aab43ef29
     })
   
     it('Editar Perfil Rest', () => {
@@ -16,10 +24,21 @@ describe('LoginRestaurante', () => {
       cy.contains('Configuración').click();
       cy.get(':nth-child(2) > .flex > .font-aref').click();
       cy.get('#alias').type('Test_User_R');
+<<<<<<< HEAD
       cy.get('#contrasena').type('hola1234');
       cy.get('#url_img_usuario').selectFile("./cypress/imgs/logoprodu_FINAL.png");
       cy.get('.md\\:w-64').click();
+=======
+      cy.get('#contrasena').type('SoyRestaurante123');
+      cy.get('#url_img_usuario').selectFile("./cypress/imgs/pruebita.jpeg");
+      cy.get('.md\\:w-64').click();
+<<<<<<< HEAD
+      cy.wait(1500);
+=======
+      cy.contains('Los cambios persistieron correctamente.');
+>>>>>>> 2071a7e3a27ad28c65ae28890a5c0d8aab43ef29
       cy.wait(3000);
+>>>>>>> eb85bb4c240810292c12a9139a2da7b22575a86c
       cy.get('#cypress').click();
       cy.contains('Salir').click()
       cy.get('.m-auto > .w-14').click()

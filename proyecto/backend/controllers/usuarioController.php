@@ -42,11 +42,14 @@ function editarUsuario($idUsuario, $datos)
         } else {
             return json_encode(array("status" => "Opción de cambio no válida: " . $opcion));
         }
-    }
+    }         
+
+    $guardarImagen = new GuardarImagen($directorioDestino);
 
     if (isset($_FILES['imagen']['name'])) {
-        $nombreArchivo = $_FILES['imagen']['name'];
-        $nuevosDatos["url_img_usuario"] = $nombreArchivo;
+        $nombreArchivo = $_FILES['imagen']['name'][0];
+        $ruta = $guardarImagen->guardarImagen($_FILES['imagen'], $nombreArchivo);
+        $nuevosDatos["url_img_usuario"] = $ruta;
     }
 
     if ($usuario->editUser($idUsuario, $nuevosDatos)) {
