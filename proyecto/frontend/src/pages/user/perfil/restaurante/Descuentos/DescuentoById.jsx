@@ -78,12 +78,7 @@ const DescuentoById = () => {
         }
     }
     if (Object.keys(data).length > 2) {
-    try {
-        await editarDescuento(data);
-        resetForm();
-    } catch (error) {
-    console.error("Error al editar descuento:", error);
-    }
+          editarDescuento(data);
     }
     
 }
@@ -95,7 +90,7 @@ const DescuentoById = () => {
       <Link to='/configuracionRest' className='absolute py-1.5 top-24 left-24 bg-wwe text-white rounded-lg px-6 py-1'><BiArrowBack/></Link>
 <form onSubmit={formik.handleSubmit} method='POST' className='bg-white md:w-3/12 m-auto mt-24 p-8 rounded-box shadow-xl' encType='multipart/form-data'>
  
-    <h2 className='text-center text-4xl mb-5 font-bold text-wwe font-aref'>Crear Promoción</h2>
+    <h2 className='text-center text-4xl mb-5 font-bold text-wwe font-aref'>Editar Promoción</h2>
      {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }
 <div  className='flex flex-col text-center font-aref text-black text-lg mb-6' >
   <label htmlFor="">Título de la promoción</label>

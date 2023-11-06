@@ -3,9 +3,11 @@ import subscripcionData from "../../../../../../context/subscripcionData"
 import todoContext from "../../../../../../context/todoContext";
 import clienteAxios from "../../../../../../config/axios";
 
+
 const Aprobaciones = () => {
 
 const [solicitudes, setSolicitudes] = useState([])
+
 
 
 const {usuario} = useContext(todoContext)
@@ -32,9 +34,11 @@ try {
             "id_usuario_admin": usuario.id_usuario,
             "id_tipo_sub": id_tipo_subscripcion
           }
-         
+          
           const respuesta = await clienteAxios.post('/subscripcionController.php', accion)
-          window.location.reload()
+          
+          
+          
     }
 
     useEffect(() => {

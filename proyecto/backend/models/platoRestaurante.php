@@ -187,49 +187,54 @@ class PlatoRestaurante extends CrudBasico
         return $resultados;
     }
 
-    public function modificarPlato($idPlato, $datos)
-    {
-        try {
-            $query = "UPDATE plato_restaurantes SET ";
-            $valores = [];
+   public function modificarPlato($idPlato, $datos)
+{
+    try {
+        $query = "UPDATE plato_restaurantes SET ";
+        $valores = [];
 
-            foreach ($datos as $opcion => $valor) {
-                switch ($opcion) {
-                    case "nombre_plato":
-                        $query .= "nombre_plato = :nombre_plato, ";
-                        $valores[":nombre_plato"] = $valor;
-                        break;
-                    case "costo":
-                        $query .= "costo = :costo, ";
-                        $valores[":costo"] = $valor;
-                        break;
-                    case "descripcion":
-                        $query .= "descripcion = :descripcion, ";
-                        $valores[":descripcion"] = $valor;
-                        break;
-                    case "estado_plato":
-                        $query .= "estado_plato = :estado_plato, ";
-                        $valores[":estado_plato"] = $valor;
-                        break;
-                    default:
-                        return false;
-                }
+        foreach ($datos as $opcion => $valor) {
+            switch ($opcion) {
+                case "nombre_plato":
+                    $query .= "nombre_plato = :nombre_plato, ";
+                    $valores[":nombre_plato"] = $valor;
+                    break;
+                case "costo":
+                    $query .= "costo = :costo, ";
+                    $valores[":costo"] = $valor;
+                    break;
+                case "descripcion":
+                    $query .= "descripcion = :descripcion, ";
+                    $valores[":descripcion"] = $valor;
+                    break;
+                case "estado_plato":
+                    $query .= "estado_plato = :estado_plato, ";
+                    $valores[":estado_plato"] = $valor;
+                    break;
+                default:
+                    return false;
             }
-
-            $query = rtrim($query, ', ');
-
-            $query .= " WHERE id_Plato = :id_Plato";
-            $valores[":id_Plato"] = $idPlato;
-
-            $stmt = $this->getConn()->prepare($query);
-
-            if ($stmt->execute($valores)) {
-                return true;
-            }
-
-            return false;
-        } catch (PDOException $ex) {
-            error_log("Error en la actualización de datos: " . $ex->getMessage());
         }
+
+        // Si no se ha añadido ningún atributo válido, regresar falso
+        if (count($valores) === 0) {
+            return false;
+        }
+        
+        $query = rtrim($query, ', ');
+
+        $query .= " WHERE id_Plato = :id_Plato";
+        $valores[":id_Plato"] = $idPlato;
+
+        $stmt = $this->getConn()->prepare($query);
+
+        if ($stmt->execute($valores)) {
+            return true;
+        }
+
+        return false;
+    } catch (PDOException $ex) {
+        error_log("Error en la actualización de datos: " . $ex->getMessage());
     }
+}
 }

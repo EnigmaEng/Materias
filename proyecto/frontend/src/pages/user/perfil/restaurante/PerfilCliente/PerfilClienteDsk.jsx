@@ -22,7 +22,7 @@ restaurante
     getProductById(id_usuario);
     getMenuById(id_usuario);
     getReseniaById(id_usuario);
-    
+
   }, [id_usuario]);
 
   if (!restaurante) {
@@ -44,7 +44,7 @@ restaurante
          <div className=' mt-10 flex justify-center dark:bg-zinc-800 bg-white w-[40%] m-4 p-3' key={index}>
           <div className='  rounded-lg p-8 '>
       <h2 className=' text-center text-3xl font-semibold font-aref text-wwe'>{item.nombre}</h2>
-      
+        
      <img src={item.url_img_usuario} alt="foto-perfil" className=' m-auto shadow-xl mt-5 mb-5 w-72 h-72 rounded-lg bg-zinc-300' />
      <div className='h-96 w-96  rounded-lg '>
        <p className=' px-10 py-10 dark:text-white text-zinc-600 font-semibold text-lg'>Número de local: {item.nro_local} </p>

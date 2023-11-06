@@ -170,7 +170,7 @@ const usuarioAutenticado = () => {
         const respuesta = await clienteAxios.post('/reseniaController.php', datos)
         dispatch({
         type: RESENIA_CREADA,
-        payload: respuesta.data 
+        payload: respuesta.data.status
         })
       } catch (error) {
         console.log(error)
@@ -184,7 +184,7 @@ const usuarioAutenticado = () => {
           type: SOLICITUD_SUBSCRIPCION,
           payload: respuesta.data.status
         })
-        console.log(respuesta.data.status)
+        
       } catch (error) {
         console.log(error)
       }
@@ -221,7 +221,7 @@ const usuarioAutenticado = () => {
            const respuesta = clienteAxios.post('/restauranteController.php', datos)
             dispatch({
           type: EDITAR_DESCUENTO,
-          payload: respuesta.data
+          payload: respuesta.data.status
         })
         } catch (error) {
           console.log(error)
