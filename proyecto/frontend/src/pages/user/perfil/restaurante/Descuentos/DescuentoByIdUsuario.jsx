@@ -38,6 +38,7 @@ const settings = {
   speed: 500,
   slidesToShow: 4,
   slidesToScroll: 3,
+  
 };
 
     return (
@@ -56,6 +57,7 @@ const settings = {
                 <p className='text-wwe text-sm '>{item.descripcion}</p>
                 <p className='text-wwe font-aref font-semibold'>${item.costo}</p>
               </div>
+
               <Link to={`/descuentoById/${item.id_descuento}`} className='block bg-wwe w-28 text-white py-1 rounded-lg mx-auto mt-2'>Editar</Link>
             </div>
           ))}

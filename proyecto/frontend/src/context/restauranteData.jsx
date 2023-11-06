@@ -12,11 +12,12 @@ const restauranteData = () => {
     const [pagina, setPagina] = useState(1);
     const [busqueda, setBusqueda] = useState('');
     const [buscando, setBuscando] = useState(false);
-    const itemsPorPagina = 4;  //la cantidad de productos que quiero mostrar en una pagina 
+    const itemsPorPagina = 600;  //la cantidad de productos que quiero mostrar en una pagina 
     const [product, setProduct] = useState([]);
     const startIndex = (pagina - 1) * itemsPorPagina; //es el primer indice del primer elemento que mostrara
     const endIndex = startIndex + itemsPorPagina;  //el indice del elemento DESPUES del ultimo elemento que mostrara
-    const itemsTotales = product.length;  //la cantidad de productos totales que trae la apissss
+    const itemsTotales = 4;  //la cantidad de productos totales que trae la api
+
     
     const getProduct = async () => {
         try {

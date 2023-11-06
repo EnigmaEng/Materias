@@ -4,9 +4,11 @@ import Image from '../../../assets/logo-white.png'
 import { CgProfile } from "react-icons/cg";
 import { SlLogout } from "react-icons/sl";
 import { BsFilterSquare } from "react-icons/bs";
+import { useContext } from "react";
+import todoContext from "../../../context/todoContext";
 const TuristaMobile = () => {
     
-
+  const {usuario, cerrarSesion} = useContext(todoContext)
   return (
 <>
 <div className="bg-wwe rounded-full relative top-3 flex justify-between  w-[80%] m-auto  shadow-xl ">
@@ -19,9 +21,9 @@ const TuristaMobile = () => {
     </Link>
    <div className="mr-2 ">
     <div className="dropdown dropdown-end">
-      <label tabIndex={0} className="btn btn-ghost btn-circle  bg-white mt-2 shadow-xl">
+      <label tabIndex={0} className="btn btn-ghost btn-circle mt-2 shadow-xl">
         <div className="rounded-full ">
-          <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className='w-14 rounded-full' />
+          <img src={usuario.url_img_usuario} className='w-12  h-12 rounded-full' />
         </div>
       </label>
       <ul tabIndex={0} className="z-10 px-4 py-4 z dropdown-content mt-3 border bg-white rounded-box w-40">
@@ -30,7 +32,7 @@ const TuristaMobile = () => {
          Perfil 
           </Link>
         </li>
-        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/editarPerfilTurista' className='text-black flex gap-4'> Editar perfil</Link></li>
+        <li className=' hover:bg-gray-200 rounded-lg p-2'><Link to='/editarPerfil' className='text-black flex gap-4'> Editar perfil</Link></li>
         <li className=' hover:bg-gray-200 rounded-lg p-2'><button onClick={() => cerrarSesion()}  className='text-black flex gap-4  w-24'> <div className='mt-1'>
           <SlLogout/> </div> Salir </button></li>
       </ul>

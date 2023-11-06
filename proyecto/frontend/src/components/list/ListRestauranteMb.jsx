@@ -34,7 +34,7 @@ const ListRestauranteMb = () => {
     dots: true,
     infinite: true,
     speed: 500,
-     slidesToShow: product.length > 3 ? 3 : product.length,
+     slidesToShow: 1,
     slidesToScroll: 1,
   
   };
