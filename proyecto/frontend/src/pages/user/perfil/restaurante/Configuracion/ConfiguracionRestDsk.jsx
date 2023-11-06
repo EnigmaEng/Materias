@@ -40,6 +40,14 @@ const ConfiguracionRestDsk = () => {
         </div>
         
         </div>
+          <div className='border text-center font-aref font-semibold text-wwe p-4 mb-10 rounded-box  shadow-xl'>
+        <h2 className='mb-5 font-aref'>Registro de visitas</h2>
+        <hr />
+        <div className='flex items-center justify-center'>
+          <Link to='/verTokens' className=' font-aref font-semibold text-white text-center px-2 py-0.5 rounded-lg bg-wwe text-white font-areft font-semibold w-64 py-1'>Ver visitas</Link>
+        </div>
+        
+        </div>
         
 </div>
     </div>

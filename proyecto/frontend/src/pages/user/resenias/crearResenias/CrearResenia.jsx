@@ -33,6 +33,7 @@ const formattedDate = `${year}-${month}-${day}`;
       calificacion_personal: '',
       calificacion_menu: '',
       calificacion_general: '',
+      token: ''
     },
 
     onSubmit: valores => {
@@ -45,6 +46,7 @@ const formattedDate = `${year}-${month}-${day}`;
       calificacion_personal: valores.calificacion_personal,
       calificacion_menu: valores.calificacion_menu,
       calificacion_general: valores.calificacion_general,
+      token: valores.token
       }
       crearResenia(data)
     }
@@ -107,6 +109,7 @@ const formattedDate = `${year}-${month}-${day}`;
   <option value="Muy malo">Muy malo </option>
 </select>
 
+<input type="text" placeholder='Codigo del restaurante' className='bg-white rounded-md p-2 text-black border border-wwe w-80'/>
        
       <button type='submit' className='glass bg-red-800 text-white px-4 py-1 rounded-lg border mt-8 hover:scale-125 transition-all duration-300 delay-150  md:w-40 md:py-1.5 md:text-lg w-64'>Crear</button>
       </form> 

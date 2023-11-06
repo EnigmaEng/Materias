@@ -94,7 +94,7 @@ const formik = useFormik({
 
 
 
-onSubmit: async (valores) => {
+onSubmit: async (valores , {resetForm}) => {
   const data = {
     alias: valores.alias,
     email: valores.email,
@@ -126,7 +126,7 @@ onSubmit: async (valores) => {
         data.esquina = valores.esquina;
       }
 
-      console.log(data); 
+     
 
       if (selectedRole === 'T') {
         registrarTurista(data);
@@ -137,6 +137,7 @@ onSubmit: async (valores) => {
       console.error("Error al leer la imagen como Base64", error);
     }
   }
+  resetForm();
 },
 
   });

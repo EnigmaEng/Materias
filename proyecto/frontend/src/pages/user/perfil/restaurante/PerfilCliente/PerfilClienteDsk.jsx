@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import clienteAxios from '../../../../../config/axios';
 import NavBar from '../../../../../components/nabvar/NavBar';
 import { Link } from 'react-router-dom';
 import {BiArrowBack} from 'react-icons/bi'
 import perfilData from '../../../../../context/perfilData';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import todoContext from '../../../../../context/todoContext';
+import Mensaje from '../../../../../components/alertas/Mensaje';
 const PerfilClienteDsk = () => {
 
   const {
@@ -17,6 +22,7 @@ restaurante
   } = perfilData();
 
   const { id_usuario } = useParams();
+  const {turistaVisitaRest, usuario, mensaje} = useContext(todoContext)
 
   useEffect(() => {
     getProductById(id_usuario);
@@ -25,6 +31,18 @@ restaurante
 
   }, [id_usuario]);
 
+  
+
+  const handleClick = () => {
+    const accion = {
+    "accion":"turistaVisitaRest",
+    "id_usuario_turista": usuario?.id_usuario,
+    "id_usuario_rest": id_usuario
+} 
+  turistaVisitaRest(accion)
+
+  }
+
   if (!restaurante) {
     return (<div className='min-h-screen '>
     <p className='text-center font-aref text-2xl  text-black'>Cargando..</p></div>);
@@ -32,7 +50,7 @@ restaurante
 
   return (
     <>
-    <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-80  '>
+    <div className='min-h-screen  dark:bg-zinc-800 dark:bg-opacity-80  '>
       <NavBar/>
        <Link to='/homeAuth' >
     <button className='bg-wwe  rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-8 md:absolute md:left-10 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700 md:border-gray-400 text-white'><BiArrowBack/></button>
@@ -42,15 +60,18 @@ restaurante
       
       restaurante.map((item,index) => (
          <div className=' mt-10 flex justify-center dark:bg-zinc-800 bg-white w-[40%] m-4 p-3' key={index}>
-          <div className='  rounded-lg p-8 '>
+          <div className='rounded-lg p-8 '>
+            {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/>}
       <h2 className=' text-center text-3xl font-semibold font-aref text-wwe'>{item.nombre}</h2>
         
-     <img src={item.url_img_usuario} alt="foto-perfil" className=' m-auto shadow-xl mt-5 mb-5 w-72 h-72 rounded-lg bg-zinc-300' />
-     <div className='h-96 w-96  rounded-lg '>
-       <p className=' px-10 py-10 dark:text-white text-zinc-600 font-semibold text-lg'>Número de local: {item.nro_local} </p>
-       
+    <img src={item.url_img_usuario} alt="foto-perfil" className=' m-auto shadow-xl mt-5 mb-5 w-full h-72 rounded-lg bg-zinc-300' />
+    <div className=' w-96  rounded-lg '>
+      <p className=' px-10 py-10  dark:text-white text-zinc-600 text-center font-semibold text-lg'>Número de local: {item.nro_local} </p>
+      
      </div>
-    
+    <div className='flex justify-center justify-center'>
+      <button onClick={()=> handleClick()} className='bg-wwe p-2 w-64 font-aref font-semibold text-center rounded-lg text-white '>Quiero ir</button>
+    </div>
      </div>
     </div>
    

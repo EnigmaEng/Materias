@@ -1,7 +1,7 @@
 import React, { useReducer} from "react";
 import todoContext from "./todoContext";
 import todoReducer from "./todoReducer";
-import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, EDITAR_PERFIL, DESCUENTO_CREADO, RESENIA_CREADA,EDITAR_PLATO, SOLICITUD_SUBSCRIPCION, ALOJAMIENTO_CREADO, EDITAR_DESCUENTO} from "../types/types";
+import { REGISTRO_EXITOSO, REGISTRO_ERROR, PLATO_CREADO,LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXITOSO, USUARIO_AUTENTICADO, CERRAR_SESION, EDITAR_PERFIL, DESCUENTO_CREADO, RESENIA_CREADA,EDITAR_PLATO, SOLICITUD_SUBSCRIPCION, ALOJAMIENTO_CREADO, EDITAR_DESCUENTO, TURISTA_VISITA} from "../types/types";
 import clienteAxios from "../config/axios";
 
 
@@ -170,7 +170,7 @@ const usuarioAutenticado = () => {
         const respuesta = await clienteAxios.post('/reseniaController.php', datos)
         dispatch({
         type: RESENIA_CREADA,
-        payload: respuesta.data.status
+        payload: respuesta.data
         })
       } catch (error) {
         console.log(error)
@@ -245,6 +245,20 @@ const crearAlojamiento = async (datos) => {
 
 }
 
+const turistaVisitaRest = async(datos) => {
+try {
+   const respuesta = await clienteAxios.post("/turistaController.php", datos)
+  dispatch({
+    type: TURISTA_VISITA,
+    payload: respuesta.data.status
+  })
+  console.log(respuesta.data)
+} catch (error) {
+  console.log(error)
+}
+ 
+}
+
         const cerrarSesion = async () => {
           
             dispatch({
@@ -275,7 +289,8 @@ const crearAlojamiento = async (datos) => {
                 editarPerfil,
                 editarPlato,
                 editarDescuento,
-                crearAlojamiento
+                crearAlojamiento,
+                turistaVisitaRest
             }}>
 
             {children}

@@ -33,6 +33,7 @@ import { useContext, useEffect } from 'react'
 import EditarPlato from './pages/user/perfil/restaurante/Menu/EditarPlato'
 import DescuentoByIdUsuario from './pages/user/perfil/restaurante/Descuentos/DescuentoByIdUsuario'
 import DescuentoById from './pages/user/perfil/restaurante/Descuentos/DescuentoById'
+import TokensTurista from './pages/user/perfil/restaurante/Configuracion/TokensTurista'
 function App() {
 
 
@@ -71,24 +72,17 @@ function App() {
 <Route path='/misReseniasTurista' element={<MisReseniasTurista/>}/>
 {/* Admin */}
 <Route path='/admin' element={<PerfilAdmin/>} />
-
-
-
-
 <Route path='/perfilRestaurante' element={<PerfilRestaurante/>}/>
-
 <Route path='/editarPerfil' element={<EditarPerfi/>}/>
 <Route path='/crearMenu' element={<CrearMenu/>}/>
 <Route path='/menu' element={<Menu/>}/>
 <Route path='/subscripcion' element={<Subscripcion/>}/>
 <Route path='/configuracionRest' element={<ConfiguracionRest/>}/>
 <Route path='/crearDescuentos' element={<CrearDescuentos/>}/>
-
 <Route path='/descuentos' element={<Descuentos/>}/>
 <Route path='/editarPlato/:id_Plato' element={<EditarPlato/>}/>
-
 <Route path="/clientePerfil/:id_usuario" element={<PerfilCliente/>} />
-
+<Route path="/verTokens" element={<TokensTurista/>} />
 <Route path="/descuentoByIdUsuario" element={<DescuentoByIdUsuario/>} />
 <Route path="/descuentoById/:id_descuento" element={<DescuentoById/>} />
     </Routes>

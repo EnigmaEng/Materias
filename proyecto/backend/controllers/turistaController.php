@@ -6,7 +6,7 @@ require_once '../models/alojamiento.php';
 require_once '../models/localizacion.php';
 require_once './cors.php';
 require_once '../models/guardarImagen.php';
-
+require_once '../models/restaurante.php';
 require '../vendor/autoload.php';
 
 use Dotenv\Dotenv;
@@ -135,7 +135,7 @@ function turistaVisitaRest($idTurista,$idUsuarioRest){
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
-
+        $resultado="";
     if (isset($data['accion'])) {
         switch ($data['accion']) {
             case 'altaTurista':
