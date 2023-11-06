@@ -62,7 +62,7 @@ const {usuario, autenticado} = TodoContext
         <p className='text-center text-lg font-aref text-black font-semibold'>{item.nombre_plato}</p>
 
       
-        <div className='p-2 h-auto'>
+        <div className='p-8 h-auto'>
      
           <p className='text-sm h-12'>{item.descripcion}</p>
           <p className='font-aref '>${item.costo} </p>
