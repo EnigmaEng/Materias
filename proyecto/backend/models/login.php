@@ -48,14 +48,19 @@ class Login
             $rolData = array();
             if ($userData['rol'] === 'R') {
                 
-                $query = "SELECT * FROM restaurante WHERE id_usuario = :id_usuario";
+                $query = "SELECT * FROM restaurante r
+                JOIN tipo_restaurantes tr ON r.id_usuario = tr.id_usuario_rest
+                JOIN localizacion loc ON r.id_loc_restaurante = loc.id_localizacion
+                WHERE r.id_usuario = :id_usuario";
                 $stmt = $conn->prepare($query);
                 $stmt->bindValue(":id_usuario", $userData['id_usuario']);
                 $stmt->execute();
                 $rolData = $stmt->fetch(PDO::FETCH_ASSOC);
             } elseif ($rol === 'T') {
                 
-                $query = "SELECT * FROM turista WHERE id_usuario = :id_usuario";
+                $query = "SELECT * FROM turista tur 
+                JOIN turista_sealoja_alojamiento aloj ON tur.id_usuario = aloj.id_usuario_rest
+                WHERE tur.id_usuario = :id_usuario";
                 $stmt = $conn->prepare($query);
                 $stmt->bindValue(":id_usuario", $userData['id_usuario']);
                 $stmt->execute();
