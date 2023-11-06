@@ -156,7 +156,7 @@ CREATE TABLE `turista_resena_rest` (
   calificacion_menu ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
   calificacion_general ENUM('Muy bueno', 'Bueno', 'Medio', 'Malo', 'Muy malo') NOT NULL,
   PRIMARY KEY (id_usuario_turista, id_usuario_rest),
-  FOREIGN KEY (id_usuario_turista) REFERENCES `turista_sealoja_alojamiento` (id_usuario_turista),
+  FOREIGN KEY (id_usuario_turista) REFERENCES `turista_visita_rest` (id_usuario_turista),
   FOREIGN KEY (id_usuario_rest) REFERENCES `restaurante` (id_usuario));
   
   CREATE TABLE `turista_visita_rest` (
