@@ -208,6 +208,8 @@ function modificarPlato($idPlato, $datos)
     $validOptions = ["nombre_plato", "costo", "descripcion", "estado_plato"];
     $nuevosDatos = [];
 
+    $directorioDestino = $_ENV['DIR_IMAGEN'];
+
     foreach ($datos as $opcion => $valor) {
         if ($opcion === "accion" || $opcion === "id_Plato") {
             continue;
@@ -234,6 +236,14 @@ function modificarPlato($idPlato, $datos)
         }
     }
 
+    $guardarImagen = new GuardarImagen($directorioDestino);
+
+    if (isset($_FILES['imagen']['name'])) {
+        $nombreArchivo = $_FILES['imagen']['name'][0];
+        $ruta = $guardarImagen->guardarImagen($_FILES['imagen'], $nombreArchivo);
+        $nuevosDatos["url_img_menu"] = $ruta;
+    }
+
     if ($plato->modificarPlato($idPlato, $nuevosDatos)) {
         return json_encode(array("status" => "Modificación realizada correctamente."));
     } else {
@@ -247,6 +257,8 @@ function modificarDescuento($idDescuento, $datos)
     $descuento = new Descuento();
     $validOptions = ["activo", "titulo_descuento", "descripcion", "url_img_descuento", "costo"];
     $nuevosDatos = [];
+
+    $directorioDestino = $_ENV['DIR_IMAGEN'];
 
     foreach ($datos as $opcion => $valor) {
         if ($opcion === "accion" || $opcion === "id_descuento") {
@@ -275,6 +287,14 @@ function modificarDescuento($idDescuento, $datos)
         } else {
             return json_encode(array("status" => "Opción de cambio no válida: " . $opcion));
         }
+    }
+
+    $guardarImagen = new GuardarImagen($directorioDestino);
+
+    if (isset($_FILES['imagen']['name'])) {
+        $nombreArchivo = $_FILES['imagen']['name'][0];
+        $ruta = $guardarImagen->guardarImagen($_FILES['imagen'], $nombreArchivo);
+        $nuevosDatos["url_img_descuento"] = $ruta;
     }
 
     if ($descuento->modificarDescuento($idDescuento, $nuevosDatos)) {

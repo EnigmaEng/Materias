@@ -1,6 +1,6 @@
 describe('LoginRestaurante', () => {
     beforeEach(() => {
-      cy.visit('http://wweat.ddns.net/')
+      cy.visit('http://localhost:5173/')
     })
   
     it('Editar Perfil Rest', () => {
@@ -16,10 +16,9 @@ describe('LoginRestaurante', () => {
       cy.get(':nth-child(2) > .flex > .font-aref').click();
       cy.get('#alias').type('Test_User_R');
       cy.get('#contrasena').type('SoyRestaurante123');
-      cy.get('#url_img_usuario').selectFile("./cypress/imgs/rest_cypress.jpg");
+      cy.get('#url_img_usuario').selectFile("./cypress/imgs/pruebita.jpeg");
       cy.get('.md\\:w-64').click();
-      cy.contains('Los cambios persistieron correctamente.');
-      /*cy.wait(1500);
+      cy.wait(1500);
       cy.get('#cypress').click();
       cy.contains('Salir').click()
       cy.get('.m-auto > .w-14').click()
@@ -28,6 +27,6 @@ describe('LoginRestaurante', () => {
       cy.get('#contrasena').type('SoyRestaurante123', { delay: 25 })
       cy.get(':nth-child(3) > .flex').click()
       cy.get('#cypress').click();
-      cy.contains('Perfil').click();*/
+      cy.contains('Perfil').click();
     })
   })

@@ -1,6 +1,6 @@
 describe ('Registro_Rest', () => {
     beforeEach (() => { 
-        cy.visit('http://wweat.ddns.net/')
+        cy.visit('http://localhost:5173/')
     })
     it('Entrando al Registro',() =>{
         cy.contains('WHERE WE EAT')
