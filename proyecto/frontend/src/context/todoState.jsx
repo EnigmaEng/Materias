@@ -274,7 +274,8 @@ const crearAlojamiento = async (datos) => {
                 solicitudSubscripcion,
                 editarPerfil,
                 editarPlato,
-                editarDescuento
+                editarDescuento,
+                crearAlojamiento
             }}>
 
             {children}

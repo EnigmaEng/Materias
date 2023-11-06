@@ -66,7 +66,7 @@ const ListRestaurantes = () => {
             <div className='bg-white h-6/12  w-52 rounded-lg shadow-xl text-center text-black mt-10' key={index}>
               <img src={item.foto_usuario} alt="logo-restaurante" className='w-full m-auto h-52 rounded-t-lg' />
               <h2 className='text-2xl py-10 text-wwe font-semibold font-aref'>{item.nombre_restaurante}</h2>
-              <div className='gap-5 flex p-4 ml-5'>
+              <div className='gap-20 flex p-4 items-center justify-center'>
                 <Link to={`/clientePerfil/${item.id_usuario}`} className='rounded-lg border px-4 shadow-xl border w-24 flex justify-center py-3 h-10'>
                   <BsSearch />
                 </Link>

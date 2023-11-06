@@ -2,14 +2,14 @@ import { useContext } from 'react';
 import NavBar from '../../../../../components/nabvar/NavBar'
 import { Link } from 'react-router-dom';
 import {useFormik} from 'formik';
-import * as Yup from 'yup';
+
 import todoContext from '../../../../../context/todoContext';
 import Mensaje from '../../../../../components/alertas/Mensaje';
 
 
 const Alojamiento = () => {
 
-  const {crearAlojamiento, mensaje} = useContext(todoContext)
+  const {crearAlojamiento, mensaje, usuario} = useContext(todoContext)
 
 
   const formik = useFormik({
@@ -22,19 +22,14 @@ const Alojamiento = () => {
       esquina: ''
     },
 
-    validationSchema: Yup.object({
-      nombre_alojamiento: Yup.string().required("Campo obligatorio"),
-      calle: Yup.string().required("Campo obligatorio"),
-      nro_puerta: Yup.string().required("Campo obligatorio"),
-      esquina: Yup.string().required("Campo obligatorio"),
-      
-    }),
+
     onSubmit: (valores, {resetForm}) => {
       
       const fechaInicio = formik.values.fecha_ini_alojamiento
       const fechaFin = formik.values.fecha_fin_alojamiento
       const data = {
-        accion: "",
+        accion: "crearAlojamiento",
+        id_usuario_turista: usuario?.id_usuario,
         nombre_alojamiento : valores.nombre_alojamiento,
         fecha_ini_alojamiento : fechaInicio,
         fecha_fin_alojamiento : fechaFin,
@@ -43,9 +38,9 @@ const Alojamiento = () => {
         esquina: valores.esquina
       }
       crearAlojamiento(data)
-      resetForm();
+      
     }
-    
+
     
   })
   return (
@@ -59,45 +54,34 @@ const Alojamiento = () => {
             <form onSubmit={formik.handleSubmit} className='mt-5' method='POST'>
                 <div className='form-control'>
                     <label htmlFor="" className='font-semibold font-aref text-wwe text-lg'>Nombre del alojamiento: </label>
-                    <input type="text" id='nombre_alojamiento' value={formik.values.nombre_alojamiento} onChange={formik.handleChange} onBlur={formik.handleBlur} className='border border-wwe input bg-white text-black' placeholder='Nombre..' />
-                  {
-    formik.touched.nombre_alojamiento && formik.errors.nombre_alojamiento ?
-    <div><p className='text-wwe '>{formik.errors.nombre_alojamiento}</p></div> : null
-  }
+                    <input type="text" id='nombre_alojamiento' value={formik.values.nombre_alojamiento} onChange={formik.handleChange} onBlur={formik.handleBlur} className='border border-wwe input bg-white text-black' placeholder='Nombre..' required />
+          
                 </div>
                   <div className='form-control'>
                     <label htmlFor="" className='font-semibold font-aref text-wwe text-lg'>Fecha de ingreso: </label>
-                    <input type="date" id='fecha_ini_alojamiento' value={formik.values.fecha_ini_alojamiento} onChange={formik.handleChange} onBlur={formik.handleBlur}  className='border border-wwe input bg-white text-black'  />
+                    <input type="date" id='fecha_ini_alojamiento' value={formik.values.fecha_ini_alojamiento} onChange={formik.handleChange} onBlur={formik.handleBlur}  className='border border-wwe input bg-white text-black' required />
           
                 </div>
                    <div className='form-control'>
                     <label htmlFor="" id='fecha_fin_alojamiento' className='font-semibold font-aref text-wwe text-lg'>Fecha de salida: </label>
-                    <input type="date" id='fecha_fin_alojamiento' value={formik.values.fecha_fin_alojamiento} onChange={formik.handleChange} onBlur={formik.handleBlur} className='border border-wwe input bg-white text-black'  />
+                    <input type="date" id='fecha_fin_alojamiento' value={formik.values.fecha_fin_alojamiento} onChange={formik.handleChange} onBlur={formik.handleBlur} className='border border-wwe input bg-white text-black' required />
 
                 </div>
                     <div className='form-control'>
                     <label htmlFor="" id='fecha_fin_alojamiento' className='font-semibold font-aref text-wwe text-lg'>Calle: </label>
-                    <input type="text" id='fecha_fin_alojamiento' value={formik.values.calle} onChange={formik.handleChange} onBlur={formik.handleBlur} className='border border-wwe input bg-white text-black'  />
-                                                {
-    formik.touched.calle && formik.errors.calle ?
-    <div><p className='text-wwe '>{formik.errors.calle}</p></div> : null
-  }
+                    <input type="text" id='calle' value={formik.values.calle} onChange={formik.handleChange} onBlur={formik.handleBlur} className='border border-wwe input bg-white text-black' required />
+          
                 </div>
                    <div className='form-control'>
                     <label htmlFor="" id='fecha_fin_alojamiento' className='font-semibold font-aref text-wwe text-lg'>Nro de puerta: </label>
-                    <input type="text" id='fecha_fin_alojamiento' value={formik.values.calle} onChange={formik.handleChange} onBlur={formik.handleBlur} className='border border-wwe input bg-white text-black'  />
-                                                {
-    formik.touched.calle && formik.errors.calle ?
-    <div><p className='text-wwe '>{formik.errors.calle}</p></div> : null
-  }
+                    <input type="text" id='nro_puerta' value={formik.values.nro_puerta} onChange={formik.handleChange} onBlur={formik.handleBlur} className='border border-wwe input bg-white text-black'  required/>
+                                                
+  
                 </div>
                              <div className='form-control'>
                     <label htmlFor="" id='fecha_fin_alojamiento' className='font-semibold font-aref text-wwe text-lg'>Esquina: </label>
-                    <input type="text" id='fecha_fin_alojamiento' value={formik.values.esquina} onChange={formik.handleChange} onBlur={formik.handleBlur} className='border border-wwe input bg-white text-black'  />
-                                                {
-    formik.touched.esquina && formik.errors.esquina ?
-    <div><p className='text-wwe '>{formik.errors.calle}</p></div> : null
-  }
+                    <input type="text" id='esquina' value={formik.values.esquina} onChange={formik.handleChange} onBlur={formik.handleBlur} className='border border-wwe input bg-white text-black' required />
+                                   
                 </div>
                 <button type='submit' className=' w-full mt-5   py-1 shadow-xl shadow-gray-400 hover:bg-red-600 bg-wwe rounded-lg text-white text-2xl'>Ingresar</button>
             </form>
