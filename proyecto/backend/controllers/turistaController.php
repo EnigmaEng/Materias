@@ -109,10 +109,10 @@ function crearAlojamiento($id_usuario_turista, $nombre_alojamiento, $calle, $esq
     }
 }
 
-function consultarAlojamiento($data)
+function consultarAlojamiento()
 {
     $alojamiento = new Alojamiento();
-    $resultado = $alojamiento->buscarAlojamiento($data);
+    $resultado = $alojamiento->buscarAlojamiento();
     if (!empty($resultado)) {
         return json_encode($resultado);
     } else {
@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 );
                 break;
             case "consultarAlojamiento":
-                $resultado = consultarAlojamiento($data);
+                $resultado = consultarAlojamiento();
                 break;
         }
     } else {
