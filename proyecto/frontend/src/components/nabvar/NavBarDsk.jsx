@@ -83,7 +83,7 @@ usuarioAutenticado();
         <div className="rounded-full ">
           
           <img src={usuario.url_img_usuario} className='w-12 h-12 rounded-full' />
-       
+          
         
         </div>
       </label>

@@ -24,8 +24,6 @@ const Alojamiento = () => {
 
     validationSchema: Yup.object({
       nombre_alojamiento: Yup.string().required("Campo obligatorio"),
-      fecha_ini_alojamiento: Yup.date().required('El campo no puede ir vacio'),
-      fecha_fin_alojamiento: Yup.date().required('El campo no puede ir vacio'),
       calle: Yup.string().required("Campo obligatorio"),
       nro_puerta: Yup.string().required("Campo obligatorio"),
       esquina: Yup.string().required("Campo obligatorio"),
@@ -70,18 +68,12 @@ const Alojamiento = () => {
                   <div className='form-control'>
                     <label htmlFor="" className='font-semibold font-aref text-wwe text-lg'>Fecha de ingreso: </label>
                     <input type="date" id='fecha_ini_alojamiento' value={formik.values.fecha_ini_alojamiento} onChange={formik.handleChange} onBlur={formik.handleBlur}  className='border border-wwe input bg-white text-black'  />
-                            {
-    formik.touched.fecha_ini_alojamiento && formik.errors.fecha_ini_alojamiento ?
-    <div><p className='text-wwe '>{formik.errors.fecha_ini_alojamiento}</p></div> : null
-  }
+          
                 </div>
                    <div className='form-control'>
                     <label htmlFor="" id='fecha_fin_alojamiento' className='font-semibold font-aref text-wwe text-lg'>Fecha de salida: </label>
                     <input type="date" id='fecha_fin_alojamiento' value={formik.values.fecha_fin_alojamiento} onChange={formik.handleChange} onBlur={formik.handleBlur} className='border border-wwe input bg-white text-black'  />
-                                                {
-    formik.touched.fecha_fin_alojamiento && formik.errors.fecha_fin_alojamiento ?
-    <div><p className='text-wwe '>{formik.errors.fecha_fin_alojamiento}</p></div> : null
-  }
+
                 </div>
                     <div className='form-control'>
                     <label htmlFor="" id='fecha_fin_alojamiento' className='font-semibold font-aref text-wwe text-lg'>Calle: </label>

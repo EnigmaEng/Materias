@@ -53,12 +53,12 @@ const RestauranteHomeDsk = () => {
     </div>
   </div>
 </div>
-<div  className="max-w-sm mt-20 w-[50%]   rounded-box shadow-xl  lg:max-w-full lg:flex">
+<div  className="max-w-sm mt-20 w-[50%] h-[289px]  rounded-box shadow-xl  lg:max-w-full lg:flex">
 <video
     autoPlay
     loop
     muted
-    className="h-[285px] w-30"
+    className="h-[289px] w-30"
   >
     <source src={video}  type="video/mp4" />
 
@@ -69,7 +69,7 @@ const RestauranteHomeDsk = () => {
       <p className="text-gray-700 text-sm">Logra una mayor visibilidad de tu restaurante, descubre el universo Where We Eat y todos sus beneficios para conocer nuevos clientes y llevar al auge a tu establecimiento gastronómico. </p>
     </div>
     <div className="flex  justify-center items-center">
-     <Link to='/subscripcion' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white border shadow-xl text-white bg-wwe  text-3xl rounded-lg flex justify-center items-center '> Ver suscripciones </Link>
+     <Link to='/subscripcion' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white border shadow-xl bg-wwe  text-white  text-xl py-2 rounded-lg '> Ver suscripciones </Link>
     </div>
   
 </div>

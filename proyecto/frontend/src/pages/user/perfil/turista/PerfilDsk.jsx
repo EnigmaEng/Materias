@@ -18,7 +18,7 @@ const {usuario} = TodoContext
       usuario && usuario.rol.nacionalidad ? 
  <div className='space-y-24 min-h-screen  text-black font-aref dark:text-white dark:bg-zinc-800 dark:bg-opacity-95'>
 <NavBar/> 
-      <div className='p-4   m-auto shadow-xl rounded-box h-[600px]  w-8/12 bg-white dark:bg-zinc-800    '>
+      <div className='p-4   m-auto shadow-xl rounded-box h-[300px]  w-6/12 bg-white dark:bg-zinc-800    '>
    
       <div className=' space-y-5 border dark:border-zinc-700 h-auto w-full rounded-box p-8 flex'>
           <div className='flex flex-col justify-center items-center'>
@@ -37,19 +37,13 @@ const {usuario} = TodoContext
               </div>   
       <Link to='/editarPerfil' className='h-10 w-50  flex gap-5 px-6 py-2.5   rounded-lg shadow-lg  bg-red-800 text-white '>Editar  <AiOutlineEdit/></Link>
         </div>
-        <div className='flex items-center justify-center mt-8'>
-          <p className='p-2 text-2xl  rounded-lg'>Motivo de alojamiento: {usuario.rol.motivo_alojamiento}</p>
-        </div>
-     
+        
       </div>
     
     </div>
     :
-      !usuario ? 
-
        <Home/>
-       :
-       null
+      
     }
    </>
   )

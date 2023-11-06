@@ -84,9 +84,7 @@ iniciarSesion(userData)
       <div>
         <div className="flex items-center justify-between">
           <label htmlFor="password" className="block text-lg font-semibold leading-6 text-wwe">Contraseña</label>
-          <div className="text-sm">
-            <a href="#" className="font-semibold text-wwe dark:text-white hover:text-wwe">Olvidaste tu contraseña?</a>
-          </div>
+          
         </div>
         <div className="mt-2">
           <input id="contrasena" name="" type="password" autoComplete="current-password" required className="block w-full ring-wwe bg-white  px-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
