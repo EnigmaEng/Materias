@@ -38,7 +38,7 @@ const settings = {
   speed: 500,
   slidesToShow: 4,
   slidesToScroll: 3,
-  
+
 };
 
     return (
@@ -52,7 +52,7 @@ const settings = {
             <div key={index} className='bg-white  shadow-xl mt-5 text-center'>
               <img src={item.url_img_descuento} alt="foto-descuento" className='w-64 m-auto h-24 ' />
               <div className='card-body  p-2'>
-            <p className='text-wwe'>{item.id_descuento}</p>
+            
                 <p className='text-wwe text-xl font-semibold'>{item.titulo_descuento}</p>
                 <p className='text-wwe text-sm '>{item.descripcion}</p>
                 <p className='text-wwe font-aref font-semibold'>${item.costo}</p>

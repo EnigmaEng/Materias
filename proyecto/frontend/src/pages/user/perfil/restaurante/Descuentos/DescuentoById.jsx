@@ -80,7 +80,7 @@ const DescuentoById = () => {
     if (Object.keys(data).length > 2) {
     try {
         await editarDescuento(data);
-        resetForm(); // Esta es la llamada adecuada al resetForm()
+        resetForm();
     } catch (error) {
     console.error("Error al editar descuento:", error);
     }
