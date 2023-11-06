@@ -1,6 +1,13 @@
 <?php
 include_once '../models/turista.php';
 include './cors.php';
+
+require '../vendor/autoload.php';
+
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable('/var/www/html/');
+$dotenv->load();
 function bloquearUsuario($emailUsuario)
 {
     $usuario = new Turista();
@@ -9,15 +16,24 @@ function bloquearUsuario($emailUsuario)
 
 function editarUsuario($idUsuario, $datos)
 {
+    $directorioDestino = $_ENV['DIR_IMAGEN'];
     $usuario = new Turista();
     $validOptions = ["alias", "contrasena", "url_img_usuario"];
     $nuevosDatos = [];
+
+    $guardarImagen = new GuardarImagen($directorioDestino);
+
+    if (isset($_FILES['imagen']['name'])) {
+        $nombreArchivo = $_FILES['imagen']['name'];
+        $ruta = $guardarImagen->guardarImagen($_FILES['imagen'], $nombreArchivo);
+        $nuevosDatos["url_img_usuario"] = $ruta;
+    }
 
     foreach ($datos as $opcion => $valor) {
         if ($opcion === "accion" || $opcion === "id_usuario") {
             continue;
         }
-        
+
         if (in_array($opcion, $validOptions)) {
             switch ($opcion) {
                 case "alias":
@@ -37,11 +53,12 @@ function editarUsuario($idUsuario, $datos)
     }
 
     if ($usuario->editUser($idUsuario, $nuevosDatos)) {
-        return json_encode(array("status" => "Los cambios persistieron correctamente."));
+        return json_encode(array("status" => "Los cambios se persistieron correctamente."));
     } else {
         return json_encode(array("status" => "Error en la persistencia de los cambios."));
     }
 }
+
 
 
 
