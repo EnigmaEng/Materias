@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import perfilData from '../../../../../context/perfilData';
 import { Link, useParams } from 'react-router-dom';
 import NavBar from '../../../../../components/nabvar/NavBar';
@@ -7,6 +7,7 @@ import DarkMode from '../../../../../components/Buttons/DarkMode';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import todoContext from '../../../../../context/todoContext';
 
 const PerfilClienteMb = () => {
 
@@ -20,6 +21,8 @@ menu,
 restaurante
   } = perfilData();
 
+  const {usuario, turistaVisitaRest} = useContext(todoContext)
+
   const settings = {
     dots: true,
     infinite: true,
@@ -28,6 +31,16 @@ restaurante
     slidesToScroll: 2,
     variableWidth: true
   };
+
+    const handleClick = () => {
+    const accion = {
+    "accion":"turistaVisitaRest",
+    "id_usuario_turista": usuario?.id_usuario,
+    "id_usuario_rest": id_usuario
+} 
+  turistaVisitaRest(accion)
+
+  }
 
   useEffect(() => {
     getProductById(id_usuario);
@@ -57,7 +70,7 @@ restaurante
     <div className=' ' > 
     <div className='flex flex-col justify-center items-center bg-white dark:bg-zinc-900'>
         <p className='text-center text-4xl text-wwe font-aref font-semibold'>{item.nombre}</p>
-   <button className='bg-wwe text-white px-2 rounded-md m-4 w-64 h-8'>¡Quiero ir!</button>  <p className='text-wwe font-semibold text-center text-sm m-2 dark:text-white'>Número de local: {item.nro_local}</p>  
+   <button onClick={() => handleClick()} className='bg-wwe text-white px-2 rounded-md m-4 w-64 h-8'>¡Quiero ir!</button>  <p className='text-wwe font-semibold text-center text-sm m-2 dark:text-white'>Número de local: {item.nro_local}</p>  
     </div>
     <>
     

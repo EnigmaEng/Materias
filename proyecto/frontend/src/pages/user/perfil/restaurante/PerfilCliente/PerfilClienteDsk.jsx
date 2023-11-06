@@ -96,7 +96,7 @@ restaurante
                  <p className='text-sm'>{item.descripcion}</p>
               </div>
              <div className='h-10 '>
-              <p className='text-2xl'>{item.costo}$</p>
+              <p className='text-2xl'>${item.costo}</p>
              </div>
               
             </div>
