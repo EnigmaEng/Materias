@@ -21,14 +21,6 @@ function editarUsuario($idUsuario, $datos)
     $validOptions = ["alias", "contrasena", "url_img_usuario"];
     $nuevosDatos = [];
 
-    $guardarImagen = new GuardarImagen($directorioDestino);
-
-    if (isset($_FILES['imagen']['name'])) {
-        $nombreArchivo = $_FILES['imagen']['name'];
-        $ruta = $guardarImagen->guardarImagen($_FILES['imagen'], $nombreArchivo);
-        $nuevosDatos["url_img_usuario"] = $ruta;
-    }
-
     foreach ($datos as $opcion => $valor) {
         if ($opcion === "accion" || $opcion === "id_usuario") {
             continue;
@@ -50,6 +42,11 @@ function editarUsuario($idUsuario, $datos)
         } else {
             return json_encode(array("status" => "Opción de cambio no válida: " . $opcion));
         }
+    }
+
+    if (isset($_FILES['imagen']['name'])) {
+        $nombreArchivo = $_FILES['imagen']['name'];
+        $nuevosDatos["url_img_usuario"] = $nombreArchivo;
     }
 
     if ($usuario->editUser($idUsuario, $nuevosDatos)) {
