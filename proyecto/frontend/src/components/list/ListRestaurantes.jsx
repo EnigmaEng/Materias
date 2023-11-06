@@ -1,9 +1,10 @@
 import restauranteData from '../../context/restauranteData';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import {BsSearch} from 'react-icons/bs'
 import {GoCodeReview} from 'react-icons/go'
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
+import todoContext from '../../context/todoContext';
 
 
 const ListRestaurantes = () => {
@@ -17,6 +18,8 @@ const ListRestaurantes = () => {
     setBusqueda,
     
   } = restauranteData();
+
+  const {turistaVisitaRest, usuario} = useContext(todoContext)
   
     const settings = {
     dots: true,
@@ -38,6 +41,17 @@ const ListRestaurantes = () => {
       setBuscando(false);
     }
   }, [busqueda]);
+
+    const handleClick = (id_usuario) => {
+    const accion = {
+    "accion":"turistaVisitaRest",
+    "id_usuario_turista": usuario?.id_usuario,
+    "id_usuario_rest": id_usuario
+} 
+
+  turistaVisitaRest(accion)
+
+  }
     
   return (
     <>
@@ -70,6 +84,7 @@ const ListRestaurantes = () => {
                 <Link to={`/clientePerfil/${item.id_usuario}`} className='rounded-lg border px-4 shadow-xl border w-24 flex justify-center py-3 h-10'>
                   <BsSearch />
                 </Link>
+                <button className='bg-wwe w-24 hover:bg-red-700 p-2 rounded-lg text-white' onClick={()=> handleClick(`${item.id_usuario}`)}>Visitar</button>
                 <Link to={`/crearResenia/${item.id_usuario}`} className='rounded-lg border px-4 bg-white shadow-xl w-24 flex justify-center py-3 h-10'>
                   <GoCodeReview />
                 </Link>
