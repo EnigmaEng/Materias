@@ -205,7 +205,7 @@ function obtenerDescuentoByIdUsuario($id){
 function modificarPlato($idPlato, $datos)
 {
     $plato = new PlatoRestaurante();
-    $validOptions = ["nombre_plato", "costo", "descripcion", "estado_plato"];
+    $validOptions = ["nombre_plato", "costo", "descripcion", "estado_plato","url_img_menu"];
     $nuevosDatos = [];
 
     $directorioDestino = $_ENV['DIR_IMAGEN'];
