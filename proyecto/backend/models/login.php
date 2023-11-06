@@ -58,7 +58,7 @@ class Login
                 $rolData = $stmt->fetch(PDO::FETCH_ASSOC);
             } elseif ($rol === 'T') {
                 
-                $query = "SELECT * FROM turista WHERE tur.id_usuario = :id_usuario";
+                $query = "SELECT * FROM turista tur WHERE tur.id_usuario = :id_usuario";
                 $stmt = $conn->prepare($query);
                 $stmt->bindValue(":id_usuario", $userData['id_usuario']);
                 $stmt->execute();
