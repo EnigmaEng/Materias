@@ -1,6 +1,7 @@
 describe ('Iniciando Modo Oscuro', () => {
     beforeEach (() => { 
         cy.visit('http://wweat.ddns.net/')
+        //cy.visit('http://127.0.0.1:5173/')
     })
 
     it('Entrando al Login',() =>{

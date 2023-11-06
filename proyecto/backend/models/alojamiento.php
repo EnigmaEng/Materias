@@ -128,68 +128,20 @@ class Alojamiento extends CrudBasico
         }
     }
 
-    public function buscarAlojamiento($datos)
+    public function buscarAlojamiento()
     {
         try {
-            // Inicializa la consulta SQL base
-            $query = "SELECT DISTINCT alo.nombre_alojamiento, loc.calle, loc.nro_puerta, loc.esquina FROM wwe.alojamiento alo
+            $query = "SELECT DISTINCT alo.nombre_alojamiento,loc.calle,loc.nro_puerta,loc.esquina FROM wwe.alojamiento alo
             JOIN wwe.localizacion loc ON alo.id_loc_alojamiento = loc.id_localizacion
             JOIN wwe.turista_sealoja_alojamiento talo ON alo.id_alojamiento = talo.id_alojamiento
-            WHERE alo.activo = 'S' AND (";
-
-           
-            $condiciones = [];
-
-           
-            if (isset($datos["nombreAlojamiento"])) {
-                $condiciones[] = "alo.nombre_alojamiento = :nombre_alojamiento";
-            }
-
-            
-            if (isset($datos["calle"])) {
-                $condiciones[] = "loc.calle = :calle";
-            }
-
-            
-            if (isset($datos["nroPuerta"])) {
-                $condiciones[] = "loc.nro_puerta = :nro_puerta";
-            }
-
-            
-            if (isset($datos["esquina"])) {
-                $condiciones[] = "loc.esquina = :esquina";
-            }
-
-            
-            $query .= implode(" OR ", $condiciones);
-            $query .= ");";
+            WHERE alo.activo = 'S';";
 
             $stmt = $this->getConn()->prepare($query);
-
-            
-            if (isset($datos["nombreAlojamiento"])) {
-                $stmt->bindValue(":nombre_alojamiento", $datos["nombreAlojamiento"]);
-            }
-
-            if (isset($datos["calle"])) {
-                $stmt->bindValue(":calle", $datos["calle"]);
-            }
-
-            if (isset($datos["nroPuerta"])) {
-                $stmt->bindValue(":nro_puerta", $datos["nroPuerta"]);
-            }
-
-            if (isset($datos["esquina"])) {
-                $stmt->bindValue(":esquina", $datos["esquina"]);
-            }
-
             $stmt->execute();
             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
             if (!empty($resultado)) {
                 return $resultado;
             }
-
             return false;
         } catch (PDOException $ex) {
             error_log("Error " . $ex->getMessage());

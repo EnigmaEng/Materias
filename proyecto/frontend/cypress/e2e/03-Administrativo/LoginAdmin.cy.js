@@ -1,6 +1,7 @@
 describe ('LoginAdmin', () => {
     beforeEach (() => { 
         cy.visit('http://wweat.ddns.net/')
+        //cy.visit('http://127.0.0.1:5173/')
     })
 
     it('Login Administrativo',() =>{
