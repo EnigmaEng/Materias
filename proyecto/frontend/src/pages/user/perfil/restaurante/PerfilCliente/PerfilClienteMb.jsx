@@ -102,7 +102,7 @@ restaurante
              <p> <b>Menu:</b>  {item.calificacion_menu}</p>
                          
               <p><b>General:</b>:  {item.calificacion_general}</p>
-                         <p className='text-gray-800 '>{item.fecha}</p> 
+                         <p className='text-gray-800'>{item.fecha}</p> 
         </div>
     )) 
     }
