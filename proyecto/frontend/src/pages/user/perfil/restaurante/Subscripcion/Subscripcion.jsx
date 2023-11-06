@@ -12,10 +12,10 @@ const Subscripcion = () => {
   const {mensaje} = useContext(todoContext)
   const {subscripcion} = subscripcionData();
 
-  const realizarInsert = (dato) => {
+  const realizarInsert = async(dato) => {
     
     subscripcion(dato);
-    
+   
   };
 
 

@@ -187,12 +187,13 @@ class PlatoRestaurante extends CrudBasico
         return $resultados;
     }
 
+
     public function modificarPlato($idPlato, $datos)
     {
         try {
             $query = "UPDATE plato_restaurantes SET ";
             $valores = [];
-    
+
             foreach ($datos as $opcion => $valor) {
                 switch ($opcion) {
                     case "nombre_plato":
@@ -215,22 +216,27 @@ class PlatoRestaurante extends CrudBasico
                         return false;
                 }
             }
-    
+
+            // Si no se ha añadido ningún atributo válido, regresar falso
+            if (count($valores) === 0) {
+                return false;
+            }
+
             $query = rtrim($query, ', ');
-    
+
             $query .= " WHERE id_Plato = :id_Plato";
             $valores[":id_Plato"] = $idPlato;
-    
+
             $stmt = $this->getConn()->prepare($query);
-    
+
             if ($stmt->execute($valores)) {
                 return true;
             }
-    
+
             return false;
         } catch (PDOException $ex) {
             error_log("Error en la actualización de datos: " . $ex->getMessage());
         }
+
     }
-    
 }

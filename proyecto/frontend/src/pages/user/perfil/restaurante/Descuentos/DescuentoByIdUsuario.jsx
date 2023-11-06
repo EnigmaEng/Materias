@@ -21,7 +21,7 @@ const DescuentoByIdUsuario = () => {
     }
     const respuesta = await clienteAxios.post('/restauranteController.php', accion);
     setDescuentoUser(respuesta.data);
-    console.log(respuesta.data)
+   
     }
     
     useEffect(() => {
@@ -43,7 +43,9 @@ const settings = {
 
     return (
     <>
- <div className='min-h-screen'>
+    {
+    Array.isArray(descuentoUser) && descuentoUser.length > 0 ? (
+       <div className='min-h-screen'>
     <NavBar/>
       <div className='bg-white p-8 w-8/12 m-auto mt-24 shadow-xl rounded-lg'>
         <p className='text-center text-wwe font-aref font-semibold text-2xl'>Tus promociones:</p>
@@ -64,6 +66,18 @@ const settings = {
         </Slider>
       </div>
     </div>
+    )
+: (
+  <div className='min-h-screen'>
+    <NavBar/>
+    <div className='bg-white p-2 rounded-lg w-6/12 m-auto mt-24'>
+      <p className='text-wwe text-center'>Sin promociones</p>
+    </div>
+     
+  </div>
+ 
+)
+}
     </>
   )
 }

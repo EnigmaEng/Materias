@@ -75,12 +75,7 @@ const formik = useFormik({
     }
 
    if (Object.keys(data).length > 2) {
-    try {
-        await editarPlato(data);
-        resetForm(); 
-    } catch (error) {
-    console.error("Error al editar descuento:", error);
-    }
+        editarPlato(data);
     }
    
 }
