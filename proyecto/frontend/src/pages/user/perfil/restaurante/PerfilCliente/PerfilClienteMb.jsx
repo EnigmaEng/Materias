@@ -85,16 +85,29 @@ restaurante
       )}
     </article>
 </>
-<aside className='mt-10'>
-{
+<aside className='mt-10 grid-cols-2'>
+{   
     resenia[0] === 'Error en la consulta' ?
     <div className='bg-white dark:bg-zinc-900 h-24 '><p className='text-center  font-semibold font-aref dark:bg-zinc-900  text-gray-400'>Sin reseñas</p></div>
     :
+ 
+    <Slider {...settings}>
+   {
+
+  
     resenia.map((item,index) => (
-        <div className='border ' key={index}>
-            <p>Calificaciones</p>
+        <div className='bg-white rounded-lg font-aref text-center text-black p-2' key={index}>
+            <p> <b>Instalaciones:</b> {item.calificacion_instalaciones}</p>
+             <p><b>Personal:</b> {item.calificacion_personal} </p>
+             <p> <b>Menu:</b>  {item.calificacion_menu}</p>
+                         
+              <p><b>General:</b>:  {item.calificacion_general}</p>
+                         <p className='text-gray-800 '>{item.fecha}</p> 
         </div>
-    ))
+    )) 
+    }
+    </Slider>
+    
 }
 </aside>
     </div>
