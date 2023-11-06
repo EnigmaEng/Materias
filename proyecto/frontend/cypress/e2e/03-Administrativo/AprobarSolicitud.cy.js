@@ -7,7 +7,7 @@ describe('LoginAdmin', () => {
     it('Aceptando sub', () => {
       cy.get('.hidden > :nth-child(1) > .z-10 > .gap-5 > [href="/login"] > .bg-wwe').click();
       cy.contains('Iniciar Sesión')
-      cy.get('#email').type('admin17@wwe.com')
+      cy.get('#email').type('admin@admin.com')
       cy.get('#contrasena').type('hola1234')
       cy.get(':nth-child(3) > .flex').click()  
       // Verificar si el mensaje "Sin solicitudes pendientes" existe

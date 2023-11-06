@@ -1,11 +1,7 @@
 describe ('Registro_Rest', () => {
     beforeEach (() => { 
-<<<<<<< HEAD
         cy.visit('http://wweat.ddns.net/')
         //cy.visit('http://127.0.0.1:5173/')
-=======
-        cy.visit('http://localhost:5173/')
->>>>>>> 2071a7e3a27ad28c65ae28890a5c0d8aab43ef29
     })
     it('Entrando al Registro',() =>{
         cy.contains('WHERE WE EAT')

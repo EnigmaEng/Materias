@@ -10,7 +10,7 @@ const [menu, setMenu] = useState([]);
 
     const getProductById = async (id_usuario) => {
         const accion = {
-    "accion": "restauranteById",
+    "accion": "obtenerRestauranteById",
     "id_usuario": id_usuario
   }
   try {
