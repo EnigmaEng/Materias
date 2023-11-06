@@ -11,9 +11,24 @@ const EditarPlato = () => {
 
 const {id_Plato} = useParams();
 const TodoContext = useContext(todoContext)
-const { editarPlato, mensaje, imagenBase64} = TodoContext
+const { editarPlato, mensaje} = TodoContext
 
 
+const imagenBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+      reader.onload = () => {
+      resolve(reader.result);
+     };
+
+    reader.onerror = (error) => {
+    reject(error);
+    };
+
+    reader.readAsDataURL(file);
+    });
+};
 
 
 
