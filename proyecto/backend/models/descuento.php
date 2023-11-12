@@ -233,33 +233,33 @@ class Descuento extends CrudBasico
         }
     }
 
-public function mostrarDescuentosByIdUsuario($id)
-{
-    $arrayDescuento = array();
-    try {
-        $query = "SELECT r.nombre, r.id_usuario, des.* FROM wwe.descuento des
+    public function mostrarDescuentosByIdUsuario($id)
+    {
+        $arrayDescuento = array();
+        try {
+            $query = "SELECT r.nombre, r.id_usuario, des.* FROM wwe.descuento des
             JOIN wwe.restaurante_tiene_descuento rd ON des.id_descuento = rd.id_descuento
             JOIN wwe.restaurante r ON r.id_usuario = rd.id_usuario_rest
             WHERE rd.id_usuario_rest = :id_usuario";
-        $stmt = $this->getConn()->prepare($query);
-        $stmt->bindValue(":id_usuario", $id); // Usar el parámetro $id en lugar de $this->getIdRestaurante()
-        
-        if ($stmt->execute()) {
-            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($resultados as $resultado) {
-                if ($resultado["id_usuario"] == $id) {
-                    $arrayDescuento[] = $resultado; // Agregar el resultado al array
+            $stmt = $this->getConn()->prepare($query);
+            $stmt->bindValue(":id_usuario", $id); // Usar el parámetro $id en lugar de $this->getIdRestaurante()
+
+            if ($stmt->execute()) {
+                $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($resultados as $resultado) {
+                    if ($resultado["id_usuario"] == $id) {
+                        $arrayDescuento[] = $resultado; // Agregar el resultado al array
+                    }
                 }
+                return $arrayDescuento;
+            } else {
+                return false;
             }
-            return $arrayDescuento;
-        } else {
+        } catch (PDOException $ex) {
+            error_log("" . $ex->getMessage());
             return false;
         }
-    } catch (PDOException $ex) {
-        error_log("" . $ex->getMessage());
-        return false;
     }
-}
 
 
     public function modificarDescuento($idDescuento, $datos)
@@ -309,6 +309,21 @@ public function mostrarDescuentosByIdUsuario($id)
             return false;
         } catch (PDOException $ex) {
             error_log("Error en la actualización de datos: " . $ex->getMessage());
+        }
+    }
+
+    public function eliminarDescuento()
+    {
+        try {
+            $query = "UPDATE descuento SET activo= 'N' WHERE id_descuento = :id_descuento";
+            $stmt = $this->getConn()->prepare($query);
+            $stmt->bindValue(":id_descuento", $this->getIdDescuento());
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $ex) {
+            error_log("Error en el update de descuento: " . $ex->getMessage());
         }
     }
 }

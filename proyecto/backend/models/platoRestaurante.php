@@ -237,6 +237,22 @@ class PlatoRestaurante extends CrudBasico
         } catch (PDOException $ex) {
             error_log("Error en la actualización de datos: " . $ex->getMessage());
         }
+    }
 
+    public function eliminarPlato()
+    {
+        try {
+            $query = "UPDATE plato_restaurantes SET estado_plato= 'N' WHERE id_plato= :id_plato";
+            $stmt = $this->getConn()->prepare($query);
+            $stmt->bindValue(":id_plato", $this->getIdPlato());
+            if ($stmt->execute()) {
+                return true;
+            }
+            
+            return false;
+
+        } catch (PDOException $ex) {
+            error_log("Error al eliminar el restaurante: " . $ex->getMessage());
+        }
     }
 }

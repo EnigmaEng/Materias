@@ -311,6 +311,26 @@ function obtenerVisitasTurista($idRestaurante){
     return json_encode($resultado);
 }
 
+function eliminarPlato($idPlato){
+    $plato= new PlatoRestaurante();
+    $plato->setIdPlato($idPlato);
+    if($plato->eliminarPlato()){
+        return json_encode(array("status" => "Baja logica realizada correctamente."));
+    }else{
+        return json_encode(array("status" => "Error en la baja logica de plato."));
+    }
+}
+
+function eliminarDescuento($idDescuento){
+    $descuento=new Descuento();
+    $descuento->setIdDescuento($idDescuento);
+    if($descuento->eliminarDescuento()){
+        return json_encode(array("status" => "Baja logica realizada correctamente."));
+    }else{
+        return json_encode(array("status" => "Error en la baja logica de descuento."));
+    }
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json = file_get_contents('php://input');
@@ -387,7 +407,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 break;
             case "obtenerVisitasDeTuristas":
                 $resultado= obtenerVisitasTurista($data['id_restaurante']);
-                break;    
+                break;
+            case "eliminarPlato":
+                $resultado= eliminarPlato($data['id_Plato']);
+                break;
+            case "eliminarDescuento":
+                $resultado= eliminarDescuento($data['id_descuento']);
+                break;
             default:
                 $resultado = "Error en el tipo de accion, intente nuevamente";
                 break;
