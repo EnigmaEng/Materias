@@ -75,13 +75,13 @@ const formik = useFormik({
 
     crearPlato(platoData);
     
-    
+    resetForm();
     } catch (error) {
       console.log("error al subir la foto: ", error)
     }
       
   }
-resetForm();
+
  
   },
 });
@@ -95,8 +95,9 @@ resetForm();
       <NavBar/>
 
       <form onSubmit={formik.handleSubmit} className='mb-20 flex flex-col  text-black m-auto md:mt-28 mt-10 justify-center items-center py-4 space-y-10 bg-white max-w-lg rounded-box shadow-xl font-aref text-lg ' method='POST' >
+ {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }
         <h2 className='text-center text-5xl text-wwe font-bold  font-aref'>Crear tu plato</h2>
-      <div> {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/> }</div> 
+    
       <div className='flex flex-col  '>
 <label htmlFor="" className=''>Foto del plato:</label>
 <input

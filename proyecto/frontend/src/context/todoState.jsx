@@ -142,7 +142,7 @@ const usuarioAutenticado = () => {
         
         dispatch({
         type: PLATO_CREADO,
-        payload: respuesta.data
+        payload: 'Plato creado!'
       })
       } catch (error) {
         console.log(error)

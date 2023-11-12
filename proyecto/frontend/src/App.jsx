@@ -34,6 +34,7 @@ import EditarPlato from './pages/user/perfil/restaurante/Menu/EditarPlato'
 import DescuentoByIdUsuario from './pages/user/perfil/restaurante/Descuentos/DescuentoByIdUsuario'
 import DescuentoById from './pages/user/perfil/restaurante/Descuentos/DescuentoById'
 import TokensTurista from './pages/user/perfil/restaurante/Configuracion/TokensTurista'
+
 function App() {
 
 
@@ -85,6 +86,7 @@ function App() {
 <Route path="/verTokens" element={<TokensTurista/>} />
 <Route path="/descuentoByIdUsuario" element={<DescuentoByIdUsuario/>} />
 <Route path="/descuentoById/:id_descuento" element={<DescuentoById/>} />
+
     </Routes>
     
     </BrowserRouter>

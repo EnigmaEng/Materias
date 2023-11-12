@@ -2,7 +2,7 @@ import React from 'react'
 import NavBar from '../../../../../components/nabvar/NavBar'
 import ListRestaurantes from '../../../../../components/list/ListRestaurantes'
 import Map from '../../../../../components/maps/Map'
-import Categorias from '../../../../../components/categorias/Categorias'
+import Categorias from '../../../../../components/categorias/CategoriasRestaurante'
 import FooterDsk from '../../../../../components/Footer/FooterDsk'
 import { Link } from 'react-router-dom'
 import Image from '../../../../../assets/logoubi.png'
@@ -11,6 +11,7 @@ import {BsFillHouseFill} from 'react-icons/bs'
 import Image2 from '../../../../../assets/mapa.png'
 import Image3 from '../../../../../assets/resenia.png'
 import Image1 from '../../../../../assets/alojamiento.png'
+import ImageRed from '../../../../../assets/bgred.png'
 
 const TuristaHomeDsk = () => {
   return (
@@ -19,6 +20,14 @@ const TuristaHomeDsk = () => {
   <NavBar/>
 
 
+  <div class="">
+    <img src={ImageRed} alt="inicio-imagen" className='w-8/12 m-auto h-64 rounded-lg'  />
+    
+        <h2 class="w-4/12 absolute top-52 text-white left-56 p-4 text-4xl font-bold  font-aref">Tu mejor lugar para buscar restaurantes</h2>
+       
+       
+
+</div>
       
 
 

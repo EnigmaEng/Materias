@@ -5,11 +5,21 @@ import NavBar from '../../../../../components/nabvar/NavBar';
 import { Link } from 'react-router-dom';
 import {BiArrowBack} from 'react-icons/bi'
 import perfilData from '../../../../../context/perfilData';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import todoContext from '../../../../../context/todoContext';
 import Mensaje from '../../../../../components/alertas/Mensaje';
+import DarkMode from '../../../../../components/Buttons/DarkMode';
+import {FaHouseUser} from 'react-icons/fa'
+import {MdOutlineFoodBank} from 'react-icons/md'
+import {MdDateRange} from 'react-icons/md'
+
+// Imagenes
+import ImagenItaliana from '../../../../../assets/italiano.png'
+import ImagenAsia from '../../../../../assets/asia.png'
+import ImagenMexico from '../../../../../assets/mexico.png'
+import ImagenGourmet from '../../../../../assets/gourmet.png'
+import ImagenFrancesa from '../../../../../assets/francesa.png'
+import ImagenFastFood from '../../../../../assets/fastFood.png'
+import LogoUbi from '../../../../../assets/logoubi.png'
 const PerfilClienteDsk = () => {
 
   const {
@@ -39,117 +49,157 @@ restaurante
 } 
   turistaVisitaRest(accion)
 
+
+  }
+  
+
+
+const tipoRestaurante = restaurante[0]?.descripcion;
+let imagen ='';
+
+  switch (tipoRestaurante) {
+    case "Comida italiana":
+      imagen = ImagenItaliana;
+      break;
+    case "Comida mexicana":
+      imagen = ImagenMexico;
+      break;
+    case "Comida francesa":
+      imagen = ImagenFrancesa;
+      break;
+    case "Comida japonesa" && "Comida china":
+      imagen = ImagenAsia;
+      break;
+    case "Comida gourmet" && "Restaurante de autor":
+      imagen = ImagenGourmet;
+      break;
+    default:
+      // para llevar y comida rapida
+      imagen = ImagenFastFood;
+      break;
   }
 
+
+ 
+  
   if (!restaurante) {
     return (<div className='min-h-screen '>
     <p className='text-center font-aref text-2xl  text-black'>Cargando..</p></div>);
   }
 
   return (
-    <>
-    <div className='min-h-screen  dark:bg-zinc-800 dark:bg-opacity-80  '>
-      <NavBar/>
-       <Link to='/homeAuth' >
-    <button className='bg-wwe  rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-8 md:absolute md:left-10 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700 md:border-gray-400 text-white'><BiArrowBack/></button>
-    </Link>
-<div className='flex w-full gap-5 p-4 '>
-    {
-      
-      restaurante.map((item,index) => (
-         <div className=' mt-10 flex justify-center dark:bg-zinc-800 bg-white w-[40%] m-4 p-3' key={index}>
-          <div className='rounded-lg p-8 '>
-            {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/>}
-      <h2 className=' text-center text-3xl font-semibold font-aref text-wwe'>{item.nombre}</h2>
-        
-    <img src={item.url_img_usuario} alt="foto-perfil" className=' m-auto shadow-xl mt-5 mb-5 w-full h-72 rounded-lg bg-zinc-300' />
-    <div className=' w-96  rounded-lg '>
-      <p className=' px-10 py-10  dark:text-white text-zinc-600 text-center font-semibold text-lg'>Número de local: {item.nro_local} </p>
-      
-     </div>
-    <div className='flex justify-center justify-center'>
-      <button onClick={()=> handleClick()} className='bg-wwe p-2 w-64 font-aref font-semibold text-center rounded-lg text-white '>Quiero ir</button>
-    </div>
-     </div>
-    </div>
-   
-      ))
-     
-    }
 
-   <div className='flex  mt-10  bg-white dark:bg-zinc-800 rounded-box shadow-xl  flex-col w-full gap-10'>
-
-      <div className=' m-auto mt-1 p-1 flex-col ' >
-          <p  className='text-center text-3xl font-semibold text-wwe mt-5'>Menús</p>
-      <div className=' grid grid-cols-4 gap-10 p-10'>
-    { 
-    Array.isArray(menu) && menu.length > 0 ?
-    
-      menu.map((item,index) => (
-        
-          <div className='rounded-lg shadow-xl rounded-lg bg-white text-black   font-aref  m-auto w-56 text-center ' key={index}>
-          
-            <img src={item.url_img_menu} alt="foto-menu" className='bg-zinc-300 h-48 rounded-t-lg' />
-              <h2 className='font-semibold h-10 text-lg mt-3'>{item.nombre_plato}</h2>
-            <div className=' max-h-min flex flex-col   mt-2 h-[39%]'>
-              <div className='h-20 p-2'>
-                 <p className='text-sm'>{item.descripcion}</p>
-              </div>
-             <div className='h-10 '>
-              <p className='text-2xl'>${item.costo}</p>
-             </div>
-              
+  <>
+    <div className='min-h-screen dark:bg-zinc-800 bg-opacity-60'>
+      <div className='w-full shadow-xl rounded-md text-black font-aref p-8  flex justify-center items-center absolute top-0 h-72' style={{ backgroundImage: `url(${imagen}) `, backgroundRepeat: `no-repeat`, backgroundSize: `cover` }}>
+        <Link to='/homeAuth' className='absolute top-5 left-10 bg-wwe rounded-lg text-white p-2'>Volver</Link>
+<button className='z-50 absolute top-5 right-10'><DarkMode/></button>
+      </div>
+      {mensaje && <Mensaje mensaje={mensaje} tipo="alerta" />}
+      {restaurante.map((item, index) => (
+        <div key={index} className='flex items-center justify-between justify-center mt-28  w-full m-auto rounded-lg text-black bg-white dark:bg-gradient-to-r from-slate-800 to-slate-900 dark:text-white'>
+          <div className='bg-white border text-black  p-8 shadow-xl rounded-lg mt-40 m-5'>
+<p>Tiempo de entrega: 15-30min </p>
+          </div>
+          <div className='flex flex-col justify-center items-center'>
+              <img src={item.url_img_usuario} alt="perfil" className='w-40 z-50 h-40 rounded-full object-cover' />
+          <div className='flex flex-col p-2 rounded-lg gap-2 mb-4 text-center'>
+            <h2 className='p-2 dark:text-white font-mono font-bold mt-2 text-5xl text-wwe mb-4 z-50'>{item.nombre}</h2>
+            <p className='flex gap-2 justify-center items-center items-center'><FaHouseUser/> Nº  {item.nro_local}</p>
+            <p className='font-aref flex items-center gap-2'><MdOutlineFoodBank/> Tipo de restaurante: <b className='font-aref'>{item.descripcion}</b></p>
+            <hr />
+            <div className='flex space-x-2 shadow-xl items-center text-center  p-2 rounded-lg'>
+              <img src={LogoUbi} alt="logo-ubi" className='w-4' />
+              <p className='font-semibold'>
+                {item.calle} {item.nro_puerta} , {item.esquina}
+              </p>
             </div>
-            
           </div>
-      ))
-        :
-       
-        <div className='h-64  text-black font-aref flex justify-center items-center text-center text-3xl '>
-          <p className=' left-[59%]'>Sin Menú</p>
           </div>
-       
-    } 
-      </div>
-  <div className=' h-80 p-4  w-full m-auto justify-center items-center  '>
-    <h2 className='text-center font-aref font-semibold text-2xl text-wwe'>Reseñas:</h2>
-  
+           <div className='p-2'>
+<button className='bg-wwe rounded-md  mt-5 mr-5  hover:bg-red-700 w-40 py-1 font-semibold font-aref  text-white text-xl ' onClick={() => handleClick()}>Quiero ir!</button>
+          </div>
+        </div>
+      ))}
+
+<div className='flex'>
+
+
+      <div className='flex flex-col w-11/12'>
+<>
+<div className='flex flex-col'>
+  <p className='text-center text-3xl font-aref font-semibold mt-2 text-wwe'>Menú</p>
+
+
+<div  className='overflow-x-scroll scrollbar-hidden ml-2'>
+ 
+  <div className='flex  mb-4 gap-2 '>
+      {
       
-    <div className='grid grid-cols-4'>
+         Array.isArray(menu) && menu.length > 0 ? 
+          menu.map((item, index) => (
+         <div className='bg-white rounded-md p-4 w-5/12 h-52 flex  shadow-xl flex-shrink-0' key={index}>
+           
+            <div className='text-center text-2xl font-aref p-2  card-body w-24'>
+             <h2 className='  font-semibold  text-2xl text-wwe'>{item.nombre_plato}</h2>
+           
+             <p className='text-sm font-aref text-black'>{item.descripcion}</p>
+            <p className='text-black text-sm font-semibold'>$ {item.costo}</p>
+            
+           
+            </div>
+            <img src={item.url_img_menu} alt="foto-menu" className='rounded-lg shadow-xl h-28 w-28 border border-white shadow-gray-500 ' />
+         </div>
 
-   
-{
-  resenia[0] === 'Error en la consulta' ? (
-    <div className='text-center text-black dark:text-white text-3xl font-semibold font-aref absolute left-[59%]'>
-      <p>Sin reseñas realizadas</p>
-    </div>
-  ) : (
-    resenia.map((item, index) => (
-      <li key={index} className='list-none '>
-        <div className="flex items-center gap-x-6 bg-white shadow-xl p-2 rounded-box">
-          <div>
-            <p className="text-sm font-semibold leading-6 text-black">Menú gastronómico: {item.calificacion_menu} </p>
-            <p className="text-sm font-semibold leading-6 text-black">Personal: {item.calificacion_personal}</p>
-            <p className="text-sm font-semibold leading-6 text-black">Instalaciones: {item.calificacion_instalaciones}</p>
-            <p className="text-sm font-semibold leading-6 text-black">Calificación General: {item.calificacion_general}</p>
-            <p className="text-sm font-semibold leading-6 text-black"> {item.fecha}</p>
-          </div>
-        </div> 
-      </li>
-    ))
-  )
-}
+          ))
+        
+         : 
 
-
-  </div>
-
+         <div className='bg-white text-center'>
+          <p>Nada</p>
+         </div>
     
-      </div>
-    </div>
-    </div>
-    </div>
-   </div>
-    </>
+        
+      } 
+    
+         </div> 
+          </div>
+           </div>
+      </>
+{/* Descuentos */}
+      <div className='bg-wwe text-white text-2xl font-semibold'>
+    <p>Descuentos</p>
+  </div>
+      {/* Descuentos */}
+  </div> 
+  
+  
+  
+   <div className='w-4/12 border p-4 m-5 rounded-md glass'>
+    {
+        resenia[0] === 'Error en la consulta' ?
+        <p>Sin resenas</p>
+        :
+        resenia.map((item,index) => (
+          <div className='border shadow-xl bg-white p-4 rounded-md text-black font-aref  gap-8' key={index}>
+            <p className='text-center font-semibold text-wwe'>Puntuaciones</p>
+              <p>Menú: <b>{item.calificacion_menu}</b></p>
+                <p>Personal: <b>{item.calificacion_personal }</b></p>
+                <p>Instalaciones: <b>{item.calificacion_instalaciones}</b></p>
+                    <p>General: <b>{item.calificacion_general}</b></p>
+                <p className='font-aref mt-5 text-sm text-center text-gray-800 flex items-center'><MdDateRange/>{item.fecha}</p>
+          </div>
+        ))
+    }
+    
+  </div>
+</div>
+  
+
+  
+    </div> 
+  </>
+ 
   );
 }
 

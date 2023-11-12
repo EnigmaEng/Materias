@@ -87,7 +87,7 @@ usuarioAutenticado();
         
         </div>
       </label>
-      <ul tabIndex={0} className=" z-10 px-4 py-4 dropdown-content mt-3 border bg-white rounded-box w-40">
+      <ul tabIndex={0} className=" z-50 px-4 py-4 dropdown-content mt-3 border bg-white rounded-box w-40">
         <li className=' hover:bg-gray-200 rounded-lg p-2'>
           <Link to='/perfilTurista' className="gap-2 text-center w-40 text-black flex">
          Perfil 

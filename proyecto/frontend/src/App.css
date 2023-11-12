@@ -5,6 +5,21 @@ font-family: 'Tourney', cursive;
   font-family: 'Ubuntu', sans-serif;
 }
 
+/* Estilo para ocultar la barra de desplazamiento horizontal */
+.scrollbar-hidden {
+  overflow-x: scroll;
+  /* Permitir desplazamiento horizontal */
+  scrollbar-width: none;
+  /* Ocultar barra de desplazamiento Firefox */
+  -ms-overflow-style: none;
+  /* Ocultar barra de desplazamiento IE/Edge */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+  /* Ocultar barra de desplazamiento WebKit (Chrome, Safari, etc.) */
+}
+
 body{
   background-image: url('./assets/bg-1.png');
  background-repeat: no-repeat;
