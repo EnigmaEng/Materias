@@ -64,19 +64,35 @@ const ListRestaurantes = () => {
 
        <div className='mt-20 '>
         <div className='flex flex-col text-center justify-center items-center mt-2 '>
-          <div className="group relative w-11/12">
-             <svg width="20" height="20" fill="currentColor" className="absolute left-72 top-1/2 -mt-2.5 text-wwe pointer-events-none group-focus-within:text-wwe" aria-hidden="true">
-        <path fillRule="evenodd" clipRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
-      </svg>
-            <input
-              type="text"
-             
-              className="focus:ring-2 focus:ring-wwe focus:outline-none appearance-none w-6/12  text-sm leading-6 text-black placeholder-gray-500 bg-white rounded-md py-2 pl-10 ring-1 ring-wwe shadow-sm" aria-label="Filter projects" placeholder="Buscar restaurante..."
-              value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
-            />
-          
-          </div>
+<div className="group relative w-7/12 mx-auto">
+  <div className="absolute inset-y-0 left-10 flex items-center">
+    <svg
+      width="20"
+      height="20"
+      fill="currentColor"
+      className="text-wwe pointer-events-none"
+      aria-hidden="true"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+      />
+    </svg>
+  </div>
+  <input
+    type="text"
+    className="focus:ring-2 focus:ring-wwe focus:outline-none appearance-none w-full md:w-11/12 text-sm leading-6 text-black placeholder-gray-500 bg-white rounded-md py-2 pl-10 pr-3 ring-1 ring-wwe shadow-sm mx-auto"
+    aria-label="Filter projects"
+    placeholder="Buscar restaurante..."
+    value={busqueda}
+    onChange={(e) => setBusqueda(e.target.value)}
+  />
+</div>
+
+
+
+
       </div>
       
 
