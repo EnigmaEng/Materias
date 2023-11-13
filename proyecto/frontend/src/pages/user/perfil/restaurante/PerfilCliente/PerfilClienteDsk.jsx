@@ -12,6 +12,7 @@ import {FaHouseUser} from 'react-icons/fa'
 import {MdOutlineFoodBank} from 'react-icons/md'
 import {MdDateRange} from 'react-icons/md'
 
+
 // Imagenes
 import ImagenItaliana from '../../../../../assets/italiano.png'
 import ImagenAsia from '../../../../../assets/asia.png'
@@ -20,6 +21,7 @@ import ImagenGourmet from '../../../../../assets/gourmet.png'
 import ImagenFrancesa from '../../../../../assets/francesa.png'
 import ImagenFastFood from '../../../../../assets/fastFood.png'
 import LogoUbi from '../../../../../assets/logoubi.png'
+import FooterDsk from '../../../../../components/Footer/FooterDsk';
 const PerfilClienteDsk = () => {
 
   const {
@@ -32,14 +34,33 @@ restaurante
   } = perfilData();
 
   const { id_usuario } = useParams();
+  const [descuentos, setDescuentos] = useState([])
+
   const {turistaVisitaRest, usuario, mensaje} = useContext(todoContext)
+
+    const getDescuentos = async () => {
+
+    const accion = {
+      "accion": "obtenerDescuentosByIdUsuario",
+      "id_usuario": id_usuario
+      
+    }
+      const respuesta = await clienteAxios.post('/restauranteController.php',accion )
+      setDescuentos(respuesta.data)
+    
+    }
 
   useEffect(() => {
     getProductById(id_usuario);
     getMenuById(id_usuario);
     getReseniaById(id_usuario);
+getDescuentos();
+    
 
   }, [id_usuario]);
+
+
+  
 
   const handleClick = () => {
     const accion = {
@@ -92,7 +113,7 @@ let imagen ='';
   <>
     <div className='min-h-screen dark:bg-zinc-800 bg-opacity-60'>
       <div className='w-full shadow-xl rounded-md text-black font-aref p-8  flex justify-center items-center absolute top-0 h-72' style={{ backgroundImage: `url(${imagen}) `, backgroundRepeat: `no-repeat`, backgroundSize: `cover` }}>
-        <Link to='/homeAuth' className='absolute top-5 left-10 bg-wwe rounded-lg text-white p-2'>Volver</Link>
+       <Link to='/homeAuth' className='absolute  md:left-24 left-4 top-24 bg-wwe text-white rounded-lg px-6 py-2 '>  <BiArrowBack/> </Link>
 <button className='z-50 absolute top-5 right-10'><DarkMode/></button>
       </div>
       {mensaje && <Mensaje mensaje={mensaje} tipo="alerta" />}
@@ -117,7 +138,7 @@ let imagen ='';
           </div>
           </div>
            <div className='p-2'>
-<button className='bg-wwe rounded-md  mt-5 mr-5  hover:bg-red-700 w-40 py-1 font-semibold font-aref  text-white text-xl ' onClick={() => handleClick()}>Quiero ir!</button>
+<button className='bg-wwe rounded-md  mt-5 mr-5  hover:bg-red-700 w-40 py-1 font-semibold font-aref  text-white text-xl dark:bg-white dark:text-wwe dark:hover:bg-gray-200' onClick={() => handleClick()}>Quiero ir!</button>
           </div>
         </div>
       ))}
@@ -125,10 +146,10 @@ let imagen ='';
 <div className='flex'>
 
 
-      <div className='flex flex-col w-11/12'>
+      <div className='flex flex-col mb-10 w-11/12'>
 <>
 <div className='flex flex-col'>
-  <p className='text-center text-3xl font-aref font-semibold mt-2 text-wwe'>Menú</p>
+  <p className='text-center text-3xl font-aref font-semibold mt-2 dark:text-white text-wwe'>Menú</p>
 
 
 <div  className='overflow-x-scroll scrollbar-hidden ml-2'>
@@ -144,7 +165,7 @@ let imagen ='';
              <h2 className='  font-semibold  text-2xl text-wwe'>{item.nombre_plato}</h2>
            
              <p className='text-sm font-aref text-black'>{item.descripcion}</p>
-            <p className='text-black text-sm font-semibold'>$ {item.costo}</p>
+            <p className='text-black text-xl font-semibold'>$ {item.costo}</p>
             
            
             </div>
@@ -155,8 +176,8 @@ let imagen ='';
         
          : 
 
-         <div className='bg-white text-center'>
-          <p>Nada</p>
+         <div className='bg-white items-center text-center w-full h-52 rounded-lg '>
+          <p className='items-center mt-5'>Sin platos</p>
          </div>
     
         
@@ -167,27 +188,50 @@ let imagen ='';
            </div>
       </>
 {/* Descuentos */}
-      <div className='bg-wwe text-white text-2xl font-semibold'>
-    <p>Descuentos</p>
-  </div>
+<p className='text-center text-wwe text-3xl font-semibold dark:text-white '>Promociones</p>
+<div  className='overflow-x-scroll scrollbar-hidden ml-2'>
+ 
+  <div className='flex  mb-4 gap-2 '>
+ {     descuentos.status === 'No hay descuentos del restaurante' ?
+  <div className='p-4 bg-white rounded-lg m-2 h-32 w-full  text-center items-center shadow-xl text-gray-400'>Sin descuentos</div>
+    :
+   
+        descuentos.map((item,index) => (
+      <div key={index} className='bg-white flex rounded-lg ml-4 border w-6/12 p-4 gap-5 flex-shrink-0'> 
+      <img src={item.url_img_descuento} alt="descuento" className='h-32 rounded-lg w-32 bg-gray-400' />
+      <div className='text-slate-700 text-xl'>
+            <h2 className='text-2xl font-semibold '>{item.titulo_descuento}</h2>
+<p className='p-2 text-sm'>{item.descripcion}</p>
+<p className='text-center mt-5 font-semibold'>${item.costo}</p>
+      </div>
+      
+      </div>
+    ))
+
+   
+
+}
+</div>
+</div>
       {/* Descuentos */}
   </div> 
   
   
   
-   <div className='w-4/12 border p-4 m-5 rounded-md glass'>
+   <div className='w-4/12 border p-4 m-5 rounded-md bg-white'>
+    <p className='text-center font-semibold text-2xl text-wwe'>Puntuaciones</p>
     {
         resenia[0] === 'Error en la consulta' ?
-        <p>Sin resenas</p>
+        <p className='text-center'>Este restaurante no tiene reseñas</p>
         :
         resenia.map((item,index) => (
-          <div className='border shadow-xl bg-white p-4 rounded-md text-black font-aref  gap-8' key={index}>
-            <p className='text-center font-semibold text-wwe'>Puntuaciones</p>
+          <div className='border shadow-xl bg-white p-4 rounded-md text-black font-aref   justify-center items-center flex flex-col'  key={index}>
+              <p className='font-aref mb-4 mt-3 text-sm text-center text-gray-800 flex items-center '><MdDateRange/>{item.fecha}</p>
               <p>Menú: <b>{item.calificacion_menu}</b></p>
                 <p>Personal: <b>{item.calificacion_personal }</b></p>
                 <p>Instalaciones: <b>{item.calificacion_instalaciones}</b></p>
                     <p>General: <b>{item.calificacion_general}</b></p>
-                <p className='font-aref mt-5 text-sm text-center text-gray-800 flex items-center'><MdDateRange/>{item.fecha}</p>
+              
           </div>
         ))
     }
@@ -198,6 +242,7 @@ let imagen ='';
 
   
     </div> 
+    <FooterDsk/>
   </>
  
   );

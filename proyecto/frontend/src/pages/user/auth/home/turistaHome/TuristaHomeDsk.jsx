@@ -12,6 +12,7 @@ import Image2 from '../../../../../assets/mapa.png'
 import Image3 from '../../../../../assets/resenia.png'
 import Image1 from '../../../../../assets/alojamiento.png'
 import ImageRed from '../../../../../assets/bgred.png'
+import CategoriasTurista from '../../../../../components/categorias/CategoriasTurista'
 
 const TuristaHomeDsk = () => {
   return (
@@ -20,62 +21,7 @@ const TuristaHomeDsk = () => {
   <NavBar/>
 
 
-  <div class="">
-    <img src={ImageRed} alt="inicio-imagen" className='w-8/12 m-auto h-64 rounded-lg'  />
-    
-        <h2 class="w-4/12 absolute top-52 text-white left-56 p-4 text-4xl font-bold  font-aref">Tu mejor lugar para buscar restaurantes</h2>
-       
-       
-
-</div>
-      
-
-
-<div className='flex    justify-center items-center '>
-<div className='flex  gap-5 '>
-
-
-<div class="max-w-sm w-[50%] h-[40%] rounded-box shadow-xl  lg:max-w-full lg:flex">
-  <img src={Image3} alt="resenia" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
-  <div class=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-    <div class="mb-8">
-    
-      <div class="text-gray-900 font-bold text-xl mb-2">Promociones</div>
-      <p class="text-gray-700 text-sm">Mira todos los descuentos que se encuentran actualmente</p>
-    </div>
-    <div class="flex  justify-center items-center">
-     <Link to='/descuentos' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white w-20 flex justify-center items-center  text-wwe border shadow-xl text-3xl rounded-lg h-12'> <MdOutlineRateReview/></Link>
-    </div>
-  </div>
-</div>
-<div class="max-w-sm  w-[50%] h-[40%] rounded-box shadow-xl  lg:max-w-full lg:flex">
-  <img src={Image2} alt="mapa" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
-  <div class=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-    <div class="mb-8 mt-5">
-  
-      <div class="text-gray-900 font-bold text-xl mb-2">Busca en el mapa</div>
-      <p class="text-gray-700 text-sm">Busca en el mapa tus restaurantes cercanos </p>
-    </div>
-    <div class="flex  justify-center items-center">
-     <Link to='/map' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white border shadow-xl w-20  text-white text-3xl rounded-lg h-12'> <img src={Image} alt="" className='w-5 h-8 m-auto' /></Link>
-    </div>
-  </div>
-</div>
-<div class="max-w-sm w-[50%] h-[40%] rounded-box shadow-xl  lg:max-w-full lg:flex">
-  <img src={Image1} alt="alojamiento" className='bg-cover h-28 lg:h-auto lg:w-40 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden' />
-  <div class=" bg-white rounded-b w-full  lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-    <div class="mb-8 mt-5">
-  
-      <div class="text-gray-900 font-bold text-xl mb-2">Tus alojamientos</div>
-      <p class="text-gray-700 text-sm">Ingresa tu alojamiento</p>
-    </div>
-    <div class="flex  justify-center items-center">
-     <Link to='/alojamiento' className='hover:scale-125 transition-all duration-300 delay-150 p-2 bg-white border shadow-xl w-20  text-wwe text-3xl rounded-lg flex justify-center items-center h-12'> <BsFillHouseFill/> </Link>
-    </div>
-  </div>
-</div>
-</div>
-</div>
+ <CategoriasTurista/>
 
      <ListRestaurantes/>
   <div className='mt-24'>
