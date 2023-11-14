@@ -22,9 +22,9 @@ const MisReseniasDsk = () => {
       <NavBar/>
     <div className="bg-white w-[60%] mt-28 rounded-box shadow-xl m-auto py-24 sm:py-32 mb-24">
       <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
-        <div className="max-w-2xl bg-zinc-100  h-48 p-2 rounded-box shadow-xl  xl:h-80">
-          <h2 className="text-3xl font-bold tracking-tight text-black font-aref sm:text-3xl px-5 py-2 flex gap-5 ">Tus reseñas <span className='text-4xl mt-1'><MdOutlineRateReview/></span></h2>
-          <p className="mt-6 text-lg leading-8 text-black ">
+        <div className=" bg-zinc-100  h-48 p-2 rounded-box shadow-xl  xl:h-80">
+          <h2 className="text-2xl font-bold tracking-tight text-black font-aref sm:text-2xl px-5 py-2 flex gap-5 ">Tus reseñas <span className='text-4xl mt-1'><MdOutlineRateReview/></span></h2>
+          <p className="mt-6  text-xl leading-8 text-black ">
             Este es el lugar donde veras tus reseñas creadas hacia otros restaurantes visitados.
           </p>
         </div>

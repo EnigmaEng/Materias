@@ -16,8 +16,8 @@ const AdminHomeDsk = () => {
     <NavBar/>
   </div>
 
-<div className=" w-8/12 m-10 p-7 flex justify-center  shadow-xl rounded-lg">
-  <div className="w-8/12">
+<div className=" w-8/12 m-10 p-7 ml-64 flex justify-center  shadow-xl rounded-lg">
+  <div className="w-8/12 ">
     <Aprobaciones/>
   </div>
 

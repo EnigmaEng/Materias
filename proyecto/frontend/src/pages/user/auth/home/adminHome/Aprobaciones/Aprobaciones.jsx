@@ -37,7 +37,7 @@ try {
           
           const respuesta = await clienteAxios.post('/subscripcionController.php', accion)
           
-          
+          window.location.reload();
           
     }
 

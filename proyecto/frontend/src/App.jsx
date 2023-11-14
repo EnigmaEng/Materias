@@ -17,7 +17,7 @@ import CrearMenu from './pages/user/perfil/restaurante/Menu/CrearMenu'
 import Map from './components/maps/Map'
 import Subscripcion from './pages/user/perfil/restaurante/Subscripcion/Subscripcion'
 import ConfiguracionRest from './pages/user/perfil/restaurante/Configuracion/ConfiguracionRest'
-import ConfiguracionTurista from './pages/user/perfil/turista/Configuracion/ConfiguracionTurista'
+
 import CrearDescuentos from './pages/user/perfil/restaurante/Descuentos/CrearDescuentos'
 import RutaProtegida from './context/RutaProtegida'
 
@@ -64,7 +64,7 @@ function App() {
 {/* Turista */}
 <Route path='/descuentos' element={<Descuentos/>}/>
 <Route path='/alojamiento' element={<Alojamiento/>}/>
-<Route path='/configuracionTurista' element={<ConfiguracionTurista/>}/>
+
 <Route path='/perfilTurista' element={<PerfilTurista/>}/>
 
 {/* Resenias */}

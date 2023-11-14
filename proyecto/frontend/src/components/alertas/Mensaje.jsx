@@ -11,7 +11,7 @@ const Mensaje = () => {
       useEffect(() => {
     if (mensaje) {
       toast.info(mensaje, {
-        position: toast.POSITION.TOP_CENTER,
+        position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000, 
       });
     }

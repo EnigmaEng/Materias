@@ -28,12 +28,12 @@ const TokensTurista = () => {
         },[token])
 
   return (
-    <div className='min-h-screen'>
+    <div className='min-h-screen dark:bg-zinc-800 dark:bg-opacity-80'>
         <NavBar/>
 
-        <div className='bg-white w-6/12 m-auto mt-24 rounded-lg p-8 flex flex-col gap-10 shadow-xl'>
+        <div className='bg-white w-7/12 m-auto mt-24 rounded-lg p-8 flex flex-col gap-10 shadow-xl'>
             <p className='text-2xl font-semibold text-wwe text-center'>Solicitudes de usuario:</p>
-            <div className='grid grid-cols-4'>
+            <div className='grid grid-cols-2  place-content-center'>
 
            
          {

@@ -107,7 +107,7 @@ usuarioAutenticado();
     <div className=''>
       <div className='min-h-screen'>
        
-        <div className='absolute left-0 h-full dark:bg-zinc-800 p-8 w-80 text-black space-y-10 py-10'>
+        <div className='absolute left-0  h-full dark:bg-zinc-800 p-8 w-80 text-black space-y-10 py-10'>
            <div className='flex justify-center mb-10'>
           <DarkMode/>
         </div>

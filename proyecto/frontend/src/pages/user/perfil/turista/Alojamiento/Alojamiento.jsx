@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import NavBar from '../../../../../components/nabvar/NavBar'
 import { Link } from 'react-router-dom';
 import {useFormik} from 'formik';
-
+import {BiArrowBack} from 'react-icons/bi'
 import todoContext from '../../../../../context/todoContext';
 import Mensaje from '../../../../../components/alertas/Mensaje';
 
@@ -48,8 +48,9 @@ const Alojamiento = () => {
   return (
     <div className='min-h-screen'>
         <NavBar/>
-        <Link to='/homeAuth' className='px-6 py-1 bg-wwe rounded-lg absolute md:top-24 md:left-80 text-white top-24 left-5 text-lg'>
-        Atrás</Link>
+        <Link to='/homeAuth'>
+            <button className='bg-wwe  rounded-lg ml-8 px-4 py-1 mt-2 mb-4 top-8 md:absolute md:left-10 md:p-10 md:py-3 md:shadow-xl md:shadow-gray-700 md:border-gray-400 text-white'><BiArrowBack/></button>
+            </Link>
         <div className='p-8 rounded-lg shadow-xl  gap-5 mt-28 bg-white max-w-max m-auto'>
             <h2 className='text-3xl font-semibold text-wwe font-aref'>Ingresa tu alojamiento</h2>
           {mensaje && <Mensaje mensaje={mensaje} tipo="alerta"/>}

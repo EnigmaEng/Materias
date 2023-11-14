@@ -86,7 +86,7 @@ const iniciarSesion = async (datos) => {
         
         //se guardan los datos del usuario en formato json en el localstorage
         localStorage.setItem('usuarioData', JSON.stringify(usuarioData));
-        console.log(usuarioData)
+       
         
         dispatch({
           type: LOGIN_EXITOSO,
@@ -147,7 +147,6 @@ const usuarioAutenticado = () => {
       } catch (error) {
         console.log(error)
       }
-     
     }
 
         const crearDescuento = async (datos) => {
@@ -197,7 +196,7 @@ const usuarioAutenticado = () => {
           type: EDITAR_PERFIL,
           payload: respuesta.data.status
         })
-        console.log(respuesta.data.status)
+       
       } catch (error) {
         console.log(error)
       }
@@ -252,7 +251,7 @@ try {
     type: TURISTA_VISITA,
     payload: respuesta.data.status
   })
-  console.log(respuesta.data)
+  
 } catch (error) {
   console.log(error)
 }

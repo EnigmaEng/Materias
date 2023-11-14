@@ -62,12 +62,13 @@ getDescuentos();
 
   
 
-  const handleClick = () => {
+  const handleClick = (id_usuario) => {
     const accion = {
     "accion":"turistaVisitaRest",
     "id_usuario_turista": usuario?.id_usuario,
     "id_usuario_rest": id_usuario
 } 
+
   turistaVisitaRest(accion)
 
 
@@ -88,10 +89,13 @@ let imagen ='';
     case "Comida francesa":
       imagen = ImagenFrancesa;
       break;
-    case "Comida japonesa" && "Comida china":
+    case "Comida japonesa":
       imagen = ImagenAsia;
       break;
-    case "Comida gourmet" && "Restaurante de autor":
+    case "Comida China":
+      imagen = ImagenAsia
+      break;
+    case "Comida gourmet" || "Restaurante de autor":
       imagen = ImagenGourmet;
       break;
     default:
@@ -118,27 +122,26 @@ let imagen ='';
       </div>
       {mensaje && <Mensaje mensaje={mensaje} tipo="alerta" />}
       {restaurante.map((item, index) => (
-        <div key={index} className='flex items-center justify-between justify-center mt-28  w-full m-auto rounded-lg text-black bg-white dark:bg-gradient-to-r from-slate-800 to-slate-900 dark:text-white'>
-          <div className='bg-white border text-black  p-8 shadow-xl rounded-lg mt-40 m-5'>
-<p>Tiempo de entrega: 15-30min </p>
-          </div>
+        <div key={index} className='flex items-center  justify-center mt-28  rounded-lg text-black bg-white dark:bg-gradient-to-r from-slate-800 to-slate-900 dark:text-white'>
+        
           <div className='flex flex-col justify-center items-center'>
               <img src={item.url_img_usuario} alt="perfil" className='w-40 z-50 h-40 rounded-full object-cover' />
           <div className='flex flex-col p-2 rounded-lg gap-2 mb-4 text-center'>
             <h2 className='p-2 dark:text-white font-mono font-bold mt-2 text-5xl text-wwe mb-4 z-50'>{item.nombre}</h2>
+            <button className='bg-wwe rounded-md  mt-5 mr-5  hover:bg-red-700  py-1.5 font-semibold font-aref  text-white text-xl dark:bg-white dark:text-wwe dark:hover:bg-gray-200' onClick={() => handleClick(`${item.id_usuario}`)}>Quiero ir!</button>
             <p className='flex gap-2 justify-center items-center items-center'><FaHouseUser/> Nº  {item.nro_local}</p>
             <p className='font-aref flex items-center gap-2'><MdOutlineFoodBank/> Tipo de restaurante: <b className='font-aref'>{item.descripcion}</b></p>
             <hr />
-            <div className='flex space-x-2 shadow-xl items-center text-center  p-2 rounded-lg'>
+            <div className='flex justify-center space-x-2 shadow-xl items-center text-center  p-2 rounded-lg'>
               <img src={LogoUbi} alt="logo-ubi" className='w-4' />
-              <p className='font-semibold'>
+              <p className='font-semibold '>
                 {item.calle} {item.nro_puerta} , {item.esquina}
               </p>
             </div>
           </div>
           </div>
            <div className='p-2'>
-<button className='bg-wwe rounded-md  mt-5 mr-5  hover:bg-red-700 w-40 py-1 font-semibold font-aref  text-white text-xl dark:bg-white dark:text-wwe dark:hover:bg-gray-200' onClick={() => handleClick()}>Quiero ir!</button>
+
           </div>
         </div>
       ))}
@@ -195,7 +198,8 @@ let imagen ='';
  {     descuentos.status === 'No hay descuentos del restaurante' ?
   <div className='p-4 bg-white rounded-lg m-2 h-32 w-full  text-center items-center shadow-xl text-gray-400'>Sin descuentos</div>
     :
-   
+ 
+  
         descuentos.map((item,index) => (
       <div key={index} className='bg-white flex rounded-lg ml-4 border w-6/12 p-4 gap-5 flex-shrink-0'> 
       <img src={item.url_img_descuento} alt="descuento" className='h-32 rounded-lg w-32 bg-gray-400' />
@@ -208,8 +212,7 @@ let imagen ='';
       </div>
     ))
 
-   
-
+  
 }
 </div>
 </div>
@@ -218,14 +221,14 @@ let imagen ='';
   
   
   
-   <div className='w-4/12 border p-4 m-5 rounded-md bg-white'>
+   <div className='w-4/12 border p-4 m-5  rounded-md bg-white'>
     <p className='text-center font-semibold text-2xl text-wwe'>Puntuaciones</p>
     {
         resenia[0] === 'Error en la consulta' ?
         <p className='text-center'>Este restaurante no tiene reseñas</p>
         :
         resenia.map((item,index) => (
-          <div className='border shadow-xl bg-white p-4 rounded-md text-black font-aref   justify-center items-center flex flex-col'  key={index}>
+          <div className='border shadow-xl mb-3 bg-white p-4 rounded-md text-black font-aref   justify-center items-center flex flex-col'  key={index}>
               <p className='font-aref mb-4 mt-3 text-sm text-center text-gray-800 flex items-center '><MdDateRange/>{item.fecha}</p>
               <p>Menú: <b>{item.calificacion_menu}</b></p>
                 <p>Personal: <b>{item.calificacion_personal }</b></p>

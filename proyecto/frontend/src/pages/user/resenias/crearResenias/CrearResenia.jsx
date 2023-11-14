@@ -56,7 +56,7 @@ const formattedDate = `${year}-${month}-${day}`;
   return (
     <>
   
-   <div className='min-h-screen p-6'>
+   <div className='min-h-screen p-6 dark:bg-zinc-800 dark:bg-opacity-80'>
       <NavBar/>
    
       <form onSubmit={formik.handleSubmit} className='w-11/12 space-y-10 flex flex-col justify-center items-center  md:py-6 md:px-6 md:w-3/12 m-auto mt-10 md:mt-24 bg-white border rounded-box p-4 text-black shadow-xl pb-10' method='POST'>
@@ -109,7 +109,7 @@ const formattedDate = `${year}-${month}-${day}`;
   <option value="Muy malo">Muy malo </option>
 </select>
 
-<input type="text" placeholder='Codigo del restaurante' className='bg-white rounded-md p-2 text-black border border-wwe w-80'/>
+<input type="text" placeholder='Codigo del restaurante' className='bg-white rounded-md p-2  text-black border border-wwe w-72'/>
        
       <button type='submit' className='glass bg-red-800 text-white px-4 py-1 rounded-lg border mt-8 hover:scale-125 transition-all duration-300 delay-150  md:w-40 md:py-1.5 md:text-lg w-64'>Crear</button>
       </form> 
