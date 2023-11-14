@@ -203,7 +203,8 @@ class Descuento extends CrudBasico
         try {
             $query = "SELECT r.nombre,r.id_usuario,des.* FROM wwe.descuento des
             join wwe.restaurante_tiene_descuento rd on des.id_descuento = rd.id_descuento
-            join wwe.restaurante r on r.id_usuario = rd.id_usuario_rest";
+            join wwe.restaurante r on r.id_usuario = rd.id_usuario_rest"
+            where des.activo= 'S';
             $stmt = $this->getConn()->prepare($query);
             $stmt->bindValue(":id_descuento", $this->getIdDescuento());
             if ($stmt->execute()) {
@@ -221,7 +222,8 @@ class Descuento extends CrudBasico
         try {
             $query = "SELECT r.nombre, r.id_usuario, des.* FROM wwe.descuento des
             join wwe.restaurante_tiene_descuento rd on des.id_descuento = rd.id_descuento
-            join wwe.restaurante r on r.id_usuario = rd.id_usuario_rest";
+            join wwe.restaurante r on r.id_usuario = rd.id_usuario_rest"
+            where des.activo= 'S';
             $stmt = $this->getConn()->prepare($query);
             if ($stmt->execute()) {
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -240,7 +242,8 @@ class Descuento extends CrudBasico
             $query = "SELECT r.nombre, r.id_usuario, des.* FROM wwe.descuento des
             JOIN wwe.restaurante_tiene_descuento rd ON des.id_descuento = rd.id_descuento
             JOIN wwe.restaurante r ON r.id_usuario = rd.id_usuario_rest
-            WHERE rd.id_usuario_rest = :id_usuario";
+            WHERE rd.id_usuario_rest = :id_usuario
+            where des.activo= 'S'";
             $stmt = $this->getConn()->prepare($query);
             $stmt->bindValue(":id_usuario", $id); // Usar el parámetro $id en lugar de $this->getIdRestaurante()
 
