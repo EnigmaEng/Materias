@@ -28,4 +28,4 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 8080
 
-CMD ["apache2-foreground", "-D", "FOREGROUND"]
+CMD ["apache2-foreground"]
