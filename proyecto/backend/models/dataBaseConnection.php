@@ -15,16 +15,28 @@ abstract class DataBaseConnection
 
     private $conn;
 
+    private $port;
+
     private $data;
 
     function __construct()
     {
         try {
-            $this->conn = new PDO("$this->driver:host=$this->host;dbname=$this->database", $this->user, $this->password);
+            $this->conn = new PDO("$this->driver:host=$this->host;port=$this->port;dbname=$this->database", $this->user, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             echo "falla de conexion" . $e;
         }
+    }
+    
+    public function setPort($port)
+    {
+        $this->port = $port;
+    }
+
+    public function getPort()
+    {
+        return $this->port;
     }
 
     public function setHost($host)
@@ -88,6 +100,7 @@ abstract class DataBaseConnection
         $this->password=$this->getPassword();
         $this->driver=$this->getDriver();
         $this->database=$this->getDatabase();
+        $this->port=$this->getPort();
     }
 
     public function closeCon(){

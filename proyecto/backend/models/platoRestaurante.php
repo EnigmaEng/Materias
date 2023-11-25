@@ -29,6 +29,7 @@ class PlatoRestaurante extends CrudBasico
         $this->setPassword($_ENV['DB_PASSWORD']);
         $this->setDatabase($_ENV['DB_NAME']);
         $this->setDriver($_ENV['DB_DRIVER']);
+        $this->setPort($_ENV['PORT']);
         $this->setDatCon();
         parent::__construct();
     }

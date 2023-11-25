@@ -6,28 +6,30 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:80"
-    depends_on:
-      - mariadb-db
-    networks:
-      - api-php
+    # depends_on:
+    #   - mariadb-db
+    # networks:
+    #   - api-php
+    env_file:
+      - .env  
 
-  mariadb-db:
-    image: mariadb:10.3
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "3307:3306"
-    networks:
-      - api-php
-    volumes:
-      - mariadb-data:/var/lib/mysql
+#   mariadb-db:
+#     image: mariadb:10.3
+#     environment:
+#       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+#       MYSQL_DATABASE: ${DB_NAME}
+#       MYSQL_USER: ${DB_USER}
+#       MYSQL_PASSWORD: ${DB_PASSWORD}
+#     ports:
+#       - "3307:3306"
+#     networks:
+#       - api-php
+#     volumes:
+#       - mariadb-data:/var/lib/mysql
 
-networks:
-  api-php:
-    driver: bridge
+# networks:
+#   api-php:
+#     driver: bridge
 
-volumes:
-  mariadb-data:
+# volumes:
+#   mariadb-data:

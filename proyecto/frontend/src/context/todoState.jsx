@@ -52,7 +52,7 @@ const TodoState = ({ children }) => {
             
             dispatch({
                 type: REGISTRO_EXITOSO, 
-                payload: respuesta.data
+                payload: "Registro exitoso!"
             });
            
         } catch (error) {
