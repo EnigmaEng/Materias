@@ -12,7 +12,7 @@ LABEL version="1.0"
 LABEL description="Api de PHP"
 
 #con el comando COPY . copia todo el contenido con  desde la ubicacion de este mismo archivo y lo envia al destino del contenedor en este caso /var/www/html
-COPY . /var/www/html
+COPY . .
 
 #se instala la extension pdo y pdo_mysql 
 RUN docker-php-ext-install pdo pdo_mysql
@@ -26,4 +26,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
-EXPOSE 80
+EXPOSE 8080
+
+CMD ["apache2-foreground", "-D", "FOREGROUND"]
